@@ -1,0 +1,207 @@
+//
+//  PhotoCheckViewController.swift
+//  DecorAttendance
+//
+//  Created by Sreejith n  krishna on 28/12/18.
+//  Copyright © 2018 Sreeith n  krishna. All rights reserved.
+//
+
+import UIKit
+import CoreLocation
+import MapKit
+
+class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationManagerDelegate {
+    
+    @IBOutlet weak var imageViewDataBase: UIImageView!
+    @IBOutlet weak var imageViewSnapShot: UIImageView!
+    @IBOutlet weak var bttnTakePhotoAgain: UIButton!
+    @IBOutlet weak var bttnDone: UIButton!
+    
+    
+    var capturedImageRef: UIImage!
+    var employeeIdRef: String!
+    var nameRef: String!
+    var attendanceTypeRef: String!
+    var siteIdRef: String!
+    var penaltyRef: String!
+    var paramsDict = NSMutableDictionary()
+    var spinner = UIActivityIndicatorView(style: .gray)
+    var locationManager: CLLocationManager! = nil
+    var lat: String!
+    var lng: String!
+    var imageData: Data!
+    var dataBaseImageRef: String!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setViewStyles()
+        //set image from database
+        
+        if dataBaseImageRef != nil{
+            
+            self.imageViewDataBase.kf.setImage(with: URL(string: dataBaseImageRef))
+            
+        }
+        
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
+        locationManager = CLLocationManager()
+        askForLocationAuthorisation()
+        
+        // Do any additional setup after loading the view.
+    }
+    func askForLocationAuthorisation(){
+        
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
+    }
+    
+    func setViewStyles()  {
+        
+        self.imageViewSnapShot.image = capturedImageRef
+        
+        
+        let bttnTakePhoto = self.bttnTakePhotoAgain!
+        bttnTakePhoto.layer.cornerRadius = self.bttnTakePhotoAgain.frame.size.height / 2
+        bttnTakePhoto.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
+        bttnTakePhoto.layer.shadowOffset = CGSize(width: 0, height: 8)
+        bttnTakePhoto.layer.shadowColor = UIColor(red:0.11, green:0.16, blue:0.36, alpha:0.62).cgColor
+        bttnTakePhoto.layer.shadowOpacity = 1
+        bttnTakePhoto.layer.shadowRadius = self.bttnTakePhotoAgain.frame.size.height / 2
+        
+        let bttnDone = self.bttnDone!
+        bttnDone.layer.cornerRadius = self.bttnDone.frame.size.height / 2
+        bttnDone.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
+        bttnDone.layer.shadowOffset = CGSize(width: 0, height: 8)
+        bttnDone.layer.shadowColor = UIColor(red:0.11, green:0.16, blue:0.36, alpha:0.62).cgColor
+        bttnDone.layer.shadowOpacity = 1
+        bttnDone.layer.shadowRadius = self.bttnDone.frame.size.height / 2
+        
+        
+        
+    }
+    
+    
+    @IBAction func bttnActnTakePhotoAgain(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    @IBAction func bttnActnDone(_ sender: Any) {
+        
+        if User.Attendance.type == User.attendanceType.endTime {
+            
+            self.performSegue(withIdentifier: "toEndTimeBonusSceneSegue:PhotoCheck", sender: (Any).self)
+            
+        }else{
+            
+            callPostAttendanceAPI()
+        }
+        
+        
+        
+    }
+    func callPostAttendanceAPI()  {
+        
+        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
+        ObeidiModelMarkAttendance.callMarkAttendanceRequest(dataDict: getParamsDict(), image: self.imageData){
+            (success, result, error) in
+            
+            if success! {
+                
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+                print(result!)
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let alertController = storyboard.instantiateViewController(withIdentifier: "ObeidiAlertViewControllerID") as! ObeidiAlertViewController
+                
+                alertController.titleRef = "Success ."
+                alertController.explanationRef = "Your Attendance has been marked. "
+                alertController.parentController = self
+                
+                alertController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                alertController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                alertController.delegate = self
+                self.present(alertController, animated: true, completion: nil)
+                
+                
+                
+            }else{
+                
+                
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+                
+                
+            }
+            
+            
+            
+            
+        }
+        
+        
+        
+    }
+    func getParamsDict() -> NSMutableDictionary {
+    
+        paramsDict.setValue(penaltyRef, forKey: "penalty")
+        paramsDict.setValue(siteIdRef, forKey: "site_id")
+        paramsDict.setValue(self.lng, forKey: "lng")
+        paramsDict.setValue(self.lat, forKey: "lat")
+        paramsDict.setValue(attendanceTypeRef, forKey: "type")
+        paramsDict.setValue(employeeIdRef, forKey: "emp_id")
+        paramsDict.setValue("0", forKey: "bonus")
+        paramsDict.setValue(capturedImageRef, forKey: "image")
+        
+        return paramsDict
+    }
+    func dismissed() {
+        
+        self.navigationController?.popToRootViewController(animated: true)
+        
+    }
+    //MARK: location delegate
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        
+        self.lat = String(Float(locValue.latitude))
+        self.lng = String(Float(locValue.longitude))
+        
+        
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toEndTimeBonusSceneSegue:PhotoCheck"{
+            
+            let vc = segue.destination as! EndTimeBonusViewController
+            vc.siteIdRef = self.siteIdRef
+            vc.employeeIdRef = self.employeeIdRef
+            vc.imageDataRef = self.imageData
+            vc.attendanceTypeRef = self.attendanceTypeRef
+            vc.penaltyRef = self.penaltyRef
+            vc.latRef = self.lat
+            vc.lngRef = self.lng
+            vc.nameRef = self.nameRef
+            
+        }
+        
+    }
+    
+
+    
+
+}
