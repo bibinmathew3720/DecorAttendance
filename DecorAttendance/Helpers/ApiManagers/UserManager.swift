@@ -38,7 +38,7 @@ class UserManager: CLBaseService {
     }
     
     func getProfileResponseModel(dict:[String : Any?]) -> Any? {
-        let responseModel = CCLUBProfileSettingsResponseModel.init(dict:dict)
+        let responseModel = DecoreProfileResponseModel.init(dict:dict)
         return responseModel
     }
     
@@ -47,90 +47,93 @@ class UserManager: CLBaseService {
     
 }
 
-class CCLUBProfileSettingsResponseModel : NSObject{
+class DecoreProfileResponseModel : NSObject{
     
-    var statusMessage:String = ""
-    var statusCode:Int = 0
-    var member_id:Int = 0
-    var email_address:String = ""
-    var temp_password:String = ""
-    var password:String = ""
-    var first_name:String = ""
-    var last_name:String = ""
-    var usertype_id:Int = 0
-    var gender:String = ""
-    var profile_pic:String = ""
-    var notification_settings:Int = 0
-    var phone_number:String = ""
-    var language_id:Int = 0
-    var device_token:String = ""
-    var created_date:String = ""
-    var platform:Int = 0
-    var membership_status:Int = 0
-    
+    var dob:String = ""
+    var id:Int = 0
+    var emp_id:Int = 0
+    var name:String = ""
+    var phone:String = ""
+    var image:String = ""
+    var email:String = ""
+    var date_of_joining:String = ""
+    var error:String = ""
+    var sites = [DecoreSitesModel ]()
     
     init(dict:[String:Any?]) {
-        if let value = dict["statusMessage"] as? String{
-            statusMessage = value
-        }
-        
-        if let value = dict["statusCode"] as? Int{
-            statusCode = value
-        }
-        
-        if let user = dict["settings"] as? AnyObject{
-            if let value = user["usertype_id"] as? Int{
-                usertype_id = value
+        if let user = dict["team"] as? AnyObject{
+            if let value = user["name"] as? String{
+                name = value
             }
-            if let value = user["platform"] as? Int{
-                platform = value
-            }
-            if let value = user["membership_status"] as? Int{
-                membership_status = value
-            }
-            if let value = user["member_id"] as? Int{
-                member_id = value
-            }
-            if let value = user["language_id"] as? Int{
-                language_id = value
-            }
-            if let value = user["phone_number"] as? String{
-                phone_number = value
-            }
-            if let value = user["notification_settings"] as? Int{
-                notification_settings = value
-            }
-            if let value = user["platform"] as? Int{
-                platform = value
-            }
-            if let value = user["first_name"] as? String{
-                first_name = value
-            }
-            if let value = user["password"] as? String{
-                password = value
-            }
-            if let value = user["temp_password"] as? String{
-                temp_password = value
-            }
-            if let value = user["email_address"] as? String{
-                email_address = value
-            }
-            if let value = user["last_name"] as? String{
-                last_name = value
-            }
-            if let value = user["device_token"] as? String{
-                device_token = value
-            }
-            if let value = user["created_date"] as? String{
-                created_date = value
-            }
-            if let value = user["gender"] as? String{
-                gender = value
-            }
-            if let value = user["profile_pic"] as? String{
-                profile_pic = value
+            
+            if let value = user["id"] as? Int{
+                id = value
             }
         }
+        if let value = dict["dob"] as? String{
+            dob = value
+        }
+        if let value = dict["error"] as? String{
+            error = value
+        }
+        if let value = dict["date_of_joining"] as? String{
+            date_of_joining = value
+        }
+        if let value = dict["phone"] as? String{
+            phone = value
+        }
+        if let value = dict["email"] as? String{
+            email = value
+        }
+        if let value = dict["name"] as? String{
+            name = value
+        }
+        if let value = dict["image"] as? String{
+            image = value
+        }
+        if let value = dict["emp_id"] as? Int{
+            emp_id = value
+        }
+        if let _dict = dict["sites"] as? [[String:Any?]]{
+            for site in _dict{
+                sites.append(DecoreSitesModel.init(dict: site))
+            }
+        }
+  
     }
 }
 
+class DecoreSitesModel : NSObject{
+    
+    var lng:Double = 0.0
+    var lat:Double = 0.0
+    var bonus_budget:Int = 0
+    var labour_cost_budget:Int = 0
+    var location_name:String = ""
+    var site_id:Int = 0
+    var site_name:String = ""
+    
+    init(dict:[String:Any?]) {
+        if let value = dict["lng"] as? Double{
+            lng = value
+        }
+        if let value = dict["lat"] as? Double{
+            lat = value
+        }
+        if let value = dict["bonus_budget"] as? Int{
+            bonus_budget = value
+        }
+        if let value = dict["labour_cost_budget"] as? Int{
+            labour_cost_budget = value
+        }
+        if let value = dict["location_name"] as? String{
+            location_name = value
+        }
+        if let value = dict["site_id"] as? Int{
+            site_id = value
+        }
+        if let value = dict["site_name"] as? String{
+            site_name = value
+        }
+    }
+}

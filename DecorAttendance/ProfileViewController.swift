@@ -10,9 +10,16 @@ import UIKit
 
 class ProfileViewController: UITableViewController {
 
+    @IBOutlet weak var designationLabel: UILabel!
+    @IBOutlet weak var joinDateLabel: UILabel!
+    @IBOutlet weak var employeeID: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var viewWorkInfo: UIView!
     @IBOutlet weak var viewProfilePic: UIView!
+    @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var imageViewProfile: UIImageView!
+    @IBOutlet weak var siteLabel: UILabel!
+    var profileResponse: DecoreProfileResponseModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         getProfileApi()
@@ -33,18 +40,25 @@ class ProfileViewController: UITableViewController {
         UserManager().getProfileApi(with:"", success: {
             (model,response)  in
             MBProgressHUD.hide(for: self.view, animated: true)
-//            if let model = model as? CountriesResponseModel{
-//                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
-//                if type == StatusEnum.success{
-//
-//                }
-//                else if type == StatusEnum.sessionexpired{
+            if let model = model as? DecoreProfileResponseModel{
+                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+                if type == StatusEnum.success{
+                    self.profileResponse = model
+                    self.imageViewProfile.loadImageUsingCache(withUrl: model.image, colorValue: nil)
+                    self.nameLabel.text = model.name
+                    self.employeeID.text = "Employee ID: " + String(model.emp_id)
+                    self.siteLabel.text = "Site " + model.sites[0].site_name
+                    self.ageLabel.text = "" + " yr old"
+                    self.designationLabel.text = ""
+                    self.joinDateLabel.text = "Joining date: " + model.date_of_joining
+                }
+                else if type == StatusEnum.sessionexpired{
 //                    self.callRefreshTokenApi()
-//                }
-//                else{
-//                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
-//                }
-//            }
+                }
+                else{
+                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
+                }
+            }
             
         }) { (ErrorType) in
             MBProgressHUD.hide(for: self.view, animated: true)

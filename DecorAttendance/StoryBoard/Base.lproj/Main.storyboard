@@ -1835,14 +1835,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSh-RX-yWR">
                                                     <rect key="frame" x="12" y="70" width="351" height="178.5"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="devarakonda" translatesAutoresizingMaskIntoConstraints="NO" id="nUS-0K-8bd">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nUS-0K-8bd">
                                                             <rect key="frame" x="125.5" y="-50" width="100" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="100" id="YXw-W2-gFb"/>
                                                                 <constraint firstAttribute="width" constant="100" id="kmA-ef-Tr8"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devarakonda Vijay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Das-Xx-jVt">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Das-Xx-jVt">
                                                             <rect key="frame" x="12" y="83.5" width="327" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="25" id="V6E-Kq-RJL"/>
@@ -1851,7 +1851,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Employee ID: 141432" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="609-LG-nhJ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="609-LG-nhJ">
                                                             <rect key="frame" x="12" y="118.5" width="327" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="G2Z-ca-sjs"/>
@@ -1898,7 +1898,7 @@
                                                                 <constraint firstAttribute="height" constant="2" id="iVO-2q-EE5"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45 yr Old" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EG6-Mj-PAl">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EG6-Mj-PAl">
                                                             <rect key="frame" x="25" y="20" width="301" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="aPB-x2-XXu"/>
@@ -1911,7 +1911,7 @@
                                                             <rect key="frame" x="4" y="107" width="343" height="2"/>
                                                             <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Engineering Head" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxj-UE-RZG">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxj-UE-RZG">
                                                             <rect key="frame" x="25" y="72" width="301" height="20"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                             <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -1921,13 +1921,13 @@
                                                             <rect key="frame" x="4" y="159" width="343" height="2"/>
                                                             <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joinig date: 22.10.2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8W-Af-O2f">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8W-Af-O2f">
                                                             <rect key="frame" x="25" y="124" width="301" height="20"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                             <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site Qatar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgW-cC-7yO">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VgW-cC-7yO">
                                                             <rect key="frame" x="25" y="176" width="301" height="20"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                             <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -1983,7 +1983,13 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="ageLabel" destination="EG6-Mj-PAl" id="cvD-UR-ylu"/>
+                        <outlet property="designationLabel" destination="Dxj-UE-RZG" id="0pR-dC-rMN"/>
+                        <outlet property="employeeID" destination="609-LG-nhJ" id="cua-im-wwB"/>
                         <outlet property="imageViewProfile" destination="nUS-0K-8bd" id="LYm-Fa-Aol"/>
+                        <outlet property="joinDateLabel" destination="S8W-Af-O2f" id="tHU-W1-sbP"/>
+                        <outlet property="nameLabel" destination="Das-Xx-jVt" id="BXh-g0-BXt"/>
+                        <outlet property="siteLabel" destination="VgW-cC-7yO" id="bTr-u5-VOu"/>
                         <outlet property="viewProfilePic" destination="lSh-RX-yWR" id="FuT-rX-Nbh"/>
                         <outlet property="viewWorkInfo" destination="Hsf-WA-4gh" id="aA8-he-cBf"/>
                     </connections>
@@ -2482,7 +2488,7 @@
                                         <rect key="frame" x="0.0" y="503" width="375" height="481"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cs5-ib-NXb" id="1kM-Dt-ZF7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="481"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="480.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0A-jR-ryY">

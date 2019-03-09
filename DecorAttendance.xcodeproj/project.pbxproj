@@ -114,6 +114,7 @@
 		BB5A4FCB2233B47900F4FC82 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC92233B47900F4FC82 /* Reachability.m */; };
 		BB5A4FCF2233C0C300F4FC82 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */; };
 		BB5A4FD22233C41600F4FC82 /* CCUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FD12233C41600F4FC82 /* CCUtility.swift */; };
+		BBE01C76223439B300C534F6 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */; };
 		CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -255,6 +256,7 @@
 		BB5A4FCA2233B47900F4FC82 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		BB5A4FD12233C41600F4FC82 /* CCUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCUtility.swift; sourceTree = "<group>"; };
+		BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		D98D9F27B5CC5C6DFCC53240 /* Pods-DecorAttendanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceTests/Pods-DecorAttendanceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DecorAttendanceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -336,6 +338,7 @@
 		4618715E21C6D4F500507F06 /* SingletonClasses */ = {
 			isa = PBXGroup;
 			children = (
+				BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */,
 				46E71D0621C5194200051C78 /* AppDelegate.swift */,
 				4618715821C6A57400507F06 /* ObeidiColorMeter.swift */,
 				46C6AAA02222DB1F0081F52C /* User.swift */,
@@ -967,6 +970,7 @@
 				46623B0A2212E0270072C150 /* ObeidiModelSites.swift in Sources */,
 				46449DDF221F1C9C00169089 /* ObeidiModelSpecificEmployeeAttendance.swift in Sources */,
 				46C0661D21E0B371009E731B /* ForemanDashBoardViewController.swift in Sources */,
+				BBE01C76223439B300C534F6 /* UIImageViewExtensions.swift in Sources */,
 				46AE08BB22170B1600A0BC9F /* ObeidiModelSafetyEquipments.swift in Sources */,
 				46C0661821E09925009E731B /* ForemanCenterViewController.swift in Sources */,
 				4618714D21C65F3600507F06 /* MenuItemsTableViewCell.swift in Sources */,
