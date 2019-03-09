@@ -42,7 +42,37 @@ class UserManager: CLBaseService {
         return responseModel
     }
     
+    func getEmployeesApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelForEmployees(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.getEmployeesResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
     
+    func networkModelForEmployees(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.EMPLOYEES, requestMethod_: "GET")
+        requestModel.requestBody = body
+        return requestModel
+    }
+    
+    func getEmployeesResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = DecoreEmployeeResponseModel.init(dict:dict)
+        return responseModel
+    }
     
     
 }
@@ -103,6 +133,29 @@ class DecoreProfileResponseModel : NSObject{
     }
 }
 
+class DecoreEmployeeResponseModel : NSObject{
+ 
+    var image_base:String = ""
+    var error:Int = 0
+    var employees = [DecoreEmployeeModel ]()
+    
+    init(dict:[String:Any?]) {
+        if let value = dict["image_base"] as? String{
+            image_base = value
+        }
+        if let value = dict["error"] as? Int{
+            error = value
+        }
+        if let _dict = dict["result"] as? [[String:Any?]]{
+            for emp in _dict{
+                employees.append(DecoreEmployeeModel.init(dict: emp))
+            }
+        }
+        
+    }
+}
+
+
 class DecoreSitesModel : NSObject{
     
     var lng:Double = 0.0
@@ -134,6 +187,52 @@ class DecoreSitesModel : NSObject{
         }
         if let value = dict["site_name"] as? String{
             site_name = value
+        }
+    }
+}
+class DecoreEmployeeModel : NSObject{
+    var employee_type:String = ""
+    var image:String = ""
+    var name:String = ""
+    var rating:String = ""
+    var wage_hourly:Int = 0
+    var total_rating:Int = 0
+    var site_id:Int = 0
+    var date_of_joining:String = ""
+    var emp_id:Int = 0
+    var dob:String = ""
+    
+    init(dict:[String:Any?]) {
+        
+        if let value = dict["emp_id"] as? Int{
+            emp_id = value
+        }
+        if let value = dict["site_id"] as? Int{
+            site_id = value
+        }
+        if let value = dict["dob"] as? String{
+            dob = value
+        }
+        if let value = dict["total_rating"] as? Int{
+            total_rating = value
+        }
+        if let value = dict["wage_hourly"] as? Int{
+            wage_hourly = value
+        }
+        if let value = dict["date_of_joining"] as? String{
+            date_of_joining = value
+        }
+        if let value = dict["employee_type"] as? String{
+            employee_type = value
+        }
+        if let value = dict["image"] as? String{
+            image = value
+        }
+        if let value = dict["name"] as? String{
+            name = value
+        }
+        if let value = dict["rating"] as? String{
+            rating = value
         }
     }
 }

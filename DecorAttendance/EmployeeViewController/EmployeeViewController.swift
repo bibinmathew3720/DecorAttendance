@@ -16,10 +16,10 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableViewEmployee: UITableView!
     
     var activeTextField: UITextField!
-    
+    var employeeResponse:DecoreEmployeeResponseModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getEmployeesApi()
         addTapgesturesToView()
         
         txtFldSearch.delegate = self
@@ -43,15 +43,19 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
         return true
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 3
+        if let model = self.employeeResponse{
+            return model.employees.count
+        }
+        return 0
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellEmployee", for: indexPath) as! EmployeeTableViewCell
-        
+        if let model = self.employeeResponse?.employees{
+            cell.setCell(model: model[indexPath.row])
+        }
         return cell
         
     }
@@ -114,4 +118,35 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
 
+    func getEmployeesApi(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        UserManager().getEmployeesApi(with:"", success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let model = model as? DecoreEmployeeResponseModel{
+                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+                if type == StatusEnum.success{
+                    self.employeeResponse = model
+                    self.tableViewEmployee.reloadData()
+                }
+                else if type == StatusEnum.sessionexpired{
+                    //                    self.callRefreshTokenApi()
+                }
+                else{
+                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
+                }
+            }
+            
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            
+            print(ErrorType)
+        }
+    }
 }

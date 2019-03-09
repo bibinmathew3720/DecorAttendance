@@ -65,4 +65,13 @@ class EmployeeTableViewCell: UITableViewCell {
         
     }
     
+    func setCell(model:DecoreEmployeeModel){
+        lblID.text = "ID" + String(model.emp_id)
+        lblName.text = model.name
+        imageViewLabour.loadImageUsingCache(withUrl: model.image, colorValue: nil)
+        //viewColoredWidth.constant = CGFloat(4 * Int(model.rating)!)
+        lblLabourRating.text = model.rating + "/" + String(model.total_rating)
+        lblSalaryPerDay.text = "Labour salary rate " + String(model.wage_hourly) + "AED day"
+    }
+    
 }
