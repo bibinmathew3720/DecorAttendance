@@ -112,6 +112,8 @@
 		BB5A4FC62233B43100F4FC82 /* CLNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC22233B43100F4FC82 /* CLNetworkManager.swift */; };
 		BB5A4FC72233B43100F4FC82 /* CLBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC32233B43100F4FC82 /* CLBaseService.swift */; };
 		BB5A4FCB2233B47900F4FC82 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC92233B47900F4FC82 /* Reachability.m */; };
+		BB5A4FCF2233C0C300F4FC82 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */; };
+		BB5A4FD22233C41600F4FC82 /* CCUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FD12233C41600F4FC82 /* CCUtility.swift */; };
 		CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -251,6 +253,8 @@
 		BB5A4FC32233B43100F4FC82 /* CLBaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBaseService.swift; sourceTree = "<group>"; };
 		BB5A4FC92233B47900F4FC82 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BB5A4FCA2233B47900F4FC82 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		BB5A4FD12233C41600F4FC82 /* CCUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCUtility.swift; sourceTree = "<group>"; };
 		D98D9F27B5CC5C6DFCC53240 /* Pods-DecorAttendanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceTests/Pods-DecorAttendanceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DecorAttendanceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -654,6 +658,8 @@
 		BB5A4FAE2233AF5100F4FC82 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BB5A4FD02233C40500F4FC82 /* Utilities */,
+				BB5A4FCD2233C07000F4FC82 /* ApiManagers */,
 				BB5A4FBF2233B40600F4FC82 /* BaseNetworkManager */,
 				BB5A4FBC2233B16600F4FC82 /* BridgingHeader */,
 			);
@@ -687,6 +693,22 @@
 				BB5A4FC92233B47900F4FC82 /* Reachability.m */,
 			);
 			path = Reachabillity;
+			sourceTree = "<group>";
+		};
+		BB5A4FCD2233C07000F4FC82 /* ApiManagers */ = {
+			isa = PBXGroup;
+			children = (
+				BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */,
+			);
+			path = ApiManagers;
+			sourceTree = "<group>";
+		};
+		BB5A4FD02233C40500F4FC82 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BB5A4FD12233C41600F4FC82 /* CCUtility.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -917,6 +939,7 @@
 				46AE08BD2217110E00A0BC9F /* ObeidiModelFetchAttendance.swift in Sources */,
 				46AD8DD321CD17C4006B1DEA /* LabourSummaryViewController.swift in Sources */,
 				466DE3CC2211FCCC003F0F76 /* ObeidiConstants.swift in Sources */,
+				BB5A4FCF2233C0C300F4FC82 /* UserManager.swift in Sources */,
 				469C4F1721CABFC0003DE262 /* EmployeeViewController.swift in Sources */,
 				469C4F1921CAC0AE003DE262 /* EmployeeTableViewCell.swift in Sources */,
 				46AC0B8E21CA60D4002A2ABD /* ViewController.swift in Sources */,
@@ -933,6 +956,7 @@
 				4618714F21C661BD00507F06 /* LeftViewControllerDelegate.swift in Sources */,
 				46C0660F21E095D7009E731B /* ForemanLeftViewController.swift in Sources */,
 				46A5FEB221E2707900C20784 /* ForemanNewEntryTableViewCell.swift in Sources */,
+				BB5A4FD22233C41600F4FC82 /* CCUtility.swift in Sources */,
 				46118644221472370031DFC4 /* POPUPSelectorViewController.swift in Sources */,
 				46AE08B72216938400A0BC9F /* ObeidiModelCostSummaryLabourWise.swift in Sources */,
 				46AE08B92216D6BF00A0BC9F /* SafetyEquipmentsTableViewCell.swift in Sources */,

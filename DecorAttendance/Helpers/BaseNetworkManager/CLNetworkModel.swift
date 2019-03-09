@@ -31,28 +31,11 @@ class CLNetworkModel: NSObject {
     init(url : String, requestMethod_ : String){
         requestURL = url
         requestMethod = requestMethod_
-        //let user = User.getUser()
         requestHeader = [String : String]()
         _ = requestHeader?.updateValue("application/json", forKey: "Content-Type")
-//        let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
-//        if let appVer = appVersion {
-//            _ = requestHeader?.updateValue(appVer, forKey: "App-Version")
-//        }
-//        else{
-//            _ = requestHeader?.updateValue("1.0", forKey: "App-Version")
-//        }
-//         _ = requestHeader?.updateValue("1", forKey: "PlatForm")
-//        if (CCUtility.getCurrentLanguage() == "en") {
-//            _ = requestHeader?.updateValue("1", forKey: "Language")
-//        }
-//        else {
-//            _ = requestHeader?.updateValue("2", forKey: "Language")
-//        }
-//        if let _sessionToken = user?.sessionToken{
-//            _ = requestHeader?.updateValue(_sessionToken, forKey: "Session-Token")
-//        }
-//        else{
-//           _ = requestHeader?.updateValue(Constant.GuestToken, forKey: "Session-Token")
-//        }
-    }
+        if let _token = UserDefaults.standard.string(forKey: "accessToken"){
+           _ = requestHeader?.updateValue("Bearer " + _token , forKey: "Authorization")
+        }
+
+}
 }

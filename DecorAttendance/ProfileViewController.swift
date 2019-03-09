@@ -15,7 +15,7 @@ class ProfileViewController: UITableViewController {
     @IBOutlet weak var imageViewProfile: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getProfileApi()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -28,6 +28,37 @@ class ProfileViewController: UITableViewController {
         
     }
 
+    func getProfileApi(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        UserManager().getProfileApi(with:"", success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+//            if let model = model as? CountriesResponseModel{
+//                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+//                if type == StatusEnum.success{
+//
+//                }
+//                else if type == StatusEnum.sessionexpired{
+//                    self.callRefreshTokenApi()
+//                }
+//                else{
+//                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
+//                }
+//            }
+            
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            
+            print(ErrorType)
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

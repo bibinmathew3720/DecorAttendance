@@ -9,7 +9,7 @@
 import Foundation
 
 struct User {
-    
+    static let AppName = "Offarea"
     enum attendanceType {
         case startTime
         case endTime
@@ -29,7 +29,9 @@ struct User {
         static var remaining_bonus = ""
         
     }
-    
-    
+    struct ErrorMessages {
+        static let noNetworkMessage = "Network not available"
+        static let serverErrorMessamge = "Unable to connect server"
+    }
 }
 //sick_leave,end_time,start_time,strike,absent
