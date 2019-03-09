@@ -107,6 +107,11 @@
 		46F1FF23221D30CD0002C138 /* SickLeaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1FF22221D30CD0002C138 /* SickLeaveViewController.swift */; };
 		46F1FF25221D31EA0002C138 /* EndTimeBonusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1FF24221D31EA0002C138 /* EndTimeBonusViewController.swift */; };
 		46F1FF2D221D81FD0002C138 /* ObeidiAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1FF2C221D81FD0002C138 /* ObeidiAlertController.swift */; };
+		BB5A4FC42233B43100F4FC82 /* CLNetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC02233B43100F4FC82 /* CLNetworkUtility.swift */; };
+		BB5A4FC52233B43100F4FC82 /* CLNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC12233B43100F4FC82 /* CLNetworkModel.swift */; };
+		BB5A4FC62233B43100F4FC82 /* CLNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC22233B43100F4FC82 /* CLNetworkManager.swift */; };
+		BB5A4FC72233B43100F4FC82 /* CLBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC32233B43100F4FC82 /* CLBaseService.swift */; };
+		BB5A4FCB2233B47900F4FC82 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC92233B47900F4FC82 /* Reachability.m */; };
 		CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -239,6 +244,13 @@
 		8D4E2991A8626FB16099B41A /* Pods-DecorAttendance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendance.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendance/Pods-DecorAttendance.debug.xcconfig"; sourceTree = "<group>"; };
 		96713BDDDE0BD47883F94507 /* Pods-DecorAttendanceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceUITests/Pods-DecorAttendanceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B9999E7CBD95E87A7A7864C1 /* Pods_DecorAttendanceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DecorAttendanceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB5A4FBE2233B1D700F4FC82 /* DecorAttendance-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DecorAttendance-Bridging-Header.h"; sourceTree = "<group>"; };
+		BB5A4FC02233B43100F4FC82 /* CLNetworkUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLNetworkUtility.swift; sourceTree = "<group>"; };
+		BB5A4FC12233B43100F4FC82 /* CLNetworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLNetworkModel.swift; sourceTree = "<group>"; };
+		BB5A4FC22233B43100F4FC82 /* CLNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLNetworkManager.swift; sourceTree = "<group>"; };
+		BB5A4FC32233B43100F4FC82 /* CLBaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBaseService.swift; sourceTree = "<group>"; };
+		BB5A4FC92233B47900F4FC82 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		BB5A4FCA2233B47900F4FC82 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		D98D9F27B5CC5C6DFCC53240 /* Pods-DecorAttendanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceTests/Pods-DecorAttendanceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DecorAttendanceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -578,6 +590,7 @@
 		46E71D0521C5194200051C78 /* DecorAttendance */ = {
 			isa = PBXGroup;
 			children = (
+				BB5A4FAE2233AF5100F4FC82 /* Helpers */,
 				46C7E00421C8D6AB00F3247D /* DropDownViewController */,
 				4618715E21C6D4F500507F06 /* SingletonClasses */,
 				4618715F21C6D50900507F06 /* Charts */,
@@ -636,6 +649,44 @@
 				46C0660A21E08BD6009E731B /* Test.storyboard */,
 			);
 			path = StoryBoard;
+			sourceTree = "<group>";
+		};
+		BB5A4FAE2233AF5100F4FC82 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BB5A4FBF2233B40600F4FC82 /* BaseNetworkManager */,
+				BB5A4FBC2233B16600F4FC82 /* BridgingHeader */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BB5A4FBC2233B16600F4FC82 /* BridgingHeader */ = {
+			isa = PBXGroup;
+			children = (
+				BB5A4FBE2233B1D700F4FC82 /* DecorAttendance-Bridging-Header.h */,
+			);
+			path = BridgingHeader;
+			sourceTree = "<group>";
+		};
+		BB5A4FBF2233B40600F4FC82 /* BaseNetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				BB5A4FC82233B44B00F4FC82 /* Reachabillity */,
+				BB5A4FC32233B43100F4FC82 /* CLBaseService.swift */,
+				BB5A4FC22233B43100F4FC82 /* CLNetworkManager.swift */,
+				BB5A4FC12233B43100F4FC82 /* CLNetworkModel.swift */,
+				BB5A4FC02233B43100F4FC82 /* CLNetworkUtility.swift */,
+			);
+			path = BaseNetworkManager;
+			sourceTree = "<group>";
+		};
+		BB5A4FC82233B44B00F4FC82 /* Reachabillity */ = {
+			isa = PBXGroup;
+			children = (
+				BB5A4FCA2233B47900F4FC82 /* Reachability.h */,
+				BB5A4FC92233B47900F4FC82 /* Reachability.m */,
+			);
+			path = Reachabillity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -710,6 +761,7 @@
 				TargetAttributes = {
 					46E71D0221C5194200051C78 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					46E71D1921C5194500051C78 = {
 						CreatedOnToolsVersion = 10.1;
@@ -873,7 +925,9 @@
 				46C7E00321C8D5F200F3247D /* DropDownTableViewCell.swift in Sources */,
 				4618714721C644A800507F06 /* CenterViewControllerDelegate.swift in Sources */,
 				4618715B21C6A5EB00507F06 /* ObeidiGradientAndShadowFiller.swift in Sources */,
+				BB5A4FC62233B43100F4FC82 /* CLNetworkManager.swift in Sources */,
 				46C0661F21E0C678009E731B /* SliceChart.swift in Sources */,
+				BB5A4FC52233B43100F4FC82 /* CLNetworkModel.swift in Sources */,
 				46C7E00121C8D4B000F3247D /* DropDownViewController.swift in Sources */,
 				46C6AAA12222DB1F0081F52C /* User.swift in Sources */,
 				4618714F21C661BD00507F06 /* LeftViewControllerDelegate.swift in Sources */,
@@ -894,8 +948,10 @@
 				4618714D21C65F3600507F06 /* MenuItemsTableViewCell.swift in Sources */,
 				46AB287D21C8F9DB00FF5C85 /* DropDownPresentationController.swift in Sources */,
 				46AD094221C77F1E005BBDEB /* XYMarkerView.swift in Sources */,
+				BB5A4FC72233B43100F4FC82 /* CLBaseService.swift in Sources */,
 				46E71D3821C5285A00051C78 /* LoginViewController.swift in Sources */,
 				46AD996321DF8695000CFF44 /* ProfileViewController.swift in Sources */,
+				BB5A4FC42233B43100F4FC82 /* CLNetworkUtility.swift in Sources */,
 				4618714B21C65A7800507F06 /* ContainerViewController.swift in Sources */,
 				46AC0B8821CA1494002A2ABD /* ObeidiTextStyle.swift in Sources */,
 				4611864922147F890031DFC4 /* FilterTableViewCell.swift in Sources */,
@@ -916,6 +972,7 @@
 				46AD094B21C77F93005BBDEB /* IntAxisValueFormatter.swift in Sources */,
 				46AC0B9021CA854E002A2ABD /* DashBoardContainerViewController.swift in Sources */,
 				469D712421D5F2B60057BA7C /* MarkAttendanceViewController.swift in Sources */,
+				BB5A4FCB2233B47900F4FC82 /* Reachability.m in Sources */,
 				46A11E6E21CBB27700691B76 /* CompleteEntriesViewController.swift in Sources */,
 				46A11E7021CBC58D00691B76 /* NewEntryTableViewCell.swift in Sources */,
 				46AA411221D921820036EF9F /* EmployeeDetailsViewController.swift in Sources */,
@@ -1128,13 +1185,19 @@
 			baseConfigurationReference = 8D4E2991A8626FB16099B41A /* Pods-DecorAttendance.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WVYK59KXPF;
 				INFOPLIST_FILE = DecorAttendance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Obeidi.attendance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DecorAttendance/Helpers/BridgingHeader/DecorAttendance-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1145,13 +1208,18 @@
 			baseConfigurationReference = 6A329E0CB13BC3C908E81160 /* Pods-DecorAttendance.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WVYK59KXPF;
 				INFOPLIST_FILE = DecorAttendance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Obeidi.attendance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DecorAttendance/Helpers/BridgingHeader/DecorAttendance-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1165,7 +1233,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DecorAttendanceTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cocoalabs.attendance.DecorAttendanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1182,7 +1254,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DecorAttendanceTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cocoalabs.attendance.DecorAttendanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1198,7 +1274,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DecorAttendanceUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cocoalabs.attendance.DecorAttendanceUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1214,7 +1294,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DecorAttendanceUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cocoalabs.attendance.DecorAttendanceUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
