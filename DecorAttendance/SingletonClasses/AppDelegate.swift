@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 
@@ -31,8 +32,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().layer.borderWidth = 0.0
         UITabBar.appearance().clipsToBounds = true
         //UINavigationBar.appearance().barTintColor = UIColor.red
-        
+        initWindow()
         return true
+    }
+    
+    func initWindow(){
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

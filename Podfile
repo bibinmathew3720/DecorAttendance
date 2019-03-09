@@ -11,6 +11,12 @@ pod 'AFNetworking', '~> 3.2'
 pod 'JTAppleCalendar', '~> 7.0'
 pod 'Kingfisher'
 
+pod 'GrowingTextView'
+pod 'IQKeyboardManagerSwift'
+pod 'MBProgressHUD'
+pod 'SDWebImage'
+
+
 
   target 'DecorAttendanceTests' do
     inherit! :search_paths
