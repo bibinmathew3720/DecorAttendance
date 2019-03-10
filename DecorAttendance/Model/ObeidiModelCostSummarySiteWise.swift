@@ -22,6 +22,9 @@ class ObeidiModelCostSummarySiteWise: NSObject {
     var absence_penalty_amount: AnyObject!
     var paid_vaction_amount: AnyObject!
     
+    var bonus_budget:AnyObject?
+    var net_wage_amount:AnyObject?
+    
     init(dictionaryDetails : NSDictionary)
     {
         super.init()

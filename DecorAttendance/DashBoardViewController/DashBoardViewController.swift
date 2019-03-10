@@ -539,6 +539,13 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     func drawChartAndPerformanceIndicators(modelObj: ObeidiModelCostSummarySiteWise){
         
         self.costSummaryModel = modelObj
+        
+        if let wageAmount = self.costSummaryModel.net_wage_amount as? CGFloat{
+           self.lblWageAmnt.text = "AED " + "\(wageAmount)"
+        }
+        if let sickLeaveAmount = self.costSummaryModel.medical_leave_amount as? CGFloat{
+            self.lblLeaveAmnt.text = "AED " + "\(sickLeaveAmount)"
+        }
         let calculatedDict = calculateAmntsAndPercentageValue()
         //guard let remainigBonusPer = NumberFormatter().number(from: (calculatedDict.value(forKey: "remaining_bonus_per") as! String)) else { return }
         var remainigBonusPer = calculatedDict.value(forKey: "remaining_bonus_per")
@@ -556,6 +563,9 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         var totalBonusAmnt = calculatedDict.value(forKey: "total_bounus_amount")
         var remainigBonusAmnt = calculatedDict.value(forKey: "remaining_bonus_amnt")
         
+        self.lblTotalOTAmnt.text =  "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: totalOTAmnt as! CGFloat)
+        self.lblTotalBnsAmnt.text =  "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: totalBonusAmnt as! CGFloat)
+        
         pieChartViewCostSummary.layer.sublayers = nil
         pieChartViewCostSummary.slices = [
             
@@ -567,14 +577,12 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         
         setPerformanceIndicatorLines(remainingBonusVal: remainigBonusPer as! CGFloat, totalOTVal: otPer, totalBonusVal: bonusPer, vacationVal: vacationPer, sickLeaveVal: sickLeavePer, wageVal: wagePer)
         
-        self.lblTotalOTAmnt.text =  "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: totalOTAmnt as! CGFloat)
+       
+        
         self.lblTotalCostAmnt.text =  "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: totalCost as! CGFloat)
-        self.lblTotalBnsAmnt.text =  "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: totalBonusAmnt as! CGFloat)
+       
         self.lblRemainingBnsAmnt.text = "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: remainigBonusAmnt as! CGFloat)
         
-        //
-        self.lblLeaveAmnt.text =  "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: sickLeavePer as! CGFloat)
-        self.lblWageAmnt.text =  "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: wagePer as! CGFloat)
         self.lblVacationAmnt.text = "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: vacationPer as! CGFloat)
         
         
