@@ -539,13 +539,14 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     func drawChartAndPerformanceIndicators(modelObj: ObeidiModelCostSummarySiteWise){
         
         self.costSummaryModel = modelObj
-        
-        if let wageAmount = self.costSummaryModel.net_wage_amount as? CGFloat{
-           self.lblWageAmnt.text = "AED " + "\(wageAmount)"
+        if let costSummary = self.costSummaryModel{
+          self.lblTotalOTAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.overTimeAmountNew)
+          self.lblTotalBnsAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.bonusAmountNew)
+          self.lblWageAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.netWageAmountNew)
+          self.lblLeaveAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.medicalLeaveAmountNew)
+          self.lblVacationAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.paidVacationAmountNew)
         }
-        if let sickLeaveAmount = self.costSummaryModel.medical_leave_amount as? CGFloat{
-            self.lblLeaveAmnt.text = "AED " + "\(sickLeaveAmount)"
-        }
+
         let calculatedDict = calculateAmntsAndPercentageValue()
         //guard let remainigBonusPer = NumberFormatter().number(from: (calculatedDict.value(forKey: "remaining_bonus_per") as! String)) else { return }
         var remainigBonusPer = calculatedDict.value(forKey: "remaining_bonus_per")
@@ -558,13 +559,13 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         var vacationPer = (calculatedDict.value(forKey: "vacation_per") as! CGFloat)
         
         
-        var totalCost = calculatedDict.value(forKey: "total_cost")
-        var totalOTAmnt = calculatedDict.value(forKey: "total_ot_amount")
-        var totalBonusAmnt = calculatedDict.value(forKey: "total_bounus_amount")
-        var remainigBonusAmnt = calculatedDict.value(forKey: "remaining_bonus_amnt")
+        let totalCost = calculatedDict.value(forKey: "total_cost")
+        _ = calculatedDict.value(forKey: "total_ot_amount")
+        let totalBonusAmnt = calculatedDict.value(forKey: "total_bounus_amount")
+        let remainigBonusAmnt = calculatedDict.value(forKey: "remaining_bonus_amnt")
         
-        self.lblTotalOTAmnt.text =  "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: totalOTAmnt as! CGFloat)
-        self.lblTotalBnsAmnt.text =  "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: totalBonusAmnt as! CGFloat)
+        
+        
         
         pieChartViewCostSummary.layer.sublayers = nil
         pieChartViewCostSummary.slices = [
@@ -578,12 +579,13 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         setPerformanceIndicatorLines(remainingBonusVal: remainigBonusPer as! CGFloat, totalOTVal: otPer, totalBonusVal: bonusPer, vacationVal: vacationPer, sickLeaveVal: sickLeavePer, wageVal: wagePer)
         
        
-        
-        self.lblTotalCostAmnt.text =  "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: totalCost as! CGFloat)
+        if let totalCostAmount = totalCost as? CGFloat{
+            self.lblTotalCostAmnt.text =  "AED " + String.init(format: "%0.2f", totalCostAmount)
+        }
        
         self.lblRemainingBnsAmnt.text = "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: remainigBonusAmnt as! CGFloat)
         
-        self.lblVacationAmnt.text = "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: vacationPer as! CGFloat)
+        
         
         
         

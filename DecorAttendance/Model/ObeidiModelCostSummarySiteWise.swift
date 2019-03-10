@@ -25,9 +25,59 @@ class ObeidiModelCostSummarySiteWise: NSObject {
     var bonus_budget:AnyObject?
     var net_wage_amount:AnyObject?
     
+    var absencePenaltyAmountNew:CGFloat = 0.0
+    var bonusAmountNew:CGFloat = 0.0
+    var bonusBudgetNew:CGFloat = 0.0
+    var equipmentPenaltyAmountNew:CGFloat = 0.0
+    var medicalLeaveAmountNew:CGFloat = 0.0
+    var netWageAmountNew:CGFloat = 0.0
+    var overTimeAmountNew:CGFloat = 0.0
+    var paidVacationAmountNew:CGFloat = 0.0
+    var remainingBonusAmountNew:CGFloat = 0.0
+    var strikePenaltyAmountNew:CGFloat = 0.0
+    var totalAmountNew:CGFloat = 0.0
+    var wageAmountNew:CGFloat = 0.0
+    
     init(dictionaryDetails : NSDictionary)
     {
         super.init()
+        
+        if let value = dictionaryDetails["absence_penalty_amount"] as? CGFloat{
+            absencePenaltyAmountNew = value
+        }
+        if let value = dictionaryDetails["bonus_amount"] as? CGFloat{
+            bonusAmountNew = value
+        }
+        if let value = dictionaryDetails["bonus_budget"] as? CGFloat{
+            bonusBudgetNew = value
+        }
+        if let value = dictionaryDetails["equipment_penalty_amount"] as? CGFloat{
+            equipmentPenaltyAmountNew = value
+        }
+        if let value = dictionaryDetails["medical_leave_amount"] as? CGFloat{
+            medicalLeaveAmountNew = value
+        }
+        if let value = dictionaryDetails["net_wage_amount"] as? CGFloat{
+            netWageAmountNew = value
+        }
+        if let value = dictionaryDetails["over_time_amount"] as? CGFloat{
+            overTimeAmountNew = value
+        }
+        if let value = dictionaryDetails["paid_vaction_amount"] as? CGFloat{
+            paidVacationAmountNew = value
+        }
+        if let value = dictionaryDetails["remaining_bonus_amount"] as? CGFloat{
+            remainingBonusAmountNew = value
+        }
+        if let value = dictionaryDetails["strike_penalty_amount"] as? CGFloat{
+            strikePenaltyAmountNew = value
+        }
+        if let value = dictionaryDetails["total_amount"] as? CGFloat{
+            totalAmountNew = value
+        }
+        if let value = dictionaryDetails["wage_amount"] as? CGFloat{
+            wageAmountNew = value
+        }
         
         for (key, value) in dictionaryDetails {
             let keyName = key as! String
