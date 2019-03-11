@@ -540,11 +540,20 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         
         self.costSummaryModel = modelObj
         if let costSummary = self.costSummaryModel{
-          self.lblTotalOTAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.overTimeAmountNew)
-          self.lblTotalBnsAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.bonusAmountNew)
-          self.lblWageAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.netWageAmountNew)
-          self.lblLeaveAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.medicalLeaveAmountNew)
-          self.lblVacationAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.paidVacationAmountNew)
+            self.lblRemainingBnsAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.remainingBonusAmountNew)
+            self.lblTotalOTAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.overTimeAmountNew)
+            self.lblTotalBnsAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.bonusAmountNew)
+            self.lblWageAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.netWageAmountNew)
+            self.lblLeaveAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.medicalLeaveAmountNew)
+            self.lblVacationAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.paidVacationAmountNew)
+             self.lblTotalCostAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.totalAmountNew)
+            
+            self.lblRemainingBnsPerc.text = String(format: "%0.02f", costSummary.remainingBonusPercentage) + "%"
+            self.lblTotalOTPerc.text = String(format: "%0.02f", costSummary.overTimePercentage) + "%"
+            self.lblTotalBnsPerc.text = String(format: "%0.02f", costSummary.bonusPercentage) + "%"
+            self.lblWagePer.text = String(format: "%0.02f", costSummary.wagePercentage) + "%"
+            self.lblLeavePer.text = String(format: "%0.02f", costSummary.sickLeavePercentage) + "%"
+            self.lblPaidVacationPer.text = String(format: "%0.02f", costSummary.paidVacationPercentage) + "%"
         }
 
         let calculatedDict = calculateAmntsAndPercentageValue()
@@ -577,29 +586,8 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         //setPerformanceIndicatorLines(remainingBonusVal: remainigBonusPer as! CGFloat, totalOTVal: otPer as! CGFloat, totalBonusVal: bonusPer as! CGFloat)
         
         setPerformanceIndicatorLines(remainingBonusVal: remainigBonusPer as! CGFloat, totalOTVal: otPer, totalBonusVal: bonusPer, vacationVal: vacationPer, sickLeaveVal: sickLeavePer, wageVal: wagePer)
-        
-       
-        if let totalCostAmount = totalCost as? CGFloat{
-            self.lblTotalCostAmnt.text =  "AED " + String.init(format: "%0.2f", totalCostAmount)
-        }
-       
-        self.lblRemainingBnsAmnt.text = "AED " + ObeidiaTypeFormatter.stringFromCGFloat(floatVal: remainigBonusAmnt as! CGFloat)
-        
-        
-        
-        
-        
-        self.lblTotalOTPerc.text = ObeidiaTypeFormatter.stringFromCGFloat(floatVal: 100 * (otPer as! CGFloat)) + "%"
-        self.lblTotalBnsPerc.text = ObeidiaTypeFormatter.stringFromCGFloat(floatVal: 100 * (bonusPer as! CGFloat)) + "%"
-        self.lblRemainingBnsPerc.text = ObeidiaTypeFormatter.stringFromCGFloat(floatVal: 100 * ( remainigBonusPer as! CGFloat)) + "%"
-        //
-        self.lblPaidVacationPer.text = ObeidiaTypeFormatter.stringFromCGFloat(floatVal: 100 * (vacationPer as! CGFloat)) + "%"
-        self.lblLeavePer.text = ObeidiaTypeFormatter.stringFromCGFloat(floatVal: 100 * (sickLeavePer as! CGFloat)) + "%"
-        self.lblWagePer.text = ObeidiaTypeFormatter.stringFromCGFloat(floatVal: 100 * ( wagePer as! CGFloat)) + "%"
-        
-        
-        
     }
+    
     func calculateAmntsAndPercentageValue() -> NSMutableDictionary {
         
         let calcDict = NSMutableDictionary()

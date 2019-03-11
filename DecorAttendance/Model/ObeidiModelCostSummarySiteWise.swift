@@ -38,6 +38,14 @@ class ObeidiModelCostSummarySiteWise: NSObject {
     var totalAmountNew:CGFloat = 0.0
     var wageAmountNew:CGFloat = 0.0
     
+    var remainingBonusPercentage:CGFloat = 0.0
+    var overTimePercentage:CGFloat = 0.0
+    var bonusPercentage:CGFloat = 0.0
+    var wagePercentage:CGFloat = 0.0
+    var sickLeavePercentage:CGFloat = 0.0
+    var paidVacationPercentage:CGFloat = 0.0
+    
+    
     init(dictionaryDetails : NSDictionary)
     {
         super.init()
@@ -78,6 +86,13 @@ class ObeidiModelCostSummarySiteWise: NSObject {
         if let value = dictionaryDetails["wage_amount"] as? CGFloat{
             wageAmountNew = value
         }
+        
+        remainingBonusPercentage = ((bonusBudgetNew-remainingBonusAmountNew)/bonusBudgetNew)*100.00
+        overTimePercentage = (overTimeAmountNew/totalAmountNew)*100.00
+        bonusPercentage = (bonusAmountNew/totalAmountNew)*100.00
+        wagePercentage = (netWageAmountNew/totalAmountNew)*100.00
+        sickLeavePercentage = (medicalLeaveAmountNew/totalAmountNew)*100.00
+        paidVacationPercentage = (paidVacationAmountNew/totalAmountNew)*100.00
         
         for (key, value) in dictionaryDetails {
             let keyName = key as! String
