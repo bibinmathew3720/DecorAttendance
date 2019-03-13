@@ -88,11 +88,29 @@ class ObeidiModelCostSummarySiteWise: NSObject {
         }
         
         remainingBonusPercentage = ((bonusBudgetNew-remainingBonusAmountNew)/bonusBudgetNew)*100.00
+        if(remainingBonusPercentage.isNaN){
+            remainingBonusPercentage = 0.0
+        }
         overTimePercentage = (overTimeAmountNew/totalAmountNew)*100.00
+        if(overTimePercentage.isNaN){
+            overTimePercentage = 0.0
+        }
         bonusPercentage = (bonusAmountNew/totalAmountNew)*100.00
+        if(bonusPercentage.isNaN){
+            bonusPercentage = 0.0
+        }
         wagePercentage = (netWageAmountNew/totalAmountNew)*100.00
+        if(wagePercentage.isNaN){
+            wagePercentage = 0
+        }
         sickLeavePercentage = (medicalLeaveAmountNew/totalAmountNew)*100.00
+        if(sickLeavePercentage.isNaN){
+            sickLeavePercentage = 0.0
+        }
         paidVacationPercentage = (paidVacationAmountNew/totalAmountNew)*100.00
+        if(paidVacationPercentage.isNaN){
+            paidVacationPercentage = 0.0
+        }
         
         for (key, value) in dictionaryDetails {
             let keyName = key as! String

@@ -455,22 +455,8 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         
         self.navigationController?.navigationBar.alpha = 1
         self.tabBarController?.tabBar.alpha = 1
-        
     }
-    //total wage,sick,vacation
-    func setPerformanceIndicatorLines(remainingBonusVal: CGFloat, totalOTVal: CGFloat, totalBonusVal: CGFloat, vacationVal: CGFloat, sickLeaveVal: CGFloat, wageVal: CGFloat) {
-        //This is where the indicators set to their corresponding values
-        ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.bonusIndicatorLineWhite, lineB: bonusIndicatorLineColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineOrange(), lineAValue: 1, lineBValue: remainingBonusVal, lineAMeter: widthBonusLight, lineBMeter: widthBonusColored)
-        
-        ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalBonusIndicatorWhite, lineB: totalBonusIndicatorColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineRed(), lineAValue: 1, lineBValue: totalBonusVal, lineAMeter: widthTotalBonusLight, lineBMeter: widthTotalBounsColred)
-        
-        ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalOTIndicatorWhite, lineB: totalOTIndicatorColred, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: totalOTVal, lineAMeter: widthTotalOTLight, lineBMeter: widthTotalOTColored)
-        //remaning
-        ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalSickLeaveIndctrWhite, lineB: totalSickLeaveIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: sickLeaveVal, lineAMeter: widthSickLeaveWhite, lineBMeter: widthSickLeaveColoured)
-        ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totaltotalWageIndctrWhite, lineB: totalWageIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: wageVal, lineAMeter: widthWageWhite, lineBMeter: widthWageColoured)
-        ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPaidVacationIndctrWhite, lineB: totalPaidVacationIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: vacationVal, lineAMeter: widthVacationWhite, lineBMeter: widthVacationColoured)
-        
-    }
+    
     func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
     
 //        if pieChartViewCostSummary.myAnimationDelegate != nil
@@ -549,11 +535,42 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
              self.lblTotalCostAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.totalAmountNew)
             
             self.lblRemainingBnsPerc.text = String(format: "%0.02f", costSummary.remainingBonusPercentage) + "%"
+             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.bonusIndicatorLineWhite, lineB: bonusIndicatorLineColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineOrange(), lineAValue: 1, lineBValue: (costSummary.remainingBonusPercentage/100.00), lineAMeter: widthBonusLight, lineBMeter: widthBonusColored)
+            
             self.lblTotalOTPerc.text = String(format: "%0.02f", costSummary.overTimePercentage) + "%"
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalOTIndicatorWhite, lineB: totalOTIndicatorColred, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.overTimePercentage/100.00), lineAMeter: widthTotalOTLight, lineBMeter: widthTotalOTColored)
+            
             self.lblTotalBnsPerc.text = String(format: "%0.02f", costSummary.bonusPercentage) + "%"
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalBonusIndicatorWhite, lineB: totalBonusIndicatorColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineRed(), lineAValue: 1, lineBValue: (costSummary.bonusPercentage/100.00), lineAMeter: widthTotalBonusLight, lineBMeter: widthTotalBounsColred)
+            
             self.lblWagePer.text = String(format: "%0.02f", costSummary.wagePercentage) + "%"
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totaltotalWageIndctrWhite, lineB: totalWageIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.wagePercentage/100.00), lineAMeter: widthWageWhite, lineBMeter: widthWageColoured)
+            
             self.lblLeavePer.text = String(format: "%0.02f", costSummary.sickLeavePercentage) + "%"
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalSickLeaveIndctrWhite, lineB: totalSickLeaveIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.sickLeavePercentage/100.00), lineAMeter: widthSickLeaveWhite, lineBMeter: widthSickLeaveColoured)
+            
             self.lblPaidVacationPer.text = String(format: "%0.02f", costSummary.paidVacationPercentage) + "%"
+             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPaidVacationIndctrWhite, lineB: totalPaidVacationIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.paidVacationPercentage/100.00), lineAMeter: widthVacationWhite, lineBMeter: widthVacationColoured)
+            
+            
+           
+            
+//
+//
+//
+//            //remaning
+//
+//
+//
+            
+             let bonusSlice = Slice(radius: 0.75, width: costSummary.bonusPercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.bonusPercentage))
+            let otSlice = Slice(radius: 0.65, width: costSummary.overTimePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.overTimePercentage))
+            let wageSlice = Slice(radius: 0.75, width: costSummary.wagePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.wagePercentage))
+            let sickLeaveSlice = Slice(radius: 0.80, width: costSummary.sickLeavePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.sickLeavePercentage))
+            let vacationSlice = Slice(radius: 0.72, width: costSummary.paidVacationPercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.paidVacationPercentage))
+            pieChartViewCostSummary.layer.sublayers = nil
+            pieChartViewCostSummary.slices = [bonusSlice,otSlice,wageSlice,sickLeaveSlice,vacationSlice]
+            
         }
 
         let calculatedDict = calculateAmntsAndPercentageValue()
@@ -574,18 +591,13 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         let remainigBonusAmnt = calculatedDict.value(forKey: "remaining_bonus_amnt")
         
         
+      //  pieChartViewCostSummary.layer.sublayers = nil
+//        pieChartViewCostSummary.slices = [
+//
+//            Slice(radius: 0.75, width: bonusPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat),
+//            Slice(radius: 0.65, width: otPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.75, width: wagePer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.80, width: sickLeavePer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.72, width: vacationPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat)
         
-        
-        pieChartViewCostSummary.layer.sublayers = nil
-        pieChartViewCostSummary.slices = [
-            
-            Slice(radius: 0.75, width: bonusPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat),
-            Slice(radius: 0.65, width: otPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.75, width: wagePer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.80, width: sickLeavePer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.72, width: vacationPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat)
-            
-        ]
-        //setPerformanceIndicatorLines(remainingBonusVal: remainigBonusPer as! CGFloat, totalOTVal: otPer as! CGFloat, totalBonusVal: bonusPer as! CGFloat)
-        
-        setPerformanceIndicatorLines(remainingBonusVal: remainigBonusPer as! CGFloat, totalOTVal: otPer, totalBonusVal: bonusPer, vacationVal: vacationPer, sickLeaveVal: sickLeavePer, wageVal: wagePer)
+        //]
     }
     
     func calculateAmntsAndPercentageValue() -> NSMutableDictionary {
