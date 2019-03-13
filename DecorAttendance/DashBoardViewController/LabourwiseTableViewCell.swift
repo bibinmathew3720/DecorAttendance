@@ -48,9 +48,9 @@ class LabourwiseTableViewCell: UITableViewCell {
     func setCostSummary(costDetail:CostSummary){
         self.lblName.text = costDetail.name
         self.lblID.text = "\(costDetail.empId)"
-        self.lblIncentiveAmnt.text = "AED " + "\(costDetail.totalIncentive)"
-        self.lblTotalPenalty.text = "AED " + "\(costDetail.totalPenalty)"
-        self.lblNetSalary.text = "AED " + "\(costDetail.netSalary)"
+        self.lblIncentiveAmnt.text = "AED " + String(format: "%0.2f", costDetail.totalIncentive)
+        self.lblTotalPenalty.text = "AED " + String(format: "%0.2f", costDetail.totalPenalty)
+        self.lblNetSalary.text = "AED " + String(format: "%0.2f", costDetail.netSalary)
     }
 
 }
