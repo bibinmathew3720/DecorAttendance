@@ -69,10 +69,6 @@ class LabourwiseTableViewCell: UITableViewCell {
         ObeidiTextStyle.setLabelFontStyleAndSize(label: lblPenalty, fontSize: ObeidiFont.Size.smallA(), fontColor: ObeidiFont.Color.obeidiMediumBlack(), fontName: ObeidiFont.Family.normalFont())
         
         ObeidiTextStyle.setLabelFontStyleAndSize(label: lblNetSalary, fontSize: ObeidiFont.Size.smallB(), fontColor: ObeidiFont.Color.obeidiMediumBlack(), fontName: ObeidiFont.Family.boldFont())
-
-        
-        
-        
     }
     
     func setMultipleColorsToLabelFont(lbl: UILabel, labelStr: String, loctn: Int, lngth: Int, fontFamily: String, fontSize: CGFloat){
@@ -84,8 +80,9 @@ class LabourwiseTableViewCell: UITableViewCell {
         myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ObeidiFont.Color.obeidiLineRed(), range: NSRange(location:loctn,length:lngth))
         // set label Attribute
         lbl.attributedText = myMutableString
-        
-        
+    }
+    
+    func setCostSummary(costDetail:CostSummary){
         
     }
 

@@ -10,22 +10,24 @@ import UIKit
 
 @objcMembers
 class ObeidiModelCostSummaryLabourWise: NSObject {
-    
+    var error:Int = 0
+    var imageBaseUrlString = ""
+    var costSummaryArray = [CostSummary]()
     init(dictionaryDetails : NSDictionary)
     {
         super.init()
-        
-        for (key, value) in dictionaryDetails {
-            let keyName = key as! String
-            let keyValue = value as AnyObject
-            
-            if self.responds(to: Selector("\(keyName)")) == true {
-                self.setValue(keyValue, forKey: keyName)
-            } else {
-                //print("=====> \(keyName) == \(keyValue)")
-                print("var \(keyName): AnyObject!")
+        if let value = dictionaryDetails["error"] as? Int{
+            error = value
+        }
+        if let value = dictionaryDetails["image_base"] as? String{
+            imageBaseUrlString = value
+        }
+        if let resultArray = dictionaryDetails["result"] as? NSArray{
+            for item in resultArray{
+                if let it = item as? NSDictionary{
+                    costSummaryArray.append(CostSummary.init(dictionaryDetails: it))
+                }
             }
-            
         }
     }
     
@@ -95,19 +97,40 @@ class ObeidiModelCostSummaryLabourWise: NSObject {
                 completion(false, nil, error)
             }
             
-            
-            
-            
-            
         }
-        
-        
-        
-        
     }
-    
-    
-    
-    
+}
 
+class CostSummary: NSObject {
+    var empId:Int = 0
+    var profileImageUrl:String = ""
+    var name:String = ""
+    var netSalary:CGFloat = 0.0
+    var netWageAmount:CGFloat = 0.0
+    var totalIncentive:CGFloat = 0.0
+    var totalPenalty:CGFloat = 0.0
+    init(dictionaryDetails : NSDictionary)
+    {
+        if let value = dictionaryDetails["emp_id"] as? Int{
+            empId = value
+        }
+        if let value = dictionaryDetails["image"] as? String{
+            profileImageUrl = value
+        }
+        if let value = dictionaryDetails["name"] as? String{
+            name = value
+        }
+        if let value = dictionaryDetails["net_salary"] as? CGFloat{
+            netSalary = value
+        }
+        if let value = dictionaryDetails["net_wage_amount"] as? CGFloat{
+            netWageAmount = value
+        }
+        if let value = dictionaryDetails["total_incentive"] as? CGFloat{
+            totalIncentive = value
+        }
+        if let value = dictionaryDetails["total_penalty"] as? CGFloat{
+            totalPenalty = value
+        }
+    }
 }
