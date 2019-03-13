@@ -21,10 +21,7 @@ class LabourwiseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewStyles()
-        txtFldSearch.delegate = self
         addTapgesturesToView()
-        tableViewLabourwise.dataSource = self
-        tableViewLabourwise.delegate = self
         callLabourWiseCostSummaryAPI(keyword: "", startDate: "", endDate: "")
         // Do any additional setup after loading the view.
     }
