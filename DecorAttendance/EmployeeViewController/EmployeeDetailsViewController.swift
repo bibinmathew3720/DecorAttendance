@@ -59,7 +59,11 @@ class EmployeeDetailsViewController: UITableViewController {
             lblJoinedDate.text = model.date_of_joining
             lblAge.text = String(CCUtility.calcAge(birthday: model.dob))
             lblOccupation.text = UserDefaults.standard.string(forKey: "role")
-            
+            lblRating.text = model.rating + "/10"
+            let rating = Double(model.rating)
+            if let rat = rating{
+                widthColoredIndicator.constant = CGFloat(4 * rat)
+            }
         }
     }
     
@@ -99,7 +103,7 @@ class EmployeeDetailsViewController: UITableViewController {
     }
     func setLabelStyle()  {
         
-        ObeidiTextStyle.setLabelFontStyleAndSize(label: lblStrikeRateVal, fontSize: ObeidiFont.Size.bigA(), fontColor: ObeidiFont.Color.obeidiLineRed(), fontName: ObeidiFont.Family.boldFont())
+//        ObeidiTextStyle.setLabelFontStyleAndSize(label: lblStrikeRateVal, fontSize: ObeidiFont.Size.bigA(), fontColor: ObeidiFont.Color.obeidiLineRed(), fontName: ObeidiFont.Family.boldFont())
         
         ObeidiTextStyle.setLabelFontStyleAndSize(label: lblAbseneseRateVal, fontSize: ObeidiFont.Size.bigA(), fontColor: ObeidiFont.Color.obeidiLineRed(), fontName: ObeidiFont.Family.boldFont())
         
