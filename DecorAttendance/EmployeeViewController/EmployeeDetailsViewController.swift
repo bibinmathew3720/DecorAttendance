@@ -32,10 +32,10 @@ class EmployeeDetailsViewController: UITableViewController {
     @IBOutlet weak var viewIncentiveRate: UIView!
     @IBOutlet weak var viewPenaltyRate: UIView!
     @IBOutlet weak var viewAbsenseRate: UIView!
-    
+    var details: DecoreEmployeeModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        populateData()
         setViewStyle(view: viewInfoLabel)
         setViewStyle(view: viewStrikeRate)
         setViewStyle(view: viewAbsenseRate)
@@ -50,6 +50,17 @@ class EmployeeDetailsViewController: UITableViewController {
         
         setIndicatorValue(value: 0.57)
         
+    }
+    
+    func populateData(){
+        if let model = self.details{
+            lblName.text = model.name
+            lblID.text = String(model.emp_id)
+            lblJoinedDate.text = model.date_of_joining
+            lblAge.text = String(CCUtility.calcAge(birthday: model.dob))
+            lblOccupation.text = UserDefaults.standard.string(forKey: "role")
+            
+        }
     }
     
     // MARK: - Table view data source

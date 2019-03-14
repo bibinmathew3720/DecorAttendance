@@ -35,6 +35,8 @@ class ProfileViewController: UITableViewController {
         
     }
 
+   
+    
     func getProfileApi(){
         MBProgressHUD.showAdded(to: self.view, animated: true)
         UserManager().getProfileApi(with:"", success: {
@@ -48,8 +50,8 @@ class ProfileViewController: UITableViewController {
                     self.nameLabel.text = model.name
                     self.employeeID.text = "Employee ID: " + String(model.emp_id)
                     self.siteLabel.text = "Site " + model.sites[0].site_name
-                    self.ageLabel.text = "" + " yr old"
-                    self.designationLabel.text = ""
+                    self.ageLabel.text = String(CCUtility.calcAge(birthday: model.dob)) + " yr old"
+                    self.designationLabel.text =  UserDefaults.standard.string(forKey: "role")
                     self.joinDateLabel.text = "Joining date: " + model.date_of_joining
                 }
                 else if type == StatusEnum.sessionexpired{

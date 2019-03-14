@@ -200,7 +200,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         let passDict = NSMutableDictionary()
         passDict.setValue(self.txtFldUserName.text, forKey: "username")
         passDict.setValue(self.txtFldPassword.text, forKey: "password")
-        
+
         
         ObeidiModelLogin.callLoginRequest(bodyDict: passDict) {
             (success, result, error) in
@@ -242,13 +242,13 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         let role = dataDict.value(forKey: "roles") as! NSArray
         
         if role.object(at: 0) as! String == "engineering-head"{
-            
+            UserDefaults.standard.setValue("Engineering Head", forKey: "role")
             self.isSiteEngineer = true
             self.isForeman = false
             self.performSegue(withIdentifier: "toHomeSceneSegue", sender: Any.self)
             
         }else if (role.object(at: 0) as! String == "foreman"){
-            
+            UserDefaults.standard.setValue("Foreman", forKey: "role")
             self.isSiteEngineer = false
             self.isForeman = true
             self.performSegue(withIdentifier: "toForemanSceneSegue:Login", sender: Any.self)

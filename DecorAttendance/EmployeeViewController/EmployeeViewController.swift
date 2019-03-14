@@ -14,7 +14,7 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var viewSearchBar: UIView!
     @IBOutlet weak var txtFldSearch: UITextField!
     @IBOutlet weak var tableViewEmployee: UITableView!
-    
+    var selectedIndex:Int = -1
     var activeTextField: UITextField!
     var employeeResponse:DecoreEmployeeResponseModel?
     override func viewDidLoad() {
@@ -65,10 +65,18 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    selectedIndex = indexPath.row
         self.performSegue(withIdentifier: "toEmployeeDetailsSceneSegue:Employee", sender: Any.self)
         
         
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toEmployeeDetailsSceneSegue:Employee") {
+            let vc = segue.destination as! EmployeeDetailsViewController
+            if let model = self.employeeResponse?.employees{
+                vc.details = model[selectedIndex]
+            }
+        }
     }
     //MARK: textfield delegate methods
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
