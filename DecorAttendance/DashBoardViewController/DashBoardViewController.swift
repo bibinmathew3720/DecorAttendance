@@ -552,17 +552,6 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             self.lblPaidVacationPer.text = String(format: "%0.02f", costSummary.paidVacationPercentage) + "%"
              ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPaidVacationIndctrWhite, lineB: totalPaidVacationIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.paidVacationPercentage/100.00), lineAMeter: widthVacationWhite, lineBMeter: widthVacationColoured)
             
-            
-           
-            
-//
-//
-//
-//            //remaning
-//
-//
-//
-            
              let bonusSlice = Slice(radius: 0.75, width: costSummary.bonusPercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.bonusPercentage))
             let otSlice = Slice(radius: 0.65, width: costSummary.overTimePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.overTimePercentage))
             let wageSlice = Slice(radius: 0.75, width: costSummary.wagePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.wagePercentage))
