@@ -48,7 +48,7 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     @IBOutlet weak var totalStrikeIndicatorWhite: UIView!
     @IBOutlet weak var totalStrikeIndicatorColred: UIView!
     
-    
+    var costSummary:CostSummary?
     override func viewDidLoad() {
         super.viewDidLoad()
         getCostSummaryDetailApi()
@@ -62,7 +62,11 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     
     func getCostSummaryDetailApi(){
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        LabourManager().getCostSummaryDetail(with:"", success: {
+        var detailString = ""
+        if let costSum = self.costSummary{
+            detailString = "\(costSum.empId)"
+        }
+        LabourManager().getCostSummaryDetail(with:detailString, success: {
             (model,response)  in
             MBProgressHUD.hide(for: self.view, animated: true)
             if let model = model as? CostSummaryDetailResponseModel{
@@ -367,4 +371,4 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         self.navigationController?.navigationController?.navigationItem.backBarButtonItem?.tintColor = ObeidiColors.ColorCode.obeidiExactWhite()
 
     }
-}
+} 

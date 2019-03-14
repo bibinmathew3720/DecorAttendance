@@ -91,12 +91,37 @@ extension LabourwiseViewController:UITableViewDataSource,UITableViewDelegate{
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellLabourwise", for: indexPath) as! LabourwiseTableViewCell
         if let costSummaryRes = self.labourWiseCostSummaryResponse{
-            cell.setCostSummary(costDetail:costSummaryRes.costSummaryArray[indexPath.row])
+         cell.setCostSummary(costDetail:costSummaryRes.costSummaryArray[indexPath.row])
         }
+        cell.labourCellDelegate = self
+        cell.bttnDetails.tag = indexPath.row;
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == Constant.SegueIdentifiers.labourWisetoLabourSummary){
+            if let destController = segue.destination as? LabourSummaryViewController{
+                if let costSum = sender as? CostSummary{
+                    destController.costSummary = costSum
+                }
+            }
+        }
+    }
+}
+
+extension LabourwiseViewController:LabourwiseTableViewCellDelegate{
+    func detailButtonActionDelegate(button: UIButton) {
+        if let costSummaryRes = self.labourWiseCostSummaryResponse{
+            let costSummary = costSummaryRes.costSummaryArray[button.tag]
+            self.performSegue(withIdentifier: Constant.SegueIdentifiers.labourWisetoLabourSummary, sender: costSummary)
+        }
     }
 }

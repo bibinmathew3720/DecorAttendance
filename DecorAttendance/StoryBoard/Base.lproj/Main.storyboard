@@ -3294,7 +3294,7 @@
                                                                 <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             </state>
                                                             <connections>
-                                                                <segue destination="gBL-mw-NAX" kind="show" id="L0i-7V-nPc"/>
+                                                                <action selector="detailButtonAction:" destination="Vgc-Ai-2Bt" eventType="touchUpInside" id="h1O-kn-TL7"/>
                                                             </connections>
                                                         </button>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="devarakonda" translatesAutoresizingMaskIntoConstraints="NO" id="MKT-Px-ggw">
@@ -3375,6 +3375,7 @@
                         <outlet property="tableViewLabourwise" destination="awv-AQ-BUc" id="coD-sy-Pvg"/>
                         <outlet property="txtFldSearch" destination="9Xf-FL-hAD" id="xBx-XO-NBz"/>
                         <outlet property="viewSearchBar" destination="vJ0-yO-KkX" id="jhU-23-GwY"/>
+                        <segue destination="gBL-mw-NAX" kind="show" identifier="labourWiseToLabourSummary" id="MYw-nf-ZPN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOj-i5-jMY" userLabel="First Responder" sceneMemberID="firstResponder"/>
