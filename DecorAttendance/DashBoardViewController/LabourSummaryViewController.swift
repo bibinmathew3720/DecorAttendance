@@ -48,9 +48,11 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     @IBOutlet weak var totalStrikeIndicatorWhite: UIView!
     @IBOutlet weak var totalStrikeIndicatorColred: UIView!
     
+    @IBOutlet weak var totalAmountLabel: UILabel!
     var costSummary:CostSummary?
     override func viewDidLoad() {
         super.viewDidLoad()
+        populateCostSummary()
         getCostSummaryDetailApi()
         addObeidiBackButton()
         setUpViewStyles()
@@ -58,6 +60,14 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         slicedPieChart.myAnimationDelegate = self
         setPerformanceIndicatorLines(lightLine: totalOTIndicatorWhite, coloredLine: totalOTIndicatorColred, percentage: 0.67, color: ObeidiColors.ColorCode.obeidiLinePink(), lightLineWidth: widthTotalOTLight, coloredLineWidth: widthTotalOTColred)
         
+    }
+    
+    func populateCostSummary(){
+        if let costSum = self.costSummary{
+            self.lblEmployeeName.text = costSum.name
+            self.lblEmployeeID.text = "ID :\(costSum.empId)"
+            self.totalAmountLabel.text = "AED \(costSum.netSalary)"
+        }
     }
     
     func getCostSummaryDetailApi(){
