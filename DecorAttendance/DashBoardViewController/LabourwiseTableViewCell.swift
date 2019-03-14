@@ -46,6 +46,9 @@ class LabourwiseTableViewCell: UITableViewCell {
     }
     
     func setCostSummary(costDetail:CostSummary){
+        if let imageUrl = URL(string: costDetail.imageBaseUrl+costDetail.profileImageUrl){
+            self.imageViewLabour.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+        }
         self.lblName.text = costDetail.name
         self.lblID.text = "\(costDetail.empId)"
         self.lblIncentiveAmnt.text = "AED " + String(format: "%0.2f", costDetail.totalIncentive)

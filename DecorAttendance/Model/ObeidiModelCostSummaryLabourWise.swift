@@ -25,7 +25,9 @@ class ObeidiModelCostSummaryLabourWise: NSObject {
         if let resultArray = dictionaryDetails["result"] as? NSArray{
             for item in resultArray{
                 if let it = item as? NSDictionary{
-                    costSummaryArray.append(CostSummary.init(dictionaryDetails: it))
+                    let costSummary = CostSummary.init(dictionaryDetails: it)
+                    costSummary.imageBaseUrl = imageBaseUrlString
+                    costSummaryArray.append(costSummary)
                 }
             }
         }
@@ -103,6 +105,7 @@ class ObeidiModelCostSummaryLabourWise: NSObject {
 
 class CostSummary: NSObject {
     var empId:Int = 0
+    var imageBaseUrl:String = ""
     var profileImageUrl:String = ""
     var name:String = ""
     var netSalary:CGFloat = 0.0
