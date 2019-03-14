@@ -50,6 +50,7 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     
     @IBOutlet weak var totalAmountLabel: UILabel!
     var costSummary:CostSummary?
+    var costSummaryDetailResponse:CostSummaryDetailResponseModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         populateCostSummary()
@@ -59,14 +60,12 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         addTapGesturesToLabels()
         slicedPieChart.myAnimationDelegate = self
         setPerformanceIndicatorLines(lightLine: totalOTIndicatorWhite, coloredLine: totalOTIndicatorColred, percentage: 0.67, color: ObeidiColors.ColorCode.obeidiLinePink(), lightLineWidth: widthTotalOTLight, coloredLineWidth: widthTotalOTColred)
-        
     }
     
     func populateCostSummary(){
         if let costSum = self.costSummary{
             self.lblEmployeeName.text = costSum.name
-            self.lblEmployeeID.text = "ID :\(costSum.empId)"
-            self.totalAmountLabel.text = "AED \(costSum.netSalary)"
+            self.lblEmployeeID.text = "ID: \(costSum.empId)"
         }
     }
     
@@ -82,7 +81,8 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
             if let model = model as? CostSummaryDetailResponseModel{
                 let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
                 if type == StatusEnum.success{
-                   
+                   self.costSummaryDetailResponse = model
+                   self.populateCostDetails()
                 }
                 else if type == StatusEnum.sessionexpired{
                     //                    self.callRefreshTokenApi()
@@ -105,6 +105,11 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         }
     }
     
+    func populateCostDetails(){
+        if let costDetail = self.costSummaryDetailResponse{
+            self.totalAmountLabel.text = "AED " + String(format: "%0.2f", costDetail.totalAmount)
+        }
+    }
     
     
     override func viewDidAppear(_ animated: Bool) {
