@@ -48,10 +48,12 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     @IBOutlet weak var totalStrikeIndicatorWhite: UIView!
     @IBOutlet weak var totalStrikeIndicatorColred: UIView!
     
-    
+    @IBOutlet weak var totalAmountLabel: UILabel!
+    var costSummary:CostSummary?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        populateCostSummary()
+        getCostSummaryDetailApi()
         addObeidiBackButton()
         setUpViewStyles()
         addTapGesturesToLabels()
@@ -59,6 +61,52 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         setPerformanceIndicatorLines(lightLine: totalOTIndicatorWhite, coloredLine: totalOTIndicatorColred, percentage: 0.67, color: ObeidiColors.ColorCode.obeidiLinePink(), lightLineWidth: widthTotalOTLight, coloredLineWidth: widthTotalOTColred)
         
     }
+    
+    func populateCostSummary(){
+        if let costSum = self.costSummary{
+            self.lblEmployeeName.text = costSum.name
+            self.lblEmployeeID.text = "ID :\(costSum.empId)"
+            self.totalAmountLabel.text = "AED \(costSum.netSalary)"
+        }
+    }
+    
+    func getCostSummaryDetailApi(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        var detailString = ""
+        if let costSum = self.costSummary{
+            detailString = "\(costSum.empId)"
+        }
+        LabourManager().getCostSummaryDetail(with:detailString, success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let model = model as? CostSummaryDetailResponseModel{
+                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+                if type == StatusEnum.success{
+                   
+                }
+                else if type == StatusEnum.sessionexpired{
+                    //                    self.callRefreshTokenApi()
+                }
+                else{
+                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
+                }
+            }
+            
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            
+            print(ErrorType)
+        }
+    }
+    
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     
@@ -333,4 +381,4 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         self.navigationController?.navigationController?.navigationItem.backBarButtonItem?.tintColor = ObeidiColors.ColorCode.obeidiExactWhite()
 
     }
-}
+} 

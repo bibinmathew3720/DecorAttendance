@@ -117,6 +117,7 @@
 		BBE01C76223439B300C534F6 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */; };
 		CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */; };
 		D06B92232239ED1900C98ED7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B92222239ED1800C98ED7 /* Constants.swift */; };
+		D0AB2ADD223AA9D4008C01A4 /* LabourManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -259,6 +260,7 @@
 		BB5A4FD12233C41600F4FC82 /* CCUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCUtility.swift; sourceTree = "<group>"; };
 		BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		D06B92222239ED1800C98ED7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabourManager.swift; sourceTree = "<group>"; };
 		D98D9F27B5CC5C6DFCC53240 /* Pods-DecorAttendanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceTests/Pods-DecorAttendanceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DecorAttendanceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -705,6 +707,7 @@
 			isa = PBXGroup;
 			children = (
 				BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */,
+				D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */,
 			);
 			path = ApiManagers;
 			sourceTree = "<group>";
@@ -1016,6 +1019,7 @@
 				46A11E7021CBC58D00691B76 /* NewEntryTableViewCell.swift in Sources */,
 				46AA411221D921820036EF9F /* EmployeeDetailsViewController.swift in Sources */,
 				46F1FF23221D30CD0002C138 /* SickLeaveViewController.swift in Sources */,
+				D0AB2ADD223AA9D4008C01A4 /* LabourManager.swift in Sources */,
 				46AD8DCD21CD0480006B1DEA /* Utils.swift in Sources */,
 				46C0661321E0964F009E731B /* ForemanLeftViewControllerDlegate.swift in Sources */,
 				469D712E21D642240057BA7C /* PhotoCheckViewController.swift in Sources */,

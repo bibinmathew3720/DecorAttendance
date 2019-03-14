@@ -12,4 +12,8 @@ struct Constant{
     struct ImageNames {
         static let placeholderImage = "placeholder"
     }
+    
+    struct SegueIdentifiers {
+        static let  labourWisetoLabourSummary = "labourWiseToLabourSummary"
+    }
 }

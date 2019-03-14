@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol LabourwiseTableViewCellDelegate{
+    func detailButtonActionDelegate(button:UIButton)
+}
+
 class LabourwiseTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imageViewLabour: UIImageView!
@@ -20,7 +24,7 @@ class LabourwiseTableViewCell: UITableViewCell {
     @IBOutlet weak var innerView: UIView!
     @IBOutlet weak var bttnDetails: UIButton!
     @IBOutlet weak var viewVerticalSeperator: UIView!
-    
+    var labourCellDelegate:LabourwiseTableViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         setViewStyle()
@@ -56,4 +60,9 @@ class LabourwiseTableViewCell: UITableViewCell {
         self.lblNetSalary.text = "AED " + String(format: "%0.2f", costDetail.netSalary)
     }
 
+    @IBAction func detailButtonAction(_ sender: UIButton) {
+        if let delegate = self.labourCellDelegate{
+            delegate.detailButtonActionDelegate(button: sender)
+        }
+    }
 }
