@@ -59,6 +59,8 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate {
             self.performSegue(withIdentifier: "toProfileSceneSegue:Center", sender: Any.self)
         case 1:
             print(":1")
+        case 2:
+           self.performSegue(withIdentifier: "toChangePwdSceneSegue", sender: Any.self)
         default:
             break
             

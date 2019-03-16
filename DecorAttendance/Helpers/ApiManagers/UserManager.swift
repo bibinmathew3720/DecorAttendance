@@ -74,9 +74,38 @@ class UserManager: CLBaseService {
         return responseModel
     }
     
+    func callChangePasswordApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelForChangePassword(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.getChangePasswordResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
     
+    func networkModelForChangePassword(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.CHANGE_PASSWORD, requestMethod_: "POST")
+        requestModel.requestBody = body
+        return requestModel
+    }
+    
+    func getChangePasswordResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = ChangePasswordModel.init(dict:dict)
+        return responseModel
+    }
 }
-
 class DecoreProfileResponseModel : NSObject{
     
     var dob:String = ""
@@ -129,12 +158,12 @@ class DecoreProfileResponseModel : NSObject{
                 sites.append(DecoreSitesModel.init(dict: site))
             }
         }
-  
+        
     }
 }
 
 class DecoreEmployeeResponseModel : NSObject{
- 
+    
     var image_base:String = ""
     var error:Int = 0
     var employees = [DecoreEmployeeModel ]()
@@ -190,6 +219,22 @@ class DecoreSitesModel : NSObject{
         }
     }
 }
+
+class ChangePasswordModel : NSObject{
+    var error:Int = 0
+    var message:String = ""
+    
+    init(dict:[String:Any?]) {
+    
+        if let value = dict["error"] as? Int{
+            error = value
+        }
+        if let value = dict["message"] as? String{
+            message = value
+        }
+    }
+}
+
 class DecoreEmployeeModel : NSObject{
     var employee_type:String = ""
     var image:String = ""
@@ -236,3 +281,15 @@ class DecoreEmployeeModel : NSObject{
         }
     }
 }
+class ChangePwdRequestModel:NSObject {
+    var current:String = ""
+    var new:String = ""
+    var confirm:String = ""
+    
+    func getRequestBody()->String{
+        var dict:[String:AnyObject] = [String:AnyObject]()
+        dict.updateValue(new as AnyObject, forKey: "new_password")
+        return CCUtility.getJSONfrom(dictionary: dict)
+    }
+}
+

@@ -115,6 +115,7 @@
 		BB5A4FCF2233C0C300F4FC82 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */; };
 		BB5A4FD22233C41600F4FC82 /* CCUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FD12233C41600F4FC82 /* CCUtility.swift */; };
 		BBCFA9F9223AD95100414717 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCFA9F8223AD95100414717 /* ChangePasswordViewController.swift */; };
+		BBCFA9FE223D76FF00414717 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCFA9FD223D76FF00414717 /* StringExtensions.swift */; };
 		BBE01C76223439B300C534F6 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */; };
 		CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */; };
 		D06B92232239ED1900C98ED7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B92222239ED1800C98ED7 /* Constants.swift */; };
@@ -260,6 +261,7 @@
 		BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		BB5A4FD12233C41600F4FC82 /* CCUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCUtility.swift; sourceTree = "<group>"; };
 		BBCFA9F8223AD95100414717 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		BBCFA9FD223D76FF00414717 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		D06B92222239ED1800C98ED7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabourManager.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 		4618715E21C6D4F500507F06 /* SingletonClasses */ = {
 			isa = PBXGroup;
 			children = (
+				BBCFA9FD223D76FF00414717 /* StringExtensions.swift */,
 				BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */,
 				46E71D0621C5194200051C78 /* AppDelegate.swift */,
 				4618715821C6A57400507F06 /* ObeidiColorMeter.swift */,
@@ -1024,6 +1027,7 @@
 				46AA411221D921820036EF9F /* EmployeeDetailsViewController.swift in Sources */,
 				46F1FF23221D30CD0002C138 /* SickLeaveViewController.swift in Sources */,
 				D0AB2ADD223AA9D4008C01A4 /* LabourManager.swift in Sources */,
+				BBCFA9FE223D76FF00414717 /* StringExtensions.swift in Sources */,
 				46AD8DCD21CD0480006B1DEA /* Utils.swift in Sources */,
 				46C0661321E0964F009E731B /* ForemanLeftViewControllerDlegate.swift in Sources */,
 				469D712E21D642240057BA7C /* PhotoCheckViewController.swift in Sources */,

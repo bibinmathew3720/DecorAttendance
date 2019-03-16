@@ -42,6 +42,8 @@ class CCUtility: NSObject {
         parentController.present(alert, animated: true, completion: nil)
     }
     
+    
+    
    class func calcAge(birthday: String) -> Int {
         let dateFormater = DateFormatter()
         dateFormater.dateFormat = "yyyy-MM-dd"
