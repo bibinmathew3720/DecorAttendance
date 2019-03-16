@@ -10,6 +10,10 @@ import UIKit
 import Kingfisher
 
 class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filterUpdatedDelegate {
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+        
+    }
+    
     
 
     @IBOutlet weak var bttnNext: UIButton!

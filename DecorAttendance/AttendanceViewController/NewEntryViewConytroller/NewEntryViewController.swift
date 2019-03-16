@@ -9,6 +9,10 @@
 import UIKit
 
 class NewEntryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIGestureRecognizerDelegate, filterUpdatedDelegate {
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+    
+    }
+    
     
     @IBOutlet weak var tableViewNewEntry: UITableView!
     @IBOutlet weak var viewDropDownButtons: UIView!

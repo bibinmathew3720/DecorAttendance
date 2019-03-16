@@ -14,6 +14,7 @@ protocol filterUpdatedDelegate: class  {
     func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!)
     func dateUpdated(to date: String, updatedType: FilterTypeName!)
     func calendarColsed()
+    func doneButtonActionDelegateWithSelectedDate(date:String,type:FilterTypeName)
 }
 
 public enum FilterTypeName {
@@ -46,7 +47,7 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
     
     var filterDataArr: NSMutableArray!
     var filterTypeName: FilterTypeName!
-    
+    var selectedDate:String = ""
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -252,12 +253,13 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
             self.formatter.timeZone = Calendar.current.timeZone
             self.formatter.locale = Calendar.current.locale
             let strDate = formatter.string(from: date)
+            self.selectedDate = strDate;
             print(strDate)
             if self.filterTypeName == FilterTypeName.startDate {
-                delegate.dateUpdated(to: strDate, updatedType: self.filterTypeName)
+                //delegate.dateUpdated(to: strDate, updatedType: self.filterTypeName)
                 
             }else if self.filterTypeName == FilterTypeName.endDate {
-                delegate.dateUpdated(to: strDate, updatedType: self.filterTypeName)
+               // delegate.dateUpdated(to: strDate, updatedType: self.filterTypeName)
                 
             }
             
@@ -274,6 +276,7 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
         guard let validCell = cell as? CalenderViewCell else {return}
         print("selected date is \(date)")
         validCell.viewSelected.isHidden = true
+        self
         
         
     }
@@ -393,7 +396,7 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
         UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
             self.viewCalendarContainer.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
             self.tableViewFilter.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-            
+
         },completion:nil)
         delegate.calendarColsed()
         self.dismiss(animated: true, completion: nil)
@@ -484,7 +487,8 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
             self.tableViewFilter.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
             
         },completion:nil)
-        delegate.calendarColsed()
+        delegate.doneButtonActionDelegateWithSelectedDate(date: self.selectedDate
+            , type: self.filterTypeName)
         self.dismiss(animated: true, completion: nil)
         
     }

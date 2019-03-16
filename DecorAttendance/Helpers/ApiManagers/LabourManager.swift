@@ -134,3 +134,25 @@ class CostSummaryDetailResponseModel : NSObject{
     }
 }
 
+class SiteWiseRequestModel:NSObject{
+    var startDate:String = ""
+    var endDate:String = ""
+    var selectedSiteId:String = ""
+    func getReqestBody()->String{
+        var requestBody = ""
+        if (startDate.count != 0 ){
+            requestBody = "start_date=\(startDate)"
+        }
+        if (endDate.count != 0){
+            if (requestBody.count>0){
+               requestBody = requestBody + "&end_date=\(endDate)"
+            }
+            else{
+               requestBody = requestBody + "end_date=\(endDate)"
+            }
+        }
+        print(requestBody)
+        return requestBody
+    }
+}
+

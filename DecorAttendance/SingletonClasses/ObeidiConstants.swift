@@ -19,7 +19,7 @@ struct ObeidiConstants {
         static let RESET_PASSWORD = "auth/send-reset-password"
         static let CHANGE_PASSWORD = "auth/change-password"
         static let GET_ALL_SITES = "sites"
-        static let COST_SUMMARY_SITEWISE = "reports/cost-summary-sitewise"
+        static let COST_SUMMARY_SITEWISE = "reports/cost-summary-sitewise?"
         static let ACCESS_TOKEN = "auth/access-token?"
         static let COST_SUMMARY_LABOURWISE = "reports/cost-summary-labourwise"
         static let COST_SUMMARY_LABOURWISE_DETAIL = "reports/cost-summary-labourwise/detail/"

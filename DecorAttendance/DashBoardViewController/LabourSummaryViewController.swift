@@ -118,10 +118,10 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         //slicedPieChart.style = [Style(isOuterCircleNeeded: false)]
         slicedPieChart.slices =
             [
-                Slice(radius: 0.7, width:0.15, isOuterCircleNeeded: false, outerCircleWidth: 0),
-                Slice(radius: 0.8, width: 0.25, isOuterCircleNeeded: false, outerCircleWidth: 0),
-                Slice(radius: 1, width: 0.35, isOuterCircleNeeded: false, outerCircleWidth: 0),
-                Slice(radius: 0.85, width: 0.25, isOuterCircleNeeded: false, outerCircleWidth: 0)
+                //Slice(radius: 0.7, width:0.15, isOuterCircleNeeded: false, outerCircleWidth: 0),
+                //Slice(radius: 0.8, width: 0.25, isOuterCircleNeeded: false, outerCircleWidth: 0),
+               // Slice(radius: 1, width: 0.35, isOuterCircleNeeded: false, outerCircleWidth: 0),
+               // Slice(radius: 0.85, width: 0.25, isOuterCircleNeeded: false, outerCircleWidth: 0)
         ]
             
 //            = [

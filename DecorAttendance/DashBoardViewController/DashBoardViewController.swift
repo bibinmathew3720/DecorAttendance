@@ -17,6 +17,11 @@ protocol DashBoardDelegate: class {
 
 class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCAAnimationDelegateProtocol, filterUpdatedDelegate {
     
+    func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
+        
+    }
+    
+    
     weak var delegate: DashBoardDelegate?
     
     @IBOutlet weak var lblRemainingBnsAmnt: UILabel!
@@ -86,46 +91,39 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     var monthSelectedIndex: Int!
     var siteIdSelected: String!
     var costSummaryModel: ObeidiModelCostSummarySiteWise!
-    
+    var siteWiseRequestModel = SiteWiseRequestModel()
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
-        
+        initialisation()
         self.navigationItem.leftItemsSupplementBackButton = true
-        
-        self.setUpChartViewStyles()
         setUpViewStyles()
         pieChartViewCostSummary.myAnimationDelegate = self
         callGetAllSitesAPI()
         addTapGesturesToLabels()
-        //PieChart.initializeAndPlotGraph(chartView: pieChartView, controller: self, xCoordinateArr: ["23", "45", "32"], yCoordinateArr1: ["23", "45", "32"], yCoordinateArr2: ["23", "45", "32"], yCoordinate1Label: "volume", yCoordinate2Label: "frequency")
-        
-        //setPerformanceIndicatorLines()
-        
-        //pieChartViewCostSummary.style = [Style(isOuterCircleNeeded: true)]
-//        pieChartViewCostSummary.slices =
-//            [
-//                Slice(radius: 0.75, width: 0.55),
-//                Slice(radius: 0.65, width: 0.45)
-//        ]
-        
-        
-        
-        //-----------here ---------//
-//        pieChartViewCostSummary.slices = [
-//
-//            Slice(radius: 0.75, width: 0.55, isOuterCircleNeeded: true, outerCircleWidth: 0.70),
-//            Slice(radius: 0.65, width: 0.45, isOuterCircleNeeded: true, outerCircleWidth: 0.70)
-//
-//        ]
-        callSiteWiseCostSummaryAPI(siteID: "All", startDate: "All", endDate: "All")
-        
     }
+    
+    func initialisation(){
+        callSiteWiseCostSummaryApi()
+    }
+    
+    func callSiteWiseCostSummaryApi(){
+        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
+        print("Sitewise Request Body:\n---------()")
+    ObeidiModelCostSummarySiteWise.callCostSummaryRequset(requestBody:self.siteWiseRequestModel.getReqestBody()) {
+            (success, result, error) in
+            if success! {
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+                self.processSiteWiseCostSummaryResponse(apiResponse: result! as! ObeidiModelCostSummarySiteWise)
+                
+                print(result!)
+            }else{
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
-        
     }
     
     // MARK: - Table view data source
@@ -137,16 +135,11 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        
         return 3
-        
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         switch indexPath.row {
-            
         case 0:
             return 82
         case 1:
@@ -155,34 +148,21 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             return 277
         default:
             return 0
-            
         }
-        
     }
     
     
     @IBAction func bttnActnMenu(_ sender: Any) {
-        
         delegate?.dashBoardDidTapedMenu(tabBarIndex: 1)
     }
     
-    func setUpChartViewStyles()  {
-        
-//        self.pieChartView.clipsToBounds = true
-//        self.pieChartView.layer.cornerRadius = 8.0
-//        self.pieChartView.dropShadow()
-        
-        
-    }
     func setUpViewStyles() {
-        
         self.viewRemainingBonus.layer.cornerRadius = 1
         self.viewRemainingBonus.backgroundColor = UIColor.white
         self.viewRemainingBonus.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.viewRemainingBonus.layer.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.12).cgColor
         self.viewRemainingBonus.layer.shadowOpacity = 1
         self.viewRemainingBonus.layer.shadowRadius = 9
-        
         
         self.viewTotalOtBonus.layer.cornerRadius = 1
         self.viewTotalOtBonus.backgroundColor = UIColor.white
@@ -208,9 +188,9 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         self.lblStratDate.textColor = ObeidiFont.Color.obeidiLightBlack()
         self.lblSite.textColor = ObeidiFont.Color.obeidiLightBlack()
         
-        addDropDownLabelAndImage(lblToModify: lblStratDate, lblText: "ALL")
-        addDropDownLabelAndImage(lblToModify: lblSite, lblText: "ALL")
-        addDropDownLabelAndImage(lblToModify: lblEndDate, lblText: "ALL")
+        addDropDownLabelAndImage(lblToModify: lblStratDate, lblText: "")
+        addDropDownLabelAndImage(lblToModify: lblSite, lblText: "")
+        addDropDownLabelAndImage(lblToModify: lblEndDate, lblText: "")
         
         
     }
@@ -441,81 +421,34 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             
             let siteID = String((self.siteModelObjArr.object(at: siteSelectedIndex) as! ObeidiModelSites).id as! Int)
             
-            callSiteWiseCostSummaryAPI(siteID: siteID, startDate: "", endDate: formattedDate)
+            //callSiteWiseCostSummaryAPI(siteID: siteID, startDate: "", endDate: formattedDate)
             
         case .Attendance:
             print("  ")
         }
         
         for cell in tableView.visibleCells{
-            
             cell.backgroundColor = UIColor.white
             cell.alpha = 1
         }
-        
         self.navigationController?.navigationBar.alpha = 1
         self.tabBarController?.tabBar.alpha = 1
     }
     
-    func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
-    
-//        if pieChartViewCostSummary.myAnimationDelegate != nil
-//        {
-//            pieChartViewCostSummary.animating = false
-//            pieChartViewCostSummary.myAnimationDelegate?.animationDidStop( theAnimation, finished: true)
-//        }
-    }
     func callGetAllSitesAPI() {
-        
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
-        
         ObeidiModelSites.callListSitesRequset(){
             (success, result, error) in
-            
             if success! {
-                
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 print(result!)
                 self.siteModelObjArr = (result as! NSMutableArray)
-                
-                
             }else{
-            
-                
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                
-                
             }
-            
-            
-            
-            
         }
-        
-        
     }
-    func callSiteWiseCostSummaryAPI(siteID: String!, startDate: String!, endDate: String!)  {
-        
-        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
-        ObeidiModelCostSummarySiteWise.callCostSummaryRequset(siteId: siteID, startDate: startDate, endDate: endDate) {
-            (success, result, error) in
-            
-            
-            if success! {
-                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                self.processSiteWiseCostSummaryResponse(apiResponse: result! as! ObeidiModelCostSummarySiteWise)
-                
-                print(result!)
-            }else{
-                
-                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                
-            }
-            
-            
-        }
-        
-    }
+    
     func processSiteWiseCostSummaryResponse(apiResponse: ObeidiModelCostSummarySiteWise) {
         
         drawChartAndPerformanceIndicators(modelObj: apiResponse)
@@ -602,7 +535,7 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
                 
             }
             
-            callSiteWiseCostSummaryAPI(siteID: siteIdSelected, startDate: startDate, endDate: endDate)
+            //callSiteWiseCostSummaryAPI(siteID: siteIdSelected, startDate: startDate, endDate: endDate)
         
         default:
             print("")
@@ -632,13 +565,28 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             self.view.alpha = 1
             //self.tabBarController?.view.alpha = 0.65
             self.navigationController?.navigationBar.alpha = 1
-            
-            
         },completion:nil)
-        
-        
     }
     
-    
-    
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+        },completion:nil)
+        if (type == .startDate){
+            if (date.count>0){
+                siteWiseRequestModel.startDate = date
+                self.lblStratDate.text = date
+                callSiteWiseCostSummaryApi()
+            }
+        }
+        else if (type == .endDate){
+            if (date.count>0){
+                siteWiseRequestModel.endDate = date
+                self.lblEndDate.text = date
+                callSiteWiseCostSummaryApi()
+            }
+        }
+    }
 }
