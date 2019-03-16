@@ -85,7 +85,7 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     var window: UIWindow?
     var sitesArr: NSMutableArray!
     var spinner = UIActivityIndicatorView(style: .gray)
-    var siteModelObjArr: NSMutableArray!
+    var siteModelObjArr = [ObeidiModelSites]()
     var siteSelectedIndex: Int!
     var daySelectedIndex: Int!
     var monthSelectedIndex: Int!
@@ -292,8 +292,6 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         
     }
     @objc func handleSiteLabelTap(){
-        
-        //presentDropDownController(tableCgPoint: getPointForSiteTable(), dropDownFor: .Site, arr: fetchSiteArr())
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
@@ -311,7 +309,7 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             siteViewController.filterTypeName = FilterTypeName.site
             siteViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             siteViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            siteViewController.filterDataArr = self.siteModelObjArr
+            //siteViewController.filterDataArr = self.siteModelObjArr
             self.present(siteViewController, animated: true, completion: nil)
             
         }
@@ -373,17 +371,7 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         arr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         return arr
     }
-    func fetchSiteArr() -> NSMutableArray {
-        
-        let arr = NSMutableArray()
-        //arr = ["Quatar", "Saudi", "Dubai"]
-        for case let item as ObeidiModelSites in self.siteModelObjArr{
-            
-            arr.add(item.name as! String)
-            
-        }
-        return arr
-    }
+    
     func getPointForMonthTable() -> CGPoint{
         
         return CGPoint(x: 12 + self.viewDropDownButtons.frame.minX + self.lblStratDate.frame.minX, y: self.viewDropDownButtons.frame.maxY + 90)
@@ -419,7 +407,7 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             formatter.dateFormat = "yyyy"
             let formattedDate = formatter.string(from: date) + "-" + monthValue + "-" + dayValue
             
-            let siteID = String((self.siteModelObjArr.object(at: siteSelectedIndex) as! ObeidiModelSites).id as! Int)
+            //let siteID = String((self.siteModelObjArr.object(at: siteSelectedIndex) as! ObeidiModelSites).id as! Int)
             
             //callSiteWiseCostSummaryAPI(siteID: siteID, startDate: "", endDate: formattedDate)
             
@@ -442,7 +430,9 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             if success! {
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 print(result!)
-                self.siteModelObjArr = (result as! NSMutableArray)
+                if let res = result as? [ObeidiModelSites]{
+                    self.siteModelObjArr = res
+                }
             }else{
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
             }

@@ -25,11 +25,47 @@ class ObeidiModelSites: NSObject {
     var STATUS: AnyObject!
     var remaining_bonus: AnyObject!
     
+    var statusNew:Int = 0
+    var locationNameNew:String = ""
+    var locIdNew:Int = 0
+    var bonusBudgetNew:CGFloat = 0.0
+    var remainingBonusNew:CGFloat = 0.0
+    var latitudeNew:Double = 0.0
+    var labourCostBudgetNew:CGFloat = 0.0
+    var nameNew:String = ""
+    var longitudeNew:Double = 0.0
+    
     
         init(dictionaryDetails : NSDictionary)
         {
             super.init()
-    
+            if let value = dictionaryDetails["STATUS"] as? Int{
+                statusNew = value
+            }
+            if let value = dictionaryDetails["location_name"] as? String{
+                locationNameNew = value
+            }
+            if let value = dictionaryDetails["id"] as? Int{
+                locIdNew = value
+            }
+            if let value = dictionaryDetails["bonus_budget"] as? CGFloat{
+                bonusBudgetNew = value
+            }
+            if let value = dictionaryDetails["remaining_bonus"] as? CGFloat{
+                remainingBonusNew = value
+            }
+            if let value = dictionaryDetails["lat"] as? Double{
+                latitudeNew = value
+            }
+            if let value = dictionaryDetails["labour_cost_budget"] as? CGFloat{
+                labourCostBudgetNew = value
+            }
+            if let value = dictionaryDetails["name"] as? String{
+                nameNew = value
+            }
+            if let value = dictionaryDetails["lng"] as? Double{
+                longitudeNew = value
+            }
             for (key, value) in dictionaryDetails {
                 let keyName = key as! String
                 let keyValue = value as AnyObject
@@ -44,17 +80,16 @@ class ObeidiModelSites: NSObject {
             }
         }
     
-        class func getAllSiteDetailsObjectArr(siteDataArr: NSArray) -> NSArray? {
-            if siteDataArr.count > 0 {
-                let detailsList = NSMutableArray()
-                siteDataArr.enumerateObjects ({ (obj, idx, stop) -> Void in
-                    let list = ObeidiModelSites(dictionaryDetails: obj as! NSDictionary)
-                    detailsList.add(list)
-                })
-                return detailsList
-            }
-            return nil
+    class func getAllSiteDetailsObjectArr(siteDataArr: NSArray) -> [ObeidiModelSites] {
+        var detailsList = [ObeidiModelSites]()
+        if siteDataArr.count > 0 {
+            siteDataArr.enumerateObjects ({ (obj, idx, stop) -> Void in
+                let list = ObeidiModelSites(dictionaryDetails: obj as! NSDictionary)
+                detailsList.append(list)
+            })
         }
+        return detailsList
+    }
     
     class func callListSitesRequset(withCompletion completion: @escaping(Bool?, AnyObject?, NSError?) -> Void){
         
@@ -76,7 +111,7 @@ class ObeidiModelSites: NSObject {
                             completion(false, result, nil)
                         }else{//MARK: SUCCESS CASE
                             let dataArr = result?["result"] as! NSArray
-                            completion(true, getAllSiteDetailsObjectArr(siteDataArr: dataArr), nil)
+                            completion(true, getAllSiteDetailsObjectArr(siteDataArr: dataArr) as AnyObject, nil)
                             
                         }
                         
@@ -87,7 +122,7 @@ class ObeidiModelSites: NSObject {
                     
                     print("error key is not present in dict")
                     let dataArr = result?["result"] as! NSArray
-                    completion(true, getAllSiteDetailsObjectArr(siteDataArr: dataArr), nil)
+                    completion(true, getAllSiteDetailsObjectArr(siteDataArr: dataArr) as AnyObject, nil)
                 }
                 
                 

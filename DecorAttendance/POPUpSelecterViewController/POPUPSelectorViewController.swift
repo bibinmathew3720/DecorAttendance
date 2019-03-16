@@ -324,13 +324,10 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellFilterTableViewCell") as! FilterTableViewCell
-            
-            
             return cell
         }
-        
-        
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch filterTypeName! {
