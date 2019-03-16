@@ -25,5 +25,10 @@ struct Constant{
         static let sickLeaveColor = UIColor(red:0.43, green:0.00, blue:0.49, alpha:1.0) //6E007C - Violet Color
         static let paidVacancColor = UIColor.yellow
         
+        static let greyColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:1.0) //D8D8D8
+        static let ashColor = UIColor(red:0.28, green:0.28, blue:0.28, alpha:1.0) //484747
+        static let blackColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0) //000000
+        static let whiteColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0) //FFFFFF
+        
     }
 }

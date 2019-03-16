@@ -535,28 +535,35 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
              self.lblTotalCostAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.totalAmountNew)
             
             self.lblRemainingBnsPerc.text = String(format: "%0.02f", costSummary.remainingBonusPercentage) + "%"
-             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.bonusIndicatorLineWhite, lineB: bonusIndicatorLineColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineOrange(), lineAValue: 1, lineBValue: (costSummary.remainingBonusPercentage/100.00), lineAMeter: widthBonusLight, lineBMeter: widthBonusColored)
+            self.lblRemainingBnsPerc.textColor = Constant.Colors.remainingBonusColor
+             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.bonusIndicatorLineWhite, lineB: bonusIndicatorLineColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.remainingBonusColor, lineAValue: 1, lineBValue: (costSummary.remainingBonusPercentage/100.00), lineAMeter: widthBonusLight, lineBMeter: widthBonusColored)
             
             self.lblTotalOTPerc.text = String(format: "%0.02f", costSummary.overTimePercentage) + "%"
-            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalOTIndicatorWhite, lineB: totalOTIndicatorColred, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.overTimePercentage/100.00), lineAMeter: widthTotalOTLight, lineBMeter: widthTotalOTColored)
+            self.lblTotalOTPerc.textColor = Constant.Colors.overTimeColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalOTIndicatorWhite, lineB: totalOTIndicatorColred, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.overTimeColor, lineAValue: 1, lineBValue: (costSummary.overTimePercentage/100.00), lineAMeter: widthTotalOTLight, lineBMeter: widthTotalOTColored)
             
             self.lblTotalBnsPerc.text = String(format: "%0.02f", costSummary.bonusPercentage) + "%"
-            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalBonusIndicatorWhite, lineB: totalBonusIndicatorColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineRed(), lineAValue: 1, lineBValue: (costSummary.bonusPercentage/100.00), lineAMeter: widthTotalBonusLight, lineBMeter: widthTotalBounsColred)
+            self.lblTotalBnsPerc.textColor = Constant.Colors.bonusColor
+            self.lblTotalBnsPerc.textColor = Constant.Colors.bonusColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalBonusIndicatorWhite, lineB: totalBonusIndicatorColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.bonusColor, lineAValue: 1, lineBValue: (costSummary.bonusPercentage/100.00), lineAMeter: widthTotalBonusLight, lineBMeter: widthTotalBounsColred)
             
             self.lblWagePer.text = String(format: "%0.02f", costSummary.wagePercentage) + "%"
-            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totaltotalWageIndctrWhite, lineB: totalWageIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.wagePercentage/100.00), lineAMeter: widthWageWhite, lineBMeter: widthWageColoured)
+            self.lblWagePer.textColor = Constant.Colors.wageColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totaltotalWageIndctrWhite, lineB: totalWageIndctrColoured, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.wageColor, lineAValue: 1, lineBValue: (costSummary.wagePercentage/100.00), lineAMeter: widthWageWhite, lineBMeter: widthWageColoured)
             
             self.lblLeavePer.text = String(format: "%0.02f", costSummary.sickLeavePercentage) + "%"
-            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalSickLeaveIndctrWhite, lineB: totalSickLeaveIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.sickLeavePercentage/100.00), lineAMeter: widthSickLeaveWhite, lineBMeter: widthSickLeaveColoured)
+            self.lblLeavePer.textColor = Constant.Colors.sickLeaveColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalSickLeaveIndctrWhite, lineB: totalSickLeaveIndctrColoured, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.sickLeaveColor, lineAValue: 1, lineBValue: (costSummary.sickLeavePercentage/100.00), lineAMeter: widthSickLeaveWhite, lineBMeter: widthSickLeaveColoured)
             
             self.lblPaidVacationPer.text = String(format: "%0.02f", costSummary.paidVacationPercentage) + "%"
-             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPaidVacationIndctrWhite, lineB: totalPaidVacationIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.paidVacationPercentage/100.00), lineAMeter: widthVacationWhite, lineBMeter: widthVacationColoured)
+            self.lblPaidVacationPer.textColor = Constant.Colors.paidVacancColor
+             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPaidVacationIndctrWhite, lineB: totalPaidVacationIndctrColoured, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.paidVacancColor, lineAValue: 1, lineBValue: (costSummary.paidVacationPercentage/100.00), lineAMeter: widthVacationWhite, lineBMeter: widthVacationColoured)
             
-            let bonusSlice = Slice(radius: 0.75, width: (costSummary.bonusPercentage/100), isOuterCircleNeeded: true, outerCircleWidth: (1-(costSummary.bonusPercentage/100)), fillColor:Constant.Colors.bonusColor)
-            let otSlice = Slice(radius: 0.65, width: (costSummary.overTimePercentage/100), isOuterCircleNeeded: true, outerCircleWidth: (1-(costSummary.overTimePercentage/100)), fillColor: Constant.Colors.overTimeColor)
-           let wageSlice = Slice(radius: 0.75, width: costSummary.wagePercentage/100, isOuterCircleNeeded: true, outerCircleWidth: (1-(costSummary.wagePercentage/100)), fillColor: Constant.Colors.wageColor)
-           let sickLeaveSlice = Slice(radius: 0.80, width: costSummary.sickLeavePercentage/100, isOuterCircleNeeded: true, outerCircleWidth: (1-(costSummary.sickLeavePercentage/100)), fillColor: Constant.Colors.sickLeaveColor)
-           let vacationSlice = Slice(radius: 0.72, width: costSummary.paidVacationPercentage/100, isOuterCircleNeeded: true, outerCircleWidth: (1-(costSummary.paidVacationPercentage/100)), fillColor: Constant.Colors.paidVacancColor)
+            let bonusSlice = Slice(radius: 0.75, width: (costSummary.bonusPercentage/100), isOuterCircleNeeded: true, outerCircleWidth: (costSummary.remainingBonusPercentage/100), fillColor:Constant.Colors.bonusColor)
+            let otSlice = Slice(radius: 0.65, width: (costSummary.overTimePercentage/100), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.overTimeColor)
+           let wageSlice = Slice(radius: 0.75, width: costSummary.wagePercentage/100, isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.wageColor)
+           let sickLeaveSlice = Slice(radius: 0.80, width: costSummary.sickLeavePercentage/100, isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.sickLeaveColor)
+           let vacationSlice = Slice(radius: 0.72, width: costSummary.paidVacationPercentage/100, isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.paidVacancColor)
            
             pieChartViewCostSummary.layer.sublayers = nil
             pieChartViewCostSummary.slices = [bonusSlice,otSlice,wageSlice,sickLeaveSlice,vacationSlice]
