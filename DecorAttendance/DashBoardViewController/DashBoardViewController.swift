@@ -17,6 +17,11 @@ protocol DashBoardDelegate: class {
 
 class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCAAnimationDelegateProtocol, filterUpdatedDelegate {
     
+    func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
+        
+    }
+    
+    
     weak var delegate: DashBoardDelegate?
     
     @IBOutlet weak var lblRemainingBnsAmnt: UILabel!
@@ -80,52 +85,45 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     var window: UIWindow?
     var sitesArr: NSMutableArray!
     var spinner = UIActivityIndicatorView(style: .gray)
-    var siteModelObjArr: NSMutableArray!
+    var siteModelObjArr = [ObeidiModelSites]()
     var siteSelectedIndex: Int!
     var daySelectedIndex: Int!
     var monthSelectedIndex: Int!
     var siteIdSelected: String!
     var costSummaryModel: ObeidiModelCostSummarySiteWise!
-    
+    var siteWiseRequestModel = SiteWiseRequestModel()
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
-        
+        initialisation()
         self.navigationItem.leftItemsSupplementBackButton = true
-        
-        self.setUpChartViewStyles()
         setUpViewStyles()
         pieChartViewCostSummary.myAnimationDelegate = self
         callGetAllSitesAPI()
         addTapGesturesToLabels()
-        //PieChart.initializeAndPlotGraph(chartView: pieChartView, controller: self, xCoordinateArr: ["23", "45", "32"], yCoordinateArr1: ["23", "45", "32"], yCoordinateArr2: ["23", "45", "32"], yCoordinate1Label: "volume", yCoordinate2Label: "frequency")
-        
-        //setPerformanceIndicatorLines()
-        
-        //pieChartViewCostSummary.style = [Style(isOuterCircleNeeded: true)]
-//        pieChartViewCostSummary.slices =
-//            [
-//                Slice(radius: 0.75, width: 0.55),
-//                Slice(radius: 0.65, width: 0.45)
-//        ]
-        
-        
-        
-        //-----------here ---------//
-//        pieChartViewCostSummary.slices = [
-//
-//            Slice(radius: 0.75, width: 0.55, isOuterCircleNeeded: true, outerCircleWidth: 0.70),
-//            Slice(radius: 0.65, width: 0.45, isOuterCircleNeeded: true, outerCircleWidth: 0.70)
-//
-//        ]
-        callSiteWiseCostSummaryAPI(siteID: "All", startDate: "All", endDate: "All")
-        
     }
+    
+    func initialisation(){
+        callSiteWiseCostSummaryApi()
+    }
+    
+    func callSiteWiseCostSummaryApi(){
+        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
+        print("Sitewise Request Body:\n---------()")
+    ObeidiModelCostSummarySiteWise.callCostSummaryRequset(requestBody:self.siteWiseRequestModel.getReqestBody()) {
+            (success, result, error) in
+            if success! {
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+                self.processSiteWiseCostSummaryResponse(apiResponse: result! as! ObeidiModelCostSummarySiteWise)
+                
+                print(result!)
+            }else{
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
-        
     }
     
     // MARK: - Table view data source
@@ -137,16 +135,11 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        
         return 3
-        
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         switch indexPath.row {
-            
         case 0:
             return 82
         case 1:
@@ -155,34 +148,21 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             return 277
         default:
             return 0
-            
         }
-        
     }
     
     
     @IBAction func bttnActnMenu(_ sender: Any) {
-        
         delegate?.dashBoardDidTapedMenu(tabBarIndex: 1)
     }
     
-    func setUpChartViewStyles()  {
-        
-//        self.pieChartView.clipsToBounds = true
-//        self.pieChartView.layer.cornerRadius = 8.0
-//        self.pieChartView.dropShadow()
-        
-        
-    }
     func setUpViewStyles() {
-        
         self.viewRemainingBonus.layer.cornerRadius = 1
         self.viewRemainingBonus.backgroundColor = UIColor.white
         self.viewRemainingBonus.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.viewRemainingBonus.layer.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.12).cgColor
         self.viewRemainingBonus.layer.shadowOpacity = 1
         self.viewRemainingBonus.layer.shadowRadius = 9
-        
         
         self.viewTotalOtBonus.layer.cornerRadius = 1
         self.viewTotalOtBonus.backgroundColor = UIColor.white
@@ -208,9 +188,9 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         self.lblStratDate.textColor = ObeidiFont.Color.obeidiLightBlack()
         self.lblSite.textColor = ObeidiFont.Color.obeidiLightBlack()
         
-        addDropDownLabelAndImage(lblToModify: lblStratDate, lblText: "ALL")
-        addDropDownLabelAndImage(lblToModify: lblSite, lblText: "ALL")
-        addDropDownLabelAndImage(lblToModify: lblEndDate, lblText: "ALL")
+        addDropDownLabelAndImage(lblToModify: lblStratDate, lblText: "")
+        addDropDownLabelAndImage(lblToModify: lblSite, lblText: "")
+        addDropDownLabelAndImage(lblToModify: lblEndDate, lblText: "")
         
         
     }
@@ -312,8 +292,6 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         
     }
     @objc func handleSiteLabelTap(){
-        
-        //presentDropDownController(tableCgPoint: getPointForSiteTable(), dropDownFor: .Site, arr: fetchSiteArr())
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
@@ -331,7 +309,7 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             siteViewController.filterTypeName = FilterTypeName.site
             siteViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             siteViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            siteViewController.filterDataArr = self.siteModelObjArr
+            //siteViewController.filterDataArr = self.siteModelObjArr
             self.present(siteViewController, animated: true, completion: nil)
             
         }
@@ -393,17 +371,7 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         arr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         return arr
     }
-    func fetchSiteArr() -> NSMutableArray {
-        
-        let arr = NSMutableArray()
-        //arr = ["Quatar", "Saudi", "Dubai"]
-        for case let item as ObeidiModelSites in self.siteModelObjArr{
-            
-            arr.add(item.name as! String)
-            
-        }
-        return arr
-    }
+    
     func getPointForMonthTable() -> CGPoint{
         
         return CGPoint(x: 12 + self.viewDropDownButtons.frame.minX + self.lblStratDate.frame.minX, y: self.viewDropDownButtons.frame.maxY + 90)
@@ -439,83 +407,38 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             formatter.dateFormat = "yyyy"
             let formattedDate = formatter.string(from: date) + "-" + monthValue + "-" + dayValue
             
-            let siteID = String((self.siteModelObjArr.object(at: siteSelectedIndex) as! ObeidiModelSites).id as! Int)
+            //let siteID = String((self.siteModelObjArr.object(at: siteSelectedIndex) as! ObeidiModelSites).id as! Int)
             
-            callSiteWiseCostSummaryAPI(siteID: siteID, startDate: "", endDate: formattedDate)
+            //callSiteWiseCostSummaryAPI(siteID: siteID, startDate: "", endDate: formattedDate)
             
         case .Attendance:
             print("  ")
         }
         
         for cell in tableView.visibleCells{
-            
             cell.backgroundColor = UIColor.white
             cell.alpha = 1
         }
-        
         self.navigationController?.navigationBar.alpha = 1
         self.tabBarController?.tabBar.alpha = 1
     }
     
-    func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
-    
-//        if pieChartViewCostSummary.myAnimationDelegate != nil
-//        {
-//            pieChartViewCostSummary.animating = false
-//            pieChartViewCostSummary.myAnimationDelegate?.animationDidStop( theAnimation, finished: true)
-//        }
-    }
     func callGetAllSitesAPI() {
-        
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
-        
         ObeidiModelSites.callListSitesRequset(){
             (success, result, error) in
-            
-            if success! {
-                
-                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                print(result!)
-                self.siteModelObjArr = (result as! NSMutableArray)
-                
-                
-            }else{
-            
-                
-                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                
-                
-            }
-            
-            
-            
-            
-        }
-        
-        
-    }
-    func callSiteWiseCostSummaryAPI(siteID: String!, startDate: String!, endDate: String!)  {
-        
-        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
-        ObeidiModelCostSummarySiteWise.callCostSummaryRequset(siteId: siteID, startDate: startDate, endDate: endDate) {
-            (success, result, error) in
-            
-            
             if success! {
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                self.processSiteWiseCostSummaryResponse(apiResponse: result! as! ObeidiModelCostSummarySiteWise)
-                
                 print(result!)
+                if let res = result as? [ObeidiModelSites]{
+                    self.siteModelObjArr = res
+                }
             }else{
-                
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                
             }
-            
-            
         }
-        
     }
+    
     func processSiteWiseCostSummaryResponse(apiResponse: ObeidiModelCostSummarySiteWise) {
         
         drawChartAndPerformanceIndicators(modelObj: apiResponse)
@@ -535,124 +458,43 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
              self.lblTotalCostAmnt.text = "AED " + String.init(format: "%0.2f", costSummary.totalAmountNew)
             
             self.lblRemainingBnsPerc.text = String(format: "%0.02f", costSummary.remainingBonusPercentage) + "%"
-             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.bonusIndicatorLineWhite, lineB: bonusIndicatorLineColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineOrange(), lineAValue: 1, lineBValue: (costSummary.remainingBonusPercentage/100.00), lineAMeter: widthBonusLight, lineBMeter: widthBonusColored)
+            self.lblRemainingBnsPerc.textColor = Constant.Colors.remainingBonusColor
+             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.bonusIndicatorLineWhite, lineB: bonusIndicatorLineColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.remainingBonusColor, lineAValue: 1, lineBValue: (costSummary.remainingBonusPercentage/100.00), lineAMeter: widthBonusLight, lineBMeter: widthBonusColored)
             
             self.lblTotalOTPerc.text = String(format: "%0.02f", costSummary.overTimePercentage) + "%"
-            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalOTIndicatorWhite, lineB: totalOTIndicatorColred, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.overTimePercentage/100.00), lineAMeter: widthTotalOTLight, lineBMeter: widthTotalOTColored)
+            self.lblTotalOTPerc.textColor = Constant.Colors.overTimeColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalOTIndicatorWhite, lineB: totalOTIndicatorColred, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.overTimeColor, lineAValue: 1, lineBValue: (costSummary.overTimePercentage/100.00), lineAMeter: widthTotalOTLight, lineBMeter: widthTotalOTColored)
             
             self.lblTotalBnsPerc.text = String(format: "%0.02f", costSummary.bonusPercentage) + "%"
-            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalBonusIndicatorWhite, lineB: totalBonusIndicatorColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineRed(), lineAValue: 1, lineBValue: (costSummary.bonusPercentage/100.00), lineAMeter: widthTotalBonusLight, lineBMeter: widthTotalBounsColred)
+            self.lblTotalBnsPerc.textColor = Constant.Colors.bonusColor
+            self.lblTotalBnsPerc.textColor = Constant.Colors.bonusColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalBonusIndicatorWhite, lineB: totalBonusIndicatorColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.bonusColor, lineAValue: 1, lineBValue: (costSummary.bonusPercentage/100.00), lineAMeter: widthTotalBonusLight, lineBMeter: widthTotalBounsColred)
             
             self.lblWagePer.text = String(format: "%0.02f", costSummary.wagePercentage) + "%"
-            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totaltotalWageIndctrWhite, lineB: totalWageIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.wagePercentage/100.00), lineAMeter: widthWageWhite, lineBMeter: widthWageColoured)
+            self.lblWagePer.textColor = Constant.Colors.wageColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totaltotalWageIndctrWhite, lineB: totalWageIndctrColoured, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.wageColor, lineAValue: 1, lineBValue: (costSummary.wagePercentage/100.00), lineAMeter: widthWageWhite, lineBMeter: widthWageColoured)
             
             self.lblLeavePer.text = String(format: "%0.02f", costSummary.sickLeavePercentage) + "%"
-            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalSickLeaveIndctrWhite, lineB: totalSickLeaveIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.sickLeavePercentage/100.00), lineAMeter: widthSickLeaveWhite, lineBMeter: widthSickLeaveColoured)
+            self.lblLeavePer.textColor = Constant.Colors.sickLeaveColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalSickLeaveIndctrWhite, lineB: totalSickLeaveIndctrColoured, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.sickLeaveColor, lineAValue: 1, lineBValue: (costSummary.sickLeavePercentage/100.00), lineAMeter: widthSickLeaveWhite, lineBMeter: widthSickLeaveColoured)
             
             self.lblPaidVacationPer.text = String(format: "%0.02f", costSummary.paidVacationPercentage) + "%"
-             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPaidVacationIndctrWhite, lineB: totalPaidVacationIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.paidVacationPercentage/100.00), lineAMeter: widthVacationWhite, lineBMeter: widthVacationColoured)
+            self.lblPaidVacationPer.textColor = Constant.Colors.paidVacancColor
+             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPaidVacationIndctrWhite, lineB: totalPaidVacationIndctrColoured, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.paidVacancColor, lineAValue: 1, lineBValue: (costSummary.paidVacationPercentage/100.00), lineAMeter: widthVacationWhite, lineBMeter: widthVacationColoured)
             
-             let bonusSlice = Slice(radius: 0.75, width: costSummary.bonusPercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.bonusPercentage))
-            let otSlice = Slice(radius: 0.65, width: costSummary.overTimePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.overTimePercentage))
-            let wageSlice = Slice(radius: 0.75, width: costSummary.wagePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.wagePercentage))
-            let sickLeaveSlice = Slice(radius: 0.80, width: costSummary.sickLeavePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.sickLeavePercentage))
-            let vacationSlice = Slice(radius: 0.72, width: costSummary.paidVacationPercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.paidVacationPercentage))
+            let bonusSlice = Slice(radius: 0.75, width: (costSummary.bonusPercentage/100), isOuterCircleNeeded: true, outerCircleWidth: (costSummary.remainingBonusPercentage/100), fillColor:Constant.Colors.bonusColor)
+            let otSlice = Slice(radius: 0.65, width: (costSummary.overTimePercentage/100), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.overTimeColor)
+           let wageSlice = Slice(radius: 0.75, width: costSummary.wagePercentage/100, isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.wageColor)
+           let sickLeaveSlice = Slice(radius: 0.80, width: costSummary.sickLeavePercentage/100, isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.sickLeaveColor)
+           let vacationSlice = Slice(radius: 0.72, width: costSummary.paidVacationPercentage/100, isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.paidVacancColor)
+           
             pieChartViewCostSummary.layer.sublayers = nil
             pieChartViewCostSummary.slices = [bonusSlice,otSlice,wageSlice,sickLeaveSlice,vacationSlice]
             
         }
-
-        let calculatedDict = calculateAmntsAndPercentageValue()
-        //guard let remainigBonusPer = NumberFormatter().number(from: (calculatedDict.value(forKey: "remaining_bonus_per") as! String)) else { return }
-        var remainigBonusPer = calculatedDict.value(forKey: "remaining_bonus_per")
-        
-        
-        var otPer = (calculatedDict.value(forKey: "ot_per") as! CGFloat)
-        var bonusPer = (calculatedDict.value(forKey: "bonus_per") as! CGFloat)
-        var sickLeavePer = (calculatedDict.value(forKey: "sick_leave_per")as! CGFloat)
-        var wagePer = (calculatedDict.value(forKey: "wage_per") as! CGFloat)
-        var vacationPer = (calculatedDict.value(forKey: "vacation_per") as! CGFloat)
-        
-        
-        let totalCost = calculatedDict.value(forKey: "total_cost")
-        _ = calculatedDict.value(forKey: "total_ot_amount")
-        let totalBonusAmnt = calculatedDict.value(forKey: "total_bounus_amount")
-        let remainigBonusAmnt = calculatedDict.value(forKey: "remaining_bonus_amnt")
-        
-        
-      //  pieChartViewCostSummary.layer.sublayers = nil
-//        pieChartViewCostSummary.slices = [
-//
-//            Slice(radius: 0.75, width: bonusPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat),
-//            Slice(radius: 0.65, width: otPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.75, width: wagePer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.80, width: sickLeavePer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.72, width: vacationPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat)
-        
-        //]
     }
     
-    func calculateAmntsAndPercentageValue() -> NSMutableDictionary {
-        
-        let calcDict = NSMutableDictionary()
-        
-        let totalCost: CGFloat!
-            //= (self.costSummaryModel.total_amount as! CGFloat)
-        if let totalCostVal = self.costSummaryModel.total_amount as? CGFloat{
-            totalCost = totalCostVal
-        }else{
-            let val = self.costSummaryModel.total_amount as? String
-            totalCost = ObeidiaTypeFormatter.cgfloatFromString(str: val!)
-        }
-        var bonusAmount = (self.costSummaryModel.bonus_amount as! CGFloat)
-        var wageAmount: CGFloat!
-        if let wageAmountVal = self.costSummaryModel.wage_amount as? CGFloat{
-            wageAmount = wageAmountVal
-        }else{
-            let val = self.costSummaryModel.wage_amount as? String
-            wageAmount = ObeidiaTypeFormatter.cgfloatFromString(str: val!)
-        }
-        var overTimeAmount = (self.costSummaryModel.over_time_amount as! CGFloat)
-        var remainingBonusAmount = (self.costSummaryModel.remaining_bonus_amount as! CGFloat)
-        var sickLeaveAmount = (self.costSummaryModel.medical_leave_amount as! CGFloat)
-        var vacationAmount = (self.costSummaryModel.paid_vaction_amount as! CGFloat)
-        
-        var remainingBonusPer = remainingBonusAmount/(bonusAmount + remainingBonusAmount)
-        var otPer = (overTimeAmount/totalCost)
-        var bonusPer = (bonusAmount/remainingBonusAmount)
-        var sickLeavePer = (sickLeaveAmount/totalCost)
-        var wagePer = (wageAmount/totalCost)
-        var vacationPer = (vacationAmount/totalCost)
-        
-        if otPer.isNaN {
-            otPer = 0
-        }
-        if bonusPer.isNaN {
-            
-            bonusPer = 0
-        }
-        if sickLeavePer.isNaN{
-            sickLeavePer = 0
-        }
-        if wagePer.isNaN{
-            wagePer = 0
-        }
-        if vacationPer.isNaN{
-            vacationPer = 0
-        }
-        
-        calcDict.setValue((totalCost), forKey: "total_cost")
-        calcDict.setValue((remainingBonusAmount), forKey: "remaining_bonus_amnt")
-        calcDict.setValue((overTimeAmount), forKey: "total_ot_amount")
-        calcDict.setValue((bonusAmount), forKey: "total_bounus_amount")
-        calcDict.setValue((remainingBonusPer), forKey: "remaining_bonus_per")
-        calcDict.setValue((otPer), forKey: "ot_per")
-        calcDict.setValue((bonusPer), forKey: "bonus_per")
-        calcDict.setValue(vacationPer, forKey: "vacation_per")
-        calcDict.setValue(sickLeavePer, forKey: "sick_leave_per")
-        calcDict.setValue(wagePer, forKey: "wage_per")
-        
-        
-        return calcDict
-        
-    }
+   
     //POPUP Delegate Methods
     func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
         
@@ -683,7 +525,7 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
                 
             }
             
-            callSiteWiseCostSummaryAPI(siteID: siteIdSelected, startDate: startDate, endDate: endDate)
+            //callSiteWiseCostSummaryAPI(siteID: siteIdSelected, startDate: startDate, endDate: endDate)
         
         default:
             print("")
@@ -713,13 +555,28 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             self.view.alpha = 1
             //self.tabBarController?.view.alpha = 0.65
             self.navigationController?.navigationBar.alpha = 1
-            
-            
         },completion:nil)
-        
-        
     }
     
-    
-    
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+        },completion:nil)
+        if (type == .startDate){
+            if (date.count>0){
+                siteWiseRequestModel.startDate = date
+                self.lblStratDate.text = date
+                callSiteWiseCostSummaryApi()
+            }
+        }
+        else if (type == .endDate){
+            if (date.count>0){
+                siteWiseRequestModel.endDate = date
+                self.lblEndDate.text = date
+                callSiteWiseCostSummaryApi()
+            }
+        }
+    }
 }

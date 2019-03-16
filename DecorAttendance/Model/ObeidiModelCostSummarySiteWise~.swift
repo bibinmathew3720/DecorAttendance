@@ -135,8 +135,19 @@ class ObeidiModelCostSummarySiteWise: NSObject {
         return nil
     }
     
-    class func callCostSummaryRequset(requestBody: String, withCompletion completion: @escaping(Bool?, AnyObject?, NSError?) -> Void){
-        let serviceName = ObeidiConstants.API.COST_SUMMARY_SITEWISE+requestBody
+    class func callCostSummaryRequset(siteId: String, startDate: String, endDate: String, withCompletion completion: @escaping(Bool?, AnyObject?, NSError?) -> Void){
+        
+        let serviceName: String!
+        if (siteId != "All" && startDate != "All" && endDate != "All"){
+            
+           serviceName = ObeidiConstants.API.COST_SUMMARY_SITEWISE + "?site_id=\(siteId)&start_date=\(startDate)&end_date=\(endDate)"
+        }else{
+            serviceName = ObeidiConstants.API.COST_SUMMARY_SITEWISE
+            
+        }
+        
+        //site_id=32&start_date=2018-01-01&end_date=2019-02-06
+        
         let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
         AFNetworkingServiceManager.sharedmanager.parseLinkUsingGetMethodAndHeader(serviceName, parameter: nil, token: accessToken){
             (success, result, error) in

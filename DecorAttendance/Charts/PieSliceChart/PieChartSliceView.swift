@@ -21,18 +21,20 @@ struct Slice
   var width:  CGFloat
   var isOuterCircleNeeded: Bool
   var outerCircleWidth: CGFloat
-    
+  var fillColor:UIColor
   init(
     radius:     CGFloat = 1,
     width:      CGFloat = 0.125,
     isOuterCircleNeeded: Bool = false,
-    outerCircleWidth: CGFloat = 0.125
+    outerCircleWidth: CGFloat = 0.125,fillColor:UIColor = UIColor.red
     )
   {
     self.radius = radius
     self.width = width
     self.isOuterCircleNeeded = isOuterCircleNeeded
     self.outerCircleWidth = outerCircleWidth
+    
+    self.fillColor = fillColor
   }
 }
 
@@ -140,7 +142,8 @@ class PieChartSliceView: UIView, CAAnimationDelegate
         fillNewColorLayer.path = newPath.cgPath
         let centerFilLayer = CGPoint(x: fillNewColorLayer.bounds.midX,
                                      y: fillNewColorLayer.bounds.midY)
-        fillNewColorLayer.fillColor = ObeidiColors.ColorThemes.obeidiPieGraphShades()[colorIndex]
+        //fillNewColorLayer.fillColor = ObeidiColors.ColorThemes.obeidiPieGraphShades()[colorIndex]
+        fillNewColorLayer.fillColor = aSlice.fillColor.cgColor
         
         //Add shadow to the arcs
         fillNewColorLayer.shadowOffset = CGSize(width: 0, height: 2)
@@ -281,14 +284,14 @@ class PieChartSliceView: UIView, CAAnimationDelegate
         inneraPath.addLine(to: center)
         let holeLayerOuter = CAShapeLayer()
         holeLayerOuter.path = inneraPath.cgPath
-        holeLayerOuter.fillColor = ObeidiColors.ColorCode.obeidiCircleAsh().cgColor
+        holeLayerOuter.fillColor = Constant.Colors.blackColor.cgColor
         self.layer.addSublayer(holeLayerOuter)
         
         outerPath.addArc(withCenter: center, radius: maxRadius * 0.2, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
         outerPath.addLine(to: center)
         let holeLayerInner = CAShapeLayer()
         holeLayerInner.path = outerPath.cgPath
-        holeLayerInner.fillColor = ObeidiColors.ColorCode.obeidiExactBlack().cgColor
+        holeLayerInner.fillColor = Constant.Colors.ashColor.cgColor
         self.layer.addSublayer(holeLayerInner)
         
     }
@@ -312,12 +315,12 @@ class PieChartSliceView: UIView, CAAnimationDelegate
         var desiredPointX = (centerPoint.x + arcCenterX) / 2
         var desiredPointY = (centerPoint.y + arcCenterY) / 2 + yAdjuster
         
-        textLayers[colorIndex].font = UIFont(name: ObeidiFont.Family.normalFont(), size: ObeidiFont.Size.smallB())
+        textLayers[colorIndex].font = UIFont(name: ObeidiFont.Family.normalFont(), size: 8.0)
         //labelLayer.frame = fillNewColorLayer.frame
-        textLayers[colorIndex].string = String(format: "%.0f", (aSlice.width * 100)) + "%"
+        textLayers[colorIndex].string = String(format: "%.1f", (aSlice.width * 100)) + "%"
         textLayers[colorIndex].alignmentMode = CATextLayerAlignmentMode.left
         textLayers[colorIndex].foregroundColor = ObeidiFont.Color.obeidiExactWhite().cgColor
-        textLayers[colorIndex].fontSize = ObeidiFont.Size.mediumB()
+        textLayers[colorIndex].fontSize = ObeidiFont.Size.smallA()
         
         if desiredPointX.isNaN {
             desiredPointX = 0
@@ -345,7 +348,7 @@ class PieChartSliceView: UIView, CAAnimationDelegate
         circlePathColoured.addLine(to: center)
         let circleLayerColoured = CAShapeLayer()
         circleLayerColoured.path = circlePathColoured.cgPath
-        circleLayerColoured.strokeColor = ObeidiColors.ColorCode.obeidiDarkOrange().cgColor
+        circleLayerColoured.strokeColor = Constant.Colors.remainingBonusColor.cgColor
         circleLayerColoured.strokeStart = 0
         circleLayerColoured.strokeEnd = filValue - 0.2//0.7
         circleLayerColoured.lineWidth = 18
@@ -371,10 +374,10 @@ class PieChartSliceView: UIView, CAAnimationDelegate
         let textLayer = CATextLayer()
         textLayer.font = UIFont(name: ObeidiFont.Family.normalFont(), size: ObeidiFont.Size.smallB())
         //labelLayer.frame = fillNewColorLayer.frame
-        textLayer.string = String(format: "%.0f", (filValue * 100)) + "%"
+        textLayer.string = String(format: "%.1f", (filValue * 100)) + "%"
         textLayer.alignmentMode = CATextLayerAlignmentMode.left
-        textLayer.foregroundColor = ObeidiFont.Color.obeidiExactWhite().cgColor
-        textLayer.fontSize = ObeidiFont.Size.mediumB()
+        textLayer.foregroundColor = Constant.Colors.whiteColor.cgColor
+        textLayer.fontSize = ObeidiFont.Size.smallA()
         
         textLayer.frame = CGRect(x: Double(center.x) + cos(0.8 * 2 * Double.pi) * Double(radius) * 0.95 - 12, y: Double(center.y) + sin(0.8 * 2 * Double.pi) * Double(radius) * 0.95 - 6, width: 100, height: 50)
         

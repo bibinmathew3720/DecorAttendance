@@ -9,6 +9,10 @@
 import UIKit
 
 class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+        
+    }
+    
 
     @IBOutlet weak var lblStartDate: UILabel!
     @IBOutlet weak var lblEndDate: UILabel!

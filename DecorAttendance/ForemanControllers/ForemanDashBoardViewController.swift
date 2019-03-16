@@ -59,8 +59,8 @@ class ForemanDashBoardViewController: UITableViewController, DropDownDataDelegat
         
         pieChartViewLabourSummary.slices =
             [
-                Slice(radius: 0.75, width: 0.55, isOuterCircleNeeded: false, outerCircleWidth: 0),
-                Slice(radius: 0.65, width: 0.45, isOuterCircleNeeded: false, outerCircleWidth: 0)
+                //Slice(radius: 0.75, width: 0.55, isOuterCircleNeeded: false, outerCircleWidth: 0),
+                //Slice(radius: 0.65, width: 0.45, isOuterCircleNeeded: false, outerCircleWidth: 0)
         ]
         
         
