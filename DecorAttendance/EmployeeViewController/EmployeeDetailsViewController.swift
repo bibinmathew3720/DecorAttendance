@@ -10,6 +10,7 @@ import UIKit
 
 class EmployeeDetailsViewController: UITableViewController {
     
+    @IBOutlet weak var strikeViewWidth: NSLayoutConstraint!
     @IBOutlet weak var widthUncoloredIndicator: NSLayoutConstraint!
     @IBOutlet weak var widthColoredIndicator: NSLayoutConstraint!
     @IBOutlet weak var viewColouredIndicator: UIView!
@@ -64,6 +65,11 @@ class EmployeeDetailsViewController: UITableViewController {
             if let rat = rating{
                 widthColoredIndicator.constant = CGFloat(4 * rat)
             }
+//            let strike = Double(model.)
+//            if let _strike = strike{
+//                strikeViewWidth.constant = CGFloat(10 * _strike)
+//            }
+            
         }
     }
     
