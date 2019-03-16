@@ -21,18 +21,19 @@ struct Slice
   var width:  CGFloat
   var isOuterCircleNeeded: Bool
   var outerCircleWidth: CGFloat
-    
+  var fillColor:UIColor
   init(
     radius:     CGFloat = 1,
     width:      CGFloat = 0.125,
     isOuterCircleNeeded: Bool = false,
-    outerCircleWidth: CGFloat = 0.125
+    outerCircleWidth: CGFloat = 0.125,fillColor:UIColor = UIColor.red
     )
   {
     self.radius = radius
     self.width = width
     self.isOuterCircleNeeded = isOuterCircleNeeded
     self.outerCircleWidth = outerCircleWidth
+    self.fillColor = fillColor
   }
 }
 
@@ -140,7 +141,8 @@ class PieChartSliceView: UIView, CAAnimationDelegate
         fillNewColorLayer.path = newPath.cgPath
         let centerFilLayer = CGPoint(x: fillNewColorLayer.bounds.midX,
                                      y: fillNewColorLayer.bounds.midY)
-        fillNewColorLayer.fillColor = ObeidiColors.ColorThemes.obeidiPieGraphShades()[colorIndex]
+        //fillNewColorLayer.fillColor = ObeidiColors.ColorThemes.obeidiPieGraphShades()[colorIndex]
+        fillNewColorLayer.fillColor = aSlice.fillColor.cgColor
         
         //Add shadow to the arcs
         fillNewColorLayer.shadowOffset = CGSize(width: 0, height: 2)
@@ -314,7 +316,7 @@ class PieChartSliceView: UIView, CAAnimationDelegate
         
         textLayers[colorIndex].font = UIFont(name: ObeidiFont.Family.normalFont(), size: ObeidiFont.Size.smallB())
         //labelLayer.frame = fillNewColorLayer.frame
-        textLayers[colorIndex].string = String(format: "%.0f", (aSlice.width * 100)) + "%"
+        textLayers[colorIndex].string = String(format: "%.1f", (aSlice.width * 100)) + "%"
         textLayers[colorIndex].alignmentMode = CATextLayerAlignmentMode.left
         textLayers[colorIndex].foregroundColor = ObeidiFont.Color.obeidiExactWhite().cgColor
         textLayers[colorIndex].fontSize = ObeidiFont.Size.mediumB()

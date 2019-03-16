@@ -552,11 +552,12 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             self.lblPaidVacationPer.text = String(format: "%0.02f", costSummary.paidVacationPercentage) + "%"
              ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPaidVacationIndctrWhite, lineB: totalPaidVacationIndctrColoured, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (costSummary.paidVacationPercentage/100.00), lineAMeter: widthVacationWhite, lineBMeter: widthVacationColoured)
             
-             let bonusSlice = Slice(radius: 0.75, width: costSummary.bonusPercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.bonusPercentage))
-            let otSlice = Slice(radius: 0.65, width: costSummary.overTimePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.overTimePercentage))
-            let wageSlice = Slice(radius: 0.75, width: costSummary.wagePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.wagePercentage))
-            let sickLeaveSlice = Slice(radius: 0.80, width: costSummary.sickLeavePercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.sickLeavePercentage))
-            let vacationSlice = Slice(radius: 0.72, width: costSummary.paidVacationPercentage, isOuterCircleNeeded: true, outerCircleWidth: (100.00-costSummary.paidVacationPercentage))
+            let bonusSlice = Slice(radius: 0.75, width: (costSummary.bonusPercentage/100), isOuterCircleNeeded: true, outerCircleWidth: (1-(costSummary.bonusPercentage/100)), fillColor:Constant.Colors.bonusColor)
+            let otSlice = Slice(radius: 0.65, width: (costSummary.overTimePercentage/100), isOuterCircleNeeded: true, outerCircleWidth: (1-(costSummary.overTimePercentage/100)), fillColor: Constant.Colors.overTimeColor)
+           let wageSlice = Slice(radius: 0.75, width: costSummary.wagePercentage/100, isOuterCircleNeeded: true, outerCircleWidth: (1-(costSummary.wagePercentage/100)), fillColor: Constant.Colors.wageColor)
+           let sickLeaveSlice = Slice(radius: 0.80, width: costSummary.sickLeavePercentage/100, isOuterCircleNeeded: true, outerCircleWidth: (1-(costSummary.sickLeavePercentage/100)), fillColor: Constant.Colors.sickLeaveColor)
+           let vacationSlice = Slice(radius: 0.72, width: costSummary.paidVacationPercentage/100, isOuterCircleNeeded: true, outerCircleWidth: (1-(costSummary.paidVacationPercentage/100)), fillColor: Constant.Colors.paidVacancColor)
+           
             pieChartViewCostSummary.layer.sublayers = nil
             pieChartViewCostSummary.slices = [bonusSlice,otSlice,wageSlice,sickLeaveSlice,vacationSlice]
             
