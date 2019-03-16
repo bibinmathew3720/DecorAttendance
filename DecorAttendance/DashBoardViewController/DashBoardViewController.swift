@@ -569,98 +569,9 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             pieChartViewCostSummary.slices = [bonusSlice,otSlice,wageSlice,sickLeaveSlice,vacationSlice]
             
         }
-
-        let calculatedDict = calculateAmntsAndPercentageValue()
-        //guard let remainigBonusPer = NumberFormatter().number(from: (calculatedDict.value(forKey: "remaining_bonus_per") as! String)) else { return }
-        var remainigBonusPer = calculatedDict.value(forKey: "remaining_bonus_per")
-        
-        
-        var otPer = (calculatedDict.value(forKey: "ot_per") as! CGFloat)
-        var bonusPer = (calculatedDict.value(forKey: "bonus_per") as! CGFloat)
-        var sickLeavePer = (calculatedDict.value(forKey: "sick_leave_per")as! CGFloat)
-        var wagePer = (calculatedDict.value(forKey: "wage_per") as! CGFloat)
-        var vacationPer = (calculatedDict.value(forKey: "vacation_per") as! CGFloat)
-        
-        
-        let totalCost = calculatedDict.value(forKey: "total_cost")
-        _ = calculatedDict.value(forKey: "total_ot_amount")
-        let totalBonusAmnt = calculatedDict.value(forKey: "total_bounus_amount")
-        let remainigBonusAmnt = calculatedDict.value(forKey: "remaining_bonus_amnt")
-        
-        
-      //  pieChartViewCostSummary.layer.sublayers = nil
-//        pieChartViewCostSummary.slices = [
-//
-//            Slice(radius: 0.75, width: bonusPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat),
-//            Slice(radius: 0.65, width: otPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.75, width: wagePer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.80, width: sickLeavePer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat), Slice(radius: 0.72, width: vacationPer , isOuterCircleNeeded: true, outerCircleWidth: remainigBonusPer as! CGFloat)
-        
-        //]
     }
     
-    func calculateAmntsAndPercentageValue() -> NSMutableDictionary {
-        
-        let calcDict = NSMutableDictionary()
-        
-        let totalCost: CGFloat!
-            //= (self.costSummaryModel.total_amount as! CGFloat)
-        if let totalCostVal = self.costSummaryModel.total_amount as? CGFloat{
-            totalCost = totalCostVal
-        }else{
-            let val = self.costSummaryModel.total_amount as? String
-            totalCost = ObeidiaTypeFormatter.cgfloatFromString(str: val!)
-        }
-        var bonusAmount = (self.costSummaryModel.bonus_amount as! CGFloat)
-        var wageAmount: CGFloat!
-        if let wageAmountVal = self.costSummaryModel.wage_amount as? CGFloat{
-            wageAmount = wageAmountVal
-        }else{
-            let val = self.costSummaryModel.wage_amount as? String
-            wageAmount = ObeidiaTypeFormatter.cgfloatFromString(str: val!)
-        }
-        var overTimeAmount = (self.costSummaryModel.over_time_amount as! CGFloat)
-        var remainingBonusAmount = (self.costSummaryModel.remaining_bonus_amount as! CGFloat)
-        var sickLeaveAmount = (self.costSummaryModel.medical_leave_amount as! CGFloat)
-        var vacationAmount = (self.costSummaryModel.paid_vaction_amount as! CGFloat)
-        
-        var remainingBonusPer = remainingBonusAmount/(bonusAmount + remainingBonusAmount)
-        var otPer = (overTimeAmount/totalCost)
-        var bonusPer = (bonusAmount/remainingBonusAmount)
-        var sickLeavePer = (sickLeaveAmount/totalCost)
-        var wagePer = (wageAmount/totalCost)
-        var vacationPer = (vacationAmount/totalCost)
-        
-        if otPer.isNaN {
-            otPer = 0
-        }
-        if bonusPer.isNaN {
-            
-            bonusPer = 0
-        }
-        if sickLeavePer.isNaN{
-            sickLeavePer = 0
-        }
-        if wagePer.isNaN{
-            wagePer = 0
-        }
-        if vacationPer.isNaN{
-            vacationPer = 0
-        }
-        
-        calcDict.setValue((totalCost), forKey: "total_cost")
-        calcDict.setValue((remainingBonusAmount), forKey: "remaining_bonus_amnt")
-        calcDict.setValue((overTimeAmount), forKey: "total_ot_amount")
-        calcDict.setValue((bonusAmount), forKey: "total_bounus_amount")
-        calcDict.setValue((remainingBonusPer), forKey: "remaining_bonus_per")
-        calcDict.setValue((otPer), forKey: "ot_per")
-        calcDict.setValue((bonusPer), forKey: "bonus_per")
-        calcDict.setValue(vacationPer, forKey: "vacation_per")
-        calcDict.setValue(sickLeavePer, forKey: "sick_leave_per")
-        calcDict.setValue(wagePer, forKey: "wage_per")
-        
-        
-        return calcDict
-        
-    }
+   
     //POPUP Delegate Methods
     func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
         
