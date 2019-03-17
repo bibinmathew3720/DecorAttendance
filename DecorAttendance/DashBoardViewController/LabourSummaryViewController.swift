@@ -57,6 +57,7 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialisation()
         populateCostSummary()
         callGetAllSitesAPI()
         getCostSummaryDetailApi()
@@ -65,6 +66,12 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         addTapGesturesToLabels()
         slicedPieChart.myAnimationDelegate = self
         setPerformanceIndicatorLines(lightLine: totalOTIndicatorWhite, coloredLine: totalOTIndicatorColred, percentage: 0.67, color: ObeidiColors.ColorCode.obeidiLinePink(), lightLineWidth: widthTotalOTLight, coloredLineWidth: widthTotalOTColred)
+    }
+    
+    func initialisation(){
+        self.lblStartDate.text = ""
+        self.lblEndDate.text = ""
+        self.lblSite.text = "All"
     }
     
     func populateCostSummary(){
@@ -265,8 +272,8 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
-                self.navigationController?.navigationBar.alpha = 0.65
+                //self.view.alpha = 0.65
+                //self.navigationController?.navigationBar.alpha = 0.65
                 
                 
             },completion:nil)
@@ -288,9 +295,9 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
+                //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
-                self.navigationController?.navigationBar.alpha = 0.65
+                //self.navigationController?.navigationBar.alpha = 0.65
                 
                 
             },completion:nil)
@@ -310,13 +317,13 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     @objc func handleSiteLabelTap(){
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
+                //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
-                self.navigationController?.navigationBar.alpha = 0.65
-                
-                
+                //self.navigationController?.navigationBar.alpha = 0.65
+
+
             },completion:nil)
-            
+        
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let siteViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
             siteViewController.delegate = self
@@ -359,11 +366,11 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     }
     
     func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.view.alpha = 1
-            //self.tabBarController?.view.alpha = 0.65
-            self.navigationController?.navigationBar.alpha = 1
-        },completion:nil)
+//        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+//            self.view.alpha = 1
+//            //self.tabBarController?.view.alpha = 0.65
+//            self.navigationController?.navigationBar.alpha = 1
+//        },completion:nil)
         if (type == .startDate){
             if (date.count>0){
                 labourSummaryDetailRequestModel.startDate = date
@@ -381,11 +388,11 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     }
     
     func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName){
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.view.alpha = 1
-            //self.tabBarController?.view.alpha = 0.65
-            self.navigationController?.navigationBar.alpha = 1
-        },completion:nil)
+//        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+//            self.view.alpha = 1
+//            //self.tabBarController?.view.alpha = 0.65
+//            self.navigationController?.navigationBar.alpha = 1
+//        },completion:nil)
         self.lblSite.text = selSite.nameNew
         self.labourSummaryDetailRequestModel.siteId = selSite.locIdNew
         getCostSummaryDetailApi()
