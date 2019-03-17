@@ -13,11 +13,10 @@ class LabourwiseViewController: UIViewController {
     @IBOutlet weak var txtFldSearch: UITextField!
     @IBOutlet weak var viewSearchBar: UIView!
     @IBOutlet weak var tableViewLabourwise: UITableView!
+    @IBOutlet weak var emptyView: UIView!
     
     var activeTextField: UITextField!
     var spinner = UIActivityIndicatorView(style: .gray)
-    
-    var searchText:String = ""
     
     var labourWiseCostSummaryResponse:ObeidiModelCostSummaryLabourWise?
     var labourWiseRequestModel = LabourWiseRequestModel()
@@ -36,7 +35,7 @@ class LabourwiseViewController: UIViewController {
     }
     
     func resetRequestModel(){
-        labourWiseRequestModel.perPage = 5
+        labourWiseRequestModel.perPage = 10
         labourWiseRequestModel.pageIndex = 0
         labourWiseRequestModel.searchText = ""
     }
@@ -59,6 +58,15 @@ class LabourwiseViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
     
+    @IBAction func searchButtonAction(_ sender: UIButton) {
+        self.view.endEditing(true)
+        if let searchText = self.txtFldSearch.text{
+            resetRequestModel()
+            self.labourWiseRequestModel.searchText = searchText
+            callLabourWiseCostSummaryAPI()
+        }
+    }
+    
     @objc func dismissKeyBoard()  {
         if activeTextField != nil{
             activeTextField.resignFirstResponder()
@@ -76,6 +84,14 @@ class LabourwiseViewController: UIViewController {
                 if let res = result as? ObeidiModelCostSummaryLabourWise{
                     self.labourWiseCostSummaryResponse = res
                     self.tableViewLabourwise.reloadData()
+                    if (res.costSummaryArray.count == 0){
+                        self.emptyView.isHidden = false
+                        self.tableViewLabourwise.isHidden = true
+                    }
+                    else{
+                        self.emptyView.isHidden = true
+                        self.tableViewLabourwise.isHidden = false
+                    }
                 }
             }else{
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
