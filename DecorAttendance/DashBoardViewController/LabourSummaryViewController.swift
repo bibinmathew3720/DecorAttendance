@@ -195,7 +195,8 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         case 1:
             return 453
         case 2:
-            return 281
+            //return 281
+            return 600
         default:
             return 0
         }

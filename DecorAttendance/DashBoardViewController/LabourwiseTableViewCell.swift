@@ -54,7 +54,7 @@ class LabourwiseTableViewCell: UITableViewCell {
             self.imageViewLabour.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
         }
         self.lblName.text = costDetail.name
-        self.lblID.text = "\(costDetail.empId)"
+        self.lblID.text = "QAA\(costDetail.empId)"
         self.lblIncentiveAmnt.text = "AED " + String(format: "%0.2f", costDetail.totalIncentive)
         self.lblTotalPenalty.text = "AED " + String(format: "%0.2f", costDetail.totalPenalty)
         self.lblNetSalary.text = "AED " + String(format: "%0.2f", costDetail.netSalary)
