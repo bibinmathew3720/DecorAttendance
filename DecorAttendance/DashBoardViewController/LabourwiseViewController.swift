@@ -17,13 +17,28 @@ class LabourwiseViewController: UIViewController {
     var activeTextField: UITextField!
     var spinner = UIActivityIndicatorView(style: .gray)
     
+    var searchText:String = ""
+    
     var labourWiseCostSummaryResponse:ObeidiModelCostSummaryLabourWise?
+    var labourWiseRequestModel = LabourWiseRequestModel()
+    var isApiCalling:Bool =  true
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewStyles()
+        initialisation()
         addTapgesturesToView()
-        callLabourWiseCostSummaryAPI(keyword: "", startDate: "", endDate: "")
+        callLabourWiseCostSummaryAPI()
         // Do any additional setup after loading the view.
+    }
+    
+    func initialisation(){
+       resetRequestModel()
+    }
+    
+    func resetRequestModel(){
+        labourWiseRequestModel.perPage = 5
+        labourWiseRequestModel.pageIndex = 0
+        labourWiseRequestModel.searchText = ""
     }
     
     func setViewStyles() {
@@ -50,10 +65,12 @@ class LabourwiseViewController: UIViewController {
         }
     }
     
-    func callLabourWiseCostSummaryAPI(keyword: String!, startDate: String!, endDate: String!)  {
+    func callLabourWiseCostSummaryAPI()  {
+        self.isApiCalling = true
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
-        ObeidiModelCostSummaryLabourWise.callCostSummaryRequset(keyword: keyword, startDate: startDate, endDate: endDate) {
+    ObeidiModelCostSummaryLabourWise.callCostSummaryRequset(requestBody:self.labourWiseRequestModel.getReqestBody()) {
             (success, result, error) in
+           self.isApiCalling = false
             if success! {
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 if let res = result as? ObeidiModelCostSummaryLabourWise{
@@ -104,6 +121,22 @@ extension LabourwiseViewController:UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let costSummaryRes = self.labourWiseCostSummaryResponse{
+            if (indexPath.row == (costSummaryRes.costSummaryArray.count - 1)){
+                if (!self.isApiCalling){
+                    //self.labourWiseRequestModel.pageIndex = self.labourWiseRequestModel.pageIndex + 1
+                    //self.callLabourWiseCostSummaryAPI()
+                }
+            }
+        }
+//        if(indexPath.row == (notificationHistoryArray.count-1)){
+//            if((self.notificationModel?.total)! > (self.notificationHistoryArray.count)){
+//                callingNotificationHistoryApi()
+//            }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

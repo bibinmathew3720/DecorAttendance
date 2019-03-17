@@ -21,7 +21,7 @@ struct ObeidiConstants {
         static let GET_ALL_SITES = "sites"
         static let COST_SUMMARY_SITEWISE = "reports/cost-summary-sitewise?"
         static let ACCESS_TOKEN = "auth/access-token?"
-        static let COST_SUMMARY_LABOURWISE = "reports/cost-summary-labourwise"
+        static let COST_SUMMARY_LABOURWISE = "reports/cost-summary-labourwise?"
         static let COST_SUMMARY_LABOURWISE_DETAIL = "reports/cost-summary-labourwise/detail/"
         static let SAFETY_EQUIPMENTS = "safety-equipments"
         static let FETCH_ATTENDANCE = "attendance"

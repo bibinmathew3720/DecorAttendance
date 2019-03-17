@@ -42,19 +42,8 @@ class ObeidiModelCostSummaryLabourWise: NSObject {
         return nil
     }
     
-    class func callCostSummaryRequset(keyword: String, startDate: String, endDate: String, withCompletion completion: @escaping(Bool?, AnyObject?, NSError?) -> Void){
-        
-        let serviceName: String!
-        if (keyword != "" && startDate != "" && endDate != ""){
-            
-            serviceName = ObeidiConstants.API.COST_SUMMARY_LABOURWISE + "?start_date=\(startDate)&end_date=\(endDate)&keyword=\(keyword)"
-        }else{
-            serviceName = ObeidiConstants.API.COST_SUMMARY_LABOURWISE
-            
-        }
-        
-        //site_id=32&start_date=2018-01-01&end_date=2019-02-06
-        
+    class func callCostSummaryRequset(requestBody:String, withCompletion completion: @escaping(Bool?, AnyObject?, NSError?) -> Void){
+        let serviceName = ObeidiConstants.API.COST_SUMMARY_LABOURWISE+requestBody
         let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
         AFNetworkingServiceManager.sharedmanager.parseLinkUsingGetMethodAndHeader(serviceName, parameter: nil, token: accessToken){
             (success, result, error) in
@@ -135,5 +124,58 @@ class CostSummary: NSObject {
         if let value = dictionaryDetails["total_penalty"] as? CGFloat{
             totalPenalty = value
         }
+    }
+}
+
+class LabourWiseRequestModel:NSObject{
+    var startDate:String = ""
+    var endDate:String = ""
+    var searchText:String = ""
+    var siteId:Int = 0
+    var pageIndex:Int = 0
+    var perPage:Int = 0
+    func getReqestBody()->String{
+        var requestBody = ""
+        if (startDate.count != 0 ){
+            requestBody = "start_date=\(startDate)"
+        }
+        if (endDate.count != 0){
+            if (requestBody.count>0){
+                requestBody = requestBody + "&end_date=\(endDate)"
+            }
+            else{
+                requestBody = requestBody + "end_date=\(endDate)"
+            }
+        }
+        if (searchText.count != 0){
+            if (requestBody.count>0){
+                requestBody = requestBody + "&keyword=\(searchText)"
+            }
+            else{
+                requestBody = requestBody + "keyword=\(searchText)"
+            }
+        }
+        if (requestBody.count>0){
+            requestBody = requestBody + "&page=\(pageIndex)"
+        }
+        else{
+            requestBody = requestBody + "page=\(pageIndex)"
+        }
+        if (requestBody.count>0){
+            requestBody = requestBody + "&per_page=\(perPage)"
+        }
+        else{
+            requestBody = requestBody + "per_page=\(perPage)"
+        }
+//        if (requestBody.count>0){
+//            requestBody = requestBody + "&site_id=\(siteId)"
+//        }
+//        else{
+//            requestBody = requestBody + "site_id=\(siteId)"
+//        }
+        print("Request Body")
+        print("-------------------------")
+        print(requestBody)
+        return requestBody
     }
 }

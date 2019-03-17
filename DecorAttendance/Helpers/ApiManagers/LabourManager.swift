@@ -66,6 +66,13 @@ class CostSummaryDetailResponseModel : NSObject{
     var totalPenalty:CGFloat = 0.0
     var totalBonusWorkTime:Int = 0
     
+    var remainingBonusPercentage:CGFloat = 0.0
+    var overTimePercentage:CGFloat = 0.0
+    var bonusPercentage:CGFloat = 0.0
+    var wagePercentage:CGFloat = 0.0
+    var sickLeavePercentage:CGFloat = 0.0
+    var paidVacationPercentage:CGFloat = 0.0
+    
     init(dict:[String:Any?]) {
         if let value = dict["error"] as? Int{
             error = value
@@ -130,6 +137,40 @@ class CostSummaryDetailResponseModel : NSObject{
         if let value = dict["total_bonus_work_time"] as? Int{
             totalBonusWorkTime = value
         }
+        
+        
+//        remainingBonusPercentage = ((bonusBudgetNew-remainingBonusAmountNew)/bonusBudgetNew)*100.00
+//        if(remainingBonusPercentage.isNaN){
+//            remainingBonusPercentage = 0.0
+//        }
+        
+        
+//        overTimePercentage = (overTimeAmountNew/totalAmount)*100.00
+//       if(overTimePercentage.isNaN){
+//            overTimePercentage = 0.0
+//        }
+        
+        
+//        bonusPercentage = (bonusAmountNew/totalAmountNew)*100.00
+//        if(bonusPercentage.isNaN){
+//            bonusPercentage = 0.0
+//        }
+        
+        
+//        wagePercentage = (netWageAmountNew/totalAmount)*100.00
+//        if(wagePercentage.isNaN){
+//            wagePercentage = 0
+//        }
+        
+        
+//        sickLeavePercentage = (medicalLeaveAmountNew/totalAmountNew)*100.00
+//        if(sickLeavePercentage.isNaN){
+//            sickLeavePercentage = 0.0
+//        }
+//        paidVacationPercentage = (paidVacationAmountNew/totalAmountNew)*100.00
+//        if(paidVacationPercentage.isNaN){
+//            paidVacationPercentage = 0.0
+//        }
         print(dict)
     }
 }
