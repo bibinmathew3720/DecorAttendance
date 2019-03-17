@@ -14,7 +14,9 @@ protocol filterUpdatedDelegate: class  {
     func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!)
     func dateUpdated(to date: String, updatedType: FilterTypeName!)
     func calendarColsed()
+    
     func doneButtonActionDelegateWithSelectedDate(date:String,type:FilterTypeName)
+    func selectedSite(selSite:ObeidiModelSites, withType:FilterTypeName)
 }
 
 public enum FilterTypeName {
@@ -48,6 +50,8 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
     var filterDataArr: NSMutableArray!
     var filterTypeName: FilterTypeName!
     var selectedDate:String = ""
+    
+    var sitesArray = [ObeidiModelSites]()
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -294,15 +298,20 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
     //tableview delegate methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if self.filterDataArr != nil{
-            if self.filterDataArr.count == 0{
-                self.showAlert(alertMessage: "There is nothing to show")
+        if (filterTypeName == .site){
+            return self.sitesArray.count
+        }
+        else{
+            if self.filterDataArr != nil{
+                if self.filterDataArr.count == 0{
+                    self.showAlert(alertMessage: "There is nothing to show")
+                    
+                }
+                return self.filterDataArr.count
                 
             }
-            return self.filterDataArr.count
-            
+            return 0
         }
-        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -310,9 +319,10 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
         switch filterTypeName! {
         case .site:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellFilterTableViewCell") as! FilterTableViewCell
-            let cellDataObj = self.filterDataArr.object(at: indexPath.row) as! ObeidiModelSites
-            let name = cellDataObj.name as! String
-            cell.setCellContents(cellData: name)
+            let cellDataObje = self.sitesArray [indexPath.row]
+            //let cellDataObj = self.filterDataArr.object(at: indexPath.row) as! ObeidiModelSites
+           // let name = cellDataObj.na as! String
+            cell.setCellContents(cellData: cellDataObje.nameNew)
             
             return cell
         case .attendanceType:
@@ -332,29 +342,12 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
         
         switch filterTypeName! {
         case .site:
-            
-            let cellDataObj = self.filterDataArr.object(at: indexPath.row) as! ObeidiModelSites
-            let name = cellDataObj.name as! String
-            let id = String(cellDataObj.id as! Int)
-            let bonus_budget = ObeidiaTypeFormatter.stringFromCGFloat(floatVal: (cellDataObj.bonus_budget as! CGFloat))
-            let remaining_bonus = ObeidiaTypeFormatter.stringFromCGFloat(floatVal: (cellDataObj.remaining_bonus as! CGFloat))
-            let passDict = NSMutableDictionary()
-            passDict.setValue(name, forKey: "name")
-            passDict.setValue(id, forKey: "id")
-            passDict.setValue(remaining_bonus, forKey: "remaining_bonus")
-            passDict.setValue(bonus_budget, forKey: "bonus_budget")
-            User.BonusDetails.bonus_budget = bonus_budget
-            User.BonusDetails.remaining_bonus = remaining_bonus
-            
-            
-            delegate.filterValueUpdated(to: passDict, updatedType: self.filterTypeName)
-            
             UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                 self.viewCalendarContainer.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
                 self.tableViewFilter.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
                 
             },completion:nil)
-            delegate.calendarColsed()
+            delegate.selectedSite(selSite: self.sitesArray[indexPath.row], withType: .site)
             self.dismiss(animated: true, completion: nil)
         case .attendanceType:
             

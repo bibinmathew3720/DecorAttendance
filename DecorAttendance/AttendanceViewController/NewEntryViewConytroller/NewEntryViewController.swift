@@ -9,6 +9,10 @@
 import UIKit
 
 class NewEntryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIGestureRecognizerDelegate, filterUpdatedDelegate {
+    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
+        
+    }
+    
     func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
     
     }

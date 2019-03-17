@@ -9,6 +9,10 @@
 import UIKit
 
 class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
+    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
+        
+    }
+    
     func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
         
     }

@@ -189,7 +189,7 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         self.lblSite.textColor = ObeidiFont.Color.obeidiLightBlack()
         
         addDropDownLabelAndImage(lblToModify: lblStratDate, lblText: "")
-        addDropDownLabelAndImage(lblToModify: lblSite, lblText: "")
+        addDropDownLabelAndImage(lblToModify: lblSite, lblText: "All")
         addDropDownLabelAndImage(lblToModify: lblEndDate, lblText: "")
         
         
@@ -309,7 +309,7 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             siteViewController.filterTypeName = FilterTypeName.site
             siteViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             siteViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            //siteViewController.filterDataArr = self.siteModelObjArr
+            siteViewController.sitesArray = self.siteModelObjArr
             self.present(siteViewController, animated: true, completion: nil)
             
         }
@@ -496,59 +496,13 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     
    
     //POPUP Delegate Methods
+    
     func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
-        
-        
-        print(value.value(forKey: "name") as! String)
-        switch updatedType! {
-            
-        case .site:
-            let dict = value as! NSMutableDictionary
-            print("")
-            self.lblSite.text = (dict.value(forKey: "name") as! String)
-            self.siteIdSelected = (dict.value(forKey: "id") as! String)
-            
-            let startDate: String!
-            let endDate: String!
-            if self.lblStratDate.text != "" {
-                startDate = self.lblStratDate.text
-                
-            }else{
-                startDate = ""
-                
-            }
-            if self.lblEndDate.text != ""{
-                endDate = self.lblEndDate.text
-                
-            }else{
-                endDate = ""
-                
-            }
-            
-            //callSiteWiseCostSummaryAPI(siteID: siteIdSelected, startDate: startDate, endDate: endDate)
-        
-        default:
-            print("")
-        }
         
     }
     func dateUpdated(to date: String, updatedType: FilterTypeName!) {
-        print(date)
-        print(updatedType)
-        
-        switch updatedType! {
-        case .endDate:
-            self.lblEndDate.text = date
-            //self.selectedApplyDate = date
-        case .startDate:
-            self.lblStratDate.text = date
-            //self.selectedDate = date
-        default:
-            print("")
-            
-        }
+       
     }
-    
     func calendarColsed() {
         
         UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
@@ -579,4 +533,17 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             }
         }
     }
+    
+    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName){
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+        },completion:nil)
+        self.lblSite.text = selSite.nameNew
+        self.siteWiseRequestModel.siteId = selSite.locIdNew
+        callSiteWiseCostSummaryApi()
+    }
+    
+    
 }

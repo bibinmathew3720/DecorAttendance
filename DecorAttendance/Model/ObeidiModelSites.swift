@@ -88,6 +88,11 @@ class ObeidiModelSites: NSObject {
                 detailsList.append(list)
             })
         }
+        let allDictionary = NSMutableDictionary()
+        allDictionary.setValue(0, forKey: "id")
+        allDictionary.setValue("All", forKey: "name")
+        let allItem = ObeidiModelSites(dictionaryDetails:allDictionary)
+        detailsList.insert(allItem, at: 0)
         return detailsList
     }
     
