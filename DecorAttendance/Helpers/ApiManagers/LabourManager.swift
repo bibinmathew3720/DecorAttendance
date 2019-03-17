@@ -205,3 +205,34 @@ class SiteWiseRequestModel:NSObject{
     }
 }
 
+class LabourSummaryDetailsRequestModel:NSObject{
+    var startDate:String = ""
+    var endDate:String = ""
+    var siteId:Int = 0
+    var empId:Int = 0
+    func getReqestBody()->String{
+        var requestBody = ""
+        if (startDate.count != 0 ){
+            requestBody = "start_date=\(startDate)"
+        }
+        if (endDate.count != 0){
+            if (requestBody.count>0){
+                requestBody = requestBody + "&end_date=\(endDate)"
+            }
+            else{
+                requestBody = requestBody + "end_date=\(endDate)"
+            }
+        }
+        if (requestBody.count>0){
+            requestBody = requestBody + "&site_id=\(siteId)"
+        }
+        else{
+            requestBody = requestBody + "site_id=\(siteId)"
+        }
+        print("Request Body")
+        print("-------------------------")
+        print(requestBody)
+        return requestBody
+    }
+}
+
