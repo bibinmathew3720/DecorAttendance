@@ -556,7 +556,7 @@
                                         <rect key="frame" x="0.0" y="615" width="375" height="281"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eH7-ze-Leq" id="QYu-GV-EUf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="281"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="280.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCZ-Cb-hi8">

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateProtocol, DropDownDataDelegate {
+class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateProtocol, DropDownDataDelegate,filterUpdatedDelegate {
     @IBOutlet weak var viewDropDownButtons: UIView!
     @IBOutlet weak var lblSite: UILabel!
     @IBOutlet weak var lblDay: UILabel!
@@ -51,15 +51,35 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     @IBOutlet weak var totalAmountLabel: UILabel!
     var costSummary:CostSummary?
     var costSummaryDetailResponse:CostSummaryDetailResponseModel?
+     var siteModelObjArr = [ObeidiModelSites]()
+    var spinner = UIActivityIndicatorView(style: .gray)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         populateCostSummary()
+        callGetAllSitesAPI()
         getCostSummaryDetailApi()
         addObeidiBackButton()
         setUpViewStyles()
         addTapGesturesToLabels()
         slicedPieChart.myAnimationDelegate = self
         setPerformanceIndicatorLines(lightLine: totalOTIndicatorWhite, coloredLine: totalOTIndicatorColred, percentage: 0.67, color: ObeidiColors.ColorCode.obeidiLinePink(), lightLineWidth: widthTotalOTLight, coloredLineWidth: widthTotalOTColred)
+    }
+    
+    func callGetAllSitesAPI() {
+        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
+        ObeidiModelSites.callListSitesRequset(){
+            (success, result, error) in
+            if success! {
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+                print(result!)
+                if let res = result as? [ObeidiModelSites]{
+                    self.siteModelObjArr = res
+                }
+            }else{
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+            }
+        }
     }
     
     func populateCostSummary(){
@@ -249,7 +269,7 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     func addTapGesturesToLabels() {
         
         self.lblMonth.isUserInteractionEnabled = true
-        let tapGestureMonth = UITapGestureRecognizer(target: self, action: #selector(LabourSummaryViewController.handleMonthLabelTap))
+        let tapGestureMonth = UITapGestureRecognizer(target: self, action: #selector(LabourSummaryViewController.handleStartDateLabelTap))
         self.lblMonth.addGestureRecognizer(tapGestureMonth)
         
         self.lblSite.isUserInteractionEnabled = true
@@ -257,26 +277,79 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         self.lblSite.addGestureRecognizer(tapGestureSite)
         
         self.lblDay.isUserInteractionEnabled = true
-        let tapGestureDay = UITapGestureRecognizer(target: self, action: #selector(LabourSummaryViewController.handleDateLabelTap))
+        let tapGestureDay = UITapGestureRecognizer(target: self, action: #selector(LabourSummaryViewController.handleEndDateLabelTap))
         self.lblDay.addGestureRecognizer(tapGestureDay)
         
     }
-    @objc func handleMonthLabelTap(){
+    @objc func handleStartDateLabelTap(){
         
-        presentDropDownController(tableCgPoint: getPointForMonthTable(), dropDownFor: .Month, arr: fetchMonthArr())
-        
-        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                self.view.alpha = 0.65
+                self.navigationController?.navigationBar.alpha = 0.65
+                
+                
+            },completion:nil)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let calendarViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
+            calendarViewController.delegate = self
+            //calendarViewController.isDateNeeded = true
+            calendarViewController.filterTypeName = FilterTypeName.startDate
+            calendarViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            calendarViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(calendarViewController, animated: true, completion: nil)
+            
+        }
     }
-    @objc func handleDateLabelTap(){
+    
+    @objc func handleEndDateLabelTap(){
         
-        presentDropDownController(tableCgPoint: getPointForDateTable(), dropDownFor: .Date, arr: fetchDateArr())
+        DispatchQueue.main.async {
+            
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                self.view.alpha = 0.65
+                //self.tabBarController?.view.alpha = 0.65
+                self.navigationController?.navigationBar.alpha = 0.65
+                
+                
+            },completion:nil)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let calendarViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
+            calendarViewController.delegate = self
+            //calendarViewController.isDateNeeded = true
+            calendarViewController.filterTypeName = FilterTypeName.endDate
+            calendarViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            calendarViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(calendarViewController, animated: true, completion: nil)
+            
+        }
         
     }
     @objc func handleSiteLabelTap(){
-        
-        presentDropDownController(tableCgPoint: getPointForSiteTable(), dropDownFor: .Site, arr: fetchSiteArr())
-        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                self.view.alpha = 0.65
+                //self.tabBarController?.view.alpha = 0.65
+                self.navigationController?.navigationBar.alpha = 0.65
+                
+                
+            },completion:nil)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let siteViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
+            siteViewController.delegate = self
+            //calendarViewController.isDateNeeded = true
+            siteViewController.filterTypeName = FilterTypeName.site
+            siteViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            siteViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            siteViewController.sitesArray = self.siteModelObjArr
+            self.present(siteViewController, animated: true, completion: nil)
+            
+        }
     }
+    
     func presentDropDownController(tableCgPoint: CGPoint, dropDownFor:
         DropDownNeededFor, arr: NSMutableArray) {
         
@@ -385,5 +458,55 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         self.navigationController?.navigationController?.navigationItem.backBarButtonItem?.title = ""
         self.navigationController?.navigationController?.navigationItem.backBarButtonItem?.tintColor = ObeidiColors.ColorCode.obeidiExactWhite()
 
+    }
+    
+    //POPUP Delegate Methods
+    
+    func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
+        
+    }
+    func dateUpdated(to date: String, updatedType: FilterTypeName!) {
+        
+    }
+    func calendarColsed() {
+        
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+        },completion:nil)
+    }
+    
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+        },completion:nil)
+        if (type == .startDate){
+            if (date.count>0){
+                //siteWiseRequestModel.startDate = date
+                //self.lblStratDate.text = date
+               // callSiteWiseCostSummaryApi()
+            }
+        }
+        else if (type == .endDate){
+            if (date.count>0){
+                //siteWiseRequestModel.endDate = date
+                //self.lblEndDate.text = date
+               // callSiteWiseCostSummaryApi()
+            }
+        }
+    }
+    
+    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName){
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+        },completion:nil)
+        //self.lblSite.text = selSite.nameNew
+        //self.siteWiseRequestModel.siteId = selSite.locIdNew
+        //callSiteWiseCostSummaryApi()
     }
 } 
