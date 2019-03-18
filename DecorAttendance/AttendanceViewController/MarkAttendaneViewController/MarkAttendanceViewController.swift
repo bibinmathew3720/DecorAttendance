@@ -38,6 +38,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     var siteIDRef: String!
     var siteNameRef: String!
     
+    var attendanceResponse:ObeidiModelFetchAttendance?
     override func viewDidLoad() {
         super.viewDidLoad()
 

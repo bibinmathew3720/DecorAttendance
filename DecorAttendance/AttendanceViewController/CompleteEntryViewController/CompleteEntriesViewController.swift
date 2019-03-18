@@ -8,16 +8,13 @@
 
 import UIKit
 
-class CompleteEntriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
-
-    
+class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tableViewCompleteEntry: UITableView!
     @IBOutlet weak var viewSearchBar: UIView!
     @IBOutlet weak var txtFldSearch: UITextField!
     
     var activeTextField: UITextField!
-    var attendanceObjModelArr = NSMutableArray()
-    
+    var completedEntriesResponseModel:ObeidAttendanceResponseModel?
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -62,32 +59,7 @@ class CompleteEntriesViewController: UIViewController, UITableViewDataSource, UI
         layer1.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if self.attendanceObjModelArr.count != 0{
-            
-            return self.attendanceObjModelArr.count
-        }
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellCompleteEntry", for: indexPath) as! CompleteEntryTableViewCell
-        let cellData = self.attendanceObjModelArr.object(at: indexPath.row) as! ObeidiModelFetchAttendance
-        cell.setCellContents(cellData: cellData)
-        cell.bttnDetails.tag = indexPath.row
-        
-        cell.parentViewController = self
-        
-        return cell
-        
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 134
-        
-    }
+   
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
@@ -117,42 +89,51 @@ class CompleteEntriesViewController: UIViewController, UITableViewDataSource, UI
         
     }
     func callFetchAttendanceaAPI(date: String, keyword: String, siteID: String, isAttendanceCompleted: Int)  {
-        
         ObeidiModelFetchAttendance.callfetchAtendanceRequset(isAttendanceCompleted: isAttendanceCompleted, date: date, keyword: keyword, siteId: siteID){
             (success, result, error) in
             
             if success! && result != nil {
-                
-                print(result!)
-                self.processFetchAttendanceAPIResponse(apiResponse: result!)
+                if let res = result as? NSDictionary{
+                    self.completedEntriesResponseModel = ObeidAttendanceResponseModel.init(dictionaryDetails: res)
+                    self.tableViewCompleteEntry.reloadData()
+                }
                 
             }else{
-                
-                
-                
             }
-            
-            
         }
-        
-    }
-    func processFetchAttendanceAPIResponse(apiResponse: AnyObject) {
-        
-        self.attendanceObjModelArr = (apiResponse as! NSMutableArray)
-        self.tableViewCompleteEntry.reloadData()
-        
-        
     }
     
     @IBAction func bttnActnSearch(_ sender: Any) {
-        
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let todaysDate = formatter.string(from: date)
-        
         callFetchAttendanceaAPI(date: todaysDate, keyword: self.txtFldSearch.text!, siteID: "", isAttendanceCompleted: 1)
         
     }
     
+}
+
+extension CompleteEntriesViewController:UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let attendanceRes = self.completedEntriesResponseModel{
+            return attendanceRes.attendanceResultArray.count
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellCompleteEntry", for: indexPath) as! CompleteEntryTableViewCell
+        if let attendanceRes = self.completedEntriesResponseModel{
+            cell.setCellContents(cellData: attendanceRes.attendanceResultArray[indexPath.row])
+        }
+        cell.bttnDetails.tag = indexPath.row
+        cell.parentViewController = self
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 134
+    }
 }

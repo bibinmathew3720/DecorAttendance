@@ -8,16 +8,7 @@
 
 import UIKit
 
-class NewEntryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIGestureRecognizerDelegate, filterUpdatedDelegate {
-    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
-        
-    }
-    
-    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
-    
-    }
-    
-    
+class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
     @IBOutlet weak var tableViewNewEntry: UITableView!
     @IBOutlet weak var viewDropDownButtons: UIView!
     @IBOutlet weak var lblSite: UILabel!
@@ -28,20 +19,18 @@ class NewEntryViewController: UIViewController, UITableViewDelegate, UITableView
     
     var activeTextField: UITextField!
     var siteIdSelected: String!
-    var siteModelObjArr: NSMutableArray!
+    var siteModelObjArr = [ObeidiModelSites]()
     var spinner = UIActivityIndicatorView(style: .gray)
-    var attendanceObjModelArr = NSMutableArray()
     var selectedIndex: Int!
+    
+    var attendanceResponseModel:ObeidAttendanceResponseModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.backBarButtonItem?.title = ""
-        
         txtFldSearch.delegate = self
         tableViewNewEntry.delegate = self
         tableViewNewEntry.dataSource = self
-        
         callGetAllSitesAPI()
         setUpViewStyles()
         addTapGesturesToLabels()
@@ -52,10 +41,7 @@ class NewEntryViewController: UIViewController, UITableViewDelegate, UITableView
         formatter.dateFormat = "yyyy-MM-dd"
         let todaysDate = formatter.string(from: date)
         self.txtFldSearch.text = ""
-        
         callFetchAttendanceaAPI(date: todaysDate, keyword: "", siteID: "", isAttendanceCompleted: 0)
-        
-        
         // Do any additional setup after loading the view.
     }
     
@@ -172,49 +158,14 @@ class NewEntryViewController: UIViewController, UITableViewDelegate, UITableView
             siteViewController.filterTypeName = FilterTypeName.site
             siteViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             siteViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            siteViewController.filterDataArr = self.siteModelObjArr
+            siteViewController.sitesArray = self.siteModelObjArr
             self.present(siteViewController, animated: true, completion: nil)
             
         }
-        
-        
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if self.attendanceObjModelArr.count != 0{
-            
-            return self.attendanceObjModelArr.count
-            
-        }
-        return 0
-        
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellNewEnrty", for: indexPath) as! NewEntryTableViewCell
-        
-        let cellData = self.attendanceObjModelArr.object(at: indexPath.row) as! ObeidiModelFetchAttendance
-        
-        cell.setCellContents(cellData: cellData)
-        
-        return cell
-        
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 87
-        
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        self.selectedIndex = indexPath.row
-        self.performSegue(withIdentifier: "toMarkAttendanceSceneSegue:NewEnrty", sender: Any.self)
-        
-        
-    }
     //MARK: textfield delegate methods
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
@@ -337,61 +288,34 @@ class NewEntryViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     func callGetAllSitesAPI() {
-        
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
-        
         ObeidiModelSites.callListSitesRequset(){
             (success, result, error) in
-            
             if success! {
-                
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 print(result!)
-                self.siteModelObjArr = (result as! NSMutableArray)
-                
-                
+                if let res = result as? [ObeidiModelSites]{
+                    self.siteModelObjArr = res
+                }
             }else{
-                
-                
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                
-                
             }
-            
-            
-            
-            
         }
-        
-        
     }
+    
     func callFetchAttendanceaAPI(date: String, keyword: String, siteID: String, isAttendanceCompleted: Int)  {
-        
         ObeidiModelFetchAttendance.callfetchAtendanceRequset(isAttendanceCompleted: isAttendanceCompleted, date: date, keyword: keyword, siteId: siteID){
             (success, result, error) in
-            
             if success! && result != nil {
-                
-                print(result!)
-                self.processFetchAttendanceAPIResponse(apiResponse: result!)
-                
+                if let res = result as? NSDictionary{
+                    self.attendanceResponseModel = ObeidAttendanceResponseModel.init(dictionaryDetails: res)
+                    self.tableViewNewEntry.reloadData()
+                }
             }else{
-                
-                
-                
             }
-            
-            
         }
-        
     }
-    func processFetchAttendanceAPIResponse(apiResponse: AnyObject) {
-
-        self.attendanceObjModelArr = (apiResponse as! NSMutableArray)
-        self.tableViewNewEntry.reloadData()
-        
-        
-    }
+    
     @IBAction func bttnActnSearch(_ sender: Any) {
         
         let siteID: String!
@@ -404,30 +328,65 @@ class NewEntryViewController: UIViewController, UITableViewDelegate, UITableView
             
             date = ""
         }
-        
         callFetchAttendanceaAPI(date: date, keyword: self.txtFldSearch.text!, siteID: siteID, isAttendanceCompleted: 0)
-        
-        
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "toMarkAttendanceSceneSegue:NewEnrty"{
-            
             let vc = segue.destination as! MarkAttendanceViewController
-            let model = (attendanceObjModelArr.object(at: selectedIndex) as! ObeidiModelFetchAttendance)
-            let imageBase = UserDefaults.standard.value(forKey: "attendanceImageBase") as! String
-            let imageUrl =  imageBase + (model.image as! String)
-            let idEmployee = String(model.emp_id as! Int)
-            let name = (model.name as! String)
+            if let attendanceRes = self.attendanceResponseModel{
+                vc.attendanceResponse = attendanceRes.attendanceResultArray[self.selectedIndex]
+            }
+           
+//            let imageBase = UserDefaults.standard.value(forKey: "attendanceImageBase") as! String
+//            let imageUrl =  imageBase + (model.image as! String)
+//            let idEmployee = String(model.emp_id as! Int)
+//            let name = (model.name as! String)
             
-            vc.imageUrlRef = imageUrl
-            vc.nameRef = name
-            vc.idRef = idEmployee
-            vc.siteIDRef = self.siteIdSelected
-            vc.siteNameRef = self.lblSite.text
+//            vc.imageUrlRef = imageUrl
+//            vc.nameRef = name
+//            vc.idRef = idEmployee
+//            vc.siteIDRef = self.siteIdSelected
+//            vc.siteNameRef = self.lblSite.text
             
         }
+    }
+    
+}
+
+extension NewEntryViewController:filterUpdatedDelegate{
+    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
         
     }
     
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+        
+    }
+}
+
+extension NewEntryViewController:UITableViewDataSource,UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let attendanceRes = self.attendanceResponseModel{
+            return attendanceRes.attendanceResultArray.count
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellNewEnrty", for: indexPath) as! NewEntryTableViewCell
+        if let attendanceRes = self.attendanceResponseModel{
+            cell.setCellContents(cellData: attendanceRes.attendanceResultArray[indexPath.row])
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 87
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedIndex = indexPath.row
+        self.performSegue(withIdentifier: "toMarkAttendanceSceneSegue:NewEnrty", sender: Any.self)
+    }
 }

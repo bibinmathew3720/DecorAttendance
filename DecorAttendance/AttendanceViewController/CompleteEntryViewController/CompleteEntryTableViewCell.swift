@@ -68,18 +68,14 @@ class CompleteEntryTableViewCell: UITableViewCell {
         
     }
     func setCellContents(cellData: ObeidiModelFetchAttendance)  {
-        
-        self.lblID.text = String(cellData.emp_id as! Int)
-        self.lblName.text = (cellData.name as? String)
-        self.lblStartTime.text = (cellData.start_time_marked_at as? String)
-        self.lblEndTime.text = (cellData.end_time_marked_at as? String)
-        self.setMultipleColorsToLabelFont(lbl: self.lblTotalBonusHeader, labelStr: "Total bonus AED \(String(cellData.bonus_amount as! Int))")
-        
-        let imageBase = UserDefaults.standard.value(forKey: "attendanceImageBase") as! String
-        
-        let imageUrl = URL(string: imageBase + (cellData.image as! String) )
-        
-        self.imageViewLabour.kf.setImage(with: imageUrl)
+        self.lblID.text = "OAA\(cellData.empId)"
+        self.lblName.text = cellData.name
+        if let imageUrl = URL(string: cellData.profileBaseUrl+cellData.profileImageUrl){
+             self.imageViewLabour.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+        }
+//        self.lblStartTime.text = (cellData.start_time_marked_at as? String)
+//        self.lblEndTime.text = (cellData.end_time_marked_at as? String)
+//        self.setMultipleColorsToLabelFont(lbl: self.lblTotalBonusHeader, labelStr: "Total bonus AED \(String(cellData.bonus_amount as! Int))")
         self.modelObjArr.add(cellData)
         
     }
@@ -120,25 +116,25 @@ class CompleteEntryTableViewCell: UITableViewCell {
     }
     func callAttendanceByIDAPI() {
         
-        let attendanceId = (self.modelObjArr.object(at: self.bttnDetails.tag) as! ObeidiModelFetchAttendance).attendance_id as! String
-        ObeidiModelSpecificEmployeeAttendance.callAtendanceDetailsByIDRequset(attendanceId: attendanceId){
-            
-            (success, result, error)in
-            
-            
-            if success! {
-                
-                let resultDict = result as! NSMutableDictionary
-                self.gotoEmployeeDetails(modelDataDict: resultDict)
-                
-            }else{
-                
-                
-                
-            }
-            
-        }
-        
-        
+//        let attendanceId = (self.modelObjArr.object(at: self.bttnDetails.tag) as! ObeidiModelFetchAttendance).attendance_id as! String
+//        ObeidiModelSpecificEmployeeAttendance.callAtendanceDetailsByIDRequset(attendanceId: attendanceId){
+//
+//            (success, result, error)in
+//
+//
+//            if success! {
+//
+//                let resultDict = result as! NSMutableDictionary
+//                self.gotoEmployeeDetails(modelDataDict: resultDict)
+//
+//            }else{
+//
+//
+//
+//            }
+//
+//        }
+//
+//
     }
 }

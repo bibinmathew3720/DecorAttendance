@@ -47,17 +47,11 @@ class NewEntryTableViewCell: UITableViewCell {
     }
     
     func setCellContents(cellData: ObeidiModelFetchAttendance) {
-        
-        self.lblID.text = String(cellData.emp_id as! Int)
-        self.lblName.text = (cellData.name as! String)
-        let imageBase = UserDefaults.standard.value(forKey: "attendanceImageBase") as! String
-        
-        let imageUrl = URL(string: imageBase + (cellData.image as! String) )
-        
-        self.imageViewLabour.kf.setImage(with: imageUrl)
-        
-        
-        
+        self.lblName.text = cellData.name
+        self.lblID.text = "OAA\(cellData.empId)"
+        if let imageUrl = URL(string: cellData.profileBaseUrl+cellData.profileImageUrl){
+            self.imageViewLabour.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+        }
     }
 
 }
