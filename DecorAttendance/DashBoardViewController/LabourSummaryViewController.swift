@@ -48,6 +48,25 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     @IBOutlet weak var totalStrikeIndicatorWhite: UIView!
     @IBOutlet weak var totalStrikeIndicatorColred: UIView!
     
+    //Penalty
+    @IBOutlet weak var equipmentPenaltyPercLabel: UILabel!
+    @IBOutlet weak var equipmentPenaltyWhitView: UIView!
+    @IBOutlet weak var equipmentPenaltyColoredView: UIView!
+    @IBOutlet weak var equipmentPenaltyColoredViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var equipmentPenaltyPriceLabel: UILabel!
+    @IBOutlet weak var totalStrikePercLabel: UILabel!
+    @IBOutlet weak var totalStrikeWhiteView: UIView!
+    @IBOutlet weak var totalStrikeColoredView: UIView!
+    @IBOutlet weak var totalStrikeColoredViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var totalStrikePriceLabel: UILabel!
+    @IBOutlet weak var totalAbsencePercLabel: UILabel!
+    @IBOutlet weak var totalAbsenceWhiteView: UIView!
+    @IBOutlet weak var totalAbsenceColoredView: UIView!
+    @IBOutlet weak var totalAbsenceWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var totalAbsencePricelLabel: UILabel!
+    
+    
+    
     @IBOutlet weak var totalAmountLabel: UILabel!
     var costSummary:CostSummary?
     var costSummaryDetailResponse:CostSummaryDetailResponseModel?
