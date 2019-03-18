@@ -213,16 +213,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qud-lm-sCx">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="869.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="569.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rLy-u3-zqH">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                                <rect key="frame" x="0.0" y="-300" width="375" height="250"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="250" id="s6m-bz-HND"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvC-SQ-Gak">
-                                                <rect key="frame" x="15" y="190" width="345" height="207"/>
+                                                <rect key="frame" x="15" y="-110" width="345" height="207"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FAz-6S-mcO">
                                                         <rect key="frame" x="147.5" y="-25" width="50" height="50"/>
@@ -268,9 +268,9 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6R-G7-7hr">
-                                                <rect key="frame" x="15" y="417" width="345" height="120.5"/>
+                                                <rect key="frame" x="15" y="117" width="345" height="120.5"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RmX-3z-cnz">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="devarakonda" translatesAutoresizingMaskIntoConstraints="NO" id="RmX-3z-cnz">
                                                         <rect key="frame" x="20" y="25" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="8d9-Fd-FnB"/>
@@ -320,7 +320,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nwR-lY-sg9">
-                                                <rect key="frame" x="15" y="557.5" width="345" height="204"/>
+                                                <rect key="frame" x="15" y="257.5" width="345" height="204"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mission and Vision" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eML-g7-7FN">
                                                         <rect key="frame" x="20" y="25" width="142" height="21"/>
@@ -359,7 +359,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcN-5f-1JT">
-                                                <rect key="frame" x="0.0" y="769.5" width="185" height="100"/>
+                                                <rect key="frame" x="0.0" y="469.5" width="185" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="042584811" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrn-Sq-EO0">
                                                         <rect key="frame" x="53.5" y="59" width="78.5" height="21"/>
@@ -370,17 +370,35 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="call" translatesAutoresizingMaskIntoConstraints="NO" id="FEp-Ie-TqS">
+                                                        <rect key="frame" x="79.5" y="28" width="26" height="26"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="25"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.7725490196" green="0.1019607843" blue="0.1333333333" alpha="0.24133472709577464" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="vrn-Sq-EO0" secondAttribute="bottom" constant="20" id="0uQ-5q-abf"/>
+                                                    <constraint firstItem="FEp-Ie-TqS" firstAttribute="centerX" secondItem="XcN-5f-1JT" secondAttribute="centerX" id="Jfk-la-NEz"/>
                                                     <constraint firstAttribute="height" constant="100" id="Vnw-EF-Hjc"/>
                                                     <constraint firstItem="vrn-Sq-EO0" firstAttribute="centerX" secondItem="XcN-5f-1JT" secondAttribute="centerX" id="lrd-66-cvC"/>
+                                                    <constraint firstItem="vrn-Sq-EO0" firstAttribute="top" secondItem="FEp-Ie-TqS" secondAttribute="bottom" constant="5" id="vuV-0p-8pm"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MUG-AC-ESi">
-                                                <rect key="frame" x="190" y="769.5" width="185" height="100"/>
+                                                <rect key="frame" x="190" y="469.5" width="185" height="100"/>
                                                 <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mail" translatesAutoresizingMaskIntoConstraints="NO" id="fbz-aB-JE4">
+                                                        <rect key="frame" x="76" y="21" width="33" height="33"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="25"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="info@obaidalabdi.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHW-1i-vPY">
                                                         <rect key="frame" x="16.5" y="59" width="152" height="21"/>
                                                         <constraints>
@@ -394,7 +412,9 @@
                                                 <color key="backgroundColor" red="0.7725490196" green="0.1019607843" blue="0.1333333333" alpha="0.24515845068732395" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="Uqk-0z-r5T"/>
+                                                    <constraint firstItem="pHW-1i-vPY" firstAttribute="top" secondItem="fbz-aB-JE4" secondAttribute="bottom" constant="5" id="ZpP-xz-rBV"/>
                                                     <constraint firstItem="pHW-1i-vPY" firstAttribute="centerX" secondItem="MUG-AC-ESi" secondAttribute="centerX" id="dOp-By-aYr"/>
+                                                    <constraint firstItem="fbz-aB-JE4" firstAttribute="centerX" secondItem="MUG-AC-ESi" secondAttribute="centerX" id="ggn-Il-x1B"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -422,7 +442,7 @@
                                             <constraint firstAttribute="trailing" secondItem="IvC-SQ-Gak" secondAttribute="trailing" constant="15" id="ieT-cv-Ehq"/>
                                             <constraint firstItem="MUG-AC-ESi" firstAttribute="leading" secondItem="XcN-5f-1JT" secondAttribute="trailing" constant="5" id="pDD-Hx-0gz"/>
                                             <constraint firstAttribute="trailing" secondItem="rLy-u3-zqH" secondAttribute="trailing" id="vV7-iq-VeI"/>
-                                            <constraint firstItem="rLy-u3-zqH" firstAttribute="top" secondItem="qud-lm-sCx" secondAttribute="top" id="xAU-RE-l3I"/>
+                                            <constraint firstItem="rLy-u3-zqH" firstAttribute="top" secondItem="qud-lm-sCx" secondAttribute="top" constant="-300" id="xAU-RE-l3I"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -5822,6 +5842,7 @@
         <image name="Date " width="12" height="12"/>
         <image name="attendance" width="20" height="20"/>
         <image name="attendance_fill" width="20" height="20"/>
+        <image name="call" width="26" height="26"/>
         <image name="cam" width="70" height="70"/>
         <image name="dasboard" width="20" height="20"/>
         <image name="dashboard_fill" width="20" height="20"/>
@@ -6228,6 +6249,7 @@ QQAAAAAAAAIBAAAAAAAAAG0AAAAAAAAAAAAAAAAAAFtDA
 </mutableData>
         </image>
         <image name="logo" width="1024" height="1024"/>
+        <image name="mail" width="33" height="33"/>
         <image name="menu" width="32" height="32"/>
         <image name="navigationBar:gb8-uu-Qyd:backIndicatorImage" width="21" height="21">
             <mutableData key="keyedArchiveRepresentation">
