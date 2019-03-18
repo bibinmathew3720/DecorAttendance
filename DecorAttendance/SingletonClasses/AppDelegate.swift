@@ -40,6 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        if UserDefaults.standard.bool(forKey: "isLoggedIn"){
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let containerVC = storyBoard.instantiateViewController(withIdentifier: "CenterViewControllerID")
+            let nav = UINavigationController.init(rootViewController: containerVC)
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            delegate.window?.rootViewController = nav
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

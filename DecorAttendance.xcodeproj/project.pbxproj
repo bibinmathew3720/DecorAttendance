@@ -114,6 +114,7 @@
 		BB5A4FCB2233B47900F4FC82 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC92233B47900F4FC82 /* Reachability.m */; };
 		BB5A4FCF2233C0C300F4FC82 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */; };
 		BB5A4FD22233C41600F4FC82 /* CCUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FD12233C41600F4FC82 /* CCUtility.swift */; };
+		BBA1FF8C223EBF4300AC121B /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA1FF8B223EBF4300AC121B /* AboutViewController.swift */; };
 		BBCFA9F9223AD95100414717 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCFA9F8223AD95100414717 /* ChangePasswordViewController.swift */; };
 		BBCFA9FE223D76FF00414717 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCFA9FD223D76FF00414717 /* StringExtensions.swift */; };
 		BBE01C76223439B300C534F6 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */; };
@@ -260,6 +261,7 @@
 		BB5A4FCA2233B47900F4FC82 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		BB5A4FD12233C41600F4FC82 /* CCUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCUtility.swift; sourceTree = "<group>"; };
+		BBA1FF8B223EBF4300AC121B /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		BBCFA9F8223AD95100414717 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		BBCFA9FD223D76FF00414717 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				4618714A21C65A7800507F06 /* ContainerViewController.swift */,
 				4618714E21C661BD00507F06 /* LeftViewControllerDelegate.swift */,
 				BBCFA9F8223AD95100414717 /* ChangePasswordViewController.swift */,
+				BBA1FF8B223EBF4300AC121B /* AboutViewController.swift */,
 			);
 			path = SideMenuViewController;
 			sourceTree = "<group>";
@@ -1061,6 +1064,7 @@
 				46AD8DCF21CD049D006B1DEA /* MyCAAnimationDelegateProtocol.swift in Sources */,
 				46A11E6A21CBB24A00691B76 /* AttendanceContainerViewController.swift in Sources */,
 				46C0661521E0967D009E731B /* ForemanCenterViewControllerDelegate.swift in Sources */,
+				BBA1FF8C223EBF4300AC121B /* AboutViewController.swift in Sources */,
 				4618715521C66EC100507F06 /* AttendanceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

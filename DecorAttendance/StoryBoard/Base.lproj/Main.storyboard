@@ -201,10 +201,10 @@
             </objects>
             <point key="canvasLocation" x="-209" y="-99"/>
         </scene>
-        <!--View Controller-->
+        <!--About View Controller-->
         <scene sceneID="12a-n0-pi5">
             <objects>
-                <viewController id="1z2-SB-fTj" sceneMemberID="viewController">
+                <viewController id="1z2-SB-fTj" customClass="AboutViewController" customModule="DecorAttendance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2ep-Na-N03">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -445,6 +445,12 @@
                         <viewLayoutGuide key="safeArea" id="gwG-14-TAG"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="BgImage" destination="rLy-u3-zqH" id="DKi-5e-cqH"/>
+                        <outlet property="aboutView" destination="IvC-SQ-Gak" id="P9U-7C-jZA"/>
+                        <outlet property="messageView" destination="u6R-G7-7hr" id="Piq-J8-YID"/>
+                        <outlet property="missionView" destination="nwR-lY-sg9" id="5A7-Ke-3IC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Qf-2g-Sev" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -759,7 +765,7 @@
                                         <rect key="frame" x="0.0" y="615" width="375" height="281"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eH7-ze-Leq" id="QYu-GV-EUf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="281"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="280.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCZ-Cb-hi8">

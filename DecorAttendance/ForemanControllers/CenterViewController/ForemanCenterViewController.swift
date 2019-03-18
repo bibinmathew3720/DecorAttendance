@@ -58,7 +58,14 @@ class ForemanCenterViewController: UIViewController, ForemanLeftViewControllerDe
         case 0:
             self.performSegue(withIdentifier: "toProfileSceneSegue:Center", sender: Any.self)
         case 1:
-            print(":1")
+            self.performSegue(withIdentifier: "toAboutSceneSegue", sender: Any.self)
+        case 2:
+            self.performSegue(withIdentifier: "toChangePwdSceneSegue", sender: Any.self)
+        case 3:
+            UserDefaults.standard.setValue("", forKey: "accessToken")
+            UserDefaults.standard.set(false, forKey: "isLoggedIn")
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            delegate.initWindow()
         default:
             break
             

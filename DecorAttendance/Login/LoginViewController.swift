@@ -238,6 +238,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         
         let accessToken = dataDict.value(forKey: "token") as! String
         UserDefaults.standard.setValue(accessToken, forKey: "accessToken")
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
         
         let role = dataDict.value(forKey: "roles") as! NSArray
         

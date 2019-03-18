@@ -61,6 +61,11 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate {
             self.performSegue(withIdentifier: "toAboutSceneSegue", sender: Any.self)
         case 2:
            self.performSegue(withIdentifier: "toChangePwdSceneSegue", sender: Any.self)
+        case 3:
+            UserDefaults.standard.setValue("", forKey: "accessToken")
+            UserDefaults.standard.set(false, forKey: "isLoggedIn")
+//            let delegate = UIApplication.shared.delegate as! AppDelegate
+//            delegate.initWindow()
         default:
             break
             
