@@ -158,7 +158,12 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     
     func populateCostDetails(){
         if let costDetail = self.costSummaryDetailResponse{
-            self.totalAmountLabel.text = "AED " + String(format: "%0.2f", costDetail.totalAmount)
+            self.equipmentPenaltyPercLabel.text = "\(costDetail.equipmentPenaltyPercentage)%"
+            self.equipmentPenaltyPercLabel.textColor = Constant.Colors.remainingBonusColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.equipmentPenaltyWhitView, lineB: equipmentPenaltyColoredView, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.remainingBonusColor, lineAValue: 1, lineBValue: (costDetail.equipmentPenaltyPercentage/100.00), lineAMeter: equipmentPenaltyColoredViewWidth, lineBMeter: equipmentPenaltyColoredViewWidth)
+            self.equipmentPenaltyPriceLabel.text = "AED " + "\(costDetail.equipmentPenaltyAmount)"
+            
+            self.totalAmountLabel.text = "AED " + String(format: "%0.2f", costDetail.netSalary)
         }
     }
     
