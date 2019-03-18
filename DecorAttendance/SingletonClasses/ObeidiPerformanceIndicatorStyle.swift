@@ -29,7 +29,7 @@ class ObeidiPerformanceIndicatorStyle: NSObject {
             lineBValVar = 0
         }
         
-        lineAMeter.constant = lineAValVar * lineA.frame.size.width
+       // lineAMeter.constant = lineAValVar * lineA.frame.size.width
         lineBMeter.constant = lineBValVar * lineA.frame.size.width
     
     }

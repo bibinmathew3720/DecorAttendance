@@ -72,6 +72,9 @@ class CostSummaryDetailResponseModel : NSObject{
     var wagePercentage:CGFloat = 0.0
     var sickLeavePercentage:CGFloat = 0.0
     var paidVacationPercentage:CGFloat = 0.0
+    var equipmentPenaltyPercentage:CGFloat = 0.0
+    var totalStrikePercentage:CGFloat = 0.0
+    var totalAbsencePerncetage:CGFloat = 0.0
     
     init(dict:[String:Any?]) {
         if let value = dict["error"] as? Int{
@@ -172,6 +175,23 @@ class CostSummaryDetailResponseModel : NSObject{
 //            paidVacationPercentage = 0.0
 //        }
         print(dict)
+        
+        //Penalty
+        
+        equipmentPenaltyPercentage = (equipmentPenaltyAmount/totalPenalty)*100
+        if(equipmentPenaltyPercentage.isNaN){
+            equipmentPenaltyPercentage = 0.0
+        }
+        
+        totalStrikePercentage = (strikePenaltyAmount/totalPenalty)*100
+        if(totalStrikePercentage.isNaN){
+            totalStrikePercentage = 0.0
+        }
+        
+        totalAbsencePerncetage = (absencePenaltyAmount/totalPenalty)*100
+        if(totalAbsencePerncetage.isNaN){
+            totalAbsencePerncetage = 0.0
+        }
     }
 }
 
