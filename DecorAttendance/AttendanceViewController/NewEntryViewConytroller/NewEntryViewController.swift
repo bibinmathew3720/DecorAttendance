@@ -16,6 +16,8 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var viewSearchBar: UIView!
     @IBOutlet weak var txtFldSearch: UITextField!
+    @IBOutlet weak var dateView: UIView!
+    @IBOutlet weak var siteView: UIView!
     
     var activeTextField: UITextField!
     var siteIdSelected: String!
@@ -65,13 +67,13 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         layer1.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
         
-        self.lblDate.layer.cornerRadius = 1
-        self.lblDate.layer.borderWidth = 0.5
-        self.lblDate.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
+        self.siteView.layer.cornerRadius = 1
+        self.siteView.layer.borderWidth = 0.5
+        self.siteView.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
-        self.lblSite.layer.cornerRadius = 1
-        self.lblSite.layer.borderWidth = 0.5
-        self.lblSite.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
+        self.dateView.layer.cornerRadius = 1
+        self.dateView.layer.borderWidth = 0.5
+        self.dateView.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
         self.lblDate.textColor = ObeidiFont.Color.obeidiLightBlack()
         self.lblSite.textColor = ObeidiFont.Color.obeidiLightBlack()
@@ -100,13 +102,13 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     
     func addTapGesturesToLabels() {
         
-        self.lblDate.isUserInteractionEnabled = true
+        self.dateView.isUserInteractionEnabled = true
         let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleDateLabelTap))
-        self.lblDate.addGestureRecognizer(tapGestureDate)
+        self.dateView.addGestureRecognizer(tapGestureDate)
         
-        self.lblSite.isUserInteractionEnabled = true
+        self.siteView.isUserInteractionEnabled = true
         let tapGestureSite = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleSiteLabelTap))
-        self.lblSite.addGestureRecognizer(tapGestureSite)
+        self.siteView.addGestureRecognizer(tapGestureSite)
         
         
     }
