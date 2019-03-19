@@ -17,7 +17,9 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     @IBOutlet weak var lblEmployeeID: UILabel!
     @IBOutlet weak var lblEmployeeName: UILabel!
     @IBOutlet weak var slicedPieChart: PieChartSliceView!
-    
+    @IBOutlet weak var selectSite: UIView!
+    @IBOutlet weak var endDateView: UIView!
+    @IBOutlet weak var startDateView: UIView!
     @IBOutlet weak var bttnExportLabourCard: UIButton!
     
     @IBOutlet weak var widthTotalOTColred: NSLayoutConstraint!
@@ -250,17 +252,17 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         self.viewAllIndicators.layer.shadowRadius = 9
         
         
-        self.lblStartDate.layer.cornerRadius = 1
-        self.lblStartDate.layer.borderWidth = 0.5
-        self.lblStartDate.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
+        self.startDateView.layer.cornerRadius = 1
+        self.startDateView.layer.borderWidth = 0.5
+        self.startDateView.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
-        self.lblSite.layer.cornerRadius = 1
-        self.lblSite.layer.borderWidth = 0.5
-        self.lblSite.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
+        self.selectSite.layer.cornerRadius = 1
+        self.selectSite.layer.borderWidth = 0.5
+        self.selectSite.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
-        self.lblEndDate.layer.cornerRadius = 1
-        self.lblEndDate.layer.borderWidth = 0.5
-        self.lblEndDate.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
+        self.endDateView.layer.cornerRadius = 1
+        self.endDateView.layer.borderWidth = 0.5
+        self.endDateView.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
         self.lblStartDate.textColor = ObeidiFont.Color.obeidiLightBlack()
         self.lblEndDate.textColor = ObeidiFont.Color.obeidiLightBlack()
@@ -280,17 +282,17 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     
     func addTapGesturesToLabels() {
         
-        self.lblStartDate.isUserInteractionEnabled = true
+        self.startDateView.isUserInteractionEnabled = true
         let tapGestureStartDate = UITapGestureRecognizer(target: self, action: #selector(LabourSummaryViewController.handleStartDateLabelTap))
-        self.lblStartDate.addGestureRecognizer(tapGestureStartDate)
+        self.startDateView.addGestureRecognizer(tapGestureStartDate)
         
-        self.lblSite.isUserInteractionEnabled = true
+        self.selectSite.isUserInteractionEnabled = true
         let tapGestureSite = UITapGestureRecognizer(target: self, action: #selector(LabourSummaryViewController.handleSiteLabelTap))
-        self.lblSite.addGestureRecognizer(tapGestureSite)
+        self.selectSite.addGestureRecognizer(tapGestureSite)
         
-        self.lblEndDate.isUserInteractionEnabled = true
+        self.endDateView.isUserInteractionEnabled = true
         let tapGestureEndDate = UITapGestureRecognizer(target: self, action: #selector(LabourSummaryViewController.handleEndDateLabelTap))
-        self.lblEndDate.addGestureRecognizer(tapGestureEndDate)
+        self.endDateView.addGestureRecognizer(tapGestureEndDate)
         
     }
     @objc func handleStartDateLabelTap(){
