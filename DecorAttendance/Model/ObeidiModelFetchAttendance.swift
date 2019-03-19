@@ -162,7 +162,24 @@ class ObeidAttendanceRequestModel:NSObject{
     var siteId:Int = 0
     var isAttendanceCompleteEntry:Bool = false
     func getRequestBody()->String{
-        var requestBody:String = ""
+        var requestBody = ""
+        if (isAttendanceCompleteEntry){
+            requestBody = "is_attendance_completed=1"
+        }
+        else{
+           requestBody = "is_attendance_completed=0"
+        }
+        if (startDate.count != 0 ){
+            requestBody = "&start_date=\(startDate)"
+        }
+        if (siteId != 0){
+            requestBody = requestBody + "&site_id=\(siteId)"
+        }
+        requestBody = requestBody + "&keyword=\(searchText)"
+        
+        print("Request Body")
+        print("-------------------------")
+        print(requestBody)
         return requestBody
     }
 }

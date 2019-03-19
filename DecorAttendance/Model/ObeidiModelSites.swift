@@ -53,7 +53,7 @@ class ObeidiModelSites: NSObject {
             }
             if let value = dictionaryDetails["remaining_bonus"] as? CGFloat{
                 remainingBonusNew = value
-            }
+            } 
             if let value = dictionaryDetails["lat"] as? Double{
                 latitudeNew = value
             }
@@ -129,9 +129,6 @@ class ObeidiModelSites: NSObject {
                     let dataArr = result?["result"] as! NSArray
                     completion(true, getAllSiteDetailsObjectArr(siteDataArr: dataArr) as AnyObject, nil)
                 }
-                
-                
-                
             }else if (success! && result == nil){
                 
                 let customError: NSError!
@@ -139,21 +136,8 @@ class ObeidiModelSites: NSObject {
                 completion(false, nil, customError)
                 
             }else{
-                
                 completion(false, nil, error)
             }
-
-            
-            
-            
-            
         }
-        
-        
-        
-        
     }
-    
-    
-
 }

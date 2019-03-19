@@ -217,19 +217,8 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
             let vc = segue.destination as! MarkAttendanceViewController
             if let attendanceRes = self.attendanceResponseModel{
                 vc.attendanceResponse = attendanceRes.attendanceResultArray[self.selectedIndex]
+                vc.siteModelObjArr = self.siteModelObjArr
             }
-           
-//            let imageBase = UserDefaults.standard.value(forKey: "attendanceImageBase") as! String
-//            let imageUrl =  imageBase + (model.image as! String)
-//            let idEmployee = String(model.emp_id as! Int)
-//            let name = (model.name as! String)
-            
-//            vc.imageUrlRef = imageUrl
-//            vc.nameRef = name
-//            vc.idRef = idEmployee
-//            vc.siteIDRef = self.siteIdSelected
-//            vc.siteNameRef = self.lblSite.text
-            
         }
     }
     
@@ -238,11 +227,13 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
 extension NewEntryViewController:filterUpdatedDelegate{
     func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
         self.attendanceRequest.siteId = selSite.locIdNew
+        lblSite.text = selSite.nameNew
         callFetchAttendanceaAPI()
     }
     
     func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
         self.attendanceRequest.startDate = date
+        lblDate.text = date
         callFetchAttendanceaAPI()
     }
     

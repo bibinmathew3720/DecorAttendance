@@ -10,15 +10,6 @@ import UIKit
 import Kingfisher
 
 class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filterUpdatedDelegate {
-    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
-        
-    }
-    
-    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
-        
-    }
-    
-    
 
     @IBOutlet weak var bttnNext: UIButton!
     @IBOutlet weak var lblName: UILabel!
@@ -28,17 +19,17 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     @IBOutlet weak var lblAttendanceSelection: UILabel!
     
     var attendanceSelectedType: String!
-    var siteModelObjArr: NSMutableArray!
+    
     var spinner = UIActivityIndicatorView(style: .gray)
     var siteIdSelected: String!
-    var idRef: String!
-    var nameRef: String!
-    var imageUrlRef: String!
+    
+   
     var attendaneTypePassRef: String!
     var siteIDRef: String!
     var siteNameRef: String!
     
     var attendanceResponse:ObeidiModelFetchAttendance?
+    var siteModelObjArr = [ObeidiModelSites]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,20 +39,23 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         setUIContents()
-        callGetAllSitesAPI()
         // Do any additional setup after loading the view.
     }
     
     func setUIContents()  {
-        self.lblID.text = idRef
-        self.lblName.text = nameRef
-        self.imageEmployee.kf.setImage(with: URL(string: imageUrlRef))
-        self.lblSiteSelection.text = siteNameRef
-        self.siteIdSelected = siteIDRef
+        //self.lblSiteSelection.text = siteNameRef
+        //self.siteIdSelected = siteIDRef
+        if let attResponse = attendanceResponse{
+            if let imageUrl = URL(string: attResponse.profileBaseUrl+attResponse.profileImageUrl){
+                self.imageEmployee.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+            }
+            self.lblName.text = attResponse.name
+            self.lblID.text = "OAA\(attResponse.empId)"
+            self.siteIdSelected = "\(attResponse.siteId)"
+        }
     }
 
     func setViewStyles() {
-        
         let layer = self.bttnNext!
         layer.layer.cornerRadius = self.bttnNext.frame.size.height / 2
         layer.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
@@ -69,8 +63,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         layer.layer.shadowColor = UIColor(red:0.11, green:0.16, blue:0.36, alpha:0.62).cgColor
         layer.layer.shadowOpacity = 1
         layer.layer.shadowRadius = self.bttnNext.frame.size.height / 2
-        
-        
+    
         self.lblSiteSelection.layer.cornerRadius = 1
         self.lblSiteSelection.layer.borderWidth = 0.5
         self.lblSiteSelection.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
@@ -90,8 +83,6 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         addDropDownLabelAndImage(lblToModify: lblAttendanceSelection, lblText: "Start time")
         attendanceSelectedType = (fetchAttendanceTypeArr().object(at: 0) as! String)
         addDropDownLabelAndImage(lblToModify: lblSiteSelection, lblText: "All")
-        
-        
     }
     
     func addDropDownLabelAndImage(lblToModify: UILabel, lblText: String) {
@@ -173,13 +164,11 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             siteViewController.filterTypeName = FilterTypeName.site
             siteViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             siteViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            siteViewController.filterDataArr = self.siteModelObjArr
+            siteViewController.sitesArray = self.siteModelObjArr
             self.present(siteViewController, animated: true, completion: nil)
-            
         }
-        
-        
     }
+    
     func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
         
         switch updatedType! {
@@ -197,8 +186,14 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     }
     
     func dateUpdated(to date: String, updatedType: FilterTypeName!) {
+    
+    }
+    
+    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
         
-        
+    }
+    
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
         
     }
     
@@ -283,39 +278,8 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             attendanceSelectedType = value
             
         }
-        
-        
     }
 
-    func callGetAllSitesAPI() {
-        
-        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
-        
-        ObeidiModelSites.callListSitesRequset(){
-            (success, result, error) in
-            
-            if success! {
-                
-                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                print(result!)
-                self.siteModelObjArr = (result as! NSMutableArray)
-                
-                
-            }else{
-                
-                
-                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                
-                
-            }
-            
-            
-            
-            
-        }
-        
-        
-    }
     @IBAction func bttnActnNext(_ sender: Any) {
         
         if attendanceSelectedType != nil{
@@ -364,37 +328,28 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         alertController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         alertController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(alertController, animated: true, completion: nil)
-        
+
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toSafetyEquipmentsSceneSegue:MarkAttendance"{
-            let vc = segue.destination as! SafetyEquipmentsViewController
-            
-            vc.emIdRef = self.idRef
-            vc.nameRef = self.nameRef
-            vc.attendanceTypeRef = self.attendaneTypePassRef
-            vc.siteIdRef = self.siteIdSelected
-            
-        }
-        else if segue.identifier == "toCaptureImageSceneSegue:MarkAttendanceScene"{
-            
-            let vc = segue.destination as! CaptureImageViewController
-            vc.dataBaseImageUrlRef = self.imageUrlRef
-            vc.siteIdRef = self.siteIDRef
-            vc.nameRef = self.nameRef
-            vc.attendanceTypeRef = self.attendaneTypePassRef
-            vc.employeeIdRef = self.idRef
-            
-            
-            
-        }
-        else if segue.identifier == "toSickLeaveSceneSegue:MarkAttendance"{
-            
-            
-            
-        }
-        
-        
+//        if segue.identifier == "toSafetyEquipmentsSceneSegue:MarkAttendance"{
+//            let vc = segue.destination as! SafetyEquipmentsViewController
+//
+//            vc.emIdRef = self.idRef
+//            vc.nameRef = self.nameRef
+//            vc.attendanceTypeRef = self.attendaneTypePassRef
+//            vc.siteIdRef = self.siteIdSelected
+//
+//        }
+//        else if segue.identifier == "toCaptureImageSceneSegue:MarkAttendanceScene"{
+//            let vc = segue.destination as! CaptureImageViewController
+//            vc.dataBaseImageUrlRef = self.imageUrlRef
+//            vc.siteIdRef = self.siteIDRef
+//            vc.nameRef = self.nameRef
+//            vc.attendanceTypeRef = self.attendaneTypePassRef
+//            vc.employeeIdRef = self.idRef
+//        }
+//        else if segue.identifier == "toSickLeaveSceneSegue:MarkAttendance"{
+//        }
     }
     
 }
