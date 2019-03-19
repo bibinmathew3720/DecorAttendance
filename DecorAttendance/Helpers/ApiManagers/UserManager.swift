@@ -42,6 +42,38 @@ class UserManager: CLBaseService {
         return responseModel
     }
     
+    func getAboutApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelForAbout(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.getAboutResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
+    
+    func networkModelForAbout(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.ABOUT, requestMethod_: "GET")
+        requestModel.requestBody = body
+        return requestModel
+    }
+    
+    func getAboutResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = DecoreAboutResponseModel.init(dict:dict)
+        return responseModel
+    }
+    
     func getEmployeesApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
         CLNetworkManager().initateWebRequest(networkModelForEmployees(with:body), success: {
             (resultData,response)  in
@@ -159,6 +191,55 @@ class DecoreProfileResponseModel : NSObject{
             }
         }
         
+    }
+}
+
+class DecoreAboutResponseModel : NSObject{
+    
+    var about_content:String = ""
+    var phone_number:String = ""
+    var website:String = ""
+    var banner_image:String = ""
+    var mission_and_vision:String = ""
+    var message_from_ceo:String = ""
+    var email:String = ""
+    var image_base:String = ""
+    var emceo_imageail:String = ""
+    var error:String = ""
+    
+    
+    init(dict:[String:Any?]) {
+   
+        if let value = dict["about_content"] as? String{
+            about_content = value
+        }
+        if let value = dict["phone_number"] as? String{
+            phone_number = value
+        }
+        if let value = dict["website"] as? String{
+            website = value
+        }
+        if let value = dict["banner_image"] as? String{
+            banner_image = value
+        }
+        if let value = dict["mission_and_vision"] as? String{
+            mission_and_vision = value
+        }
+        if let value = dict["message_from_ceo"] as? String{
+            message_from_ceo = value
+        }
+        if let value = dict["email"] as? String{
+            email = value
+        }
+        if let value = dict["image_base"] as? String{
+            image_base = value
+        }
+        if let value = dict["ceo_image"] as? String{
+            ceo_image = value
+        }
+        if let value = dict["error"] as? String{
+            error = value
+        }
     }
 }
 

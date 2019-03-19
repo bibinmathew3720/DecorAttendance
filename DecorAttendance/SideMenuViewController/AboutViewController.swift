@@ -16,6 +16,7 @@ class AboutViewController: UIViewController {
      @IBOutlet weak var messageView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        getAboutApi()
         initialisation()
         // Do any additional setup after loading the view.
     }
@@ -39,4 +40,34 @@ class AboutViewController: UIViewController {
         self.aboutView.layer.shadowRadius = 5
     }
 
+    func getAboutApi(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        UserManager().getAboutApi(with:"", success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let model = model as? DecoreAboutResponseModel{
+                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+                if type == StatusEnum.success{
+                   
+                }
+                else if type == StatusEnum.sessionexpired{
+                    //                    self.callRefreshTokenApi()
+                }
+                else{
+                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
+                }
+            }
+            
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            
+            print(ErrorType)
+        }
+    }
 }
