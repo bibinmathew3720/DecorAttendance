@@ -96,12 +96,9 @@ class ObeidiModelFetchAttendance: NSObject {
     }
 
     
-    class func callfetchAtendanceRequset(isAttendanceCompleted: Int, date: String, keyword: String, siteId: String, withCompletion completion: @escaping(Bool?, AnyObject?, NSError?) -> Void){
-        
+    class func callfetchAtendanceRequset(requestBody: String, withCompletion completion: @escaping(Bool?, AnyObject?, NSError?) -> Void){
         let serviceName: String!
-        serviceName = ObeidiConstants.API.FETCH_ATTENDANCE + "?is_attendance_completed=\(isAttendanceCompleted)&keyword=\(keyword)&site_id=\(siteId)&date=\(date)"
-        
-        //site_id=32&start_date=2018-01-01&end_date=2019-02-06
+        serviceName = ObeidiConstants.API.FETCH_ATTENDANCE + requestBody
         
         let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
         AFNetworkingServiceManager.sharedmanager.parseLinkUsingGetMethodAndHeader(serviceName, parameter: nil, token: accessToken){
