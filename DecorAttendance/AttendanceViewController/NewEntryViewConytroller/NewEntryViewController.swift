@@ -28,24 +28,24 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem?.title = ""
+        initialisation()
         txtFldSearch.delegate = self
         callGetAllSitesAPI()
         setUpViewStyles()
         addTapGesturesToLabels()
         addTapgesturesToView()
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let todaysDate = formatter.string(from: date)
-        self.txtFldSearch.text = ""
-        callFetchAttendanceaAPI(date: todaysDate, keyword: "", siteID: "", isAttendanceCompleted: 0)
+        callFetchAttendanceaAPI()
         // Do any additional setup after loading the view.
     }
     
+    func initialisation(){
+        attendanceRequest.isAttendanceCompleteEntry = false
+        self.lblDate.text = ""
+        self.lblSite.text = ""
+    }
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
         if (touch.view?.isDescendant(of: tableViewNewEntry))!{
-            
             return false
         }
         return true
@@ -161,127 +161,21 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     
     //MARK: textfield delegate methods
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        let siteID: String!
-        let date: String!
-        siteID = ""
-        if self.lblDate.text != nil{
-            
-            date = self.lblDate.text
-        }else{
-            
-            date = ""
-        }
-        
-        callFetchAttendanceaAPI(date: date, keyword: self.txtFldSearch.text!, siteID: siteID, isAttendanceCompleted: 0)
-        return true
-        
-    }
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        activeTextField = textField
-        
-    }
     func addTapgesturesToView()  {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(NewEntryViewController.dismissKeyBoard))
         tapGesture.delegate = self
-        
         self.view.addGestureRecognizer(tapGesture)
-        
-    }
-    @objc func dismissKeyBoard()  {
-        
-        if activeTextField != nil{
-            
-            activeTextField.resignFirstResponder()
-            
-        }
-        
-        
-    }
-    //POPUP Delegate Methods
-    func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
-        
-        
-        print(value.value(forKey: "name") as! String)
-        switch updatedType! {
-        case .site:
-            print("")
-            let dict = value as! NSMutableDictionary
-            self.lblSite.text = (dict.value(forKey: "name") as! String)
-            self.siteIdSelected = (dict.value(forKey: "id") as! String)
-            
-            let startDate: String!
-            let endDate: String!
-            if self.lblDate.text != ""{
-                startDate = self.lblDate.text
-                
-            }else{
-                startDate = ""
-                
-            }
-            
-            User.BonusDetails.bonus_budget = dict.value(forKey: "bonus_budget") as! String
-            User.BonusDetails.remaining_bonus = dict.value(forKey: "remaining_bonus") as! String
-            
-            callFetchAttendanceaAPI(date: startDate, keyword: self.txtFldSearch.text!, siteID: self.siteIdSelected, isAttendanceCompleted: 0)
-            
-        default:
-            print("")
-        }
-        
-    }
-    func dateUpdated(to date: String, updatedType: FilterTypeName!) {
-        print(date)
-        print(updatedType)
-        
-        switch updatedType! {
-        case .endDate:
-            print("nothing happened")
-            //self.lblEndDate.text = date
-        //self.selectedApplyDate = date
-        case .startDate:
-            self.lblDate.text = date
-           
-            let siteId: String!
-            let keyword: String!
-            if self.siteIdSelected != nil{
-                siteId = siteIdSelected
-                
-            }else{
-                siteId = ""
-                
-            }
-            if self.txtFldSearch.text != "" {
-                
-                keyword = self.txtFldSearch.text!
-            }else{
-                
-                keyword = ""
-            }
-            callFetchAttendanceaAPI(date: date, keyword: keyword, siteID: siteId, isAttendanceCompleted: 0)
-        //self.selectedDate = date
-        default:
-            print("")
-            
-        }
     }
     
-    func calendarColsed() {
-        
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.view.alpha = 1
-            //self.tabBarController?.view.alpha = 0.65
-            self.navigationController?.navigationBar.alpha = 1
-            
-            
-        },completion:nil)
-        
-        
+    @objc func dismissKeyBoard()  {
+        if activeTextField != nil{
+            activeTextField.resignFirstResponder()
+        }
     }
+
+    
+   
     func callGetAllSitesAPI() {
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
         ObeidiModelSites.callListSitesRequset(){
@@ -298,8 +192,8 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         }
     }
     
-    func callFetchAttendanceaAPI(date: String, keyword: String, siteID: String, isAttendanceCompleted: Int)  {
-        ObeidiModelFetchAttendance.callfetchAtendanceRequset(isAttendanceCompleted: isAttendanceCompleted, date: date, keyword: keyword, siteId: siteID){
+    func callFetchAttendanceaAPI()  {
+        ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody: attendanceRequest.getRequestBody()){
             (success, result, error) in
             if success! && result != nil {
                 if let res = result as? NSDictionary{
@@ -312,20 +206,9 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     }
     
     @IBAction func bttnActnSearch(_ sender: Any) {
-        
-        let siteID: String!
-        let date: String!
-        siteID = ""
-        if self.lblDate.text != nil{
-            
-            date = self.lblDate.text
-        }else{
-            date = ""
-        }
-        
         if let searchText = self.txtFldSearch.text{
             self.attendanceRequest.searchText = searchText
-            callFetchAttendanceaAPI(date: date, keyword: self.txtFldSearch.text!, siteID: siteID, isAttendanceCompleted: 0)
+            callFetchAttendanceaAPI()
         }
     }
     
@@ -355,10 +238,32 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
 extension NewEntryViewController:filterUpdatedDelegate{
     func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
         self.attendanceRequest.siteId = selSite.locIdNew
+        callFetchAttendanceaAPI()
     }
     
     func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
         self.attendanceRequest.startDate = date
+        callFetchAttendanceaAPI()
+    }
+    
+    func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
+        
+    }
+    
+    func dateUpdated(to date: String, updatedType: FilterTypeName!) {
+    }
+    
+    func calendarColsed() {
+        
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+            
+            
+        },completion:nil)
+        
+        
     }
 }
 

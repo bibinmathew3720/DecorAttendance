@@ -15,35 +15,28 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     
     var activeTextField: UITextField!
     var completedEntriesResponseModel:ObeidAttendanceResponseModel?
+    var attendanceRequest = ObeidAttendanceRequestModel()
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
         txtFldSearch.delegate = self
-        
         self.navigationItem.backBarButtonItem?.title = ""
         setViewStyles()
         addTapgesturesToView()
         self.txtFldSearch.text = ""
-        
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let todaysDate = formatter.string(from: date)
-        
-        callFetchAttendanceaAPI(date: todaysDate, keyword: self.txtFldSearch.text!, siteID: "", isAttendanceCompleted: 1)
-        
-
+        initialisation()
+        callFetchAttendanceaAPI()
         // Do any additional setup after loading the view.
     }
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(true)
-        print("here. C E")
-        
+    
+    func initialisation(){
+        attendanceRequest.isAttendanceCompleteEntry = true
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
+    
     func setViewStyles() {
-        
         let layer = self.viewSearchBar!
         layer.backgroundColor = UIColor.white
         layer.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -59,37 +52,28 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     }
    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
-        
     }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         activeTextField = textField
-        
     }
+    
     func addTapgesturesToView()  {
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CompleteEntriesViewController.dismissKeyBoard))
-        
         self.view.addGestureRecognizer(tapGesture)
         
     }
     @objc func dismissKeyBoard()  {
-        
         if activeTextField != nil{
-            
             activeTextField.resignFirstResponder()
-            
         }
-        
-        
     }
-    func callFetchAttendanceaAPI(date: String, keyword: String, siteID: String, isAttendanceCompleted: Int)  {
-        ObeidiModelFetchAttendance.callfetchAtendanceRequset(isAttendanceCompleted: isAttendanceCompleted, date: date, keyword: keyword, siteId: siteID){
+    
+    func callFetchAttendanceaAPI()  {
+        ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody:attendanceRequest.getRequestBody()){
             (success, result, error) in
-            
             if success! && result != nil {
                 if let res = result as? NSDictionary{
                     self.completedEntriesResponseModel = ObeidAttendanceResponseModel.init(dictionaryDetails: res)
@@ -102,12 +86,10 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func bttnActnSearch(_ sender: Any) {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let todaysDate = formatter.string(from: date)
-        callFetchAttendanceaAPI(date: todaysDate, keyword: self.txtFldSearch.text!, siteID: "", isAttendanceCompleted: 1)
-        
+        if let searchText = txtFldSearch.text{
+            attendanceRequest.searchText = searchText
+        }
+        callFetchAttendanceaAPI()
     }
     
 }

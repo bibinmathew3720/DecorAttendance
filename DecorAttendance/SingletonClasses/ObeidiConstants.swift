@@ -24,7 +24,7 @@ struct ObeidiConstants {
         static let COST_SUMMARY_LABOURWISE = "reports/cost-summary-labourwise?"
         static let COST_SUMMARY_LABOURWISE_DETAIL = "reports/cost-summary-labourwise/detail/"
         static let SAFETY_EQUIPMENTS = "safety-equipments"
-        static let FETCH_ATTENDANCE = "attendance"
+        static let FETCH_ATTENDANCE = "attendance?"
         static let MARK_ATTENDANCE = "attendance"
         
     }
