@@ -158,3 +158,14 @@ class ObeidAttendanceResponseModel:NSObject{
         }
     }
 }
+
+class ObeidAttendanceRequestModel:NSObject{
+    var searchText:String = ""
+    var startDate:String = ""
+    var siteId:Int = 0
+    var isAttendanceCompleteEntry:Bool = false
+    func getRequestBody()->String{
+        var requestBody:String = ""
+        return requestBody
+    }
+}

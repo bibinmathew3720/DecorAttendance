@@ -24,18 +24,15 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     var selectedIndex: Int!
     
     var attendanceResponseModel:ObeidAttendanceResponseModel?
-    
+    var attendanceRequest = ObeidAttendanceRequestModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem?.title = ""
         txtFldSearch.delegate = self
-        tableViewNewEntry.delegate = self
-        tableViewNewEntry.dataSource = self
         callGetAllSitesAPI()
         setUpViewStyles()
         addTapGesturesToLabels()
         addTapgesturesToView()
-        
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -53,8 +50,8 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         }
         return true
     }
+    
     func setUpViewStyles() {
-        
         let layer = self.viewSearchBar!
         layer.backgroundColor = UIColor.white
         layer.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -78,8 +75,6 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         
         self.lblDate.textColor = ObeidiFont.Color.obeidiLightBlack()
         self.lblSite.textColor = ObeidiFont.Color.obeidiLightBlack()
-        
-        
     }
     
     func addDropDownLabelAndImage(lblToModify: UILabel, lblText: String) {
@@ -325,10 +320,13 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
             
             date = self.lblDate.text
         }else{
-            
             date = ""
         }
-        callFetchAttendanceaAPI(date: date, keyword: self.txtFldSearch.text!, siteID: siteID, isAttendanceCompleted: 0)
+        
+        if let searchText = self.txtFldSearch.text{
+            self.attendanceRequest.searchText = searchText
+            callFetchAttendanceaAPI(date: date, keyword: self.txtFldSearch.text!, siteID: siteID, isAttendanceCompleted: 0)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -356,11 +354,11 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
 
 extension NewEntryViewController:filterUpdatedDelegate{
     func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
-        
+        self.attendanceRequest.siteId = selSite.locIdNew
     }
     
     func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
-        
+        self.attendanceRequest.startDate = date
     }
 }
 

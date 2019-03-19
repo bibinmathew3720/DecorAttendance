@@ -53,13 +53,11 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     }
     
     func setUIContents()  {
-        
         self.lblID.text = idRef
         self.lblName.text = nameRef
         self.imageEmployee.kf.setImage(with: URL(string: imageUrlRef))
         self.lblSiteSelection.text = siteNameRef
         self.siteIdSelected = siteIDRef
-        
     }
 
     func setViewStyles() {

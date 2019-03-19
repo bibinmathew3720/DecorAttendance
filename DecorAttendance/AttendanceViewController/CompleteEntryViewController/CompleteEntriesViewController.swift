@@ -22,8 +22,6 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         txtFldSearch.delegate = self
         
         self.navigationItem.backBarButtonItem?.title = ""
-        tableViewCompleteEntry.delegate = self
-        tableViewCompleteEntry.dataSource = self
         setViewStyles()
         addTapgesturesToView()
         self.txtFldSearch.text = ""
