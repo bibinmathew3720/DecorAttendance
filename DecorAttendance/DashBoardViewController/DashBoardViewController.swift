@@ -32,6 +32,9 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     @IBOutlet weak var lblTotalOTPerc: UILabel!
     @IBOutlet weak var lblTotalCostAmnt: UILabel!
     
+    @IBOutlet weak var selectSite: UIView!
+    @IBOutlet weak var endDateView: UIView!
+    @IBOutlet weak var startDateView: UIView!
     @IBOutlet weak var viewDropDownButtons: UIView!
     @IBOutlet weak var lblSite: UILabel!
     @IBOutlet weak var viewRemainingBonus: UIView!
@@ -172,17 +175,17 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         self.viewTotalOtBonus.layer.shadowRadius = 9
         
         
-        self.lblStratDate.layer.cornerRadius = 1
-        self.lblStratDate.layer.borderWidth = 0.5
-        self.lblStratDate.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
+        self.startDateView.layer.cornerRadius = 1
+        self.startDateView.layer.borderWidth = 0.5
+        self.startDateView.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
-        self.lblSite.layer.cornerRadius = 1
-        self.lblSite.layer.borderWidth = 0.5
-        self.lblSite.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
+        self.selectSite.layer.cornerRadius = 1
+        self.selectSite.layer.borderWidth = 0.5
+        self.selectSite.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
-        self.lblEndDate.layer.cornerRadius = 1
-        self.lblEndDate.layer.borderWidth = 0.5
-        self.lblEndDate.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
+        self.endDateView.layer.cornerRadius = 1
+        self.endDateView.layer.borderWidth = 0.5
+        self.endDateView.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
         self.lblEndDate.textColor = ObeidiFont.Color.obeidiLightBlack()
         self.lblStratDate.textColor = ObeidiFont.Color.obeidiLightBlack()
@@ -228,17 +231,17 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     
     func addTapGesturesToLabels() {
         
-        self.lblStratDate.isUserInteractionEnabled = true
+        self.startDateView.isUserInteractionEnabled = true
         let tapGestureMonth = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleMonthLabelTap))
-        self.lblStratDate.addGestureRecognizer(tapGestureMonth)
+        self.startDateView.addGestureRecognizer(tapGestureMonth)
         
-        self.lblSite.isUserInteractionEnabled = true
+        self.selectSite.isUserInteractionEnabled = true
         let tapGestureSite = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleSiteLabelTap))
-        self.lblSite.addGestureRecognizer(tapGestureSite)
+        self.selectSite.addGestureRecognizer(tapGestureSite)
         
-        self.lblEndDate.isUserInteractionEnabled = true
+        self.endDateView.isUserInteractionEnabled = true
         let tapGestureDay = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleDateLabelTap))
-        self.lblEndDate.addGestureRecognizer(tapGestureDay)
+        self.endDateView.addGestureRecognizer(tapGestureDay)
         
     }
     @objc func handleMonthLabelTap(){
