@@ -12,6 +12,12 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var missionView: UIView!
     @IBOutlet weak var aboutView: UIView!
     
+    @IBOutlet weak var webIDLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var visionLabel: UILabel!
+    @IBOutlet weak var ceoMessageLabel: UILabel!
+    @IBOutlet weak var ceoImage: UIImageView!
+    @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var BgImage: UIImageView!
      @IBOutlet weak var messageView: UIView!
     override func viewDidLoad() {
@@ -48,7 +54,13 @@ class AboutViewController: UIViewController {
             if let model = model as? DecoreAboutResponseModel{
                 let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
                 if type == StatusEnum.success{
-                   
+                    self.phoneLabel.text = model.phone_number
+                    self.ceoImage.loadImageUsingCache(withUrl: model.image_base + model.ceo_image, colorValue: nil)
+                    self.ceoMessageLabel.text  = model.message_from_ceo
+                    self.aboutLabel.text = model.about_content
+                    self.visionLabel.text = model.mission_and_vision
+                    self.BgImage.loadImageUsingCache(withUrl: model.image_base + model.banner_image, colorValue: nil)
+                    self.webIDLabel.text = model.website
                 }
                 else if type == StatusEnum.sessionexpired{
                     //                    self.callRefreshTokenApi()

@@ -204,7 +204,7 @@ class DecoreAboutResponseModel : NSObject{
     var message_from_ceo:String = ""
     var email:String = ""
     var image_base:String = ""
-    var emceo_imageail:String = ""
+    var ceo_image:String = ""
     var error:String = ""
     
     

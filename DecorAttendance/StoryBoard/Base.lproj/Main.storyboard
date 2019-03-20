@@ -213,7 +213,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qud-lm-sCx">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="869.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="602"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rLy-u3-zqH">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
@@ -222,7 +222,7 @@
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvC-SQ-Gak">
-                                                <rect key="frame" x="15" y="190" width="345" height="207"/>
+                                                <rect key="frame" x="15" y="190" width="345" height="90"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FAz-6S-mcO">
                                                         <rect key="frame" x="147.5" y="-25" width="50" height="50"/>
@@ -247,9 +247,8 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGv-XL-Lh4">
-                                                        <rect key="frame" x="20" y="75" width="305" height="117"/>
-                                                        <string key="text">This application is meant to provide a tool for accessing critical information on safe migration for migrant workers and connect migrants in distress. This application is meant to provide a tool for accessing critical information on safe migration for migrant workers and connect migrants in distress</string>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGv-XL-Lh4">
+                                                        <rect key="frame" x="20" y="75" width="305" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -268,9 +267,9 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6R-G7-7hr">
-                                                <rect key="frame" x="15" y="417" width="345" height="120.5"/>
+                                                <rect key="frame" x="15" y="300" width="345" height="87"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="devarakonda" translatesAutoresizingMaskIntoConstraints="NO" id="RmX-3z-cnz">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RmX-3z-cnz">
                                                         <rect key="frame" x="20" y="25" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="8d9-Fd-FnB"/>
@@ -291,8 +290,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;This is the basis for a brighter future, built on a hand up, not a handout.&quot;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCV-8G-ctr">
-                                                        <rect key="frame" x="75" y="57" width="250" height="33.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pCV-8G-ctr">
+                                                        <rect key="frame" x="75" y="57" width="250" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -320,7 +319,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nwR-lY-sg9">
-                                                <rect key="frame" x="15" y="557.5" width="345" height="204"/>
+                                                <rect key="frame" x="15" y="407" width="345" height="87"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mission and Vision" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eML-g7-7FN">
                                                         <rect key="frame" x="20" y="25" width="142" height="21"/>
@@ -331,9 +330,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUc-6X-sRF">
-                                                        <rect key="frame" x="20" y="57" width="305" height="117"/>
-                                                        <string key="text">This application is meant to provide a tool for accessing critical information on safe migration for migrant workers and connect migrants in distress. This application is meant to provide a tool for accessing critical information on safe migration for migrant workers and connect migrants in distress</string>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUc-6X-sRF">
+                                                        <rect key="frame" x="20" y="57" width="305" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -359,10 +357,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcN-5f-1JT">
-                                                <rect key="frame" x="0.0" y="769.5" width="185" height="100"/>
+                                                <rect key="frame" x="0.0" y="502" width="185" height="100"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="042584811" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrn-Sq-EO0">
-                                                        <rect key="frame" x="53.5" y="59" width="78.5" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrn-Sq-EO0">
+                                                        <rect key="frame" x="92.5" y="59" width="0.0" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="MOj-LT-Il5"/>
                                                         </constraints>
@@ -389,7 +387,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MUG-AC-ESi">
-                                                <rect key="frame" x="190" y="769.5" width="185" height="100"/>
+                                                <rect key="frame" x="190" y="502" width="185" height="100"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mail" translatesAutoresizingMaskIntoConstraints="NO" id="fbz-aB-JE4">
                                                         <rect key="frame" x="76" y="21" width="33" height="33"/>
@@ -399,8 +397,8 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="info@obaidalabdi.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHW-1i-vPY">
-                                                        <rect key="frame" x="16.5" y="59" width="152" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHW-1i-vPY">
+                                                        <rect key="frame" x="92.5" y="59" width="0.0" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="4BG-NW-kxR"/>
                                                         </constraints>
@@ -467,9 +465,15 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="BgImage" destination="rLy-u3-zqH" id="DKi-5e-cqH"/>
+                        <outlet property="aboutLabel" destination="pGv-XL-Lh4" id="B0O-ZA-CZ7"/>
                         <outlet property="aboutView" destination="IvC-SQ-Gak" id="P9U-7C-jZA"/>
+                        <outlet property="ceoImage" destination="RmX-3z-cnz" id="7zc-XC-Haw"/>
+                        <outlet property="ceoMessageLabel" destination="pCV-8G-ctr" id="d9f-zX-4TN"/>
                         <outlet property="messageView" destination="u6R-G7-7hr" id="Piq-J8-YID"/>
                         <outlet property="missionView" destination="nwR-lY-sg9" id="5A7-Ke-3IC"/>
+                        <outlet property="phoneLabel" destination="vrn-Sq-EO0" id="Mze-p8-uvK"/>
+                        <outlet property="visionLabel" destination="eUc-6X-sRF" id="8kw-pU-sAo"/>
+                        <outlet property="webIDLabel" destination="pHW-1i-vPY" id="8Z2-0H-DfM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Qf-2g-Sev" userLabel="First Responder" sceneMemberID="firstResponder"/>
