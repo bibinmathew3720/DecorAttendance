@@ -18,21 +18,20 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     @IBOutlet weak var lblSiteSelection: UILabel!
     @IBOutlet weak var lblAttendanceSelection: UILabel!
     
-    var attendanceSelectedType: String!
     
     var spinner = UIActivityIndicatorView(style: .gray)
     var siteIdSelected: String!
     
    
     var attendaneTypePassRef: String!
-    var siteIDRef: String!
-    var siteNameRef: String!
     
     var attendanceResponse:ObeidiModelFetchAttendance?
     var siteModelObjArr = [ObeidiModelSites]()
+    var selSiteModel:ObeidiModelSites?
+    var selAttendanceType:String?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        initialisation()
         self.navigationController?.navigationBar.tintColor = UIColor.white
         setViewStyles()
         addTapGesturesToLabels()
@@ -42,16 +41,36 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         // Do any additional setup after loading the view.
     }
     
+    func initialisation(){
+       self.siteModelObjArr.remove(at: 0)
+       self.selSiteModel = self.siteModelObjArr.first
+        if let attendanceType = fetchAttendanceTypeArr().firstObject as? String{
+            self.selAttendanceType = attendanceType
+        }
+       populateSelectedSite()
+       populateAttendanceType()
+    }
+    
+    func populateSelectedSite(){
+        if let selSite = self.selSiteModel{
+            self.lblSiteSelection.text = selSite.nameNew
+            self.siteIdSelected = "\(selSite.locIdNew)"
+        }
+    }
+    
+    func populateAttendanceType(){
+        if let selAttType = self.selAttendanceType{
+            self.lblAttendanceSelection.text = selAttType
+        }
+    }
+    
     func setUIContents()  {
-        //self.lblSiteSelection.text = siteNameRef
-        //self.siteIdSelected = siteIDRef
         if let attResponse = attendanceResponse{
             if let imageUrl = URL(string: attResponse.profileBaseUrl+attResponse.profileImageUrl){
                 self.imageEmployee.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
             }
             self.lblName.text = attResponse.name
             self.lblID.text = "OAA\(attResponse.empId)"
-            self.siteIdSelected = "\(attResponse.siteId)"
         }
     }
 
@@ -80,9 +99,9 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         
         ObeidiTextStyle.setLabelFontStyleAndSize(label: self.lblSiteSelection, fontSize: ObeidiFont.Size.smallB(), fontColor: ObeidiFont.Color.obeidiLightBlack(), fontName: ObeidiFont.Family.normalFont())
         
-        addDropDownLabelAndImage(lblToModify: lblAttendanceSelection, lblText: "Start time")
-        attendanceSelectedType = (fetchAttendanceTypeArr().object(at: 0) as! String)
-        addDropDownLabelAndImage(lblToModify: lblSiteSelection, lblText: "All")
+        //addDropDownLabelAndImage(lblToModify: lblAttendanceSelection, lblText: "Start time")
+        //attendanceSelectedType = (fetchAttendanceTypeArr().object(at: 0) as! String)
+        //addDropDownLabelAndImage(lblToModify: lblSiteSelection, lblText: "All")
     }
     
     func addDropDownLabelAndImage(lblToModify: UILabel, lblText: String) {
@@ -125,7 +144,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                 //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
-                self.navigationController?.navigationBar.alpha = 0.65
+               // self.navigationController?.navigationBar.alpha = 0.65
                 
                 
             },completion:nil)
@@ -145,14 +164,12 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         
     }
     @objc func handleSiteLabelTap(){
-        
-//        presentDropDownController(tableCgPoint: getPointForSiteTable(), dropDownFor: .Site, arr: fetchSiteArr())
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                 //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
-                self.navigationController?.navigationBar.alpha = 0.65
+               // self.navigationController?.navigationBar.alpha = 0.65
                 
                 
             },completion:nil)
@@ -178,8 +195,11 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             self.siteIdSelected = (value.value(forKey: "id") as! String)
         case .attendanceType:
             print("")
-            self.lblAttendanceSelection.text = (value as! String)
-            self.attendanceSelectedType = (value as! String)
+            if let val = value as? String{
+                self.selAttendanceType = val
+                populateAttendanceType()
+            }
+           
         default:
             print("")
         }
@@ -190,7 +210,8 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     }
     
     func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
-        
+        self.selSiteModel = selSite
+        populateSelectedSite()
     }
     
     func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
@@ -242,17 +263,11 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         
     }
     func fetchAttendanceTypeArr() -> NSMutableArray {
-        
         var arr = NSMutableArray()
         arr = ["Start time", "End Time", "Sick Leave", "Absent", "Strike"]
         return arr
     }
-    func fetchSiteArr() -> NSMutableArray {
-        
-        var arr = NSMutableArray()
-        arr = ["Quatar", "Saudi", "Dubai"]
-        return arr
-    }
+    
     func getPointForSiteTable() -> CGPoint{
         
         return CGPoint(x: self.lblSiteSelection.frame.minX, y:   self.lblSiteSelection.frame.maxY + self.lblSiteSelection.frame.size.height + (self.navigationController?.navigationBar.frame.size.height)!)
@@ -266,53 +281,37 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     
     func changedValue(is value: String!, dropDownType: DropDownNeededFor, index: Int) {
         
-        switch  dropDownType {
-        case .Date:
-            print("do nothing")
-        case .Month:
-            print("do nothing")
-        case .Site:
-            addDropDownLabelAndImage(lblToModify: self.lblSiteSelection, lblText: value)
-        case .Attendance:
-            addDropDownLabelAndImage(lblToModify: self.lblAttendanceSelection, lblText: value)
-            attendanceSelectedType = value
-            
-        }
+       
     }
 
     @IBAction func bttnActnNext(_ sender: Any) {
         
-        if attendanceSelectedType != nil{
-            
-            if attendanceSelectedType == (fetchAttendanceTypeArr().object(at: 0) as! String){
-                self.attendaneTypePassRef = "start_time"
-                self.performSegue(withIdentifier: "toSafetyEquipmentsSceneSegue:MarkAttendance", sender: Any.self)
-                
-                
-            }
-            else if attendanceSelectedType == (fetchAttendanceTypeArr().object(at: 1) as! String){
-                self.attendaneTypePassRef = "end_time"
-                self.performSegue(withIdentifier: "toCaptureImageSceneSegue:MarkAttendanceScene", sender: Any.self)
-                User.Attendance.type = User.attendanceType.endTime
-                
-                
-            }else if attendanceSelectedType == (fetchAttendanceTypeArr().object(at: 2) as! String){
-                
-                self.performSegue(withIdentifier: "toSickLeaveSceneSegue:MarkAttendance", sender: Any.self)
-                
-            }else if attendanceSelectedType == (fetchAttendanceTypeArr().object(at: 3) as! String){
-                showObeidiAlert(message: "Absent has been marked", title: "Success .")
-                
-            }else if attendanceSelectedType == (fetchAttendanceTypeArr().object(at: 4) as! String){
-                self.attendaneTypePassRef = "strike"
-                showObeidiAlert(message: "Strike has been marked", title: "Success .")
-                
-            }
-            
-            
-        }
-        
-        
+//        if attendanceSelectedType != nil{
+//            
+//            if attendanceSelectedType == (fetchAttendanceTypeArr().object(at: 0) as! String){
+//                self.attendaneTypePassRef = "start_time"
+//                self.performSegue(withIdentifier: "toSafetyEquipmentsSceneSegue:MarkAttendance", sender: Any.self)
+//                
+//                
+//            }
+//            else if attendanceSelectedType == (fetchAttendanceTypeArr().object(at: 1) as! String){
+//                self.attendaneTypePassRef = "end_time"
+//                self.performSegue(withIdentifier: "toCaptureImageSceneSegue:MarkAttendanceScene", sender: Any.self)
+//                User.Attendance.type = User.attendanceType.endTime
+//                
+//                
+//            }else if attendanceSelectedType == (fetchAttendanceTypeArr().object(at: 2) as! String){
+//                
+//                self.performSegue(withIdentifier: "toSickLeaveSceneSegue:MarkAttendance", sender: Any.self)
+//                
+//            }else if attendanceSelectedType == (fetchAttendanceTypeArr().object(at: 3) as! String){
+//                showObeidiAlert(message: "Absent has been marked", title: "Success .")
+//                
+//            }else if attendanceSelectedType == (fetchAttendanceTypeArr().object(at: 4) as! String){
+//                self.attendaneTypePassRef = "strike"
+//                showObeidiAlert(message: "Strike has been marked", title: "Success .")
+//            }
+//        }
     }
     
     func showObeidiAlert(message: String, title: String) {
