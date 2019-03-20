@@ -235,7 +235,7 @@ class DecoreAboutResponseModel : NSObject{
             image_base = value
         }
         if let value = dict["ceo_image"] as? String{
-            ceo_image = value
+            emceo_imageail = value
         }
         if let value = dict["error"] as? String{
             error = value

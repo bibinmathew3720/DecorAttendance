@@ -18,14 +18,15 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     var capturedImage: UIImage!
-    var employeeIdRef: String!
-    var nameRef: String!
+   
     var attendanceTypeRef: String!
-    var siteIdRef: String!
+    
     var penaltyRef: String!
     var imageDataRep: Data!
-    var dataBaseImageUrlRef: String!
-    var attendanceEnumType: User.attendanceType!
+    
+    var selSiteModel:ObeidiModelSites?
+    var attendanceResponse:ObeidiModelFetchAttendance?
+    var attendanceType:AttendanceType?
     
     
     override func viewDidLoad() {
@@ -36,25 +37,18 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         super.viewDidAppear(animated)
         configureCamera()
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
         self.captureSession.stopRunning()
-        
     }
     
     func configureCamera() {
-        
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
-        
         guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
             else {
                 print("Unable to access back camera!")
@@ -136,14 +130,20 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
         if segue.identifier == "toPhotoCheckSceneSegue:Capture" {
             
             let VC = segue.destination as! PhotoCheckViewController
+            if let attResponse = self.attendanceResponse{
+                VC.nameRef = attResponse.name
+                VC.dataBaseImageRef = attResponse.profileBaseUrl + attResponse.profileImageUrl
+                VC.employeeIdRef = "\(attResponse.empId)"
+            }
+            if let siteModel = self.selSiteModel{
+                VC.siteIdRef = "\(siteModel.locIdNew)"
+            }
             VC.capturedImageRef = capturedImage
-            VC.employeeIdRef = self.employeeIdRef
-            VC.nameRef = self.nameRef
-            VC.siteIdRef = self.siteIdRef
+            
+            
             VC.attendanceTypeRef = self.attendanceTypeRef
             VC.penaltyRef = self.penaltyRef
             VC.imageData = self.imageDataRep
-            VC.dataBaseImageRef = self.dataBaseImageUrlRef
             
         }
         
