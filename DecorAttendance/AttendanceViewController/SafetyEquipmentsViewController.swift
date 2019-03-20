@@ -175,39 +175,23 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
             let equipmentPenalty: Int!
             equipmentPenalty = ((self.safetyEquipmentsObjModelArr.object(at: buttonIndex) as! ObeidiModelSafetyEquipments).penalty as! Int)
             penaltyVal = penaltyVal - equipmentPenalty
-            
             self.lblPenaltyAmnt.text = String(penaltyVal) + "AED"
-            
         }else{
-            
             let equipmentPenalty: Int!
-            
-            
             self.isButtonChecked = false
             self.bttnCheckAll.setImage(UIImage(named: ""), for: .normal)
-            
             equipmentPenalty = ((self.safetyEquipmentsObjModelArr.object(at: buttonIndex) as! ObeidiModelSafetyEquipments).penalty as! Int)
             penaltyVal = penaltyVal + equipmentPenalty
-            
             self.lblPenaltyAmnt.text = String(penaltyVal) + "AED"
-            
         }
-        
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "toCaptureImageSceneSegue:Safety" {
-            
             let vc = segue.destination as! CaptureImageViewController
             vc.attendanceResponse = self.attendanceResponse
             vc.selSiteModel = self.selSiteModel
-          
-           
             vc.penaltyRef = String(self.penaltyVal)
-            
         }
     }
-    
-    
-    
 }

@@ -98,11 +98,9 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         let myString = NSMutableAttributedString(string: "  " + lblText)
         myString.append(attachmentString)
         lblToModify.attributedText = myString
-        
     }
     
     func addTapGesturesToLabels() {
-        
         self.dateView.isUserInteractionEnabled = true
         let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleDateLabelTap))
         self.dateView.addGestureRecognizer(tapGestureDate)
@@ -110,9 +108,8 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         self.siteView.isUserInteractionEnabled = true
         let tapGestureSite = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleSiteLabelTap))
         self.siteView.addGestureRecognizer(tapGestureSite)
-        
-        
     }
+    
     @objc func handleDateLabelTap(){
         
         DispatchQueue.main.async {
@@ -264,11 +261,7 @@ extension NewEntryViewController:filterUpdatedDelegate{
             self.view.alpha = 1
             //self.tabBarController?.view.alpha = 0.65
             self.navigationController?.navigationBar.alpha = 1
-            
-            
         },completion:nil)
-        
-        
     }
 }
 

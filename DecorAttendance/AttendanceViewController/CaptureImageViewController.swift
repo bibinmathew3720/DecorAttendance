@@ -37,25 +37,18 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         super.viewDidAppear(animated)
         configureCamera()
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
         self.captureSession.stopRunning()
-        
     }
     
     func configureCamera() {
-        
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
-        
         guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
             else {
                 print("Unable to access back camera!")
