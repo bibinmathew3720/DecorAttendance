@@ -25,6 +25,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     var spinner = UIActivityIndicatorView(style: .gray)
     var selectedIndex: Int!
     
+    @IBOutlet weak var emptyView: UIView!
     var attendanceResponseModel:ObeidAttendanceResponseModel?
     var attendanceRequest = ObeidAttendanceRequestModel()
     override func viewDidLoad() {
@@ -117,7 +118,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
+                //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
                 self.navigationController?.navigationBar.alpha = 0.65
                 
@@ -141,7 +142,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
+                //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
                 self.navigationController?.navigationBar.alpha = 0.65
                 
@@ -200,6 +201,16 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
             if success! && result != nil {
                 if let res = result as? NSDictionary{
                     self.attendanceResponseModel = ObeidAttendanceResponseModel.init(dictionaryDetails: res)
+                    if let response = self.attendanceResponseModel{
+                        if (response.attendanceResultArray.count == 0){
+                            self.emptyView.isHidden = false
+                            self.tableViewNewEntry.isHidden = true
+                        }
+                        else{
+                            self.emptyView.isHidden = true
+                            self.tableViewNewEntry.isHidden = false
+                        }
+                    }
                     self.tableViewNewEntry.reloadData()
                 }
             }else{
@@ -208,6 +219,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     }
     
     @IBAction func bttnActnSearch(_ sender: Any) {
+        self.view.endEditing(true)
         if let searchText = self.txtFldSearch.text{
             self.attendanceRequest.searchText = searchText
             callFetchAttendanceaAPI()

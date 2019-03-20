@@ -16,6 +16,9 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     var activeTextField: UITextField!
     var completedEntriesResponseModel:ObeidAttendanceResponseModel?
     var attendanceRequest = ObeidAttendanceRequestModel()
+    @IBOutlet weak var emptyView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         txtFldSearch.delegate = self
@@ -77,6 +80,16 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
             if success! && result != nil {
                 if let res = result as? NSDictionary{
                     self.completedEntriesResponseModel = ObeidAttendanceResponseModel.init(dictionaryDetails: res)
+                    if let response = self.completedEntriesResponseModel{
+                        if (response.attendanceResultArray.count == 0){
+                            self.emptyView.isHidden = false
+                            self.tableViewCompleteEntry.isHidden = true
+                        }
+                        else{
+                            self.emptyView.isHidden = true
+                            self.tableViewCompleteEntry.isHidden = false
+                        }
+                    }
                     self.tableViewCompleteEntry.reloadData()
                 }
                 
@@ -86,6 +99,7 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func bttnActnSearch(_ sender: Any) {
+        self.view.endEditing(true)
         if let searchText = txtFldSearch.text{
             attendanceRequest.searchText = searchText
         }
