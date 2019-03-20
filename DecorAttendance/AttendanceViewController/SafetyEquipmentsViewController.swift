@@ -23,10 +23,11 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     var safetyEquipmentsObjModelArr = NSMutableArray()
     var spinner = UIActivityIndicatorView(style: .gray)
     var penaltyFullValue: Int!
-    var emIdRef: String!
-    var nameRef: String!
     var attendanceTypeRef: String!
-    var siteIdRef: String!
+    
+    var selSiteModel:ObeidiModelSites?
+    var attendanceResponse:ObeidiModelFetchAttendance?
+    var attendanceType:AttendanceType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,6 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
         setViewStyles()
         setButtonStyle()
         penaltyVal = 0
-       
         callSafetyEquipmentsAPI()
         
         // Do any additional setup after loading the view.
@@ -152,39 +152,26 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func callSafetyEquipmentsAPI() {
-        
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
         ObeidiModelSafetyEquipments.callSafetyEquipmentsRequest() {
             (success, result, error) in
-            
-            
             if success! {
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 self.processSafetyEquipmentsResponse(apiResponse: result!)
-                
                 print(result!)
             }else{
-                
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                
             }
-            
-            
         }
-        
-        
     }
+    
     func processSafetyEquipmentsResponse(apiResponse: AnyObject!)  {
-        
         self.safetyEquipmentsObjModelArr = (apiResponse as! NSMutableArray)
-        
         self.tableViewPenalty.reloadData()
-        
     }
+    
     func buttonCheckedStatus(isChecked: Bool, buttonIndex: Int) {
-        
         if isChecked{
-            
             let equipmentPenalty: Int!
             equipmentPenalty = ((self.safetyEquipmentsObjModelArr.object(at: buttonIndex) as! ObeidiModelSafetyEquipments).penalty as! Int)
             penaltyVal = penaltyVal - equipmentPenalty
@@ -212,10 +199,10 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
         if segue.identifier == "toCaptureImageSceneSegue:Safety" {
             
             let vc = segue.destination as! CaptureImageViewController
-            vc.employeeIdRef = self.emIdRef
-            vc.nameRef = self.nameRef
-            vc.siteIdRef = self.siteIdRef
-            vc.attendanceTypeRef = self.attendanceTypeRef
+            vc.attendanceResponse = self.attendanceResponse
+            vc.selSiteModel = self.selSiteModel
+          
+           
             vc.penaltyRef = String(self.penaltyVal)
             
         }

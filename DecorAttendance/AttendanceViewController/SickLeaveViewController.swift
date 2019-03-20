@@ -220,7 +220,6 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
          
             let vc = segue.destination as! CaptureImageViewController
             vc.attendanceTypeRef = "sick_leave"
-            vc.attendanceEnumType = User.attendanceType.sickLeave
             
             
         }
