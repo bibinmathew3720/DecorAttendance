@@ -16,7 +16,7 @@ class ObeidiSpinner: NSObject {
         activityView.center = view.center
         activityView.startAnimating()
         
-        view.alpha = 0.65
+        //view.alpha = 0.65
         view.addSubview(activityView)
         
     }

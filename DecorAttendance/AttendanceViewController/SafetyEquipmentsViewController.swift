@@ -39,7 +39,6 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         isButtonChecked = false
         setViewStyles()
-        setButtonStyle()
         penaltyVal = 0
         callSafetyEquipmentsAPI()
         
@@ -49,16 +48,12 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     func setViewStyles() {
         
         let layer = self.bttnNext!
-        layer.layer.cornerRadius = 23.5
+        layer.layer.cornerRadius = 25
         layer.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
         layer.layer.shadowOffset = CGSize(width: 0, height: 8)
         layer.layer.shadowColor = UIColor(red:0.11, green:0.16, blue:0.36, alpha:0.62).cgColor
         layer.layer.shadowOpacity = 1
         layer.layer.shadowRadius = 23
-        
-        let lblPenalty = lblPenaltyAmnt!
-        lblPenalty.layer.borderWidth = 1
-        lblPenalty.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
         //lblPenaltyAmnt.text = "80 AED"
         
@@ -68,58 +63,39 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     }
 
     @IBAction func bttnActnNext(_ sender: Any) {
-        
         self.performSegue(withIdentifier: "toCaptureImageSceneSegue:Safety", sender: Any.self)
-        
     }
-    func setButtonStyle()  {
-        
-        
-        
-        
-    }
+    
     func updatePenaltyValue(val: Int) {
-        
         let valStr = String(val)
         self.lblPenaltyAmnt.text = valStr + " AED"
-        
     }
     
     @IBAction func bttnActnCheckAll(_ sender: Any) {
-        
         isButtonChecked = !isButtonChecked
         if isButtonChecked{
-            
             self.bttnCheckAll.setImage(UIImage(named: "tick"), for: .normal)
             //update the checked status in each cell
             penaltyVal = 0
             self.lblPenaltyAmnt.text = String(penaltyVal)
             self.tableViewPenalty.reloadData()
-            
         }else{
-            
             self.bttnCheckAll.setImage(UIImage(named: ""), for: .normal)
             //update the checked status in each cell
             self.lblPenaltyAmnt.text = String(penaltyFullValue)
             self.tableViewPenalty.reloadData()
             
         }
-        
-        
-        
-        
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if safetyEquipmentsObjModelArr.count != 0{
-            
             return safetyEquipmentsObjModelArr.count
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellSafetyEquipmentTableView", for: indexPath) as! SafetyEquipmentsTableViewCell
         cell.bttnCheck.tag = indexPath.row
         
@@ -127,26 +103,20 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
         penaltyVal = penaltyVal + (cellData.penalty as! Int)
         cell.setCellContents(cellData: cellData, isAllChecked: self.isButtonChecked)
         cell.checkButtonDelegate = self
-        
         if indexPath.row == self.safetyEquipmentsObjModelArr.count - 1{
-            
             if isButtonChecked{
                 penaltyVal = 0
                 self.lblPenaltyAmnt.text = String(penaltyVal) + "AED"
             }else{
-                
                 penaltyFullValue = penaltyVal
                 self.lblPenaltyAmnt.text = String(penaltyFullValue) + "AED"
             }
-            
-            
         }
-        
         return cell
-        
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
         return 105
         
     }
