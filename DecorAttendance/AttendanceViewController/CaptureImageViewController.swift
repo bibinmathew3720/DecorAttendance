@@ -19,10 +19,8 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     var capturedImage: UIImage!
-   
-    var attendanceTypeRef: String!
     
-    var penaltyRef: String!
+    
     var imageDataRep: Data!
     
     var selSiteModel:ObeidiModelSites?
@@ -153,10 +151,8 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
             VC.selSiteModel = self.selSiteModel
             VC.attendanceResponse = self.attendanceResponse
             VC.attendanceType = self.attendanceType
-            
+            VC.penaltyValue = self.penaltyValue
             VC.capturedImageRef = capturedImage
-            VC.attendanceTypeRef = self.attendanceTypeRef
-            VC.penaltyRef = self.penaltyRef
             VC.imageData = self.imageDataRep
             
         }

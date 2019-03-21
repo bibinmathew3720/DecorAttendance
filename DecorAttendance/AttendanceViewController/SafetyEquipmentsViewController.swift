@@ -16,7 +16,6 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var bttnNext: UIButton!
     
     var isAllButtonChecked: Bool!
-    
     var penaltyVal: CGFloat = 0.0
     var spinner = UIActivityIndicatorView(style: .gray)
     var penaltyFullValue: CGFloat = 0.0

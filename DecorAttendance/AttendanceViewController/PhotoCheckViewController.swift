@@ -31,6 +31,7 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     var selSiteModel:ObeidiModelSites?
     var attendanceResponse:ObeidiModelFetchAttendance?
     var attendanceType:AttendanceType?
+    var penaltyValue:CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,10 +57,8 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
         
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
-        
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
-        
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -69,10 +68,7 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     }
     
     func setViewStyles()  {
-        
         self.imageViewSnapShot.image = capturedImageRef
-        
-        
         let bttnTakePhoto = self.bttnTakePhotoAgain!
         bttnTakePhoto.layer.cornerRadius = self.bttnTakePhotoAgain.frame.size.height / 2
         bttnTakePhoto.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
@@ -88,34 +84,23 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
         bttnDone.layer.shadowColor = UIColor(red:0.11, green:0.16, blue:0.36, alpha:0.62).cgColor
         bttnDone.layer.shadowOpacity = 1
         bttnDone.layer.shadowRadius = self.bttnDone.frame.size.height / 2
-        
-        
-        
     }
     
     
     @IBAction func bttnActnTakePhotoAgain(_ sender: Any) {
-        
         self.navigationController?.popViewController(animated: true)
     }
     
-    
     @IBAction func bttnActnDone(_ sender: Any) {
-        
         if User.Attendance.type == User.attendanceType.endTime {
-            
             self.performSegue(withIdentifier: "toEndTimeBonusSceneSegue:PhotoCheck", sender: (Any).self)
             
         }else{
-            
             callPostAttendanceAPI()
         }
-        
-        
-        
     }
+    
     func callPostAttendanceAPI()  {
-        
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
         ObeidiModelMarkAttendance.callMarkAttendanceRequest(dataDict: getParamsDict(), image: self.imageData){
             (success, result, error) in

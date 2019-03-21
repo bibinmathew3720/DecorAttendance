@@ -213,17 +213,11 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
-        
         if segue.identifier == "toCaptureSceneSegue:SickLeave"{
-         
             let vc = segue.destination as! CaptureImageViewController
-            vc.attendanceTypeRef = "sick_leave"
-            
+            vc.attendanceType = AttendanceType.SickLeave
             
         }
-        
     }
 
 }
