@@ -19,10 +19,7 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     
     
     var capturedImageRef: UIImage!
-    var employeeIdRef: String!
-    var nameRef: String!
     var attendanceTypeRef: String!
-    var siteIdRef: String!
     var penaltyRef: String!
     var paramsDict = NSMutableDictionary()
     var spinner = UIActivityIndicatorView(style: .gray)
@@ -30,27 +27,31 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     var lat: String!
     var lng: String!
     var imageData: Data!
-    var dataBaseImageRef: String!
+    
+    var selSiteModel:ObeidiModelSites?
+    var attendanceResponse:ObeidiModelFetchAttendance?
+    var attendanceType:AttendanceType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setViewStyles()
         //set image from database
-        
-        if dataBaseImageRef != nil{
-            
-            self.imageViewDataBase.kf.setImage(with: URL(string: dataBaseImageRef))
-            
-        }
-        
+        populateData()
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         locationManager = CLLocationManager()
         askForLocationAuthorisation()
-        
         // Do any additional setup after loading the view.
     }
+    
+    func populateData(){
+        if let selAttendance = self.attendanceResponse{
+            if let imageUrl = URL(string: selAttendance.profileBaseUrl+selAttendance.profileImageUrl){
+                self.imageViewDataBase.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+            }
+        }
+    }
+    
     func askForLocationAuthorisation(){
         
         // Ask for Authorisation from the User.
@@ -157,11 +158,15 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     func getParamsDict() -> NSMutableDictionary {
     
         paramsDict.setValue(penaltyRef, forKey: "penalty")
-        paramsDict.setValue(siteIdRef, forKey: "site_id")
+        if let siteModel = self.selSiteModel{
+            paramsDict.setValue("\(siteModel.locIdNew)", forKey: "site_id")
+        }
         paramsDict.setValue(self.lng, forKey: "lng")
         paramsDict.setValue(self.lat, forKey: "lat")
         paramsDict.setValue(attendanceTypeRef, forKey: "type")
-        paramsDict.setValue(employeeIdRef, forKey: "emp_id")
+        if let attResponse = self.attendanceResponse{
+            paramsDict.setValue("\(attResponse.empId)", forKey: "emp_id")
+        }
         paramsDict.setValue("0", forKey: "bonus")
         paramsDict.setValue(capturedImageRef, forKey: "image")
         
@@ -186,22 +191,16 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toEndTimeBonusSceneSegue:PhotoCheck"{
-            
             let vc = segue.destination as! EndTimeBonusViewController
-            vc.siteIdRef = self.siteIdRef
-            vc.employeeIdRef = self.employeeIdRef
+            vc.selSiteModel = self.selSiteModel
+            vc.attendanceResponse = self.attendanceResponse
+            vc.attendanceType = self.attendanceType
+            
             vc.imageDataRef = self.imageData
             vc.attendanceTypeRef = self.attendanceTypeRef
             vc.penaltyRef = self.penaltyRef
             vc.latRef = self.lat
             vc.lngRef = self.lng
-            vc.nameRef = self.nameRef
-            
         }
-        
     }
-    
-
-    
-
 }

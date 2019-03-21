@@ -22,14 +22,17 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
     var activeTextField: UITextField!
     var spinner = UIActivityIndicatorView(style: .gray)
     var paramsDict = NSMutableDictionary()
-    var employeeIdRef: String!
-    var nameRef: String!
+    
     var attendanceTypeRef: String!
-    var siteIdRef: String!
+   
     var penaltyRef: String!
     var latRef: String!
     var lngRef: String!
     var imageDataRef: Data!
+    
+    var selSiteModel:ObeidiModelSites?
+    var attendanceResponse:ObeidiModelFetchAttendance?
+    var attendanceType:AttendanceType?
     
     override func viewDidLoad() {
         
@@ -218,11 +221,16 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
     func getParamsDict() -> NSMutableDictionary {
         
         paramsDict.setValue(penaltyRef, forKey: "penalty")
-        paramsDict.setValue(siteIdRef, forKey: "site_id")
+        if let site = self.selSiteModel{
+            paramsDict.setValue("\(site.locIdNew)", forKey: "site_id")
+        }
         paramsDict.setValue(lngRef, forKey: "lng")
         paramsDict.setValue(latRef, forKey: "lat")
         paramsDict.setValue(attendanceTypeRef, forKey: "type")
-        paramsDict.setValue(employeeIdRef, forKey: "emp_id")
+        
+        if let atResponse = self.attendanceResponse{
+            paramsDict.setValue("\(atResponse.empId)", forKey: "emp_id")
+        }
         paramsDict.setValue(self.txtFldGivenBonus.text, forKey: "bonus")
         paramsDict.setValue("", forKey: "image")
         

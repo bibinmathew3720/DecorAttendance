@@ -149,17 +149,11 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
         if segue.identifier == "toPhotoCheckSceneSegue:Capture" {
             
             let VC = segue.destination as! PhotoCheckViewController
-            if let attResponse = self.attendanceResponse{
-                VC.nameRef = attResponse.name
-                VC.dataBaseImageRef = attResponse.profileBaseUrl + attResponse.profileImageUrl
-                VC.employeeIdRef = "\(attResponse.empId)"
-            }
-            if let siteModel = self.selSiteModel{
-                VC.siteIdRef = "\(siteModel.locIdNew)"
-            }
+            VC.selSiteModel = self.selSiteModel
+            VC.attendanceResponse = self.attendanceResponse
+            VC.attendanceType = self.attendanceType
+            
             VC.capturedImageRef = capturedImage
-            
-            
             VC.attendanceTypeRef = self.attendanceTypeRef
             VC.penaltyRef = self.penaltyRef
             VC.imageData = self.imageDataRep
