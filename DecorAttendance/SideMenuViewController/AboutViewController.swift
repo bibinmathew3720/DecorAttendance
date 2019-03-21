@@ -11,7 +11,6 @@ import UIKit
 class AboutViewController: UIViewController {
     @IBOutlet weak var missionView: UIView!
     @IBOutlet weak var aboutView: UIView!
-    
     @IBOutlet weak var webIDLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var visionLabel: UILabel!
@@ -20,6 +19,8 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var BgImage: UIImageView!
      @IBOutlet weak var messageView: UIView!
+    var phone: String = ""
+    var mailAddress:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         getAboutApi()
@@ -45,7 +46,22 @@ class AboutViewController: UIViewController {
         self.aboutView.layer.shadowOpacity = 0.7
         self.aboutView.layer.shadowRadius = 5
     }
-
+    @IBAction func mailAction(_ sender: Any) {
+        if self.mailAddress != ""{
+            let appURL = URL(string: "mailto:" + self.mailAddress)!
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(appURL as URL, options: [:], completionHandler: nil)
+        }
+        else {
+            UIApplication.shared.openURL(appURL as URL)
+        }
+        }
+    }
+    
+    @IBAction func callAction(_ sender: Any) {
+        guard let number = URL(string:"TEL://" + phone ) else { return }
+        UIApplication.shared.open(number)
+    }
     func getAboutApi(){
         MBProgressHUD.showAdded(to: self.view, animated: true)
         UserManager().getAboutApi(with:"", success: {
@@ -61,6 +77,8 @@ class AboutViewController: UIViewController {
                     self.visionLabel.text = model.mission_and_vision
                     self.BgImage.loadImageUsingCache(withUrl: model.image_base + model.banner_image, colorValue: nil)
                     self.webIDLabel.text = model.website
+                    self.mailAddress = model.website
+                    self.phone = model.phone_number
                 }
                 else if type == StatusEnum.sessionexpired{
                     //                    self.callRefreshTokenApi()
@@ -83,3 +101,4 @@ class AboutViewController: UIViewController {
         }
     }
 }
+
