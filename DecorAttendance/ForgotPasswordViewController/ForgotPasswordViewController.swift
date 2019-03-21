@@ -25,6 +25,7 @@ class ForgotPasswordViewController: UITableViewController, UITextFieldDelegate {
     var resetSecret: String!
     var clientID: String!
     
+    var forgot = ForgotPwdRequestModel()
     enum TextFldEntryStatus {
         
         case AllOk
@@ -311,29 +312,64 @@ class ForgotPasswordViewController: UITableViewController, UITextFieldDelegate {
     }
 
     func callForgotPassWordAPI(){
-        
-        ObeidiModelForgotPassword.callForgotPasswordRequest(email: self.txtFldEmail.text!) {
-            (success, result, error) in
-            
-            if success!{
-                if result != nil{
-                    
-                    let dict = result as! NSDictionary
-                    self.resetSecret = (dict.value(forKey: "reset_secret") as! String)
-                    self.clientID = (dict.value(forKey: "client_id") as! String)
-                    
-                    
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            UserManager().callForgotPasswordApi(with: getChangePwdRequestBody(), success: {
+                (model,response)  in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                if let _model = model as? ChangePasswordModel{
+                    let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+                    if type == StatusEnum.success{
+                        self.showAlert(alertMessage: "")
+                    }
+                    else if type == StatusEnum.sessionexpired{
+                    }
+                    else{
+                        self.showAlert(alertMessage: "Something went wrong. Please try again")
+                    }            }
+                
+                
+            }) { (ErrorType) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                if(ErrorType == .noNetwork){
+                    self.showAlert(alertMessage: User.ErrorMessages.noNetworkMessage)
+                }
+                else{
+                    self.showAlert(alertMessage: User.ErrorMessages.serverErrorMessamge)
                 }
                 
-            }else{
-                
-                
-                print("error")
+                print(ErrorType)
             }
-            
-            
-        }
         
+        
+        
+//        ObeidiModelForgotPassword.callForgotPasswordRequest(email: self.txtFldEmail.text!) {
+//            (success, result, error) in
+//
+//            if success!{
+//                if result != nil{
+//
+//                    let dict = result as! NSDictionary
+//                    self.resetSecret = (dict.value(forKey: "reset_secret") as! String)
+//                    self.clientID = (dict.value(forKey: "client_id") as! String)
+//
+//
+//                }
+//
+//            }else{
+//
+//
+//                print("error")
+//            }
+//
+//
+//        }
+        
+    }
+    func getChangePwdRequestBody()->String{
+        if let _text = self.txtFldEmail.text{
+            forgot.email = _text
+        }
+        return forgot.getRequestBody()
     }
     func callAccessTokenAPI() {
         
