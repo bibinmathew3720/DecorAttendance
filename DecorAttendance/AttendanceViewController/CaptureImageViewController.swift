@@ -28,6 +28,7 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     var selSiteModel:ObeidiModelSites?
     var attendanceResponse:ObeidiModelFetchAttendance?
     var attendanceType:AttendanceType?
+    var penaltyValue:CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()

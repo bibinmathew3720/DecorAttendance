@@ -28,7 +28,6 @@ class SafetyEquipmentsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         isButtonChecked = false
         bttnCheck.layer.borderWidth = 1
         bttnCheck.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
@@ -43,52 +42,36 @@ class SafetyEquipmentsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    func setCellContents(cellData: ObeidiModelSafetyEquipments, isAllChecked: Bool) {
-        
-        self.lblPenaltyAmnt.text = String(cellData.penalty as! Int)
-        self.lblEquipmentName.text = (cellData.name as! String)
-        
-        let imageBase = UserDefaults.standard.value(forKey: "safetyEquipmentsImageBase") as! String
-        let imageUrl = URL(string: imageBase + (cellData.image as! String) )
-        self.imageViewEquipment.kf.setImage(with: imageUrl)
-        
+    func setCellContents(equipment: SafetyEquipment, isAllChecked: Bool) {
+        self.lblPenaltyAmnt.text = "Penalty : \(equipment.penalty)"
+        self.lblEquipmentName.text = equipment.name
+        if let imageUrl = URL(string: equipment.imageBaseUrl+equipment.imageName){
+            self.imageViewEquipment.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+        }
         if isAllChecked{
-            
             self.bttnCheck.setImage(UIImage(named: "tick"), for: .normal)
             self.isButtonChecked = true
             
         }else{
             self.bttnCheck.setImage(UIImage(named: ""), for: .normal)
             self.isButtonChecked = false
-            
         }
-        
-        
     }
 
     @IBAction func bttnActnCheck(_ sender: Any){
         
         isButtonChecked = !isButtonChecked
         if isButtonChecked{
-            
             self.bttnCheck.setImage(UIImage(named: "tick"), for: .normal)
             checkButtonDelegate?.buttonCheckedStatus(isChecked: true, buttonIndex: bttnCheck.tag)
-            
-            
         }else{
-            
             self.bttnCheck.setImage(UIImage(named: ""), for: .normal)
             checkButtonDelegate?.buttonCheckedStatus(isChecked: false, buttonIndex: bttnCheck.tag)
-            
         }
-        
-        
-        
     }
+    
     func updateCheckAllStatus(vc:SafetyEquipmentsViewController){
-        
         self.SafetyEquipmentsViewControllerVCRef = vc
-        
     }
     
 }
