@@ -46,69 +46,36 @@ class ObeidiModelSafetyEquipments: NSObject {
         }
         return nil
     }
-    class func callSafetyEquipmentsRequest(withCompeltion completion: @escaping(Bool?, AnyObject?, NSError?) -> Void){
-        
-        
+    class func callSafetyEquipmentsRequest(withCompeltion completion: @escaping(Bool?, [String:AnyObject]?, NSError?) -> Void){
         let serviceName = ObeidiConstants.API.SAFETY_EQUIPMENTS
         let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
         AFNetworkingServiceManager.sharedmanager.parseLinkUsingGetMethodAndHeader(serviceName, parameter: nil, token: accessToken){
-            
             (success, result, error) in
-            
             if (success! && result != nil){
-                
                 print(result as Any)
                 let dict = result as! NSDictionary
-                
                 if let val = dict["error"] {
                     if case let isError as Bool = val{
-                        
                         if isError {
-                            
-                            completion(false, result, nil)
+                            completion(false, nil, nil)
                         }else{//MARK: SUCCESS CASE
-                            let dataDict = result as! NSDictionary
-                            let imageBase = dataDict["image_base"] as! String
-                            UserDefaults.standard.set(imageBase, forKey: "safetyEquipmentsImageBase")
-                            let valArr = dataDict["result"] as! NSArray
-                            completion(true, getSafetyEquipmentsDetailsObjectArr(equipmentsDataArr: valArr), nil)
-                            
+                            completion (true,result as? [String : AnyObject],nil)
                         }
-                        
                     } else {
-                        print("value is nil")
+                        
                     }
                 } else {
-                    
                     print("error key is not present in dict")
-                    //let dataDict = result as! NSDictionary
-                    //completion(true, getCostSummaryDetailsObjectDict(costSummaryDataDict: dataDict), nil)
                     completion(false, nil, error)
                 }
-                
-                
-                
             }else if (success! && result == nil){
-                
                 let customError: NSError!
                 customError = NSError(domain: "Obeidi Errors ", code: 404, userInfo: ["error": "no data to show"])
                 completion(false, nil, customError)
                 
             }else{
-                
                 completion(false, nil, error)
             }
-            
-            
         }
-        
-        
-        
-        
-        
     }
-    
-    
-    
-    
 }

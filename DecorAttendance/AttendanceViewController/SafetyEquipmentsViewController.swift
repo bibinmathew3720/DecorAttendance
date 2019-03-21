@@ -29,6 +29,8 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     var attendanceResponse:ObeidiModelFetchAttendance?
     var attendanceType:AttendanceType?
     
+    var safetyEquipmentsResponseModel:SafetyEquipmentsResponseModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -127,17 +129,14 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
             (success, result, error) in
             if success! {
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                self.processSafetyEquipmentsResponse(apiResponse: result!)
-                print(result!)
+                if let model = result{
+                    self.safetyEquipmentsResponseModel = SafetyEquipmentsResponseModel.init(dict:model)
+                    self.tableViewPenalty.reloadData()
+                }
             }else{
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
             }
         }
-    }
-    
-    func processSafetyEquipmentsResponse(apiResponse: AnyObject!)  {
-        self.safetyEquipmentsObjModelArr = (apiResponse as! NSMutableArray)
-        self.tableViewPenalty.reloadData()
     }
     
     func buttonCheckedStatus(isChecked: Bool, buttonIndex: Int) {

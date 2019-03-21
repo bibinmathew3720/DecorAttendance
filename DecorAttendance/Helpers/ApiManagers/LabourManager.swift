@@ -256,3 +256,52 @@ class LabourSummaryDetailsRequestModel:NSObject{
     }
 }
 
+class SafetyEquipmentsResponseModel:NSObject{
+    var error:Int = 0
+    var imageBaseurl:String = ""
+    var SafetyEquipments = [SafetyEquipment]()
+    init(dict:[String:Any?]) {
+        if let value = dict["error"] as? Int{
+            error = value
+        }
+        if let value = dict["image_base"] as? String{
+            imageBaseurl = value
+        }
+        if let value = dict["result"] as? NSArray{
+            for item in value{
+                if let it = item as? [String:AnyObject] {
+                    let equipment = SafetyEquipment.init(dict: it)
+                    equipment.imageBaseUrl = imageBaseurl
+                    SafetyEquipments.append(equipment)
+                }
+            }
+        }
+    }
+}
+
+class SafetyEquipment:NSObject{
+    var imageBaseUrl:String = ""
+    var id:Int = 0
+    var imageName:String = ""
+    var internalName:String = ""
+    var name:String = ""
+    var penalty:CGFloat = 0.0
+    init(dict:[String:Any?]) {
+        if let value = dict["id"] as? Int{
+            id = value
+        }
+        if let value = dict["image"] as? String{
+            imageName = value
+        }
+        if let value = dict["intenal_name"] as? String{
+            internalName = value
+        }
+        if let value = dict["name"] as? String{
+            name = value
+        }
+        if let value = dict["penalty"] as? CGFloat{
+            penalty = value
+        }
+    }
+}
+
