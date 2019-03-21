@@ -265,15 +265,10 @@ class AFNetworkingServiceManager: NSObject {
     
     
     func parseLinkWithImageAndHeaderUsingPostMethod(_ servicename:String,parameter:NSDictionary?,imgData : Data?,pathKey:String,token:String,completion:@escaping (Bool?,AnyObject?,NSError?) -> Void){
-        
         manager.requestSerializer.setValue(token, forHTTPHeaderField: "token")
-        
         manager.responseSerializer.acceptableContentTypes = NSSet(objects: "application/json", "text/html") as? Set<String>
-        
         let  strUrl : String = self.initWithManager()
-        
         manager.post(strUrl+servicename, parameters: parameter, constructingBodyWith: { (formData:AFMultipartFormData) -> Void in
-            
             formData.appendPart(withFileData: imgData!, name: pathKey, fileName: "\(self.makeFileName()).jpg", mimeType: "image/jpeg")
             
         }, progress: nil, success: { (operation, responseObj) -> Void in

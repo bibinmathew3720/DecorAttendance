@@ -233,5 +233,19 @@ class CCUtility: NSObject {
         }
     }
     
+    class func getAttendanceTypeString(attendanceType:AttendanceType)->String{
+        switch attendanceType {
+        case .StartTime:
+            return "Start Time"
+        case .EndTime:
+            return "End Time"
+        case .SickLeave:
+            return "Sick Leave"
+        case .Absent:
+            return "Adsent"
+        case .Strike:
+            return "Strike"
+        }
+    }
     
 }

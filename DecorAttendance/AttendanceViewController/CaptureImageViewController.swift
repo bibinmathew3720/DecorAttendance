@@ -143,6 +143,7 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
         self.performSegue(withIdentifier: "toPhotoCheckSceneSegue:Capture", sender: Any.self)
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toPhotoCheckSceneSegue:Capture" {

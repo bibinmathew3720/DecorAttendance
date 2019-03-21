@@ -19,19 +19,16 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     
     
     var capturedImageRef: UIImage!
-    var attendanceTypeRef: String!
-    var penaltyRef: String!
     var paramsDict = NSMutableDictionary()
     var spinner = UIActivityIndicatorView(style: .gray)
     var locationManager: CLLocationManager! = nil
-    var lat: String!
-    var lng: String!
     var imageData: Data!
     
     var selSiteModel:ObeidiModelSites?
     var attendanceResponse:ObeidiModelFetchAttendance?
     var attendanceType:AttendanceType?
     var penaltyValue:CGFloat?
+    var selLocation:Location?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,9 +101,7 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
         ObeidiModelMarkAttendance.callMarkAttendanceRequest(dataDict: getParamsDict(), image: self.imageData){
             (success, result, error) in
-            
             if success! {
-                
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 print(result!)
                 
@@ -121,71 +116,60 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
                 alertController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
                 alertController.delegate = self
                 self.present(alertController, animated: true, completion: nil)
-                
-                
-                
             }else{
-                
-                
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                
-                
             }
-            
-            
-            
-            
         }
-        
-        
-        
     }
-    func getParamsDict() -> NSMutableDictionary {
     
-        paramsDict.setValue(penaltyRef, forKey: "penalty")
+    func getParamsDict() -> NSMutableDictionary {
+        if let penalty = self.penaltyValue {
+            paramsDict.setValue("\(penalty)", forKey: "penalty")
+        }
         if let siteModel = self.selSiteModel{
             paramsDict.setValue("\(siteModel.locIdNew)", forKey: "site_id")
         }
-        paramsDict.setValue(self.lng, forKey: "lng")
-        paramsDict.setValue(self.lat, forKey: "lat")
-        paramsDict.setValue(attendanceTypeRef, forKey: "type")
+        if let location = self.selLocation{
+            paramsDict.setValue("\(location.latitude)", forKey: "lat")
+            paramsDict.setValue("\(location.longitude)", forKey: "lng")
+        }
+        if let attType = self.attendanceType{
+             paramsDict.setValue(CCUtility.getAttendanceTypeString(attendanceType:attType), forKey: "type")
+        }
         if let attResponse = self.attendanceResponse{
             paramsDict.setValue("\(attResponse.empId)", forKey: "emp_id")
         }
         paramsDict.setValue("0", forKey: "bonus")
         paramsDict.setValue(capturedImageRef, forKey: "image")
-        
         return paramsDict
     }
+    
     func dismissed() {
-        
         self.navigationController?.popToRootViewController(animated: true)
-        
     }
+    
     //MARK: location delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")
-        
-        self.lat = String(Float(locValue.latitude))
-        self.lng = String(Float(locValue.longitude))
-        
-        
-        
+        selLocation = Location()
+        selLocation?.latitude = locValue.latitude
+        selLocation?.longitude = locValue.longitude
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "toEndTimeBonusSceneSegue:PhotoCheck"{
             let vc = segue.destination as! EndTimeBonusViewController
             vc.selSiteModel = self.selSiteModel
             vc.attendanceResponse = self.attendanceResponse
             vc.attendanceType = self.attendanceType
-            
+            vc.selLocation = self.selLocation
             vc.imageDataRef = self.imageData
-            vc.attendanceTypeRef = self.attendanceTypeRef
-            vc.penaltyRef = self.penaltyRef
-            vc.latRef = self.lat
-            vc.lngRef = self.lng
         }
     }
+}
+
+class Location:NSObject{
+    var latitude:Double = 0.0
+    var longitude:Double = 0.0
 }

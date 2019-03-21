@@ -17,7 +17,7 @@ enum AttendanceType{
     case Strike
 }
 
-let startTime = "Start time"
+let startTime = "Start Time"
 let endTime = "End Time"
 let sickLeave = "Sick Leave"
 let absent = "Absent"
