@@ -13,6 +13,7 @@ import AVFoundation
 class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     @IBOutlet weak var previewView: UIView!
+    @IBOutlet weak var rotateButton: UIButton!
     
     var captureSession: AVCaptureSession!
     var stillImageOutput: AVCapturePhotoOutput!
@@ -27,7 +28,6 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     var selSiteModel:ObeidiModelSites?
     var attendanceResponse:ObeidiModelFetchAttendance?
     var attendanceType:AttendanceType?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,24 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
         self.captureSession.stopRunning()
     }
     
+    func getFrontCamera() -> AVCaptureDevice?{
+        let videoDevices = AVCaptureDevice.devices(for: AVMediaType.video)
+        //let videoDevices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
+        for device in videoDevices{
+            if device.position == AVCaptureDevice.Position.front {
+                return device
+            }
+        }
+        return nil
+    }
+    
+    func getBackCamera() -> AVCaptureDevice?{
+        if let video = AVCaptureDevice.default(for: AVMediaType.video){
+            return video
+        }
+        return nil
+    }
+    
     func configureCamera() {
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
@@ -55,23 +73,24 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
                 return
         }
         
-        do {
-            let input = try AVCaptureDeviceInput(device: backCamera)
-            stillImageOutput = AVCapturePhotoOutput()
-            
-            if captureSession.canAddInput(input) && captureSession.canAddOutput(stillImageOutput) {
-                captureSession.addInput(input)
-                captureSession.addOutput(stillImageOutput)
-                setupLivePreview()
+       var currentCaptureDevice: AVCaptureDevice?
+        currentCaptureDevice = (self.rotateButton.isSelected ? getFrontCamera() : getBackCamera())
+        if let captureDevice = currentCaptureDevice{
+            do {
+                let input = try AVCaptureDeviceInput(device: captureDevice)
+                stillImageOutput = AVCapturePhotoOutput()
+                
+                if captureSession.canAddInput(input) && captureSession.canAddOutput(stillImageOutput) {
+                    captureSession.addInput(input)
+                    captureSession.addOutput(stillImageOutput)
+                    setupLivePreview()
+                }
+                
             }
-            
+            catch let error  {
+                print("Error Unable to initialize back camera:  \(error.localizedDescription)")
+            }
         }
-        catch let error  {
-            print("Error Unable to initialize back camera:  \(error.localizedDescription)")
-        }
-        
-        
-        
     }
     
     func setupLivePreview() {
@@ -91,8 +110,12 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
         }
     }
     
+    @IBAction func rotateButtonAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        configureCamera()
+    }
+    
     @IBAction func bttnActnCapture(_ sender: Any) {
-        
         #if targetEnvironment(simulator)
         // your simulator code
         self.performSegue(withIdentifier: "toPhotoCheckSceneSegue:Capture", sender: Any.self)
@@ -105,12 +128,8 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
             // Fallback on earlier versions
         }
         #endif
-        
-        
-        
-        
-        
     }
+    
     @available(iOS 11.0, *)
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
@@ -146,8 +165,5 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
             VC.imageData = self.imageDataRep
             
         }
-        
-        
-        
     }
 }
