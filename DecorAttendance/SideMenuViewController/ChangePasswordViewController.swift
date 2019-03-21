@@ -35,6 +35,10 @@ class ChangePasswordViewController: UIViewController {
     
     func setUpViewStyles(){
         
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
+        
         self.currentPwdTF.leftViewMode = UITextField.ViewMode.always
         let imageView = UIImageView(frame: CGRect(x: 18, y: 18, width: 20, height: 20))
         let image = UIImage(named: "password")

@@ -28,6 +28,9 @@ class AboutViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     func initialisation(){
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         self.missionView.layer.cornerRadius = 8
         self.missionView.layer.shadowOffset = CGSize(width: 0, height: 8)
         self.missionView.layer.shadowColor = UIColor(red:0.11, green:0.16, blue:0.36, alpha:0.34).cgColor

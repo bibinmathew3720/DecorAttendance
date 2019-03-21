@@ -137,6 +137,38 @@ class UserManager: CLBaseService {
         let responseModel = ChangePasswordModel.init(dict:dict)
         return responseModel
     }
+    
+    func callForgotPasswordApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelForForgotPassword(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.getForgotPasswordResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
+    
+    func networkModelForForgotPassword(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.RESET_PASSWORD, requestMethod_: "POST")
+        requestModel.requestBody = body
+        return requestModel
+    }
+    
+    func getForgotPasswordResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = ChangePasswordModel.init(dict:dict)
+        return responseModel
+    }
 }
 class DecoreProfileResponseModel : NSObject{
     
@@ -370,6 +402,15 @@ class ChangePwdRequestModel:NSObject {
     func getRequestBody()->String{
         var dict:[String:AnyObject] = [String:AnyObject]()
         dict.updateValue(new as AnyObject, forKey: "new_password")
+        return CCUtility.getJSONfrom(dictionary: dict)
+    }
+}
+class ForgotPwdRequestModel:NSObject {
+    var email:String = ""
+    
+    func getRequestBody()->String{
+        var dict:[String:AnyObject] = [String:AnyObject]()
+        dict.updateValue(email as AnyObject, forKey: "email")
         return CCUtility.getJSONfrom(dictionary: dict)
     }
 }
