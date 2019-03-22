@@ -15,7 +15,7 @@ protocol DashBoardDelegate: class {
     
 }
 
-class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCAAnimationDelegateProtocol, filterUpdatedDelegate {
+class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProtocol, filterUpdatedDelegate {
     
     func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
         
@@ -35,7 +35,6 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     @IBOutlet weak var selectSite: UIView!
     @IBOutlet weak var endDateView: UIView!
     @IBOutlet weak var startDateView: UIView!
-    @IBOutlet weak var viewDropDownButtons: UIView!
     @IBOutlet weak var lblSite: UILabel!
     @IBOutlet weak var viewRemainingBonus: UIView!
     @IBOutlet weak var viewTotalOtBonus: UIView!
@@ -43,9 +42,6 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
     
     @IBOutlet weak var lblEndDate: UILabel!
     @IBOutlet weak var lblStratDate: UILabel!
-    @IBOutlet weak var tableViewMonth: UITableView!
-    @IBOutlet weak var tableViewDay: UITableView!
-    @IBOutlet weak var tableViewSite: UITableView!
     
     @IBOutlet weak var widthTotalBounsColred: NSLayoutConstraint!
     @IBOutlet weak var widthTotalBonusLight: NSLayoutConstraint!
@@ -194,43 +190,13 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         addDropDownLabelAndImage(lblToModify: lblStratDate, lblText: "")
         addDropDownLabelAndImage(lblToModify: lblSite, lblText: "All")
         addDropDownLabelAndImage(lblToModify: lblEndDate, lblText: "")
-        
-        
     }
     
     func addDropDownLabelAndImage(lblToModify: UILabel, lblText: String) {
-//        var image: UIImage!
-//        if lblToModify != self.lblSite {
-//            image = UIImage(named: "attendsnce_fill")
-//
-//        }else{
-//           image = UIImage(named: "dropdown")
-//
-//        }
-//
-//        let newSize = CGSize(width: 10, height: 10)
-//
-//        //Resize image
-//        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-//        image?.draw(in: CGRect(x:0, y:0, width: newSize.width, height: newSize.height))
-//        let imageResized = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//
-//        //Create attachment text with image
-//        let attachment = NSTextAttachment()
-//        attachment.image = imageResized
-//        let attachmentString = NSAttributedString(attachment: attachment)
-//
-//        let myString = NSMutableAttributedString(string: lblText)
-//        myString.append(attachmentString)
-//        lblToModify.attributedText = myString
-        
         lblToModify.text = lblText
-        
     }
     
     func addTapGesturesToLabels() {
-        
         self.startDateView.isUserInteractionEnabled = true
         let tapGestureMonth = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleMonthLabelTap))
         self.startDateView.addGestureRecognizer(tapGestureMonth)
@@ -242,21 +208,16 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
         self.endDateView.isUserInteractionEnabled = true
         let tapGestureDay = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleDateLabelTap))
         self.endDateView.addGestureRecognizer(tapGestureDay)
-        
     }
+    
     @objc func handleMonthLabelTap(){
-        
-        //presentDropDownController(tableCgPoint: getPointForMonthTable(), dropDownFor: .Month, arr: fetchMonthArr())
         DispatchQueue.main.async {
-            
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                 self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
                 self.navigationController?.navigationBar.alpha = 0.65
                 
-                
             },completion:nil)
-            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let calendarViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
             calendarViewController.delegate = self
@@ -265,13 +226,10 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             calendarViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             calendarViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             self.present(calendarViewController, animated: true, completion: nil)
-            
         }
-        
     }
+    
     @objc func handleDateLabelTap(){
-        
-        //presentDropDownController(tableCgPoint: getPointForDateTable(), dropDownFor: .Date, arr: fetchDateArr())
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
@@ -316,114 +274,6 @@ class DashBoardViewController: UITableViewController, DropDownDataDelegate, MyCA
             self.present(siteViewController, animated: true, completion: nil)
             
         }
-    }
-    func presentDropDownController(tableCgPoint: CGPoint, dropDownFor:
-        DropDownNeededFor, arr: NSMutableArray) {
-        for cell in tableView.visibleCells{
-            
-            cell.backgroundColor = ObeidiFont.Color.obeidiExactBlack()
-            cell.alpha = 0.4
-        }
-        
-        self.navigationController?.navigationBar.alpha = 0.7
-        self.tabBarController?.tabBar.alpha = 0.7
-        
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let dropDownController = storyboard.instantiateViewController(withIdentifier: "DropDownViewControllerID") as! DropDownViewController
-        dropDownController.tableCgPoint = tableCgPoint//CGPoint(x: self.viewDropDownButtons.frame.minX, y: self.viewDropDownButtons.frame.maxY) //+ (self.navigationController?.navigationBar.frame.size.height)!)
-        dropDownController.widthTable = self.lblEndDate.frame.size.width
-        dropDownController.dropDownNeededFor = dropDownFor
-        dropDownController.delegate = self
-        switch dropDownFor {
-            
-        case DropDownNeededFor.Date:
-            dropDownController.dateArr = arr
-            dropDownController.dropDownNeededFor = dropDownFor
-        case DropDownNeededFor.Month:
-            dropDownController.monthArr = arr
-            dropDownController.dropDownNeededFor = dropDownFor
-        case DropDownNeededFor.Site:
-            dropDownController.siteArr = arr
-            dropDownController.dropDownNeededFor = dropDownFor
-            
-        case .Attendance:
-            dropDownController.dropDownNeededFor = dropDownFor
-        }
-        
-        dropDownController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        dropDownController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(dropDownController, animated: true, completion: nil)
-        
-        
-    }
-    func fetchDateArr() -> NSMutableArray {
-        
-        let arr = NSMutableArray()
-        for i in 1...31{
-            
-            arr.add(String(i))
-            
-        }
-        return arr
-    }
-    
-    func fetchMonthArr() -> NSMutableArray {
-        
-        var arr = NSMutableArray()
-        arr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        return arr
-    }
-    
-    func getPointForMonthTable() -> CGPoint{
-        
-        return CGPoint(x: 12 + self.viewDropDownButtons.frame.minX + self.lblStratDate.frame.minX, y: self.viewDropDownButtons.frame.maxY + 90)
-        
-    }
-    func getPointForDateTable() -> CGPoint{
-        
-        return CGPoint(x: 12 + self.viewDropDownButtons.frame.minX + self.lblStratDate.frame.size.width + self.lblStratDate.frame.minX + 12, y: self.viewDropDownButtons.frame.maxY + 90)
-        
-    }
-    func getPointForSiteTable() -> CGPoint{
-        
-        return CGPoint(x: 12 + self.viewDropDownButtons.frame.minX + self.lblStratDate.frame.minX + self.lblEndDate.frame.size.width + self.lblStratDate.frame.size.width + 24, y: self.viewDropDownButtons.frame.maxY + 90)
-        
-    }
-    func changedValue(is value: String!, dropDownType: DropDownNeededFor, index: Int) {
-        
-        switch  dropDownType {
-        case .Date:
-            addDropDownLabelAndImage(lblToModify: self.lblEndDate, lblText: value)
-            daySelectedIndex = index
-        case .Month:
-            addDropDownLabelAndImage(lblToModify: self.lblStratDate, lblText: value)
-            monthSelectedIndex = index
-        case .Site:
-            addDropDownLabelAndImage(lblToModify: self.lblSite, lblText: value)
-            self.siteSelectedIndex = index
-            
-            let monthValue = String(monthSelectedIndex + 1)
-            let dayValue = String(daySelectedIndex + 1)
-            let date = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy"
-            let formattedDate = formatter.string(from: date) + "-" + monthValue + "-" + dayValue
-            
-            //let siteID = String((self.siteModelObjArr.object(at: siteSelectedIndex) as! ObeidiModelSites).id as! Int)
-            
-            //callSiteWiseCostSummaryAPI(siteID: siteID, startDate: "", endDate: formattedDate)
-            
-        case .Attendance:
-            print("  ")
-        }
-        
-        for cell in tableView.visibleCells{
-            cell.backgroundColor = UIColor.white
-            cell.alpha = 1
-        }
-        self.navigationController?.navigationBar.alpha = 1
-        self.tabBarController?.tabBar.alpha = 1
     }
     
     func callGetAllSitesAPI() {
