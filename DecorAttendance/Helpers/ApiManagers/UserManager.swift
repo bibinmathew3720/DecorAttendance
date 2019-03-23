@@ -169,6 +169,38 @@ class UserManager: CLBaseService {
         let responseModel = ChangePasswordModel.init(dict:dict)
         return responseModel
     }
+    func callEmployeeDetailsApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelForEmployeeDetails(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.getEmployeeDetailsResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
+    
+    func networkModelForEmployeeDetails(with body:String)->CLNetworkModel{
+        let emp_id = UserDefaults.standard.integer(forKey: "EmpID")
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + String(emp_id), requestMethod_: "GET")
+        requestModel.requestBody = body
+        return requestModel
+    }
+    
+    func getEmployeeDetailsResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = ChangePasswordModel.init(dict:dict)
+        return responseModel
+    }
 }
 class DecoreProfileResponseModel : NSObject{
     

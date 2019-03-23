@@ -36,15 +36,16 @@ class EmployeeDetailsViewController: UITableViewController {
     var details: DecoreEmployeeModel?
     override func viewDidLoad() {
         super.viewDidLoad()
+        callEmployeeDetailsAPI()
         populateData()
-        setViewStyle(view: viewInfoLabel)
-        setViewStyle(view: viewStrikeRate)
-        setViewStyle(view: viewAbsenseRate)
-        setViewStyle(view: viewIncentiveRate)
-        setViewStyle(view: viewPenaltyRate)
-        setViewStyle(view: viewPerformanceRate)
+//        setViewStyle(view: viewInfoLabel)
+//        setViewStyle(view: viewStrikeRate)
+//        setViewStyle(view: viewAbsenseRate)
+//        setViewStyle(view: viewIncentiveRate)
+//        setViewStyle(view: viewPenaltyRate)
+//        setViewStyle(view: viewPerformanceRate)
         
-        setLabelStyle()
+        //setLabelStyle()
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
@@ -58,7 +59,7 @@ class EmployeeDetailsViewController: UITableViewController {
             lblName.text = model.name
             lblID.text = String(model.emp_id)
             lblJoinedDate.text = model.date_of_joining
-            lblAge.text = String(CCUtility.calcAge(birthday: model.dob))
+            lblAge.text = String(CCUtility.calcAge(birthday: model.dob)) + "years old"
             lblOccupation.text = UserDefaults.standard.string(forKey: "role")
             lblRating.text = model.rating + "/10"
             let rating = Double(model.rating)
@@ -139,4 +140,36 @@ class EmployeeDetailsViewController: UITableViewController {
         
     }
     
+    func callEmployeeDetailsAPI(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        UserManager().callEmployeeDetailsApi(with: "", success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let _model = model as? ChangePasswordModel{
+                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+                if type == StatusEnum.success{
+                    
+                }
+                else if type == StatusEnum.sessionexpired{
+                }
+                else{
+                   
+                }            }
+            
+            
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+               
+            }
+            else{
+               
+            }
+            
+            print(ErrorType)
+        }
+       
+    }
+    
+
 }

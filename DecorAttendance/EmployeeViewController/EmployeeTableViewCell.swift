@@ -70,7 +70,20 @@ class EmployeeTableViewCell: UITableViewCell {
         lblName.text = model.name
         imageViewLabour.loadImageUsingCache(withUrl: model.image, colorValue: nil)
         let rating = Double(model.rating)
+       
         if let rat = rating{
+            if rat < 5.0{
+                viewColoured.backgroundColor = .red
+            }
+            else if rat > 8.0{
+                viewColoured.backgroundColor = .green
+            }
+            else if rat > 4.0 && rat < 7.0{
+                viewColoured.backgroundColor = .orange
+            }
+            else{
+                viewColoured.backgroundColor = .yellow
+            }
             widthColoredIndctr.constant = CGFloat(4 * rat)
         }
         
