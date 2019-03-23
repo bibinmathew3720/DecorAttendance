@@ -83,14 +83,14 @@ class CCUtility: NSObject {
         
     }
     
-   class func showAlertWithYesOrNo(_title : String, viewController:UIViewController, messageString:String, completion:@escaping (_ result:Bool) -> Void) {
+   class func showAlertWithYesOrCancel(_title : String, viewController:UIViewController, messageString:String, completion:@escaping (_ result:Bool) -> Void) {
     
         let alertController = UIAlertController(title: _title, message: messageString, preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: "YES", style: .default) { (action:UIAlertAction) in
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { (action:UIAlertAction) in
            
             completion (true)
         }
-        let noAction = UIAlertAction(title: "NO", style: .default) { (action:UIAlertAction) in
+        let noAction = UIAlertAction(title: "Cancel", style: .default) { (action:UIAlertAction) in
             completion (false)
         }
         alertController.addAction(noAction)
@@ -221,7 +221,8 @@ class CCUtility: NSObject {
     }
     
     class func processAfterLogOut(){
-        
+        UserDefaults.standard.setValue("", forKey: "accessToken")
+        UserDefaults.standard.set(false, forKey: Constant.VariableNames.isLoggedIn)
     }
     
     class func getCurrentLanguage()->String{

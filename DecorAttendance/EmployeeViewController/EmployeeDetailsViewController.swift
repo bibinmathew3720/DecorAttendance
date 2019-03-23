@@ -55,6 +55,7 @@ class EmployeeDetailsViewController: UITableViewController {
     
     func populateData(){
         if let model = self.details{
+            self.title = "EMPLOYEES DETAIL"
             lblName.text = model.name
             lblID.text = String(model.emp_id)
             lblJoinedDate.text = model.date_of_joining

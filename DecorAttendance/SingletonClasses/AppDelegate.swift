@@ -32,21 +32,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().layer.borderWidth = 0.0
         UITabBar.appearance().clipsToBounds = true
         //UINavigationBar.appearance().barTintColor = UIColor.red
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         initWindow()
         return true
     }
     
     func initWindow(){
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableAutoToolbar = false
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-//        if UserDefaults.standard.bool(forKey: "isLoggedIn"){
-//            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-//            let containerVC = storyBoard.instantiateViewController(withIdentifier: "CenterViewControllerID")
-//            let nav = UINavigationController.init(rootViewController: containerVC)
-//            let delegate = UIApplication.shared.delegate as! AppDelegate
-//            delegate.window?.rootViewController = nav
-//        }
+        if UserDefaults.standard.bool(forKey: Constant.VariableNames.isLoggedIn){
+             //if isSiteEngineer{
+            let containerViewController = ContainerViewController()
+            containerViewController.navigationController?.navigationBar.backgroundColor = ObeidiColors.ColorCode.obeidiRed()
+            self.window!.rootViewController = containerViewController
+        }
+        else{
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyBoard.instantiateViewController(withIdentifier: "LoginViewControllerID")
+            self.window?.rootViewController = loginVC
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

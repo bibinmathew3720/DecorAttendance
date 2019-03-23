@@ -3626,7 +3626,7 @@
         <!--Navigation Controller-->
         <scene sceneID="jvO-Ex-9rf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RZG-SU-dAa" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RootNavigationControllerID" automaticallyAdjustsScrollViewInsets="NO" id="RZG-SU-dAa" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" backIndicatorImage="navigationBar:gb8-uu-Qyd:backIndicatorImage" id="gb8-uu-Qyd">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

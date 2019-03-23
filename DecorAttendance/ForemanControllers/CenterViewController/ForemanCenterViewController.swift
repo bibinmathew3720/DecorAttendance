@@ -63,7 +63,7 @@ class ForemanCenterViewController: UIViewController, ForemanLeftViewControllerDe
             self.performSegue(withIdentifier: "toChangePwdSceneSegue", sender: Any.self)
         case 3:
             UserDefaults.standard.setValue("", forKey: "accessToken")
-            UserDefaults.standard.set(false, forKey: "isLoggedIn")
+            UserDefaults.standard.set(false, forKey: Constant.VariableNames.isLoggedIn)
             let delegate = UIApplication.shared.delegate as! AppDelegate
             delegate.initWindow()
         default:

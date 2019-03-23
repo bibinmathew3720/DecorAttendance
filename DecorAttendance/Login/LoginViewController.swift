@@ -238,7 +238,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         
         let accessToken = dataDict.value(forKey: "token") as! String
         UserDefaults.standard.setValue(accessToken, forKey: "accessToken")
-        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        UserDefaults.standard.set(true, forKey: Constant.VariableNames.isLoggedIn)
         
         let role = dataDict.value(forKey: "roles") as! NSArray
         
@@ -246,7 +246,9 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
             UserDefaults.standard.setValue("Engineering Head", forKey: "role")
             self.isSiteEngineer = true
             self.isForeman = false
-            self.performSegue(withIdentifier: "toHomeSceneSegue", sender: Any.self)
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            delegate.initWindow()
+           // self.performSegue(withIdentifier: "toHomeSceneSegue", sender: Any.self)
             
         }else if (role.object(at: 0) as! String == "foreman"){
             UserDefaults.standard.setValue("Foreman", forKey: "role")
@@ -279,12 +281,10 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
             
             if isSiteEngineer{
                 self.window = UIWindow(frame: UIScreen.main.bounds)
-                
                 let containerViewController = ContainerViewController()
-                containerViewController.navigationController?.navigationBar.backgroundColor = ObeidiColors.ColorCode.obeidiRed()
-                
+            containerViewController.navigationController?.navigationBar.backgroundColor = ObeidiColors.ColorCode.obeidiRed()
                 self.window!.rootViewController = containerViewController
-                self.window!.makeKeyAndVisible()
+                //self.window!.makeKeyAndVisible()
                 
             }else{
                 self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -294,14 +294,8 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
                 
                 self.window!.rootViewController = containerViewControllerForeman
                 self.window!.makeKeyAndVisible()
-                
-                
             }
-            
-            
         }
-        
-        
     }
     
     func addTapgesturesToView()  {
