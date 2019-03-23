@@ -9,7 +9,6 @@
 import UIKit
 
 class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateProtocol,filterUpdatedDelegate {
-    @IBOutlet weak var viewDropDownButtons: UIView!
     @IBOutlet weak var lblSite: UILabel!
     @IBOutlet weak var lblEndDate: UILabel!
     @IBOutlet weak var lblStartDate: UILabel!
@@ -22,16 +21,52 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     @IBOutlet weak var startDateView: UIView!
     @IBOutlet weak var bttnExportLabourCard: UIButton!
     
-    @IBOutlet weak var widthTotalOTColred: NSLayoutConstraint!
+    //Total Wage
+    @IBOutlet weak var totalWageLabel: UILabel!
+    @IBOutlet weak var widthTotalWageColred: NSLayoutConstraint!
+    @IBOutlet weak var widthTotalWageLight: NSLayoutConstraint!
+    @IBOutlet weak var totalWageAmountLabel: UILabel!
+    @IBOutlet weak var totalWageAmountIndicatorColored: UIView!
+    @IBOutlet weak var totalWageAmountIndicatorWhite: UIView!
+    
+    //Total OT
+    @IBOutlet weak var totalOTPercentageLabel: UILabel!
+    @IBOutlet weak var totalOTIndicatorColored: UIView!
+    @IBOutlet weak var widthTotalOTIndicatorColored: NSLayoutConstraint!
     @IBOutlet weak var widthTotalOTLight: NSLayoutConstraint!
-    @IBOutlet weak var widthTotalBonusColored: NSLayoutConstraint!
-    @IBOutlet weak var widthTotalBonusLight: NSLayoutConstraint!
-    @IBOutlet weak var widthTotalAbsenseColored: NSLayoutConstraint!
-    @IBOutlet weak var widthTotalAbsenseLight: NSLayoutConstraint!
+     @IBOutlet weak var totalOTIndicatorWhite: UIView!
+    @IBOutlet weak var totalOtPriceLabel: UILabel!
+    
+    //Total Bonus
+    @IBOutlet weak var totalBonusPerLabel: UILabel!
+    @IBOutlet weak var totalBonusIndicatorColored: UIView!
+    @IBOutlet weak var totalBonusIndicatorWhite: UIView!
+    @IBOutlet weak var widthTotalBonusIndicatorWhite: NSLayoutConstraint!
+    @IBOutlet weak var widthTotalBonusIndColored: NSLayoutConstraint!
+    @IBOutlet weak var totalBonusPriceLabel: UILabel!
+   
+    //Sick Leave
+    @IBOutlet weak var sickLeavePerLabel: UILabel!
+    @IBOutlet weak var sickLeaveIndicatorLineWhite: UIView!
+    @IBOutlet weak var sickLeaveIndicatorLineColored: UIView!
     @IBOutlet weak var widthTotalSickLeaveColored: NSLayoutConstraint!
     @IBOutlet weak var widthTotalSickLeaveLight: NSLayoutConstraint!
+    @IBOutlet weak var sickLEavePriceLabel: UILabel!
+    
+    //Paid Vacation
+    @IBOutlet weak var paidVacationPerLabel: UILabel!
     @IBOutlet weak var widthTotalPaidVacationColored: NSLayoutConstraint!
     @IBOutlet weak var widthTotalPaidVacationLight: NSLayoutConstraint!
+    @IBOutlet weak var paidVacationIndicatorWhite: UIView!
+    @IBOutlet weak var paidVacationIndicatorColored: UIView!
+    @IBOutlet weak var paidVacationAmountLabel: UILabel!
+    
+    //Penalties
+    
+    @IBOutlet weak var widthTotalAbsenseColored: NSLayoutConstraint!
+    @IBOutlet weak var widthTotalAbsenseLight: NSLayoutConstraint!
+    
+   
     @IBOutlet weak var widthtotalStrikeColored: NSLayoutConstraint!
     @IBOutlet weak var widthTotalStrikeLight: NSLayoutConstraint!
     
@@ -39,14 +74,8 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     
     @IBOutlet weak var totalAbsenseIndicatorLineWhite: UIView!
     @IBOutlet weak var totalAbsenseIndicatorLineColored: UIView!
-    @IBOutlet weak var totalBonusIndicatorWhite: UIView!
-    @IBOutlet weak var totalBonusIndicatorColored: UIView!
-    @IBOutlet weak var totalOTIndicatorWhite: UIView!
-    @IBOutlet weak var totalOTIndicatorColred: UIView!
-    @IBOutlet weak var sickLeaveIndicatorLineWhite: UIView!
-    @IBOutlet weak var sickLeaveIndicatorLineColored: UIView!
-    @IBOutlet weak var paidVacationIndicatorWhite: UIView!
-    @IBOutlet weak var paidVacationIndicatorColored: UIView!
+   
+   
     @IBOutlet weak var totalStrikeIndicatorWhite: UIView!
     @IBOutlet weak var totalStrikeIndicatorColred: UIView!
     
@@ -86,7 +115,6 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         setUpViewStyles()
         addTapGesturesToLabels()
         slicedPieChart.myAnimationDelegate = self
-        setPerformanceIndicatorLines(lightLine: totalOTIndicatorWhite, coloredLine: totalOTIndicatorColred, percentage: 0.67, color: ObeidiColors.ColorCode.obeidiLinePink(), lightLineWidth: widthTotalOTLight, coloredLineWidth: widthTotalOTColred)
     }
     
     func initialisation(){
