@@ -180,6 +180,16 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     func populateCostDetails(){
         if let costDetail = self.costSummaryDetailResponse{
             
+            let wageSlice = Slice(radius: 0.75, width: costDetail.wagePercentage/100, isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.wageColor)
+            let otSlice = Slice(radius: 0.65, width: (costDetail.overTimePercentage/100), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.overTimeColor)
+            let bonusSlice = Slice(radius: 0.75, width: (costDetail.bonusPercentage/100), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor:Constant.Colors.bonusColor)
+            let sickLeaveSlice = Slice(radius: 0.80, width: costDetail.medicalLeavePercentage/100, isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.sickLeaveColor)
+            let vacationSlice = Slice(radius: 0.72, width: costDetail.paidVacationPercentage/100, isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.paidVacancColor)
+            
+            slicedPieChart.layer.sublayers = nil
+            slicedPieChart.slices = [bonusSlice,otSlice,wageSlice,sickLeaveSlice,vacationSlice]
+            
+            
             self.totalWageLabel.text = String.init(format: "%0.2f", costDetail.wagePercentage) + "%"
             self.totalWageLabel.textColor = Constant.Colors.wageColor
             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalWageAmountIndicatorWhite, lineB: totalWageAmountIndicatorColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.wageColor, lineAValue: 1, lineBValue: (costDetail.wagePercentage/100.00), lineAMeter: widthTotalWageLight, lineBMeter: widthTotalWageColred)
@@ -198,13 +208,12 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
             self.sickLeavePerLabel.text = String.init(format: "%0.2f", costDetail.medicalLeavePercentage) + "%"
             self.sickLeavePerLabel.textColor = Constant.Colors.sickLeaveColor
             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.sickLeaveIndicatorLineWhite, lineB: sickLeaveIndicatorLineColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.sickLeaveColor, lineAValue: 1, lineBValue: (costDetail.medicalLeavePercentage/100.00), lineAMeter: widthTotalSickLeaveColored, lineBMeter: widthTotalSickLeaveColored)
-            self.sickLEavePriceLabel.text = "Hr " + "\(costDetail.totalMedicalLeaveDayCount)" + " AED " + "\(costDetail.medicalLeaveAmount)"
+            self.sickLEavePriceLabel.text = "Day " + "\(costDetail.totalMedicalLeaveDayCount)" + " AED " + "\(costDetail.medicalLeaveAmount)"
             
             self.paidVacationPerLabel.text = String.init(format: "%0.2f", costDetail.paidVacationPercentage) + "%"
             self.paidVacationPerLabel.textColor = Constant.Colors.paidVacancColor
             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.paidVacationIndicatorWhite, lineB: paidVacationIndicatorColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.paidVacancColor, lineAValue: 1, lineBValue: (costDetail.paidVacationPercentage/100.00), lineAMeter: widthTotalPaidVacationColored, lineBMeter: widthTotalPaidVacationColored)
             self.paidVacationAmountLabel.text = "AED " + "\(costDetail.paidVacationAmount)"
-            
             
             //Penalties
             
