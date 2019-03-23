@@ -24,14 +24,55 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     
     weak var delegate: DashBoardDelegate?
     
-    @IBOutlet weak var lblRemainingBnsAmnt: UILabel!
     @IBOutlet weak var lblRemainingBnsPerc: UILabel!
-    @IBOutlet weak var lblTotalBnsAmnt: UILabel!
-    @IBOutlet weak var lblTotalBnsPerc: UILabel!
-    @IBOutlet weak var lblTotalOTAmnt: UILabel!
-    @IBOutlet weak var lblTotalOTPerc: UILabel!
-    @IBOutlet weak var lblTotalCostAmnt: UILabel!
+    @IBOutlet weak var lblRemainingBnsAmnt: UILabel!
+    @IBOutlet weak var bonusIndicatorLineWhite: UIView!
+    @IBOutlet weak var bonusIndicatorLineColored: UIView!
+    @IBOutlet weak var widthBonusColored: NSLayoutConstraint!
     
+    //Total Wage
+    
+    @IBOutlet weak var lblWagePer: UILabel!
+    @IBOutlet weak var lblWageAmnt: UILabel!
+    @IBOutlet weak var totaltotalWageIndctrWhite: UIView!
+    @IBOutlet weak var totalWageIndctrColoured: UIView!
+    @IBOutlet weak var widthWageColoured: NSLayoutConstraint!
+    @IBOutlet weak var widthWageWhite: NSLayoutConstraint!
+    
+    //Total OT
+    @IBOutlet weak var lblTotalOTPerc: UILabel!
+    @IBOutlet weak var totalOTIndicatorWhite: UIView!
+    @IBOutlet weak var totalOTIndicatorColred: UIView!
+    @IBOutlet weak var widthTotalOTColored: NSLayoutConstraint!
+    @IBOutlet weak var widthTotalOTLight: NSLayoutConstraint!
+    @IBOutlet weak var lblTotalOTAmnt: UILabel!
+    
+    //Total Bonus
+     @IBOutlet weak var lblTotalBnsPerc: UILabel!
+    @IBOutlet weak var totalBonusIndicatorWhite: UIView!
+    @IBOutlet weak var totalBonusIndicatorColored: UIView!
+    @IBOutlet weak var widthTotalBounsColred: NSLayoutConstraint!
+    @IBOutlet weak var widthTotalBonusLight: NSLayoutConstraint!
+    @IBOutlet weak var lblTotalBnsAmnt: UILabel!
+    
+    //Total Sick Leave
+    @IBOutlet weak var lblLeavePer: UILabel!
+    @IBOutlet weak var lblLeaveAmnt: UILabel!
+    @IBOutlet weak var widthSickLeaveColoured: NSLayoutConstraint!
+    @IBOutlet weak var widthSickLeaveWhite: NSLayoutConstraint!
+    @IBOutlet weak var totalSickLeaveIndctrWhite: UIView!
+    @IBOutlet weak var totalSickLeaveIndctrColoured: UIView!
+    
+    //Total Paid Vacation
+    @IBOutlet weak var lblPaidVacationPer: UILabel!
+    @IBOutlet weak var lblVacationAmnt: UILabel!
+    @IBOutlet weak var totalPaidVacationIndctrWhite: UIView!
+    @IBOutlet weak var totalPaidVacationIndctrColoured: UIView!
+    @IBOutlet weak var widthVacationColoured: NSLayoutConstraint!
+    @IBOutlet weak var widthVacationWhite: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var lblTotalCostAmnt: UILabel!
     @IBOutlet weak var selectSite: UIView!
     @IBOutlet weak var endDateView: UIView!
     @IBOutlet weak var startDateView: UIView!
@@ -43,42 +84,8 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     @IBOutlet weak var lblEndDate: UILabel!
     @IBOutlet weak var lblStratDate: UILabel!
     
-    @IBOutlet weak var widthTotalBounsColred: NSLayoutConstraint!
-    @IBOutlet weak var widthTotalBonusLight: NSLayoutConstraint!
-    @IBOutlet weak var widthTotalOTColored: NSLayoutConstraint!
-    @IBOutlet weak var widthTotalOTLight: NSLayoutConstraint!
-    @IBOutlet weak var widthBonusColored: NSLayoutConstraint!
     @IBOutlet weak var widthBonusLight: NSLayoutConstraint!
-    @IBOutlet weak var widthSickLeaveColoured: NSLayoutConstraint!
-    @IBOutlet weak var widthSickLeaveWhite: NSLayoutConstraint!
-    @IBOutlet weak var widthVacationColoured: NSLayoutConstraint!
-    @IBOutlet weak var widthVacationWhite: NSLayoutConstraint!
-    @IBOutlet weak var widthWageColoured: NSLayoutConstraint!
-    @IBOutlet weak var widthWageWhite: NSLayoutConstraint!
-    
     @IBOutlet weak var heightBonusIndLight: NSLayoutConstraint!
-    @IBOutlet weak var bonusIndicatorLineWhite: UIView!
-    @IBOutlet weak var bonusIndicatorLineColored: UIView!
-    @IBOutlet weak var totalBonusIndicatorWhite: UIView!
-    @IBOutlet weak var totalBonusIndicatorColored: UIView!
-    @IBOutlet weak var totalOTIndicatorWhite: UIView!
-    @IBOutlet weak var totalOTIndicatorColred: UIView!
-    @IBOutlet weak var totalPaidVacationIndctrWhite: UIView!
-    @IBOutlet weak var totalPaidVacationIndctrColoured: UIView!
-    @IBOutlet weak var totalSickLeaveIndctrWhite: UIView!
-    @IBOutlet weak var totalSickLeaveIndctrColoured: UIView!
-    @IBOutlet weak var totaltotalWageIndctrWhite: UIView!
-    @IBOutlet weak var totalWageIndctrColoured: UIView!
-   
-    @IBOutlet weak var lblPaidVacationPer: UILabel!
-    
-    @IBOutlet weak var lblWageAmnt: UILabel!
-    @IBOutlet weak var lblVacationAmnt: UILabel!
-    
-    @IBOutlet weak var lblWagePer: UILabel!
-    @IBOutlet weak var lblLeavePer: UILabel!
-    @IBOutlet weak var lblLeaveAmnt: UILabel!
-    
     
     
     var window: UIWindow?

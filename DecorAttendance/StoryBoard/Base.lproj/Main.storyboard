@@ -3170,12 +3170,12 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0A-jR-ryY">
                                                     <rect key="frame" x="15" y="48" width="345" height="145"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total OT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="819-b4-cYA">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Wage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="819-b4-cYA">
                                                             <rect key="frame" x="53" y="8" width="103.5" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="rih-J3-nen"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -3200,7 +3200,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="OAo-7A-CIy"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -3209,16 +3209,16 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="Fge-Zr-vfq"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="9"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total bonus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOj-hG-GS6">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total OT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOj-hG-GS6">
                                                             <rect key="frame" x="53" y="34" width="103.5" height="14"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="o19-Rx-wMk"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -3243,7 +3243,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="eC6-Ss-c76"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -3252,7 +3252,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="FEE-rO-rgu"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="9"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -3293,7 +3293,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="w0D-MT-3eF"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3310,16 +3310,16 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="dje-ru-rEL"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="9"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Wage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfv-6a-qZD">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Bonus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfv-6a-qZD">
                                                     <rect key="frame" x="68" y="108" width="103.5" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="DQ8-sh-29C"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3336,7 +3336,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="mm2-jS-dLb"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3353,7 +3353,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="C0r-Hq-hQJ"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="9"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3362,7 +3362,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="2yn-gg-6xP"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3379,7 +3379,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="FIn-KL-fV5"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3396,13 +3396,13 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="o4X-5w-NID"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="9"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Paid Vacation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t11-XU-GXq">
-                                                    <rect key="frame" x="68" y="161" width="103.5" height="12"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <rect key="frame" x="68" y="160" width="103.5" height="14"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3423,7 +3423,7 @@
                                                                 <constraint firstAttribute="width" constant="45" id="QqF-AR-0eo"/>
                                                                 <constraint firstAttribute="height" constant="14" id="jRF-85-tFc"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -3432,7 +3432,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="PvZ-s1-bQy"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -3457,7 +3457,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="14" id="lyv-74-mVC"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="9"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -3476,26 +3476,20 @@
                                                         <constraint firstItem="B2p-rt-olK" firstAttribute="width" secondItem="Fef-wX-SwF" secondAttribute="width" multiplier="0.3" id="sdb-Vc-6M8"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAq-XB-RbJ">
-                                                    <rect key="frame" x="15" y="229" width="87" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="24" id="qda-fr-wTw"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL COST" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAq-XB-RbJ">
+                                                    <rect key="frame" x="15" y="229" width="121" height="27.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AED 4000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Oh-E9-nYP">
-                                                    <rect key="frame" x="244.5" y="223" width="115.5" height="36"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="36" id="fBO-DB-Vmz"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                    <rect key="frame" x="255" y="227.5" width="105" height="30.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="22"/>
                                                     <color key="textColor" red="0.78823529410000004" green="0.0078431372550000003" blue="0.098039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xO9-Mb-mvT">
-                                                    <rect key="frame" x="244.5" y="264" width="115.5" height="5"/>
+                                                    <rect key="frame" x="255" y="263" width="105" height="5"/>
                                                     <color key="backgroundColor" red="0.78823529410000004" green="0.0078431372550000003" blue="0.098039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="5" id="FX1-cP-Dpc"/>
@@ -3596,41 +3590,41 @@
                         <outlet property="lblRemainingBnsPerc" destination="oWJ-4j-VYH" id="Rsk-8h-KSl"/>
                         <outlet property="lblSite" destination="H6x-Hd-QcF" id="bxj-1l-ate"/>
                         <outlet property="lblStratDate" destination="bcL-yf-9oz" id="UPF-qZ-q97"/>
-                        <outlet property="lblTotalBnsAmnt" destination="8tX-e2-ERs" id="7kZ-dp-BO6"/>
-                        <outlet property="lblTotalBnsPerc" destination="33Z-cU-JlK" id="WxK-Yt-DsX"/>
+                        <outlet property="lblTotalBnsAmnt" destination="9R9-2z-ITJ" id="YIh-2i-GZP"/>
+                        <outlet property="lblTotalBnsPerc" destination="TxS-JB-65Q" id="rHJ-Ry-Pos"/>
                         <outlet property="lblTotalCostAmnt" destination="1Oh-E9-nYP" id="Skl-Ab-5Is"/>
-                        <outlet property="lblTotalOTAmnt" destination="o3g-vK-qdU" id="En4-lf-0in"/>
-                        <outlet property="lblTotalOTPerc" destination="iR3-Yw-9Kk" id="6m6-sm-Gzt"/>
+                        <outlet property="lblTotalOTAmnt" destination="8tX-e2-ERs" id="G30-pG-fQs"/>
+                        <outlet property="lblTotalOTPerc" destination="33Z-cU-JlK" id="ROY-Kg-ep4"/>
                         <outlet property="lblVacationAmnt" destination="h0e-OQ-2Ey" id="05V-ZX-eJH"/>
-                        <outlet property="lblWageAmnt" destination="9R9-2z-ITJ" id="FQd-qY-DlX"/>
-                        <outlet property="lblWagePer" destination="TxS-JB-65Q" id="JwY-Ef-SNJ"/>
+                        <outlet property="lblWageAmnt" destination="o3g-vK-qdU" id="Frq-Ex-1YF"/>
+                        <outlet property="lblWagePer" destination="iR3-Yw-9Kk" id="78u-Qw-p9M"/>
                         <outlet property="pieChartViewCostSummary" destination="66v-r0-ObI" id="Ddz-DW-5Tx"/>
                         <outlet property="selectSite" destination="wdX-0l-fMf" id="R6Q-0r-zFw"/>
                         <outlet property="startDateView" destination="0f9-vV-c0K" id="A5w-D4-Xo5"/>
-                        <outlet property="totalBonusIndicatorColored" destination="yFY-Rc-iM3" id="rmG-EK-bua"/>
-                        <outlet property="totalBonusIndicatorWhite" destination="FOf-XO-77O" id="4fe-cx-cVJ"/>
-                        <outlet property="totalOTIndicatorColred" destination="0EI-yz-yIQ" id="Ppz-CV-zWu"/>
-                        <outlet property="totalOTIndicatorWhite" destination="bEz-ac-PXN" id="pYp-EV-Fnu"/>
+                        <outlet property="totalBonusIndicatorColored" destination="SKn-RJ-Q4x" id="ZEW-xo-sbu"/>
+                        <outlet property="totalBonusIndicatorWhite" destination="VUZ-5p-Okw" id="5Hs-Ed-Cmu"/>
+                        <outlet property="totalOTIndicatorColred" destination="yFY-Rc-iM3" id="thy-KW-Xk9"/>
+                        <outlet property="totalOTIndicatorWhite" destination="FOf-XO-77O" id="W24-Q7-LrS"/>
                         <outlet property="totalPaidVacationIndctrColoured" destination="6Lq-eS-G7e" id="60u-Rs-lwB"/>
                         <outlet property="totalPaidVacationIndctrWhite" destination="LgG-gQ-CsW" id="3Zl-7D-GgF"/>
                         <outlet property="totalSickLeaveIndctrColoured" destination="UOZ-R1-ehn" id="H4e-lf-k4t"/>
                         <outlet property="totalSickLeaveIndctrWhite" destination="aHF-H2-ipH" id="C71-r8-AQ6"/>
-                        <outlet property="totalWageIndctrColoured" destination="SKn-RJ-Q4x" id="ppa-vp-bon"/>
-                        <outlet property="totaltotalWageIndctrWhite" destination="VUZ-5p-Okw" id="WII-h8-089"/>
+                        <outlet property="totalWageIndctrColoured" destination="0EI-yz-yIQ" id="FVA-P2-bAc"/>
+                        <outlet property="totaltotalWageIndctrWhite" destination="bEz-ac-PXN" id="A9a-B3-pbx"/>
                         <outlet property="viewRemainingBonus" destination="Fef-wX-SwF" id="Mh5-fp-E6g"/>
                         <outlet property="viewTotalOtBonus" destination="C0A-jR-ryY" id="bOX-Dg-LYh"/>
                         <outlet property="widthBonusColored" destination="EDd-xc-Yag" id="IKf-Gw-fdf"/>
                         <outlet property="widthBonusLight" destination="l3V-ko-5de" id="Og5-n2-SSN"/>
                         <outlet property="widthSickLeaveColoured" destination="1wW-Fu-ZOA" id="AvG-DS-7RS"/>
                         <outlet property="widthSickLeaveWhite" destination="9Xj-yW-e5t" id="6FG-Fu-f4K"/>
-                        <outlet property="widthTotalBonusLight" destination="Vsv-p0-AN3" id="wXw-zr-23y"/>
-                        <outlet property="widthTotalBounsColred" destination="ncQ-ab-60Z" id="FM2-5f-mL3"/>
-                        <outlet property="widthTotalOTColored" destination="PPg-MM-Tgy" id="6S1-So-76O"/>
-                        <outlet property="widthTotalOTLight" destination="BvP-5c-SDs" id="waR-mJ-am2"/>
+                        <outlet property="widthTotalBonusLight" destination="e8G-vC-vD0" id="yw3-XQ-2jM"/>
+                        <outlet property="widthTotalBounsColred" destination="y64-0J-Wtw" id="z0q-9x-6Q0"/>
+                        <outlet property="widthTotalOTColored" destination="ncQ-ab-60Z" id="2YU-rD-1Nr"/>
+                        <outlet property="widthTotalOTLight" destination="Vsv-p0-AN3" id="Bp1-bQ-fC3"/>
                         <outlet property="widthVacationColoured" destination="aes-74-4Oj" id="HSo-qc-la3"/>
                         <outlet property="widthVacationWhite" destination="nd7-EG-a1V" id="y4H-J6-7cE"/>
-                        <outlet property="widthWageColoured" destination="y64-0J-Wtw" id="nVV-j6-3Hj"/>
-                        <outlet property="widthWageWhite" destination="e8G-vC-vD0" id="k2r-dE-rh8"/>
+                        <outlet property="widthWageColoured" destination="PPg-MM-Tgy" id="zeH-o6-JLl"/>
+                        <outlet property="widthWageWhite" destination="BvP-5c-SDs" id="AeR-wN-fb1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1z-Ap-hfy" userLabel="First Responder" sceneMemberID="firstResponder"/>
