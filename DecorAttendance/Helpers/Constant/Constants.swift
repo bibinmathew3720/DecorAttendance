@@ -9,8 +9,13 @@
 import UIKit
 
 struct Constant{
+    static let AppName = "Obaid Al Abdi"
     struct ImageNames {
         static let placeholderImage = "placeholder"
+    }
+    
+    struct VariableNames {
+        static let isLoggedIn = "isLoggedIn"
     }
     
     struct SegueIdentifiers {

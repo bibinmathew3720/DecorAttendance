@@ -19,15 +19,14 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     var capturedImage: UIImage!
-   
-    var attendanceTypeRef: String!
     
-    var penaltyRef: String!
+    
     var imageDataRep: Data!
     
     var selSiteModel:ObeidiModelSites?
     var attendanceResponse:ObeidiModelFetchAttendance?
     var attendanceType:AttendanceType?
+    var penaltyValue:CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,6 +143,7 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
         self.performSegue(withIdentifier: "toPhotoCheckSceneSegue:Capture", sender: Any.self)
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toPhotoCheckSceneSegue:Capture" {
@@ -152,10 +152,8 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
             VC.selSiteModel = self.selSiteModel
             VC.attendanceResponse = self.attendanceResponse
             VC.attendanceType = self.attendanceType
-            
+            VC.penaltyValue = self.penaltyValue
             VC.capturedImageRef = capturedImage
-            VC.attendanceTypeRef = self.attendanceTypeRef
-            VC.penaltyRef = self.penaltyRef
             VC.imageData = self.imageDataRep
             
         }

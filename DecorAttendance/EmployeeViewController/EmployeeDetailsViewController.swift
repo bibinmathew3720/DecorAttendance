@@ -56,6 +56,7 @@ class EmployeeDetailsViewController: UITableViewController {
     
     func populateData(){
         if let model = self.details{
+            self.title = "EMPLOYEES DETAIL"
             lblName.text = model.name
             lblID.text = String(model.emp_id)
             lblJoinedDate.text = model.date_of_joining
@@ -66,11 +67,38 @@ class EmployeeDetailsViewController: UITableViewController {
             if let rat = rating{
                 widthColoredIndicator.constant = CGFloat(4 * rat)
             }
-//            let strike = Double(model.)
-//            if let _strike = strike{
-//                strikeViewWidth.constant = CGFloat(10 * _strike)
-//            }
+            getEmployeeDetailsApi(empId: model.emp_id)
+        }
+    }
+    
+    func getEmployeeDetailsApi(empId:Int){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        UserManager().getEmployeeDetailsApi(with:"\(empId)", success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let model = model as? GetEmployeeDetailsResponseModel{
+                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+                if type == StatusEnum.success{
+          
+                }
+                else if type == StatusEnum.sessionexpired{
+                    //                    self.callRefreshTokenApi()
+                }
+                else{
+                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
+                }
+            }
             
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            
+            print(ErrorType)
         }
     }
     

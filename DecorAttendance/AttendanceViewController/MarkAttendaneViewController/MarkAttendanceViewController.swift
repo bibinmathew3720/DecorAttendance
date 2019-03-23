@@ -17,7 +17,7 @@ enum AttendanceType{
     case Strike
 }
 
-let startTime = "Start time"
+let startTime = "Start Time"
 let endTime = "End Time"
 let sickLeave = "Sick Leave"
 let absent = "Absent"
@@ -33,8 +33,6 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     @IBOutlet weak var lblAttendanceSelection: UILabel!
     
     var spinner = UIActivityIndicatorView(style: .gray)
-   
-    var attendaneTypePassRef: String!
     
     var attendanceResponse:ObeidiModelFetchAttendance?
     var siteModelObjArr = [ObeidiModelSites]()
@@ -283,11 +281,9 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         if let attType = self.attendanceType{
             switch attType{
             case .StartTime:
-                self.attendaneTypePassRef = startTime
                      self.performSegue(withIdentifier: "toSafetyEquipmentsSceneSegue:MarkAttendance", sender: Any.self)
                     break
             case .EndTime:
-                self.attendaneTypePassRef = endTime
                 User.Attendance.type = User.attendanceType.endTime
                 self.performSegue(withIdentifier: "toCaptureImageSceneSegue:MarkAttendanceScene", sender: Any.self)
                 break
@@ -298,7 +294,6 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
                  showObeidiAlert(message: "Absent has been marked", title: "Success .")
                  break
             case .Strike:
-                self.attendaneTypePassRef = "strike"
                 showObeidiAlert(message: "Strike has been marked", title: "Success .")
                 break
             }
@@ -324,7 +319,6 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             vc.selSiteModel = self.selSiteModel
             vc.attendanceResponse = self.attendanceResponse
             vc.attendanceType = self.attendanceType
-            vc.attendanceTypeRef = self.attendaneTypePassRef
 
         }
         else if segue.identifier == "toCaptureImageSceneSegue:MarkAttendanceScene"{
@@ -332,7 +326,6 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             vc.selSiteModel = self.selSiteModel
             vc.attendanceResponse = self.attendanceResponse
             vc.attendanceType = self.attendanceType
-            vc.attendanceTypeRef = self.attendaneTypePassRef
         }
         else if segue.identifier == "toSickLeaveSceneSegue:MarkAttendance"{
         }

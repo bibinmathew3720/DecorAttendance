@@ -22,79 +22,57 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
     var activeTextField: UITextField!
     var spinner = UIActivityIndicatorView(style: .gray)
     var paramsDict = NSMutableDictionary()
-    
-    var attendanceTypeRef: String!
    
-    var penaltyRef: String!
-    var latRef: String!
-    var lngRef: String!
-    var imageDataRef: Data!
-    
     var selSiteModel:ObeidiModelSites?
     var attendanceResponse:ObeidiModelFetchAttendance?
     var attendanceType:AttendanceType?
+    var penaltyValue:CGFloat?
+    var selLocation:Location?
+    var imageDataRef: Data!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
         addTapgesturesToView()
         txtFldGivenBonus.delegate = self
         setViewStyles()
         calculateBonusPer()
-        
         self.lblRemainingBonus.text = "AED" + "\(User.BonusDetails.remaining_bonus)/ \(User.BonusDetails.bonus_budget)"
-       
         // Do any additional setup after loading the view.
     }
     
     //MARK: textfield delegate methods
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
-        
     }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         activeTextField = textField
-        
     }
 
     @IBAction func bttnActnDone(_ sender
         : Any){
-        
         self.callPostAttendanceAPI()
-        
-        
-        
     }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return 2
-        
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         switch indexPath.row {
         case 0:
-            
             return 350
         case 1:
-            
             return 250
         default:
-            
             return 0
             
         }
-        
     }
+    
     func drawOuterPieChart(center: CGPoint, radius: CGFloat, filValue: CGFloat) {
-        
         let circlePathColoured = UIBezierPath()
-        
-        
         circlePathColoured.addArc(withCenter: center, radius: radius * 0.95, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
         circlePathColoured.addLine(to: center)
         let circleLayerColoured = CAShapeLayer()
@@ -135,59 +113,40 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
         circleLayerColoured.addSublayer(textLayer)
         self.pieChartBonus.layer.addSublayer(circleLayerColoured)
         self.pieChartBonus.layer.addSublayer(circleLayerUnColoured)
-        
-        
-        
     }
+    
     func setViewStyles()  {
-        
         self.bttnDone.layer.cornerRadius = self.bttnDone.frame.size.height/2
-        
-        
-        
     }
 
     func addTapgesturesToView()  {
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(EndTimeBonusViewController.dismissKeyBoard))
-        
         self.view.addGestureRecognizer(tapGesture)
-        
     }
+    
     @objc func dismissKeyBoard()  {
-        
         if activeTextField != nil{
-            
             activeTextField.resignFirstResponder()
-            
         }
-        
-        
     }
+    
     func calculateBonusPer() {
-        
         let bonusPer = (ObeidiaTypeFormatter.cgfloatFromString(str: User.BonusDetails.remaining_bonus))/(ObeidiaTypeFormatter.cgfloatFromString(str: User.BonusDetails.bonus_budget))
         
         maxRadius = min(pieChartBonus.bounds.size.width,
                         pieChartBonus.bounds.size.height)/2 - 5
         center = CGPoint(x: pieChartBonus.bounds.midX,
                          y: pieChartBonus.bounds.midY)
-        
         drawOuterPieChart(center: center, radius: maxRadius, filValue: bonusPer )
-
-        
     }
+    
     func callPostAttendanceAPI()  {
-        
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
         ObeidiModelMarkAttendance.callMarkAttendanceRequest(dataDict: getParamsDict(), image: self.imageDataRef){
             (success, result, error) in
-            
             if success! {
-                
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 print(result!)
-                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let alertController = storyboard.instantiateViewController(withIdentifier: "ObeidiAlertViewControllerID") as! ObeidiAlertViewController
                 
@@ -199,47 +158,36 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
                 alertController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
                 alertController.delegate = self
                 self.present(alertController, animated: true, completion: nil)
-                
-                
-                
             }else{
-                
-                
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                
-                
             }
-            
-            
-            
-            
         }
-        
-        
-        
     }
+    
     func getParamsDict() -> NSMutableDictionary {
-        
-        paramsDict.setValue(penaltyRef, forKey: "penalty")
+        if let penalty = self.penaltyValue{
+          paramsDict.setValue("\(penalty)", forKey: "penalty")
+        }
         if let site = self.selSiteModel{
             paramsDict.setValue("\(site.locIdNew)", forKey: "site_id")
         }
-        paramsDict.setValue(lngRef, forKey: "lng")
-        paramsDict.setValue(latRef, forKey: "lat")
-        paramsDict.setValue(attendanceTypeRef, forKey: "type")
-        
+        if let loc = self.selLocation{
+            paramsDict.setValue("\(loc.latitude)", forKey: "lat")
+             paramsDict.setValue("\(loc.longitude)", forKey: "lng")
+        }
+        if let attType = self.attendanceType{
+            paramsDict.setValue(CCUtility.getAttendanceTypeString(attendanceType:attType), forKey: "type")
+        }
         if let atResponse = self.attendanceResponse{
             paramsDict.setValue("\(atResponse.empId)", forKey: "emp_id")
         }
         paramsDict.setValue(self.txtFldGivenBonus.text, forKey: "bonus")
         paramsDict.setValue("", forKey: "image")
-        
         return paramsDict
     }
+    
     func dismissed() {
-        
         self.navigationController?.popToRootViewController(animated: true)
-        
     }
 
 }

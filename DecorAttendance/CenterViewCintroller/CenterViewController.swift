@@ -18,7 +18,6 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         //leftViewController = getLeftViewController()
         //leftViewController.leftControllerDelegate = self
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -52,7 +51,6 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate {
     
         print("am at \(itemIndex)")
         delegate?.collapseSidePanel!()
-        
         switch itemIndex {
         
         case 0:
@@ -62,15 +60,21 @@ class CenterViewController: UIViewController, LeftViewControllerDelegate {
         case 2:
            self.performSegue(withIdentifier: "toChangePwdSceneSegue", sender: Any.self)
         case 3:
-            UserDefaults.standard.setValue("", forKey: "accessToken")
-            UserDefaults.standard.set(false, forKey: "isLoggedIn")
-            let delegate = UIApplication.shared.delegate as! AppDelegate
-            delegate.initWindow()
+            logoutAlert()
         default:
             break
             
         }
-        
+    }
+    
+    func logoutAlert(){
+        CCUtility.showAlertWithYesOrCancel(_title: Constant.AppName, viewController: self, messageString: "Are you sure you want to logout?") { (isYes) in
+            if (isYes){
+                CCUtility.processAfterLogOut()
+                let delegate = UIApplication.shared.delegate as! AppDelegate
+                delegate.initWindow()
+            }
+        }
     }
 }
 // MARK: - SidePanelViewControllerDelegate

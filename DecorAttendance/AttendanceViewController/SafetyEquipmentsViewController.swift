@@ -15,15 +15,10 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var lblPenaltyAmnt: UILabel!
     @IBOutlet weak var bttnNext: UIButton!
     
-    
-    
-    var isButtonChecked: Bool!
-    
-    var penaltyVal: Int!
-    var safetyEquipmentsObjModelArr = NSMutableArray()
+    var isAllButtonChecked: Bool!
+    var penaltyVal: CGFloat = 0.0
     var spinner = UIActivityIndicatorView(style: .gray)
-    var penaltyFullValue: Int!
-    var attendanceTypeRef: String!
+    var penaltyFullValue: CGFloat = 0.0
     
     var selSiteModel:ObeidiModelSites?
     var attendanceResponse:ObeidiModelFetchAttendance?
@@ -33,22 +28,22 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initialisation()
         self.tableViewPenalty.delegate = self
         self.tableViewPenalty.dataSource = self
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
-        isButtonChecked = false
         setViewStyles()
-        penaltyVal = 0
         callSafetyEquipmentsAPI()
-        
         // Do any additional setup after loading the view.
     }
     
+    func initialisation(){
+        isAllButtonChecked = false
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
+    }
+    
     func setViewStyles() {
-        
         let layer = self.bttnNext!
         layer.layer.cornerRadius = 25
         layer.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
@@ -56,8 +51,6 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
         layer.layer.shadowColor = UIColor(red:0.11, green:0.16, blue:0.36, alpha:0.62).cgColor
         layer.layer.shadowOpacity = 1
         layer.layer.shadowRadius = 23
-        
-        //lblPenaltyAmnt.text = "80 AED"
         
         bttnCheckAll.layer.borderWidth = 1
         bttnCheckAll.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
@@ -74,25 +67,24 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func bttnActnCheckAll(_ sender: Any) {
-        isButtonChecked = !isButtonChecked
-        if isButtonChecked{
+        isAllButtonChecked = !isAllButtonChecked
+        if isAllButtonChecked{
             self.bttnCheckAll.setImage(UIImage(named: "tick"), for: .normal)
-            //update the checked status in each cell
             penaltyVal = 0
-            self.lblPenaltyAmnt.text = String(penaltyVal)
+            self.lblPenaltyAmnt.text = "AED \(penaltyVal)"
             self.tableViewPenalty.reloadData()
         }else{
             self.bttnCheckAll.setImage(UIImage(named: ""), for: .normal)
             //update the checked status in each cell
-            self.lblPenaltyAmnt.text = String(penaltyFullValue)
+            penaltyVal = penaltyFullValue
+            self.lblPenaltyAmnt.text = "AED \(penaltyFullValue)"
             self.tableViewPenalty.reloadData()
-            
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if safetyEquipmentsObjModelArr.count != 0{
-            return safetyEquipmentsObjModelArr.count
+        if let safetyResponse = self.safetyEquipmentsResponseModel{
+            return safetyResponse.SafetyEquipments.count
         }
         return 0
     }
@@ -100,20 +92,11 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellSafetyEquipmentTableView", for: indexPath) as! SafetyEquipmentsTableViewCell
         cell.bttnCheck.tag = indexPath.row
-        
-        let cellData = self.safetyEquipmentsObjModelArr.object(at: indexPath.row) as! ObeidiModelSafetyEquipments
-        penaltyVal = penaltyVal + (cellData.penalty as! Int)
-        cell.setCellContents(cellData: cellData, isAllChecked: self.isButtonChecked)
-        cell.checkButtonDelegate = self
-        if indexPath.row == self.safetyEquipmentsObjModelArr.count - 1{
-            if isButtonChecked{
-                penaltyVal = 0
-                self.lblPenaltyAmnt.text = String(penaltyVal) + "AED"
-            }else{
-                penaltyFullValue = penaltyVal
-                self.lblPenaltyAmnt.text = String(penaltyFullValue) + "AED"
-            }
+        if let equipmentRes = self.safetyEquipmentsResponseModel {
+            let equipment = equipmentRes.SafetyEquipments[indexPath.row]
+            cell.setCellContents(equipment: equipment, isAllChecked: self.isAllButtonChecked)
         }
+        cell.checkButtonDelegate = self
         return cell
     }
     
@@ -131,7 +114,7 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 if let model = result{
                     self.safetyEquipmentsResponseModel = SafetyEquipmentsResponseModel.init(dict:model)
-                    self.tableViewPenalty.reloadData()
+                    self.processData()
                 }
             }else{
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
@@ -139,19 +122,34 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
     
+    func processData(){
+        self.tableViewPenalty.reloadData()
+        if let response = self.safetyEquipmentsResponseModel{
+            var totalPenalty:CGFloat = 0.0
+            for equipment in response.SafetyEquipments{
+               totalPenalty = totalPenalty + equipment.penalty
+            }
+            penaltyVal = totalPenalty
+            penaltyFullValue = totalPenalty
+            self.lblPenaltyAmnt.text = "AED \(penaltyFullValue)"
+        }
+    }
+    
     func buttonCheckedStatus(isChecked: Bool, buttonIndex: Int) {
-        if isChecked{
-            let equipmentPenalty: Int!
-            equipmentPenalty = ((self.safetyEquipmentsObjModelArr.object(at: buttonIndex) as! ObeidiModelSafetyEquipments).penalty as! Int)
-            penaltyVal = penaltyVal - equipmentPenalty
-            self.lblPenaltyAmnt.text = String(penaltyVal) + "AED"
-        }else{
-            let equipmentPenalty: Int!
-            self.isButtonChecked = false
-            self.bttnCheckAll.setImage(UIImage(named: ""), for: .normal)
-            equipmentPenalty = ((self.safetyEquipmentsObjModelArr.object(at: buttonIndex) as! ObeidiModelSafetyEquipments).penalty as! Int)
-            penaltyVal = penaltyVal + equipmentPenalty
-            self.lblPenaltyAmnt.text = String(penaltyVal) + "AED"
+        if let safetyResponse = self.safetyEquipmentsResponseModel{
+            if isChecked{
+                var equipmentPenalty:CGFloat = 0.0
+                equipmentPenalty = safetyResponse.SafetyEquipments[buttonIndex].penalty
+                penaltyVal = penaltyVal - equipmentPenalty
+                self.lblPenaltyAmnt.text = "AED \(penaltyVal)"
+            }else{
+                var equipmentPenalty:CGFloat = 0.0
+                self.isAllButtonChecked = false
+                self.bttnCheckAll.setImage(UIImage(named: ""), for: .normal)
+                equipmentPenalty = safetyResponse.SafetyEquipments[buttonIndex].penalty
+                penaltyVal = penaltyVal + equipmentPenalty
+                self.lblPenaltyAmnt.text = "AED \(penaltyVal)"
+            }
         }
     }
     
@@ -160,7 +158,8 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
             let vc = segue.destination as! CaptureImageViewController
             vc.attendanceResponse = self.attendanceResponse
             vc.selSiteModel = self.selSiteModel
-            vc.penaltyRef = String(self.penaltyVal)
+            vc.attendanceType = self.attendanceType
+            vc.penaltyValue = self.penaltyVal
         }
     }
 }

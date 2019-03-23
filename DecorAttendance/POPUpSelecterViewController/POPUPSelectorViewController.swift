@@ -276,14 +276,11 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        
         guard let validCell = cell as? CalenderViewCell else {return}
         print("selected date is \(date)")
         validCell.viewSelected.isHidden = true
-        self
-        
-        
     }
+    
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         //        let date = visibleDates.monthDates.first!.date
         //

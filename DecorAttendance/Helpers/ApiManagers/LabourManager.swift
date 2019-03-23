@@ -66,11 +66,10 @@ class CostSummaryDetailResponseModel : NSObject{
     var totalPenalty:CGFloat = 0.0
     var totalBonusWorkTime:Int = 0
     
-    var remainingBonusPercentage:CGFloat = 0.0
+    var wagePercentage:CGFloat = 0.0
     var overTimePercentage:CGFloat = 0.0
     var bonusPercentage:CGFloat = 0.0
-    var wagePercentage:CGFloat = 0.0
-    var sickLeavePercentage:CGFloat = 0.0
+    var medicalLeavePercentage:CGFloat = 0.0
     var paidVacationPercentage:CGFloat = 0.0
     var equipmentPenaltyPercentage:CGFloat = 0.0
     var totalStrikePercentage:CGFloat = 0.0
@@ -98,6 +97,11 @@ class CostSummaryDetailResponseModel : NSObject{
         if let value = dict["net_salary"] as? CGFloat{
             netSalary = value
         }
+        if let value = dict["net_salary"] as? String{
+            if let n = NumberFormatter().number(from: value) {
+                netSalary = CGFloat(truncating: n)
+            }
+        }
         if let value = dict["total_incentive"] as? CGFloat{
             totalIncentive = value
         }
@@ -110,11 +114,26 @@ class CostSummaryDetailResponseModel : NSObject{
         if let value = dict["total_absent_day_count"] as? Int{
             totalAbsentDayCount = value
         }
+        if let value = dict["total_absent_day_count"] as? String{
+            if let n = NumberFormatter().number(from: value) {
+                totalAbsentDayCount = Int(truncating: n)
+            }
+        }
         if let value = dict["total_present_day_count"] as? Int{
             totalPresentDayCount = value
         }
+        if let value = dict["total_present_day_count"] as? String{
+            if let n = NumberFormatter().number(from: value) {
+                totalPresentDayCount = Int(truncating: n)
+            }
+        }
         if let value = dict["total_medical_leave_day_count"] as? Int{
             totalMedicalLeaveDayCount = value
+        }
+        if let value = dict["total_medical_leave_day_count"] as? String{
+            if let n = NumberFormatter().number(from: value) {
+                totalMedicalLeaveDayCount = Int(truncating: n)
+            }
         }
         if let value = dict["equipment_penalty_amount"] as? CGFloat{
             equipmentPenaltyAmount = value
@@ -141,40 +160,31 @@ class CostSummaryDetailResponseModel : NSObject{
             totalBonusWorkTime = value
         }
         
+        wagePercentage = (wageAmount/totalAmount)*100.00
+        if(wagePercentage.isNaN){
+            wagePercentage = 0
+        }
         
-//        remainingBonusPercentage = ((bonusBudgetNew-remainingBonusAmountNew)/bonusBudgetNew)*100.00
-//        if(remainingBonusPercentage.isNaN){
-//            remainingBonusPercentage = 0.0
-//        }
+        overTimePercentage = (overTimeAmount/totalAmount)*100.00
+        if(overTimePercentage.isNaN){
+            overTimePercentage = 0.0
+        }
         
+        bonusPercentage = (bonusAmount/totalAmount)*100.00
+        if(bonusPercentage.isNaN){
+            bonusPercentage = 0.0
+        }
         
-//        overTimePercentage = (overTimeAmountNew/totalAmount)*100.00
-//       if(overTimePercentage.isNaN){
-//            overTimePercentage = 0.0
-//        }
+        medicalLeavePercentage = (medicalLeaveAmount/totalAmount)*100.00
+        if(medicalLeavePercentage.isNaN){
+            medicalLeavePercentage = 0.0
+        }
         
+        paidVacationPercentage = (paidVacationAmount/totalAmount)*100.00
+        if(paidVacationPercentage.isNaN){
+            paidVacationPercentage = 0.0
+        }
         
-//        bonusPercentage = (bonusAmountNew/totalAmountNew)*100.00
-//        if(bonusPercentage.isNaN){
-//            bonusPercentage = 0.0
-//        }
-        
-        
-//        wagePercentage = (netWageAmountNew/totalAmount)*100.00
-//        if(wagePercentage.isNaN){
-//            wagePercentage = 0
-//        }
-        
-        
-//        sickLeavePercentage = (medicalLeaveAmountNew/totalAmountNew)*100.00
-//        if(sickLeavePercentage.isNaN){
-//            sickLeavePercentage = 0.0
-//        }
-//        paidVacationPercentage = (paidVacationAmountNew/totalAmountNew)*100.00
-//        if(paidVacationPercentage.isNaN){
-//            paidVacationPercentage = 0.0
-//        }
-        print(dict)
         
         //Penalty
         
