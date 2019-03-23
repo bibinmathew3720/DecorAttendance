@@ -98,6 +98,11 @@ class CostSummaryDetailResponseModel : NSObject{
         if let value = dict["net_salary"] as? CGFloat{
             netSalary = value
         }
+        if let value = dict["net_salary"] as? String{
+            if let n = NumberFormatter().number(from: value) {
+                netSalary = CGFloat(truncating: n)
+            }
+        }
         if let value = dict["total_incentive"] as? CGFloat{
             totalIncentive = value
         }

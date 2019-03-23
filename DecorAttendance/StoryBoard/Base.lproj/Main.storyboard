@@ -1093,7 +1093,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hr.12   AED 300" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="hSY-H5-I4O">
-                                                                    <rect key="frame" x="262.5" y="10.5" width="79.5" height="12.5"/>
+                                                                    <rect key="frame" x="267.5" y="10.5" width="74.5" height="12.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="9"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -1102,7 +1102,6 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="7mC-rX-NbG" firstAttribute="centerY" secondItem="bQ6-9f-gIz" secondAttribute="centerY" id="2FS-Kj-McN"/>
-                                                                <constraint firstItem="hSY-H5-I4O" firstAttribute="leading" secondItem="VdG-Gn-sXu" secondAttribute="trailing" constant="8" id="2ZK-lI-Rja"/>
                                                                 <constraint firstItem="gZg-BL-Mn0" firstAttribute="centerY" secondItem="7mC-rX-NbG" secondAttribute="centerY" id="BSi-vM-nux"/>
                                                                 <constraint firstItem="bQ6-9f-gIz" firstAttribute="leading" secondItem="jw1-ua-u9A" secondAttribute="leading" constant="8" id="Jw1-vZ-fnB"/>
                                                                 <constraint firstAttribute="bottom" secondItem="7mC-rX-NbG" secondAttribute="bottom" constant="3" id="LnI-OC-Qyj"/>
@@ -1112,6 +1111,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="hSY-H5-I4O" secondAttribute="trailing" constant="3" id="cLM-qU-GJG"/>
                                                                 <constraint firstItem="7mC-rX-NbG" firstAttribute="leading" secondItem="bQ6-9f-gIz" secondAttribute="trailing" constant="4" id="dSm-wj-Iby"/>
                                                                 <constraint firstItem="hSY-H5-I4O" firstAttribute="centerY" secondItem="VdG-Gn-sXu" secondAttribute="centerY" id="guR-ON-Rae"/>
+                                                                <constraint firstItem="hSY-H5-I4O" firstAttribute="leading" secondItem="gZg-BL-Mn0" secondAttribute="trailing" constant="8" id="hdu-Pw-n8r"/>
                                                                 <constraint firstItem="VdG-Gn-sXu" firstAttribute="centerY" secondItem="gZg-BL-Mn0" secondAttribute="centerY" id="mwy-pF-fH8"/>
                                                                 <constraint firstItem="VdG-Gn-sXu" firstAttribute="leading" secondItem="gZg-BL-Mn0" secondAttribute="leading" id="uxq-sI-uBm"/>
                                                                 <constraint firstItem="gZg-BL-Mn0" firstAttribute="leading" secondItem="7mC-rX-NbG" secondAttribute="trailing" constant="4" id="xcO-cU-BEX"/>
