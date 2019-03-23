@@ -169,6 +169,39 @@ class UserManager: CLBaseService {
         let responseModel = ChangePasswordModel.init(dict:dict)
         return responseModel
     }
+    
+    //Get Employee Details Api
+    
+    func getEmployeeDetailsApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelGetEmployeeDetails(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.getEmployeeDetailsResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
+    
+    func networkModelGetEmployeeDetails(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.EMPLOYEES + "/" + body, requestMethod_: "GET")
+        return requestModel
+    }
+    
+    func getEmployeeDetailsResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = GetEmployeeDetailsResponseModel.init(dict:dict)
+        return responseModel
+    }
 }
 class DecoreProfileResponseModel : NSObject{
     
@@ -223,6 +256,15 @@ class DecoreProfileResponseModel : NSObject{
             }
         }
         
+    }
+}
+
+class GetEmployeeDetailsResponseModel : NSObject{
+    var sites = [DecoreSitesModel ]()
+    init(dict:[String:Any?]) {
+        if let resultArray = dict["result"] as? NSArray{
+            print(resultArray)
+        }
     }
 }
 
