@@ -114,11 +114,26 @@ class CostSummaryDetailResponseModel : NSObject{
         if let value = dict["total_absent_day_count"] as? Int{
             totalAbsentDayCount = value
         }
+        if let value = dict["total_absent_day_count"] as? String{
+            if let n = NumberFormatter().number(from: value) {
+                totalAbsentDayCount = Int(truncating: n)
+            }
+        }
         if let value = dict["total_present_day_count"] as? Int{
             totalPresentDayCount = value
         }
+        if let value = dict["total_present_day_count"] as? String{
+            if let n = NumberFormatter().number(from: value) {
+                totalPresentDayCount = Int(truncating: n)
+            }
+        }
         if let value = dict["total_medical_leave_day_count"] as? Int{
             totalMedicalLeaveDayCount = value
+        }
+        if let value = dict["total_medical_leave_day_count"] as? String{
+            if let n = NumberFormatter().number(from: value) {
+                totalMedicalLeaveDayCount = Int(truncating: n)
+            }
         }
         if let value = dict["equipment_penalty_amount"] as? CGFloat{
             equipmentPenaltyAmount = value
