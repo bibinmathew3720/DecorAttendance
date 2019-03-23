@@ -180,20 +180,45 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     func populateCostDetails(){
         if let costDetail = self.costSummaryDetailResponse{
             
+            self.totalWageLabel.text = String.init(format: "%0.2f", costDetail.wagePercentage) + "%"
+            self.totalWageLabel.textColor = Constant.Colors.wageColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalWageAmountIndicatorWhite, lineB: totalWageAmountIndicatorColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.wageColor, lineAValue: 1, lineBValue: (costDetail.wagePercentage/100.00), lineAMeter: widthTotalWageLight, lineBMeter: widthTotalWageColred)
+            self.totalWageAmountLabel.text = "Hr " + "\(costDetail.totalPresentDayCount)" + " AED " + "\(costDetail.wageAmount)"
+            
+            self.totalOTPercentageLabel.text = String.init(format: "%0.2f", costDetail.overTimePercentage) + "%"
+            self.totalOTPercentageLabel.textColor = Constant.Colors.overTimeColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalOTIndicatorWhite, lineB: totalOTIndicatorColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.overTimeColor, lineAValue: 1, lineBValue: (costDetail.overTimePercentage/100.00), lineAMeter: widthTotalOTLight, lineBMeter: widthTotalOTIndicatorColored)
+            self.totalOtPriceLabel.text = "Hr " + "\(costDetail.overTimeMinutes)" + " AED " + "\(costDetail.overTimeAmount)"
+            
+            self.totalBonusPerLabel.text = String.init(format: "%0.2f", costDetail.bonusPercentage) + "%"
+            self.totalBonusPerLabel.textColor = Constant.Colors.bonusColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalBonusIndicatorWhite, lineB: totalBonusIndicatorColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.bonusColor, lineAValue: 1, lineBValue: (costDetail.bonusPercentage/100.00), lineAMeter: widthTotalBonusIndColored, lineBMeter: widthTotalBonusIndColored)
+            self.totalBonusPriceLabel.text = "Hr " + "\(costDetail.totalBonusWorkTime)" + " AED " + "\(costDetail.bonusAmount)"
+            
+            self.sickLeavePerLabel.text = String.init(format: "%0.2f", costDetail.medicalLeavePercentage) + "%"
+            self.sickLeavePerLabel.textColor = Constant.Colors.sickLeaveColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.sickLeaveIndicatorLineWhite, lineB: sickLeaveIndicatorLineColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.sickLeaveColor, lineAValue: 1, lineBValue: (costDetail.medicalLeavePercentage/100.00), lineAMeter: widthTotalSickLeaveColored, lineBMeter: widthTotalSickLeaveColored)
+            self.sickLEavePriceLabel.text = "Hr " + "\(costDetail.totalMedicalLeaveDayCount)" + " AED " + "\(costDetail.medicalLeaveAmount)"
+            
+            self.paidVacationPerLabel.text = String.init(format: "%0.2f", costDetail.paidVacationPercentage) + "%"
+            self.paidVacationPerLabel.textColor = Constant.Colors.paidVacancColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.paidVacationIndicatorWhite, lineB: paidVacationIndicatorColored, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.paidVacancColor, lineAValue: 1, lineBValue: (costDetail.paidVacationPercentage/100.00), lineAMeter: widthTotalPaidVacationColored, lineBMeter: widthTotalPaidVacationColored)
+            self.paidVacationAmountLabel.text = "AED " + "\(costDetail.paidVacationAmount)"
             
             
+            //Penalties
             
-            self.equipmentPenaltyPercLabel.text = "\(costDetail.equipmentPenaltyPercentage)%"
+            self.equipmentPenaltyPercLabel.text = String.init(format: "%0.2f", costDetail.equipmentPenaltyPercentage) + "%"
             self.equipmentPenaltyPercLabel.textColor = Constant.Colors.remainingBonusColor
             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.equipmentPenaltyWhitView, lineB: equipmentPenaltyColoredView, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.remainingBonusColor, lineAValue: 1, lineBValue: (costDetail.equipmentPenaltyPercentage/100.00), lineAMeter: equipmentPenaltyColoredViewWidth, lineBMeter: equipmentPenaltyColoredViewWidth)
             self.equipmentPenaltyPriceLabel.text = "AED " + "\(costDetail.equipmentPenaltyAmount)"
             
-            self.totalStrikePercLabel.text = "\(costDetail.totalStrikePercentage)%"
+            self.totalStrikePercLabel.text = String.init(format: "%0.2f", costDetail.totalStrikePercentage) + "%"
             self.totalStrikePercLabel.textColor = Constant.Colors.remainingBonusColor
              ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalStrikeWhiteView, lineB: totalStrikeColoredView, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.remainingBonusColor, lineAValue: 1, lineBValue: (costDetail.totalStrikePercentage/100.00), lineAMeter: totalStrikeColoredViewWidth, lineBMeter: totalStrikeColoredViewWidth)
             self.totalStrikePriceLabel.text = "Day " + String(format: "%0.0f", costDetail.totalStrikeDayCount) + " AED " + "\(costDetail.strikePenaltyAmount)"
             
-            self.totalAbsencePercLabel.text = "\(costDetail.totalAbsencePerncetage)%"
+            self.totalAbsencePercLabel.text = String.init(format: "%0.2f", costDetail.totalAbsencePerncetage) + "%"
              self.totalAbsencePercLabel.textColor = Constant.Colors.remainingBonusColor
             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalAbsenceWhiteView, lineB: totalAbsenceColoredView, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.remainingBonusColor, lineAValue: 1, lineBValue: (costDetail.totalAbsencePerncetage/100.00), lineAMeter: totalAbsenceWidthConstraint, lineBMeter: totalAbsenceWidthConstraint)
             self.totalAbsencePricelLabel.text = "Day " + String(format: "%0.0f", costDetail.totalAbsentDayCount) + " AED " + "\(costDetail.absencePenaltyAmount)"
