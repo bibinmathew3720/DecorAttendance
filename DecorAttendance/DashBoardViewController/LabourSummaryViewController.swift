@@ -184,6 +184,16 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.equipmentPenaltyWhitView, lineB: equipmentPenaltyColoredView, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.remainingBonusColor, lineAValue: 1, lineBValue: (costDetail.equipmentPenaltyPercentage/100.00), lineAMeter: equipmentPenaltyColoredViewWidth, lineBMeter: equipmentPenaltyColoredViewWidth)
             self.equipmentPenaltyPriceLabel.text = "AED " + "\(costDetail.equipmentPenaltyAmount)"
             
+            self.totalStrikePercLabel.text = "\(costDetail.totalStrikePercentage)%"
+            self.totalStrikePercLabel.textColor = Constant.Colors.remainingBonusColor
+             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalStrikeWhiteView, lineB: totalStrikeColoredView, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.remainingBonusColor, lineAValue: 1, lineBValue: (costDetail.totalStrikePercentage/100.00), lineAMeter: totalStrikeColoredViewWidth, lineBMeter: totalStrikeColoredViewWidth)
+            self.totalStrikePriceLabel.text = "Day " + String(format: "%0.0f", costDetail.totalStrikeDayCount) + " AED " + "\(costDetail.strikePenaltyAmount)"
+            
+            self.totalAbsencePercLabel.text = "\(costDetail.totalAbsencePerncetage)%"
+             self.totalAbsencePercLabel.textColor = Constant.Colors.remainingBonusColor
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalAbsenceWhiteView, lineB: totalAbsenceColoredView, lineAColor: Constant.Colors.greyColor, lineBColor: Constant.Colors.remainingBonusColor, lineAValue: 1, lineBValue: (costDetail.totalAbsencePerncetage/100.00), lineAMeter: totalAbsenceWidthConstraint, lineBMeter: totalAbsenceWidthConstraint)
+            self.totalAbsencePricelLabel.text = "Day " + String(format: "%0.0f", costDetail.totalAbsentDayCount) + " AED " + "\(costDetail.absencePenaltyAmount)"
+            
             self.totalAmountLabel.text = "AED " + String(format: "%0.2f", costDetail.netSalary)
         }
     }
