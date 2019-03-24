@@ -76,7 +76,7 @@ class EmployeeTableViewCell: UITableViewCell {
                 viewColoured.backgroundColor = .red
             }
             else if rat > 8.0{
-                viewColoured.backgroundColor = .green
+                viewColoured.backgroundColor = UIColor(red:0.65, green:0.79, blue:0.38, alpha:1.0)
             }
             else if rat > 4.0 && rat < 7.0{
                 viewColoured.backgroundColor = .orange

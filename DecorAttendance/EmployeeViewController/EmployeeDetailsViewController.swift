@@ -71,7 +71,8 @@ class EmployeeDetailsViewController: UITableViewController {
             lblRating.text = model.rating + "/10"
             let rating = Double(model.rating)
             if let rat = rating{
-                widthUncoloredIndicator.constant = CGFloat(4 * rat)
+                widthColoredIndicator.constant = CGFloat(4 * rat)
+                viewColouredIndicator.backgroundColor = getColorFromRating(rating: CGFloat(rat))
             }
             getEmployeeDetailsApi(empId: model.emp_id)
         }
@@ -108,7 +109,7 @@ class EmployeeDetailsViewController: UITableViewController {
             return .red
         }
         else if rating > 8.0{
-            return .green
+            return UIColor(red:0.65, green:0.79, blue:0.38, alpha:1.0)
         }
         else if rating > 4.0 && rating < 7.0{
             return .orange
@@ -118,7 +119,6 @@ class EmployeeDetailsViewController: UITableViewController {
         }
     }
    
-    
     func getEmployeeDetailsApi(empId:Int){
         MBProgressHUD.showAdded(to: self.view, animated: true)
         UserManager().getEmployeeDetailsApi(with:"\(empId)", success: {
