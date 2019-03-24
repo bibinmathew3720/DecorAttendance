@@ -30,9 +30,13 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialisation()
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
-        
+    }
+    
+    func initialisation(){
+        self.title = Constant.PageNames.Attendance
     }
     
     override func viewDidAppear(_ animated: Bool) {

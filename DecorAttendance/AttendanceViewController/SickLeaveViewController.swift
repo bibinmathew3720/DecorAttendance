@@ -29,7 +29,7 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        self.title = Constant.PageNames.Attendance
         setViewStyles()
         addTapGesturesToLabels()
         // Do any additional setup after loading the view.

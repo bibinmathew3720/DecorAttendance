@@ -20,6 +20,7 @@ class AttendanceViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialisation()
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
 
@@ -28,6 +29,10 @@ class AttendanceViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func initialisation(){
+        self.title = Constant.PageNames.Attendance
     }
 
     // MARK: - Table view data source

@@ -10,6 +10,10 @@ import UIKit
 
 struct Constant{
     static let AppName = "Obaid Al Abdi"
+    
+    struct PageNames {
+        static let Attendance = "ATTENDANCE"
+    }
     struct ImageNames {
         static let placeholderImage = "placeholder"
     }
@@ -34,6 +38,9 @@ struct Constant{
         static let ashColor = UIColor(red:0.28, green:0.28, blue:0.28, alpha:1.0) //484747
         static let blackColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0) //000000
         static let whiteColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0) //FFFFFF
-        
+    }
+    
+    struct Font {
+        static let AvenirBook = "Avenir Book"
     }
 }

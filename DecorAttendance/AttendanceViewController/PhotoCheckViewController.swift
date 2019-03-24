@@ -33,6 +33,7 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewStyles()
+        initialisation()
         //set image from database
         populateData()
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
@@ -40,6 +41,10 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
         locationManager = CLLocationManager()
         askForLocationAuthorisation()
         // Do any additional setup after loading the view.
+    }
+    
+    func initialisation(){
+        self.title = Constant.PageNames.Attendance
     }
     
     func populateData(){
@@ -141,6 +146,7 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
         }
         paramsDict.setValue("0", forKey: "bonus")
         paramsDict.setValue(capturedImageRef, forKey: "image")
+        print(paramsDict)
         return paramsDict
     }
     
@@ -155,6 +161,7 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
         selLocation = Location()
         selLocation?.latitude = locValue.latitude
         selLocation?.longitude = locValue.longitude
+        manager.stopUpdatingLocation()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

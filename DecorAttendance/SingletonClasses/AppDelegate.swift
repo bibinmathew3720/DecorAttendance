@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        setNavigationBarProperties()
         initWindow()
         return true
     }
@@ -52,6 +53,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = loginVC
         }
     }
+    
+    func setNavigationBarProperties(){
+        //UINavigationBar.appearance().barTintColor = Constant.Colors.CommonMeroonColor
+        UINavigationBar.appearance().tintColor = Constant.Colors.whiteColor
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: Constant.Colors.whiteColor,
+            NSAttributedString.Key.font: UIFont(name: Constant.Font.AvenirBook, size: 22)!
+        ]
+        UINavigationBar.appearance().titleTextAttributes = attrs
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

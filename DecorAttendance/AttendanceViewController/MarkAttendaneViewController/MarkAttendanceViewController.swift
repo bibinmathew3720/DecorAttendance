@@ -46,14 +46,13 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         setViewStyles()
         addTapGesturesToLabels()
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
+       self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         setUIContents()
         // Do any additional setup after loading the view.
     }
     
     func initialisation(){
-       self.siteModelObjArr.remove(at: 0)
-       self.selSiteModel = self.siteModelObjArr.first
+        self.title = Constant.PageNames.Attendance
         if let attendanceType = fetchAttendanceTypeArr().firstObject as? String{
             self.selAttendanceType = attendanceType
         }
@@ -257,7 +256,19 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     }
     func fetchAttendanceTypeArr() -> NSMutableArray {
         var arr = NSMutableArray()
-        arr = [startTime, endTime, sickLeave, absent, strike]
+        if let attResponse = attendanceResponse{
+            arr = [startTime, endTime, sickLeave, absent, strike]
+//            if !attResponse.isStartTimeMarked{
+//                arr = [startTime, sickLeave, absent, strike]
+//            }
+//            else if attResponse.isEndTimeMarkd{
+//
+//            }
+//            else{
+//                arr = [startTime, endTime, sickLeave, absent, strike]
+//            }
+            
+        }
         return arr
     }
     
