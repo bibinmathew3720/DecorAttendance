@@ -46,12 +46,13 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         setViewStyles()
         addTapGesturesToLabels()
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
+       self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         setUIContents()
         // Do any additional setup after loading the view.
     }
     
     func initialisation(){
+        self.title = Constant.PageNames.Attendance
        self.siteModelObjArr.remove(at: 0)
        self.selSiteModel = self.siteModelObjArr.first
         if let attendanceType = fetchAttendanceTypeArr().firstObject as? String{

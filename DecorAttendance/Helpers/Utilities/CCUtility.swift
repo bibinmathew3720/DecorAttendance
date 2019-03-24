@@ -237,15 +237,15 @@ class CCUtility: NSObject {
     class func getAttendanceTypeString(attendanceType:AttendanceType)->String{
         switch attendanceType {
         case .StartTime:
-            return "Start Time"
+            return "start_time"
         case .EndTime:
-            return "End Time"
+            return "end_ime"
         case .SickLeave:
-            return "Sick Leave"
+            return "sick_leave"
         case .Absent:
-            return "Adsent"
+            return "absent"
         case .Strike:
-            return "Strike"
+            return "strike"
         }
     }
     
