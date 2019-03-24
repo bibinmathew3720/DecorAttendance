@@ -258,15 +258,15 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         var arr = NSMutableArray()
         if let attResponse = attendanceResponse{
             arr = [startTime, endTime, sickLeave, absent, strike]
-//            if !attResponse.isStartTimeMarked{
-//                arr = [startTime, sickLeave, absent, strike]
-//            }
-//            else if attResponse.isEndTimeMarkd{
-//
-//            }
-//            else{
-//                arr = [startTime, endTime, sickLeave, absent, strike]
-//            }
+            if !attResponse.isStartTimeMarked{
+                arr = [startTime, sickLeave, absent, strike]
+            }
+            else if attResponse.isStartTimeMarked{
+                arr = [endTime, sickLeave]
+            }
+            else{
+                arr = [startTime, endTime, sickLeave, absent, strike]
+            }
             
         }
         return arr
