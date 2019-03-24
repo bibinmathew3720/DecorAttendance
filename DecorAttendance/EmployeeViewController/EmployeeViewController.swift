@@ -77,6 +77,7 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
             let vc = segue.destination as! EmployeeDetailsViewController
             if let model = self.employeeResponse?.employees{
                 vc.details = model[selectedIndex]
+                vc.imageBase = self.employeeResponse?.image_base
             }
         }
     }

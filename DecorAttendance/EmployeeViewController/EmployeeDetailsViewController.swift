@@ -43,6 +43,7 @@ class EmployeeDetailsViewController: UITableViewController {
     @IBOutlet weak var viewPenaltyRate: UIView!
     @IBOutlet weak var viewAbsenseRate: UIView!
     var details: DecoreEmployeeModel?
+    var imageBase: String?
     var emp_details:GetEmployeeDetailsResponseModel?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,9 @@ class EmployeeDetailsViewController: UITableViewController {
             lblName.text = model.name
             lblID.text = String(model.emp_id)
             lblJoinedDate.text = model.date_of_joining
+            if let img = imageBase{
+            imageViewLabour.loadImageUsingCache(withUrl: img + model.image, colorValue: nil)
+            }
             lblAge.text = String(CCUtility.calcAge(birthday: model.dob)) + "years old"
             lblOccupation.text = UserDefaults.standard.string(forKey: "role")
             lblRating.text = model.rating + "/10"

@@ -2638,10 +2638,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qsw-Za-bM0">
-                                                            <rect key="frame" x="80.5" y="13" width="60" height="38"/>
+                                                            <rect key="frame" x="78" y="13" width="48" height="38"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jose" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nc-75-ZJ9">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="48" height="16"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="16" id="KBz-zV-cGT"/>
                                                                     </constraints>
@@ -2650,7 +2650,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID547" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pr1-4V-yvF">
-                                                                    <rect key="frame" x="0.0" y="24" width="60" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="24" width="48" height="14"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="14" id="kvp-Zj-cEc"/>
                                                                     </constraints>
@@ -2671,7 +2671,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ymb-0K-cS4">
-                                                            <rect key="frame" x="150.5" y="16" width="170" height="35"/>
+                                                            <rect key="frame" x="189" y="16" width="160" height="35"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labour rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUz-bq-61y">
                                                                     <rect key="frame" x="0.0" y="21" width="51.5" height="14"/>
@@ -2691,7 +2691,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labour salary rate 200AED day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TUl-Uh-Fks">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="170" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="14"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="14" id="a4E-FM-Oh9"/>
                                                                     </constraints>
@@ -2730,6 +2730,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="TUl-Uh-Fks" secondAttribute="trailing" id="dyC-Fo-HW5"/>
                                                                 <constraint firstItem="DKh-af-2fo" firstAttribute="leading" secondItem="RUz-bq-61y" secondAttribute="trailing" constant="8" id="gz2-D9-uJ3"/>
                                                                 <constraint firstItem="TUl-Uh-Fks" firstAttribute="leading" secondItem="Ymb-0K-cS4" secondAttribute="leading" id="lKL-0S-k0A"/>
+                                                                <constraint firstAttribute="width" constant="160" id="sqq-wI-I3k"/>
                                                                 <constraint firstItem="uGF-v4-Xaf" firstAttribute="centerY" secondItem="RUz-bq-61y" secondAttribute="centerY" id="tZi-7u-AaX"/>
                                                             </constraints>
                                                         </view>
@@ -2739,10 +2740,9 @@
                                                         <constraint firstItem="Qsw-Za-bM0" firstAttribute="top" secondItem="js2-ZG-EXP" secondAttribute="top" constant="13" id="I8q-Td-5cE"/>
                                                         <constraint firstItem="Ymb-0K-cS4" firstAttribute="top" secondItem="js2-ZG-EXP" secondAttribute="top" constant="16" id="OKV-jq-7QB"/>
                                                         <constraint firstItem="pG3-Ty-AGV" firstAttribute="top" secondItem="js2-ZG-EXP" secondAttribute="top" constant="8" id="Upx-4f-wE6"/>
-                                                        <constraint firstItem="Ymb-0K-cS4" firstAttribute="leading" secondItem="Qsw-Za-bM0" secondAttribute="trailing" constant="10" id="ch7-AK-qsl"/>
-                                                        <constraint firstItem="Ymb-0K-cS4" firstAttribute="width" secondItem="js2-ZG-EXP" secondAttribute="width" multiplier="0.473538" id="hWu-so-b34"/>
-                                                        <constraint firstItem="Qsw-Za-bM0" firstAttribute="leading" secondItem="pG3-Ty-AGV" secondAttribute="trailing" constant="12.5" id="ig9-7B-9a0"/>
-                                                        <constraint firstItem="Qsw-Za-bM0" firstAttribute="width" secondItem="js2-ZG-EXP" secondAttribute="width" multiplier="0.167131" id="rDi-Pg-Biv"/>
+                                                        <constraint firstItem="Ymb-0K-cS4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qsw-Za-bM0" secondAttribute="trailing" constant="8" id="ch7-AK-qsl"/>
+                                                        <constraint firstItem="Qsw-Za-bM0" firstAttribute="leading" secondItem="pG3-Ty-AGV" secondAttribute="trailing" constant="10" id="ig9-7B-9a0"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Ymb-0K-cS4" secondAttribute="trailing" constant="10" id="s1f-m6-P3k"/>
                                                         <constraint firstItem="pG3-Ty-AGV" firstAttribute="leading" secondItem="js2-ZG-EXP" secondAttribute="leading" constant="8" id="uYY-uM-2kk"/>
                                                     </constraints>
                                                 </view>
@@ -4395,7 +4395,7 @@
                                         <rect key="frame" x="0.0" y="636" width="375" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oqr-1b-upB" id="UQc-zP-bAg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="111.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSt-X4-pzh">
@@ -4478,7 +4478,7 @@
                                         <rect key="frame" x="0.0" y="748" width="375" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tzy-2V-QrU" id="MWH-Tt-W65">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="111.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3lY-Iz-eEi">
@@ -4561,7 +4561,7 @@
                                         <rect key="frame" x="0.0" y="860" width="375" height="112"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QRA-nC-lsU" id="84f-TW-G3G">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="112"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="111.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dbT-vQ-4HN">
