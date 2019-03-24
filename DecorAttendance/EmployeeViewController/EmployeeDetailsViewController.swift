@@ -73,33 +73,33 @@ class EmployeeDetailsViewController: UITableViewController {
     
     func getEmployeeDetailsApi(empId:Int){
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        UserManager().getEmployeeDetailsApi(with:"\(empId)", success: {
-            (model,response)  in
-            MBProgressHUD.hide(for: self.view, animated: true)
-            if let model = model as? GetEmployeeDetailsResponseModel{
-                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
-                if type == StatusEnum.success{
-          
-                }
-                else if type == StatusEnum.sessionexpired{
-                    //                    self.callRefreshTokenApi()
-                }
-                else{
-                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
-                }
-            }
-            
-        }) { (ErrorType) in
-            MBProgressHUD.hide(for: self.view, animated: true)
-            if(ErrorType == .noNetwork){
-                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
-            }
-            else{
-                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
-            }
-            
-            print(ErrorType)
-        }
+//        UserManager().getEmployeeDetailsApi(with:"\(empId)", success: {
+//            (model,response)  in
+//            MBProgressHUD.hide(for: self.view, animated: true)
+//            if let model = model as? GetEmployeeDetailsResponseModel{
+//                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+//                if type == StatusEnum.success{
+//          
+//                }
+//                else if type == StatusEnum.sessionexpired{
+//                    //                    self.callRefreshTokenApi()
+//                }
+//                else{
+//                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
+//                }
+//            }
+//            
+//        }) { (ErrorType) in
+//            MBProgressHUD.hide(for: self.view, animated: true)
+//            if(ErrorType == .noNetwork){
+//                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+//            }
+//            else{
+//                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+//            }
+//            
+//            print(ErrorType)
+//        }
     }
     
     // MARK: - Table view data source

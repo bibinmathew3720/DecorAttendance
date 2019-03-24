@@ -24,6 +24,7 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
     @IBOutlet weak var bttnUploadPicture: UIButton!
     @IBOutlet weak var bttnNext: UIButton!
     
+    @IBOutlet weak var selImageView: UIImageView!
     
 
     override func viewDidLoad() {
@@ -39,32 +40,23 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
         : Any){
         
         if (self.lblStartDate.text != "" && self.lblEndDate.text != ""){
-            
             showObeidiAlert(message: "Sick leave has been marked. ", title: "Obeidi Alert")
-            
         }else{
-            
             ObeidiAlertController.showAlert(self, alertMessage: "start date and end date neede. ")
-            
         }
-        
     }
 
     @IBAction func bttnActnTakePicture(_ sender
         : Any){
-        
         self.performSegue(withIdentifier: "toCaptureSceneSegue:SickLeave", sender: Any.self)
-        
     }
-    @IBAction func bttnActnUploadPicture(_ sender
+    
+    @IBAction func bttnActnAttachPicture(_ sender
         : Any){
-        
-        
-        
+         addingImagePickerController(sourceType: .photoLibrary)
     }
     
     func setViewStyles() {
-        
         let bttnDone = self.bttnNext!
         bttnDone.layer.cornerRadius = self.bttnNext.frame.size.height / 2
         bttnDone.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
@@ -219,5 +211,28 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
             
         }
     }
+    
+    func addingImagePickerController(sourceType:UIImagePickerController.SourceType){
+        let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = false
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType;
+        present(imagePicker, animated: true, completion: nil)
+    }
 
+}
+
+extension SickLeaveViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+           
+        } else{
+            print("Something went wrong in  image")
+        }
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
 }
