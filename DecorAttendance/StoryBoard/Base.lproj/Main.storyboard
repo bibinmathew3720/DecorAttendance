@@ -2625,14 +2625,20 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="js2-ZG-EXP">
                                                     <rect key="frame" x="8" y="5" width="359" height="77"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pG3-Ty-AGV">
-                                                            <rect key="frame" x="8" y="8" width="60.5" height="61"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pG3-Ty-AGV">
+                                                            <rect key="frame" x="8" y="8" width="60" height="60"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="60.5" id="rj7-GX-LsS"/>
+                                                                <constraint firstAttribute="width" constant="60" id="rj7-GX-LsS"/>
+                                                                <constraint firstAttribute="height" constant="60" id="uCT-Ko-rWX"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="30"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qsw-Za-bM0">
-                                                            <rect key="frame" x="81" y="13" width="60" height="38"/>
+                                                            <rect key="frame" x="80.5" y="13" width="60" height="38"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jose" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nc-75-ZJ9">
                                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="16"/>
@@ -2665,7 +2671,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ymb-0K-cS4">
-                                                            <rect key="frame" x="151" y="16" width="170" height="35"/>
+                                                            <rect key="frame" x="150.5" y="16" width="170" height="35"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labour rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUz-bq-61y">
                                                                     <rect key="frame" x="0.0" y="21" width="51.5" height="14"/>
@@ -2730,7 +2736,6 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="pG3-Ty-AGV" secondAttribute="bottom" constant="8" id="8Ho-p5-uyw"/>
                                                         <constraint firstItem="Qsw-Za-bM0" firstAttribute="top" secondItem="js2-ZG-EXP" secondAttribute="top" constant="13" id="I8q-Td-5cE"/>
                                                         <constraint firstItem="Ymb-0K-cS4" firstAttribute="top" secondItem="js2-ZG-EXP" secondAttribute="top" constant="16" id="OKV-jq-7QB"/>
                                                         <constraint firstItem="pG3-Ty-AGV" firstAttribute="top" secondItem="js2-ZG-EXP" secondAttribute="top" constant="8" id="Upx-4f-wE6"/>

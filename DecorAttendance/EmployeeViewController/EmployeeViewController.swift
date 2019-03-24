@@ -53,8 +53,10 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellEmployee", for: indexPath) as! EmployeeTableViewCell
-        if let model = self.employeeResponse?.employees{
-            cell.setCell(model: model[indexPath.row])
+        if let model = self.employeeResponse{
+            if model.employees.count > 0{
+            cell.setCell(model: model.employees[indexPath.row], imageBase: model.image_base)
+            }
         }
         return cell
         

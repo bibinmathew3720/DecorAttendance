@@ -65,10 +65,10 @@ class EmployeeTableViewCell: UITableViewCell {
         
     }
     
-    func setCell(model:DecoreEmployeeModel){
+    func setCell(model:DecoreEmployeeModel,imageBase: String){
         lblID.text = "ID" + String(model.emp_id)
         lblName.text = model.name
-        imageViewLabour.loadImageUsingCache(withUrl: model.image, colorValue: nil)
+        imageViewLabour.loadImageUsingCache(withUrl: imageBase + model.image, colorValue: nil)
         let rating = Double(model.rating)
        
         if let rat = rating{
