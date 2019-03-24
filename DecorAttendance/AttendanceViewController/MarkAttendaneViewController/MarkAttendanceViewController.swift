@@ -53,8 +53,6 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     
     func initialisation(){
         self.title = Constant.PageNames.Attendance
-       self.siteModelObjArr.remove(at: 0)
-       self.selSiteModel = self.siteModelObjArr.first
         if let attendanceType = fetchAttendanceTypeArr().firstObject as? String{
             self.selAttendanceType = attendanceType
         }
@@ -258,7 +256,19 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     }
     func fetchAttendanceTypeArr() -> NSMutableArray {
         var arr = NSMutableArray()
-        arr = [startTime, endTime, sickLeave, absent, strike]
+        if let attResponse = attendanceResponse{
+            arr = [startTime, endTime, sickLeave, absent, strike]
+//            if !attResponse.isStartTimeMarked{
+//                arr = [startTime, sickLeave, absent, strike]
+//            }
+//            else if attResponse.isEndTimeMarkd{
+//
+//            }
+//            else{
+//                arr = [startTime, endTime, sickLeave, absent, strike]
+//            }
+            
+        }
         return arr
     }
     

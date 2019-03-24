@@ -20,7 +20,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     @IBOutlet weak var siteView: UIView!
     
     var activeTextField: UITextField!
-    var siteIdSelected: String!
+    var selectedSite: ObeidiModelSites?
     var siteModelObjArr = [ObeidiModelSites]()
     var spinner = UIActivityIndicatorView(style: .gray)
     var selectedIndex: Int!
@@ -45,6 +45,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         attendanceRequest.isAttendanceCompleteEntry = false
         self.lblDate.text = ""
         self.lblSite.text = ""
+        self.title = Constant.PageNames.Attendance
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
@@ -185,6 +186,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
                 print(result!)
                 if let res = result as? [ObeidiModelSites]{
                     self.siteModelObjArr = res
+                    self.siteModelObjArr.remove(at: 0)
                 }
             }else{
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
@@ -228,6 +230,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
             let vc = segue.destination as! MarkAttendanceViewController
             if let attendanceRes = self.attendanceResponseModel{
                 vc.attendanceResponse = attendanceRes.attendanceResultArray[self.selectedIndex]
+                vc.selSiteModel = self.selectedSite
                 vc.siteModelObjArr = self.siteModelObjArr
             }
         }
@@ -239,6 +242,7 @@ extension NewEntryViewController:filterUpdatedDelegate{
     func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
         self.attendanceRequest.siteId = selSite.locIdNew
         lblSite.text = selSite.nameNew
+        self.selectedSite = selSite
         callFetchAttendanceaAPI()
     }
     
@@ -287,7 +291,12 @@ extension NewEntryViewController:UITableViewDataSource,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedIndex = indexPath.row
-        self.performSegue(withIdentifier: "toMarkAttendanceSceneSegue:NewEnrty", sender: Any.self)
+        if let selSite = self.selectedSite{
+            self.selectedIndex = indexPath.row
+            self.performSegue(withIdentifier: "toMarkAttendanceSceneSegue:NewEnrty", sender: Any.self)
+        }
+        else{
+           CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Choose a site to continue..", parentController: self)
+        }
     }
 }

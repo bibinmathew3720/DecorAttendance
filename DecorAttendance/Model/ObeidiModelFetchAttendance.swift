@@ -15,21 +15,21 @@ class ObeidiModelFetchAttendance: NSObject {
     var attendanceId:Int = 0
     var bonusAmount:CGFloat = 0.0
     var empId:Int = 0
-    var endTimeMarkd:CGFloat = 0.0
+    var isEndTimeMarkd:Bool = false
     var endTimeMarkedAt:String = ""
     var endTimeMarkedBy:String = ""
     var profileImageUrl:String = ""
     var profileBaseUrl:String = ""
-    var isApproved:Int = 0
-    var isAttendanceCompleted:Int = 0
-    var isPresent:Int = 0
-    var isSickLeave:Int = 0
-    var isStrike:Int = 0
-    var isSuspicious:Int = 0
+    var isApproved:Bool = false
+    var isAttendanceCompleted:Bool = false
+    var isPresent:Bool = false
+    var isSickLeave:Bool = false
+    var isStrike:Bool = false
+    var isSuspicious:Bool = false
     var markedAt:String = ""
     var name:String = ""
     var siteId:Int = 0
-    var startTimeMarked:CGFloat = 0.0
+    var isStartTimeMarked:Bool = false
     var startTimeMarkedAt:String = ""
     var startTimeMarkedBy:String = ""
     
@@ -45,8 +45,13 @@ class ObeidiModelFetchAttendance: NSObject {
         if let value = dictionaryDetails["emp_id"] as? Int{
             empId = value
         }
-        if let value = dictionaryDetails["end_time_marked"] as? CGFloat{
-            endTimeMarkd = value
+        if let value = dictionaryDetails["end_time_marked"] as? Int{
+            if value == 1{
+                isEndTimeMarkd = true
+            }
+            else{
+                isEndTimeMarkd = false
+            }
         }
         if let value = dictionaryDetails["end_time_marked_at"] as? String{
             endTimeMarkedAt = value
@@ -58,22 +63,53 @@ class ObeidiModelFetchAttendance: NSObject {
             profileImageUrl = value
         }
         if let value = dictionaryDetails["is_approved"] as? Int{
-            isApproved = value
+            if value == 1
+            {
+               isApproved = true
+            }
+            else{
+               isApproved = false
+            }
         }
         if let value = dictionaryDetails["is_attendance_completed"] as? Int{
-            isAttendanceCompleted = value
+            if value == 1{
+                isAttendanceCompleted = true
+            }
+            else{
+                isAttendanceCompleted = false
+            }
         }
         if let value = dictionaryDetails["is_present"] as? Int{
-            isPresent = value
+            if value == 1{
+                isPresent = true
+            }
+            else{
+               isPresent = false
+            }
         }
         if let value = dictionaryDetails["is_sick_leave"] as? Int{
-            isSickLeave = value
+            if value == 1 {
+                isSickLeave = true
+            }
+            else{
+               isSickLeave = false
+            }
         }
         if let value = dictionaryDetails["is_strike"] as? Int{
-            isStrike = value
+            if value == 1 {
+                isStrike = true
+            }
+            else{
+                isStrike = false
+            }
         }
         if let value = dictionaryDetails["is_suspicious"] as? Int{
-            isSuspicious = value
+            if value == 1 {
+                isSuspicious = true
+            }
+            else{
+                isSuspicious = false
+            }
         }
         if let value = dictionaryDetails["marked_at"] as? String{
             markedAt = value
@@ -84,8 +120,13 @@ class ObeidiModelFetchAttendance: NSObject {
         if let value = dictionaryDetails["site_id"] as? Int{
             siteId = value
         }
-        if let value = dictionaryDetails["start_time_marked"] as? CGFloat{
-            startTimeMarked = value
+        if let value = dictionaryDetails["start_time_marked"] as? Int{
+            if value == 1{
+                isStartTimeMarked = true
+            }
+            else{
+                isStartTimeMarked = false
+            }
         }
         if let value = dictionaryDetails["start_time_marked_at"] as? String{
             startTimeMarkedAt = value
