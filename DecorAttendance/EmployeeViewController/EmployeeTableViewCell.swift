@@ -65,10 +65,10 @@ class EmployeeTableViewCell: UITableViewCell {
         
     }
     
-    func setCell(model:DecoreEmployeeModel){
-        lblID.text = "ID" + String(model.emp_id)
+    func setCell(model:DecoreEmployeeModel,imageBase: String){
+        lblID.text = "OAA" + String(model.emp_id)
         lblName.text = model.name
-        imageViewLabour.loadImageUsingCache(withUrl: model.image, colorValue: nil)
+        imageViewLabour.loadImageUsingCache(withUrl: imageBase + model.image, colorValue: nil)
         let rating = Double(model.rating)
        
         if let rat = rating{
@@ -76,7 +76,7 @@ class EmployeeTableViewCell: UITableViewCell {
                 viewColoured.backgroundColor = .red
             }
             else if rat > 8.0{
-                viewColoured.backgroundColor = .green
+                viewColoured.backgroundColor = UIColor(red:0.65, green:0.79, blue:0.38, alpha:1.0)
             }
             else if rat > 4.0 && rat < 7.0{
                 viewColoured.backgroundColor = .orange

@@ -169,8 +169,10 @@ class UserManager: CLBaseService {
         let responseModel = ChangePasswordModel.init(dict:dict)
         return responseModel
     }
-    func callEmployeeDetailsApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
-        CLNetworkManager().initateWebRequest(networkModelForEmployeeDetails(with:body), success: {
+    //Get Employee Details Api
+    
+    func getEmployeeDetailsApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelGetEmployeeDetails(with:body), success: {
             (resultData,response)  in
             let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
             if error == nil {
@@ -190,17 +192,16 @@ class UserManager: CLBaseService {
         
     }
     
-    func networkModelForEmployeeDetails(with body:String)->CLNetworkModel{
-        let emp_id = UserDefaults.standard.integer(forKey: "EmpID")
-        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + String(emp_id), requestMethod_: "GET")
-        requestModel.requestBody = body
+    func networkModelGetEmployeeDetails(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.EMPLOYEES + "/" + body, requestMethod_: "GET")
         return requestModel
     }
     
     func getEmployeeDetailsResponseModel(dict:[String : Any?]) -> Any? {
-        let responseModel = ChangePasswordModel.init(dict:dict)
+        let responseModel = GetEmployeeDetailsResponseModel.init(dict:dict)
         return responseModel
     }
+
 }
 class DecoreProfileResponseModel : NSObject{
     
@@ -426,6 +427,42 @@ class DecoreEmployeeModel : NSObject{
         }
     }
 }
+class DecoreEmployeeDetailModel : NSObject{
+    var name:String = ""
+    var rating:Int = 0
+    var rating_type:String = ""
+    var total_rating:Int = 0
+    
+    
+    init(dict:[String:Any?]) {
+        
+        if let value = dict["rating"] as? Int{
+            rating = value
+        }
+        if let value = dict["name"] as? String{
+            name = value
+        }
+        if let value = dict["rating_type"] as? String{
+            rating_type = value
+        }
+        if let value = dict["total_rating"] as? Int{
+            total_rating = value
+        }
+        
+    }
+}
+
+class GetEmployeeDetailsResponseModel : NSObject{
+    var employee = [DecoreEmployeeDetailModel ]()
+    init(dict:[String:Any?]) {
+        if let _dict = dict["result"] as? [[String:Any?]]{
+            for emp in _dict{
+                employee.append(DecoreEmployeeDetailModel.init(dict: emp))
+            }
+        }
+    }
+}
+
 class ChangePwdRequestModel:NSObject {
     var current:String = ""
     var new:String = ""
