@@ -39,7 +39,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     var selSiteModel:ObeidiModelSites?
     var selAttendanceType:String?
     var attendanceType:AttendanceType?
-    var paramsDict = NSMutableDictionary()
+    var addAttendanceRequest = AddAttendanceRequestModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -92,6 +92,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         if let attResponse = attendanceResponse{
             if let imageUrl = URL(string: attResponse.profileBaseUrl+attResponse.profileImageUrl){
                 self.imageEmployee.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+                addAttendanceRequest.empId = attResponse.empId
             }
             self.lblName.text = attResponse.name
             self.lblID.text = "OAA\(attResponse.empId)"
@@ -304,11 +305,9 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
                 break
             case .Absent:
                 callPostAttendanceAPI()
-                 //showObeidiAlert(message: "Absent has been marked", title: "Success .")
                  break
             case .Strike:
                 callPostAttendanceAPI()
-                //showObeidiAlert(message: "Strike has been marked", title: "Success .")
                 break
             }
         }
@@ -347,49 +346,43 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     
     func callPostAttendanceAPI()  {
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
-        ObeidiModelMarkAttendance.callMarkAttendanceRequest(dataDict: getParamsDict(), image: nil){
-            (success, result, error) in
-            if success! {
-                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
-                print(result!)
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let alertController = storyboard.instantiateViewController(withIdentifier: "ObeidiAlertViewControllerID") as! ObeidiAlertViewController
-                
-                alertController.titleRef = "Success ."
-                alertController.explanationRef = "Your Attendance has been marked. "
-                alertController.parentController = self
-                
-                alertController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                alertController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                //alertController.delegate = self
-                self.present(alertController, animated: true, completion: nil)
-            }else{
-                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+        if let atType = self.attendanceType{
+            addAttendanceRequest.type = CCUtility.getAttendanceTypeString(attendanceType: atType)
+        }
+        if let selSite = self.selSiteModel{
+            addAttendanceRequest.siteId = selSite.locIdNew
+            addAttendanceRequest.latitude = 0.0
+            addAttendanceRequest.longitude = 0.0
+        }
+        LabourManager().addAttendance(with:addAttendanceRequest.getRequestBody(), success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let model = model as? AddAttendanceResponseModel{
+                if model.error == 0{
+                    if let att = self.attendanceType{
+                        if att == AttendanceType.Absent{
+                           self.showObeidiAlert(message: "Absent has been marked", title: "Success")
+                        }
+                        else if att == AttendanceType.Strike{
+                            self.showObeidiAlert(message: "Strike has been marked", title: "Success")
+                        }
+                    }
+                }
+                else{
+                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
+                }
             }
+            
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            
+            print(ErrorType)
         }
     }
-    
-    func getParamsDict() -> NSMutableDictionary {
-//        if let penalty = self.penaltyValue{
-//            paramsDict.setValue("\(penalty)", forKey: "penalty")
-//        }
-        if let site = self.selSiteModel{
-            paramsDict.setValue("\(site.locIdNew)", forKey: "site_id")
-        }
-//        if let loc = self.selLocation{
-//            paramsDict.setValue("\(loc.latitude)", forKey: "lat")
-//            paramsDict.setValue("\(loc.longitude)", forKey: "lng")
-//        }
-        if let attType = self.attendanceType{
-            paramsDict.setValue(CCUtility.getAttendanceTypeString(attendanceType:attType), forKey: "type")
-        }
-        if let atResponse = self.attendanceResponse{
-            paramsDict.setValue("\(atResponse.empId)", forKey: "emp_id")
-        }
-        //paramsDict.setValue(self.txtFldGivenBonus.text, forKey: "bonus")
-        //paramsDict.setValue("", forKey: "image")
-        print(paramsDict)
-        return paramsDict
-    }
-    
 }

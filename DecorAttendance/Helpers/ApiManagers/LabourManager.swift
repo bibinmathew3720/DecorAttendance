@@ -41,6 +41,83 @@ class LabourManager: CLBaseService {
         let responseModel = CostSummaryDetailResponseModel.init(dict:dict)
         return responseModel
     }
+    
+    //Call Add attendance Api
+    
+    func addAttendance(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelForAddAttendance(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.addAttendanceResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
+    
+    func networkModelForAddAttendance(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.MARK_ATTENDANCE, requestMethod_: "POST")
+        requestModel.requestBody = body
+        return requestModel
+    }
+    
+    func addAttendanceResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = AddAttendanceResponseModel.init(dict:dict)
+        return responseModel
+    }
+}
+
+class AddAttendanceRequestModel:NSObject{
+    var type:String?
+    var empId:Int?
+    var siteId:Int?
+    var bonus:CGFloat?
+    var penalty:CGFloat?
+    var leaveStartDate:String?
+    var leaveEndDate:String?
+    var latitude:Double?
+    var longitude:Double?
+    func getRequestBody()->String{
+        var dict:[String:AnyObject] = [String:AnyObject]()
+        if let value = type{
+            dict.updateValue(value as AnyObject, forKey: "type")
+        }
+        if let value = empId{
+            dict.updateValue(value as AnyObject, forKey: "emp_id")
+        }
+        if let value = siteId{
+            dict.updateValue(value as AnyObject, forKey: "site_id")
+        }
+        if let value = bonus{
+            dict.updateValue(value as AnyObject, forKey: "bonus")
+        }
+        if let value = penalty{
+            dict.updateValue(value as AnyObject, forKey: "penalty")
+        }
+        if let value = leaveStartDate{
+            dict.updateValue(value as AnyObject, forKey: "leave_start_date")
+        }
+        if let value = leaveEndDate{
+            dict.updateValue(value as AnyObject, forKey: "leave_end_date")
+        }
+        if let value = latitude{
+            dict.updateValue(value as AnyObject, forKey: "lat")
+        }
+        if let value = longitude{
+            dict.updateValue(value as AnyObject, forKey: "lng")
+        }
+        return CCUtility.getJSONfrom(dictionary: dict)
+    }
 }
 
 class CostSummaryDetailResponseModel : NSObject{
@@ -315,3 +392,16 @@ class SafetyEquipment:NSObject{
     }
 }
 
+class AddAttendanceResponseModel : NSObject{
+    var error:Int = 0
+    var image:String = ""
+    init(dict:[String:Any?]) {
+        if let value = dict["error"] as? Int{
+            error = value
+        }
+        if let value = dict["image"] as? String{
+            image = value
+        }
+    }
+    
+}
