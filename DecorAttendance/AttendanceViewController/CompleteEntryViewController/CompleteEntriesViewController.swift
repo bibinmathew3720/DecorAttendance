@@ -12,8 +12,14 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tableViewCompleteEntry: UITableView!
     @IBOutlet weak var viewSearchBar: UIView!
     @IBOutlet weak var txtFldSearch: UITextField!
+    @IBOutlet weak var lblSite: UILabel!
     
+    @IBOutlet weak var siteView: UIView!
+    @IBOutlet weak var dateView: UIView!
+    @IBOutlet weak var lblDate: UILabel!
     var activeTextField: UITextField!
+    var selectedSite: ObeidiModelSites?
+    var siteModelObjArr = [ObeidiModelSites]()
     var completedEntriesResponseModel:ObeidAttendanceResponseModel?
     var attendanceRequest = ObeidAttendanceRequestModel()
     @IBOutlet weak var emptyView: UIView!
@@ -27,12 +33,25 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         addTapgesturesToView()
         self.txtFldSearch.text = ""
         initialisation()
+        addTapGesturesToLabels()
         callFetchAttendanceaAPI()
         // Do any additional setup after loading the view.
     }
     
     func initialisation(){
         attendanceRequest.isAttendanceCompleteEntry = true
+        self.lblDate.text = ""
+        self.lblSite.text = ""
+    }
+    
+    func addTapGesturesToLabels() {
+        self.dateView.isUserInteractionEnabled = true
+        let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleDateLabelTap))
+        self.dateView.addGestureRecognizer(tapGestureDate)
+        
+        self.siteView.isUserInteractionEnabled = true
+        let tapGestureSite = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleSiteLabelTap))
+        self.siteView.addGestureRecognizer(tapGestureSite)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +71,16 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         layer1.layer.borderWidth = 0.5
         layer1.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
         
+        self.siteView.layer.cornerRadius = 1
+        self.siteView.layer.borderWidth = 0.5
+        self.siteView.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
+        
+        self.dateView.layer.cornerRadius = 1
+        self.dateView.layer.borderWidth = 0.5
+        self.dateView.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
+        
+        self.lblDate.textColor = ObeidiFont.Color.obeidiLightBlack()
+        self.lblSite.textColor = ObeidiFont.Color.obeidiLightBlack()
     }
    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -71,6 +100,53 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     @objc func dismissKeyBoard()  {
         if activeTextField != nil{
             activeTextField.resignFirstResponder()
+        }
+    }
+    
+    @objc func handleDateLabelTap(){
+        DispatchQueue.main.async {
+            
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                self.view.alpha = 0.65
+                //self.tabBarController?.view.alpha = 0.65
+                self.navigationController?.navigationBar.alpha = 0.65
+                
+                
+            },completion:nil)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let calendarViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
+            calendarViewController.delegate = self
+            //calendarViewController.isDateNeeded = true
+            calendarViewController.filterTypeName = FilterTypeName.endDate
+            calendarViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            calendarViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(calendarViewController, animated: true, completion: nil)
+            
+        }
+        
+    }
+    @objc func handleSiteLabelTap(){
+        DispatchQueue.main.async {
+            
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                self.view.alpha = 0.65
+                //self.tabBarController?.view.alpha = 0.65
+                self.navigationController?.navigationBar.alpha = 0.65
+                
+                
+            },completion:nil)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let siteViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
+            siteViewController.delegate = self
+            //calendarViewController.isDateNeeded = true
+            siteViewController.filterTypeName = FilterTypeName.site
+            siteViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            siteViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            //siteViewController.sitesArray = self.siteModelObjArr
+            self.present(siteViewController, animated: true, completion: nil)
+            
         }
     }
     
@@ -129,5 +205,35 @@ extension CompleteEntriesViewController:UITableViewDataSource,UITableViewDelegat
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 134
+    }
+}
+extension CompleteEntriesViewController:filterUpdatedDelegate{
+    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
+        self.attendanceRequest.siteId = selSite.locIdNew
+        lblSite.text = selSite.nameNew
+        self.selectedSite = selSite
+        //callFetchAttendanceaAPI()
+    }
+    
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+        self.attendanceRequest.startDate = date
+        lblDate.text = date
+        //callFetchAttendanceaAPI()
+    }
+    
+    func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
+        
+    }
+    
+    func dateUpdated(to date: String, updatedType: FilterTypeName!) {
+    }
+    
+    func calendarColsed() {
+        
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+        },completion:nil)
     }
 }
