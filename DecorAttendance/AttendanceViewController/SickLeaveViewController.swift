@@ -8,15 +8,7 @@
 
 import UIKit
 
-class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
-    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
-        
-    }
-    
-    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
-        
-    }
-    
+class SickLeaveViewController: UIViewController {
 
     @IBOutlet weak var lblStartDate: UILabel!
     @IBOutlet weak var lblEndDate: UILabel!
@@ -26,6 +18,8 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
     
     @IBOutlet weak var selImageView: UIImageView!
     
+    var startDate:String?
+    var endDate:String?
 
     override func viewDidLoad() {
         
@@ -33,6 +27,7 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
         self.title = Constant.PageNames.Attendance
         setViewStyles()
         addTapGesturesToLabels()
+        populateData()
         // Do any additional setup after loading the view.
     }
     
@@ -80,15 +75,19 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
         bttnUploadPicture.layer.cornerRadius = 16
         bttnUploadPicture.layer.borderWidth = 1
         bttnUploadPicture.layer.borderColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1).cgColor
-        
-        
     }
+    
+    func populateData(){
+        startDate = CCUtility.stringFromDate(date: Date())
+        self.lblStartDate.text = "\(CCUtility.stringFromDate(date: Date()))"
+    }
+    
     //MARK:Tap Gestures
+    
     func addTapGesturesToLabels() {
-        
-        self.lblStartDate.isUserInteractionEnabled = true
-        let tapGestureStart = UITapGestureRecognizer(target: self, action: #selector(SickLeaveViewController.handleStartDateLabelTap))
-        self.lblStartDate.addGestureRecognizer(tapGestureStart)
+//        self.lblStartDate.isUserInteractionEnabled = true
+//        let tapGestureStart = UITapGestureRecognizer(target: self, action: #selector(SickLeaveViewController.handleStartDateLabelTap))
+//        self.lblStartDate.addGestureRecognizer(tapGestureStart)
     
         self.lblEndDate.isUserInteractionEnabled = true
         let tapGestureEnd = UITapGestureRecognizer(target: self, action: #selector(SickLeaveViewController.handleEndDateLabelTap))
@@ -101,10 +100,9 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
+                //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
-                self.navigationController?.navigationBar.alpha = 0.65
-                
+                //self.navigationController?.navigationBar.alpha = 0.65
                 
             },completion:nil)
             
@@ -145,53 +143,8 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
         }
         
     }
-
-    //POPUP Delegate Methods
-    func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
-        
-        
-        print(value.value(forKey: "name") as! String)
-        switch updatedType! {
-            
-        case .site:
-            print("site")
-        default:
-            print("")
-        }
-        
-    }
-    func dateUpdated(to date: String, updatedType: FilterTypeName!) {
-        print(date)
-        print(updatedType)
-        
-        switch updatedType! {
-        case .endDate:
-            self.lblEndDate.text = date
-        //self.selectedApplyDate = date
-        case .startDate:
-            self.lblStartDate.text = date
-        //self.selectedDate = date
-        default:
-            print("")
-            
-        }
-    }
     
-    func calendarColsed() {
-        
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.view.alpha = 1
-            //self.tabBarController?.view.alpha = 0.65
-            self.navigationController?.navigationBar.alpha = 1
-            
-            
-        },completion:nil)
-        
-        
-    }
     func showObeidiAlert(message: String, title: String) {
-        
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let alertController = storyboard.instantiateViewController(withIdentifier: "ObeidiAlertViewControllerID") as! ObeidiAlertViewController
         
@@ -202,13 +155,12 @@ class SickLeaveViewController: UIViewController, filterUpdatedDelegate {
         alertController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         alertController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(alertController, animated: true, completion: nil)
-        
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toCaptureSceneSegue:SickLeave"{
             let vc = segue.destination as! CaptureImageViewController
             vc.attendanceType = AttendanceType.SickLeave
-            
         }
     }
     
@@ -226,13 +178,42 @@ extension SickLeaveViewController:UIImagePickerControllerDelegate,UINavigationCo
     
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-           
+           selImageView.image = image
         } else{
             print("Something went wrong in  image")
         }
+        dismiss(animated: true, completion: nil)
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SickLeaveViewController:filterUpdatedDelegate{
+    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
+        
+    }
+    
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+        if type == FilterTypeName.endDate{
+            self.endDate = date
+            self.lblEndDate.text = "\(date)"
+        }
+    }
+    
+    func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
+    }
+    
+    func dateUpdated(to date: String, updatedType: FilterTypeName!) {
+        
+    }
+    
+    func calendarColsed() {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+        },completion:nil)
     }
 }

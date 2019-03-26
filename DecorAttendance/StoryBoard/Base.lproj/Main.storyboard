@@ -2202,7 +2202,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="464"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-22-2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjH-rt-BmL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-22-2018" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjH-rt-BmL">
                                 <rect key="frame" x="30" y="59" width="125" height="26"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
@@ -2233,7 +2233,7 @@
                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-22-2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4q7-e1-TKh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4q7-e1-TKh">
                                 <rect key="frame" x="220" y="59" width="125" height="26"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
@@ -2277,15 +2277,15 @@
                                     <action selector="bttnActnAttachPicture:" destination="rgm-lH-wSu" eventType="touchUpInside" id="TjY-Rs-wnb"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qjk-wo-rnI">
-                                <rect key="frame" x="137.5" y="203" width="100" height="100"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qjk-wo-rnI">
+                                <rect key="frame" x="112.5" y="223" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="2NK-E7-atd"/>
-                                    <constraint firstAttribute="width" constant="100" id="ena-nF-eFF"/>
+                                    <constraint firstAttribute="height" constant="150" id="2NK-E7-atd"/>
+                                    <constraint firstAttribute="width" constant="150" id="ena-nF-eFF"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload an image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgG-GN-TAs">
-                                <rect key="frame" x="134" y="313" width="107.5" height="19.5"/>
+                                <rect key="frame" x="134" y="383" width="107.5" height="19.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2302,7 +2302,7 @@
                             <constraint firstItem="GjH-rt-BmL" firstAttribute="top" secondItem="qyn-9e-pw7" secondAttribute="bottom" constant="8" id="5f9-fI-oYq"/>
                             <constraint firstItem="Blr-wH-M6i" firstAttribute="centerY" secondItem="rzj-FF-dRk" secondAttribute="centerY" id="5iG-MY-SBN"/>
                             <constraint firstItem="0eE-4k-fJw" firstAttribute="centerX" secondItem="y2U-rV-LmW" secondAttribute="centerX" id="6Vl-HT-wPl"/>
-                            <constraint firstItem="qjk-wo-rnI" firstAttribute="top" secondItem="Blr-wH-M6i" secondAttribute="bottom" constant="20" id="8ge-px-HTG"/>
+                            <constraint firstItem="qjk-wo-rnI" firstAttribute="top" secondItem="Blr-wH-M6i" secondAttribute="bottom" constant="40" id="8ge-px-HTG"/>
                             <constraint firstItem="Les-oK-tpk" firstAttribute="height" secondItem="qyn-9e-pw7" secondAttribute="height" id="9KM-pa-BSJ"/>
                             <constraint firstItem="GjH-rt-BmL" firstAttribute="height" secondItem="qyn-9e-pw7" secondAttribute="height" id="EUN-9c-Ahh"/>
                             <constraint firstItem="rzj-FF-dRk" firstAttribute="leading" secondItem="y2U-rV-LmW" secondAttribute="leading" constant="20" id="GkO-Lt-eap"/>
