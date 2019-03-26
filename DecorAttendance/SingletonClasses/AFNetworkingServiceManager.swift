@@ -269,7 +269,9 @@ class AFNetworkingServiceManager: NSObject {
         manager.responseSerializer.acceptableContentTypes = NSSet(objects: "application/json", "text/html") as? Set<String>
         let  strUrl : String = self.initWithManager()
         manager.post(strUrl+servicename, parameters: parameter, constructingBodyWith: { (formData:AFMultipartFormData) -> Void in
-            formData.appendPart(withFileData: imgData!, name: pathKey, fileName: "\(self.makeFileName()).jpg", mimeType: "image/jpeg")
+            if let imData = imgData{
+                formData.appendPart(withFileData: imData, name: pathKey, fileName: "\(self.makeFileName()).jpg", mimeType: "image/jpeg")
+            }
             
         }, progress: nil, success: { (operation, responseObj) -> Void in
             
