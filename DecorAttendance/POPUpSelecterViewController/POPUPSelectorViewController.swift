@@ -71,7 +71,6 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
         calenderView.backgroundColor = ObeidiColors.ColorCode.obeidiRed()
         calenderView.calendarDelegate = self
         calenderView.calendarDataSource = self
-        
         tableViewFilter.backgroundColor = ObeidiColors.ColorCode.obeidiRed()
         tableViewFilter.layer.cornerRadius = 10.0
         

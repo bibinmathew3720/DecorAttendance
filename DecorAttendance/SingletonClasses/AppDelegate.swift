@@ -19,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         //hide back button title
-        let BarButtonItemAppearance = UIBarButtonItem.appearance()
-        BarButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
-        BarButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .highlighted)
+        //let BarButtonItemAppearance = UIBarButtonItem.appearance()
+        //BarButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
+        //BarButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .highlighted)
 //        let backImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal)
 //        UINavigationBar.appearance().backIndicatorImage = backImage
 //        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backImage
@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //setTabBarStyles()
         UITabBar.appearance().layer.borderWidth = 0.0
         UITabBar.appearance().clipsToBounds = true
-        //UINavigationBar.appearance().barTintColor = UIColor.red
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
@@ -55,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setNavigationBarProperties(){
-        //UINavigationBar.appearance().barTintColor = Constant.Colors.CommonMeroonColor
+        UINavigationBar.appearance().barTintColor = Constant.Colors.whiteColor
         UINavigationBar.appearance().tintColor = Constant.Colors.whiteColor
         let attrs = [
             NSAttributedString.Key.foregroundColor: Constant.Colors.whiteColor,
