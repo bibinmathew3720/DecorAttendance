@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SickLeaveViewController: UIViewController {
+class SickLeaveViewController: UIViewController,dismissDelegate {
 
     @IBOutlet weak var lblStartDate: UILabel!
     @IBOutlet weak var lblEndDate: UILabel!
@@ -17,9 +17,16 @@ class SickLeaveViewController: UIViewController {
     @IBOutlet weak var bttnNext: UIButton!
     
     @IBOutlet weak var selImageView: UIImageView!
+    var spinner = UIActivityIndicatorView(style: .gray)
     
     var startDate:String?
     var endDate:String?
+    var selSiteModel:ObeidiModelSites?
+    var attendanceType:AttendanceType?
+    var selLocation:Location?
+    var selImage:UIImage?
+    var imageData:Data?
+     var attendanceResponse:ObeidiModelFetchAttendance?
 
     override func viewDidLoad() {
         
@@ -33,12 +40,27 @@ class SickLeaveViewController: UIViewController {
     
     @IBAction func bttnActnNext(_ sender
         : Any){
-        
-        if (self.lblStartDate.text != "" && self.lblEndDate.text != ""){
-            showObeidiAlert(message: "Sick leave has been marked. ", title: "Obeidi Alert")
-        }else{
-            ObeidiAlertController.showAlert(self, alertMessage: "start date and end date neede. ")
+        if isValid(){
+            callPostAttendanceAPI()
         }
+    }
+    
+    func isValid()->Bool{
+        var valid = true
+        if let _selImage = self.selImage{
+            if let _endDate = self.endDate{
+                
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Please select End Date", parentController: self)
+                valid = false
+            }
+        }
+        else{
+            CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Please add image", parentController: self)
+            valid = false
+        }
+        return valid
     }
 
     @IBAction func bttnActnTakePicture(_ sender
@@ -161,6 +183,7 @@ class SickLeaveViewController: UIViewController {
         if segue.identifier == "toCaptureSceneSegue:SickLeave"{
             let vc = segue.destination as! CaptureImageViewController
             vc.attendanceType = AttendanceType.SickLeave
+            vc.delegate = self
         }
     }
     
@@ -171,7 +194,64 @@ class SickLeaveViewController: UIViewController {
         imagePicker.sourceType = sourceType;
         present(imagePicker, animated: true, completion: nil)
     }
-
+    
+    func callPostAttendanceAPI()  {
+        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
+        ObeidiModelMarkAttendance.callMarkAttendanceRequest(dataDict: getParamsDict(), image: self.imageData){
+            (success, result, error) in
+            if success! {
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+                print(result!)
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let alertController = storyboard.instantiateViewController(withIdentifier: "ObeidiAlertViewControllerID") as! ObeidiAlertViewController
+                
+                alertController.titleRef = "Success ."
+                alertController.explanationRef = "Your Sick leave has been marked. "
+                alertController.parentController = self
+                
+                alertController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                alertController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                alertController.delegate = self
+                self.present(alertController, animated: true, completion: nil)
+            }else{
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+            }
+        }
+    }
+    
+    func getParamsDict() -> NSMutableDictionary {
+        let paramsDict = NSMutableDictionary()
+        paramsDict.setValue("0", forKey: "penalty")
+        if let siteModel = self.selSiteModel{
+            paramsDict.setValue("\(siteModel.locIdNew)", forKey: "site_id")
+        }
+        if let location = self.selLocation{
+            paramsDict.setValue("\(location.latitude)", forKey: "lat")
+            paramsDict.setValue("\(location.longitude)", forKey: "lng")
+        }
+        if let attType = self.attendanceType{
+            paramsDict.setValue(CCUtility.getAttendanceTypeString(attendanceType:attType), forKey: "type")
+        }
+        if let attResponse = self.attendanceResponse{
+            paramsDict.setValue("\(attResponse.empId)", forKey: "emp_id")
+        }
+        paramsDict.setValue("0", forKey: "bonus")
+        if let _image = self.selImage{
+            paramsDict.setValue(_image, forKey: "image")
+        }
+        if let _startDate = self.startDate{
+           paramsDict.setValue(_startDate, forKey: "leave_start_date")
+        }
+        if let _startDate = self.endDate{
+            paramsDict.setValue(_startDate, forKey: "leave_end_date")
+        }
+        return paramsDict
+    }
+    
+    func dismissed() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
 }
 
 extension SickLeaveViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
@@ -179,6 +259,8 @@ extension SickLeaveViewController:UIImagePickerControllerDelegate,UINavigationCo
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
            selImageView.image = image
+           self.selImage = image
+            self.imageData = image.jpegData(compressionQuality: 1.0)
         } else{
             print("Something went wrong in  image")
         }
@@ -215,5 +297,13 @@ extension SickLeaveViewController:filterUpdatedDelegate{
             //self.tabBarController?.view.alpha = 0.65
             self.navigationController?.navigationBar.alpha = 1
         },completion:nil)
+    }
+}
+
+extension SickLeaveViewController:CaptureImageViewControllerDelegate{
+    func capturedImage(image: UIImage, imageData: Data) {
+        selImageView.image = image
+        self.selImage = image
+        self.imageData = imageData
     }
 }

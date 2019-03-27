@@ -2260,7 +2260,8 @@
                                     <constraint firstAttribute="width" secondItem="0eE-4k-fJw" secondAttribute="height" multiplier="20:3" id="IMp-Jb-pds"/>
                                     <constraint firstAttribute="height" constant="45" id="T4L-Dk-hVz"/>
                                 </constraints>
-                                <state key="normal" title="Next">
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Done">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>

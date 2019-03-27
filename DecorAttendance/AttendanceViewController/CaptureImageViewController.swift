@@ -10,6 +10,9 @@ import UIKit
 import AVFoundation
 
 @available(iOS 10.0, *)
+protocol CaptureImageViewControllerDelegate {
+    func capturedImage(image:UIImage,imageData:Data)
+}
 class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     @IBOutlet weak var previewView: UIView!
@@ -19,10 +22,7 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     var capturedImage: UIImage!
-    
-    
     var imageDataRep: Data!
-    
     var selSiteModel:ObeidiModelSites?
     var attendanceResponse:ObeidiModelFetchAttendance?
     var attendanceType:AttendanceType?
@@ -30,6 +30,7 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     var missedSafetyEquipments = [SafetyEquipment]()
     var selLocation:Location?
     
+    var delegate:CaptureImageViewControllerDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -146,7 +147,15 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
         capturedImage = image
         self.imageDataRep  = imageData
         //captureImageView.image = image
-        self.performSegue(withIdentifier: "toPhotoCheckSceneSegue:Capture", sender: Any.self)
+        if self.attendanceType == AttendanceType.SickLeave{
+            if let _delegate = self.delegate{
+                _delegate.capturedImage(image: capturedImage, imageData: imageData)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        else{
+            self.performSegue(withIdentifier: "toPhotoCheckSceneSegue:Capture", sender: Any.self)
+        }
     }
     
     
