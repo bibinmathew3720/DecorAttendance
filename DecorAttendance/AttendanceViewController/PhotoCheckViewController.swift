@@ -21,7 +21,6 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     var capturedImageRef: UIImage!
     var paramsDict = NSMutableDictionary()
     var spinner = UIActivityIndicatorView(style: .gray)
-    var locationManager: CLLocationManager! = nil
     var imageData: Data!
     
     var selSiteModel:ObeidiModelSites?
@@ -29,7 +28,6 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     var attendanceType:AttendanceType?
     var penaltyValue:CGFloat?
     var selLocation:Location?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewStyles()
@@ -38,8 +36,6 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
         populateData()
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
-        locationManager = CLLocationManager()
-        askForLocationAuthorisation()
         // Do any additional setup after loading the view.
     }
     
@@ -53,20 +49,6 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
                 self.imageViewDataBase.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
             }
         }
-    }
-    
-    func askForLocationAuthorisation(){
-        
-        // Ask for Authorisation from the User.
-        self.locationManager.requestAlwaysAuthorization()
-        // For use in foreground
-        self.locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
-        
     }
     
     func setViewStyles()  {
@@ -152,16 +134,6 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     
     func dismissed() {
         self.navigationController?.popToRootViewController(animated: true)
-    }
-    
-    //MARK: location delegate
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
-        selLocation = Location()
-        selLocation?.latitude = locValue.latitude
-        selLocation?.longitude = locValue.longitude
-        manager.stopUpdatingLocation()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -85,8 +85,7 @@ class AddAttendanceRequestModel:NSObject{
     var penalty:CGFloat?
     var leaveStartDate:String?
     var leaveEndDate:String?
-    var latitude:Double?
-    var longitude:Double?
+    var location:Location?
     func getRequestBody()->String{
         var dict:[String:AnyObject] = [String:AnyObject]()
         if let value = type{
@@ -110,11 +109,9 @@ class AddAttendanceRequestModel:NSObject{
         if let value = leaveEndDate{
             dict.updateValue(value as AnyObject, forKey: "leave_end_date")
         }
-        if let value = latitude{
-            dict.updateValue(value as AnyObject, forKey: "lat")
-        }
-        if let value = longitude{
-            dict.updateValue(value as AnyObject, forKey: "lng")
+        if let value = location{
+            dict.updateValue(value.latitude as AnyObject, forKey: "lat")
+            dict.updateValue(value.longitude as AnyObject, forKey: "lng")
         }
         return CCUtility.getJSONfrom(dictionary: dict)
     }

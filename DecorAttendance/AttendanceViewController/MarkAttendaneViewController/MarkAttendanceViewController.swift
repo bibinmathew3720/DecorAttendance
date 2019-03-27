@@ -8,6 +8,8 @@
 
 import UIKit
 import Kingfisher
+import CoreLocation
+import MapKit
 
 enum AttendanceType{
     case StartTime
@@ -40,6 +42,9 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     var selAttendanceType:String?
     var attendanceType:AttendanceType?
     var addAttendanceRequest = AddAttendanceRequestModel()
+    
+    var locationManager: CLLocationManager! = nil
+    var selLocation:Location?
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -49,6 +54,8 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")
         setUIContents()
+        locationManager = CLLocationManager()
+        askForLocationAuthorisation()
         // Do any additional setup after loading the view.
     }
     
@@ -59,6 +66,18 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         }
        populateSelectedSite()
        populateAttendanceType()
+    }
+    
+    func askForLocationAuthorisation(){
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
     }
     
     func populateSelectedSite(){
@@ -304,10 +323,14 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
                 self.performSegue(withIdentifier: "toSickLeaveSceneSegue:MarkAttendance", sender: Any.self)
                 break
             case .Absent:
-                callPostAttendanceAPI()
+                if inValidEntry(){
+                    callPostAttendanceAPI()
+                }
                  break
             case .Strike:
-                callPostAttendanceAPI()
+                if inValidEntry(){
+                    callPostAttendanceAPI()
+                }
                 break
             }
         }
@@ -344,6 +367,8 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         }
     }
     
+    //Calling post attendance api
+    
     func callPostAttendanceAPI()  {
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
         if let atType = self.attendanceType{
@@ -351,12 +376,10 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         }
         if let selSite = self.selSiteModel{
             addAttendanceRequest.siteId = selSite.locIdNew
-            addAttendanceRequest.latitude = 0.0
-            addAttendanceRequest.longitude = 0.0
         }
         LabourManager().addAttendance(with:addAttendanceRequest.getRequestBody(), success: {
             (model,response)  in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
             if let model = model as? AddAttendanceResponseModel{
                 if model.error == 0{
                     if let att = self.attendanceType{
@@ -374,7 +397,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             }
             
         }) { (ErrorType) in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
             if(ErrorType == .noNetwork){
                 CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
             }
@@ -385,4 +408,30 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             print(ErrorType)
         }
     }
+    
+    func inValidEntry()->Bool{
+        var valid = true
+        if let selLocation = self.selLocation{
+        }
+        else{
+            valid = false
+            CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Location not found", parentController: self)
+        }
+        return valid
+    }
+}
+
+//MARK: location delegate
+
+extension MarkAttendanceViewController:CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        selLocation = Location()
+        selLocation?.latitude = locValue.latitude
+        selLocation?.longitude = locValue.longitude
+        self.addAttendanceRequest.location = selLocation
+        manager.stopUpdatingLocation()
+    }
+    
 }
