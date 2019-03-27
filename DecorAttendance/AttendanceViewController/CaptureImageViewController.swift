@@ -27,6 +27,8 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     var attendanceResponse:ObeidiModelFetchAttendance?
     var attendanceType:AttendanceType?
     var penaltyValue:CGFloat?
+    var missedSafetyEquipments = [SafetyEquipment]()
+    var selLocation:Location?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,7 +153,6 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toPhotoCheckSceneSegue:Capture" {
-            
             let VC = segue.destination as! PhotoCheckViewController
             VC.selSiteModel = self.selSiteModel
             VC.attendanceResponse = self.attendanceResponse
@@ -159,7 +160,8 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
             VC.penaltyValue = self.penaltyValue
             VC.capturedImageRef = capturedImage
             VC.imageData = self.imageDataRep
-            
+            VC.selLocation = self.selLocation
+            VC.missedSafetyEquipments = self.missedSafetyEquipments
         }
     }
 }

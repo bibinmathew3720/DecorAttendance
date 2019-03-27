@@ -355,6 +355,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             vc.selSiteModel = self.selSiteModel
             vc.attendanceResponse = self.attendanceResponse
             vc.attendanceType = self.attendanceType
+            vc.selLocation = self.selLocation
 
         }
         else if segue.identifier == "toCaptureImageSceneSegue:MarkAttendanceScene"{

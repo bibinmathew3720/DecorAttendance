@@ -28,6 +28,7 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     var attendanceType:AttendanceType?
     var penaltyValue:CGFloat?
     var selLocation:Location?
+    var missedSafetyEquipments = [SafetyEquipment]()
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewStyles()
@@ -122,6 +123,13 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
         }
         if let attType = self.attendanceType{
              paramsDict.setValue(CCUtility.getAttendanceTypeString(attendanceType:attType), forKey: "type")
+            if (attType == AttendanceType.StartTime){
+                var equipmentIdArray = [Int]()
+                for item in self.missedSafetyEquipments{
+                    equipmentIdArray.append(item.id)
+                }
+               paramsDict.setValue(equipmentIdArray, forKey: "safety_equipments_missed")
+            }
         }
         if let attResponse = self.attendanceResponse{
             paramsDict.setValue("\(attResponse.empId)", forKey: "emp_id")

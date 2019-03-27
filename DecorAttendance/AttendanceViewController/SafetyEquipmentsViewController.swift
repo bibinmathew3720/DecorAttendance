@@ -23,8 +23,10 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     var selSiteModel:ObeidiModelSites?
     var attendanceResponse:ObeidiModelFetchAttendance?
     var attendanceType:AttendanceType?
+    var selLocation:Location?
     
     var safetyEquipmentsResponseModel:SafetyEquipmentsResponseModel?
+    var selSafetyEquipments = [SafetyEquipment]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,12 +75,17 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
             self.bttnCheckAll.setImage(UIImage(named: "tick"), for: .normal)
             penaltyVal = 0
             self.lblPenaltyAmnt.text = "AED \(penaltyVal)"
+            self.selSafetyEquipments.removeAll()
+            if let safetyEquipments = self.safetyEquipmentsResponseModel{
+                self.selSafetyEquipments.append(contentsOf: safetyEquipments.SafetyEquipments)
+            }
             self.tableViewPenalty.reloadData()
         }else{
             self.bttnCheckAll.setImage(UIImage(named: ""), for: .normal)
             //update the checked status in each cell
             penaltyVal = penaltyFullValue
             self.lblPenaltyAmnt.text = "AED \(penaltyFullValue)"
+            self.selSafetyEquipments.removeAll()
             self.tableViewPenalty.reloadData()
         }
     }
@@ -138,11 +145,15 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     
     func buttonCheckedStatus(isChecked: Bool, buttonIndex: Int) {
         if let safetyResponse = self.safetyEquipmentsResponseModel{
+            let equipment = safetyResponse.SafetyEquipments[buttonIndex]
             if isChecked{
                 var equipmentPenalty:CGFloat = 0.0
                 equipmentPenalty = safetyResponse.SafetyEquipments[buttonIndex].penalty
                 penaltyVal = penaltyVal - equipmentPenalty
                 self.lblPenaltyAmnt.text = "AED \(penaltyVal)"
+                if !selSafetyEquipments.contains(equipment){
+                    selSafetyEquipments.append(equipment)
+                }
             }else{
                 var equipmentPenalty:CGFloat = 0.0
                 self.isAllButtonChecked = false
@@ -150,6 +161,12 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
                 equipmentPenalty = safetyResponse.SafetyEquipments[buttonIndex].penalty
                 penaltyVal = penaltyVal + equipmentPenalty
                 self.lblPenaltyAmnt.text = "AED \(penaltyVal)"
+                if selSafetyEquipments.contains(equipment){
+                    let index = selSafetyEquipments.index(where: {$0 == equipment})
+                    if let ind = index{
+                        selSafetyEquipments.remove(at: ind)
+                    }
+                }
             }
         }
     }
@@ -161,6 +178,12 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
             vc.selSiteModel = self.selSiteModel
             vc.attendanceType = self.attendanceType
             vc.penaltyValue = self.penaltyVal
+            if let safetyResponse = self.safetyEquipmentsResponseModel{
+                let parentSet = Set(safetyResponse.SafetyEquipments)
+                let childSet = Set(self.selSafetyEquipments)
+                vc.missedSafetyEquipments = Array(parentSet.symmetricDifference(childSet))
+            }
+            vc.selLocation = self.selLocation
         }
     }
 }
