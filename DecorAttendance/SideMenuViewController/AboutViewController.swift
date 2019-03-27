@@ -28,6 +28,7 @@ class AboutViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     func initialisation(){
+        self.title = Constant.PageNames.AboutUs
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "back")

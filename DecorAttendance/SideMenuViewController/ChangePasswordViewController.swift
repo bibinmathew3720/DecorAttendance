@@ -17,6 +17,7 @@ class ChangePasswordViewController: UIViewController {
     var pwd = ChangePwdRequestModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = Constant.PageNames.ChangePassword
         setUpViewStyles()
     }
     

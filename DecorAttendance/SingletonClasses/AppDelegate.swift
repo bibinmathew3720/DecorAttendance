@@ -60,7 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSAttributedString.Key.foregroundColor: Constant.Colors.whiteColor,
             NSAttributedString.Key.font: UIFont(name: Constant.Font.AvenirBook, size: 22)!
         ]
-        UINavigationBar.appearance().titleTextAttributes = attrs
+      UINavigationBar.appearance().titleTextAttributes = attrs
+      UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000, vertical: 0), for:UIBarMetrics.default)
     }
 
 
