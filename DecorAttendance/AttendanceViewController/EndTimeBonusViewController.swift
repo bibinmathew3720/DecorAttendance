@@ -32,12 +32,20 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialisation()
         addTapgesturesToView()
         txtFldGivenBonus.delegate = self
         setViewStyles()
         calculateBonusPer()
-        self.lblRemainingBonus.text = "AED" + "\(User.BonusDetails.remaining_bonus)/ \(User.BonusDetails.bonus_budget)"
+       // self.lblRemainingBonus.text = "AED" + "\(User.BonusDetails.remaining_bonus)/ \(User.BonusDetails.bonus_budget)"
+        if let selSite = self.selSiteModel{
+            self.lblRemainingBonus.text = "AED " + "\(selSite.remainingBonusNew) / \(selSite.bonusBudgetNew)"
+        }
         // Do any additional setup after loading the view.
+    }
+    
+    func initialisation(){
+       self.title = Constant.PageNames.Attendance
     }
     
     //MARK: textfield delegate methods
@@ -53,7 +61,9 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
 
     @IBAction func bttnActnDone(_ sender
         : Any){
-        self.callPostAttendanceAPI()
+        if (isValid()){
+            self.callPostAttendanceAPI()
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -140,6 +150,23 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
         drawOuterPieChart(center: center, radius: maxRadius, filValue: bonusPer )
     }
     
+    func isValid()->Bool{
+        var valid = true
+        if let bonusText = txtFldGivenBonus.text{
+            if let bonusValue = Float (bonusText){
+                let bonusValueCGFloat = CGFloat(bonusValue)
+                print(bonusValueCGFloat)
+                if let selSite = self.selSiteModel{
+                    if bonusValueCGFloat > selSite.remainingBonusNew{
+                        valid = false
+                        CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Entered bonus amount greater than available bonus point", parentController: self)
+                    }
+                }
+            }
+        }
+        return valid
+    }
+    
     func callPostAttendanceAPI()  {
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
         ObeidiModelMarkAttendance.callMarkAttendanceRequest(dataDict: getParamsDict(), image: self.imageDataRef){
@@ -181,8 +208,11 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
         if let atResponse = self.attendanceResponse{
             paramsDict.setValue("\(atResponse.empId)", forKey: "emp_id")
         }
-        paramsDict.setValue(self.txtFldGivenBonus.text, forKey: "bonus")
+        if let bonusText = txtFldGivenBonus.text{
+             paramsDict.setValue(bonusText, forKey: "bonus")
+        }
         paramsDict.setValue("", forKey: "image")
+        print(paramsDict)
         return paramsDict
     }
     

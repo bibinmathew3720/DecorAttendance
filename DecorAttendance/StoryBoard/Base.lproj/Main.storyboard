@@ -2148,13 +2148,13 @@
                                 <rect key="frame" x="10" y="10" width="355" height="354"/>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOR-8r-hSW">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOR-8r-hSW">
                                 <rect key="frame" x="82.5" y="394" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="F19-wc-AKB"/>
                                     <constraint firstAttribute="height" constant="50" id="HMX-ZO-R2c"/>
                                 </constraints>
-                                <state key="normal" title="Rotate"/>
+                                <state key="normal" image="cameraRotateIcon"/>
                                 <connections>
                                     <action selector="rotateButtonAction:" destination="I6v-QT-HeV" eventType="touchUpInside" id="m5L-67-kM4"/>
                                 </connections>
@@ -6079,13 +6079,13 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="45" id="pc8-N2-Odb"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AED 200/ 12200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQL-go-m1p">
                                                                     <rect key="frame" x="0.0" y="45" width="243" height="45"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                                     <color key="textColor" red="0.91372549020000005" green="0.18039215689999999" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -6139,7 +6139,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="152" id="gdk-Ln-eMk"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                             <color key="textColor" red="0.45098039220000002" green="0.45098039220000002" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -6168,6 +6168,7 @@
                                                         <constraint firstAttribute="width" secondItem="zlv-bB-JI1" secondAttribute="height" multiplier="20:3" id="DZO-No-Y0Z"/>
                                                         <constraint firstAttribute="height" constant="45" id="yaZ-1u-Kgq"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                                     <state key="normal" title="Done">
                                                         <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -6213,6 +6214,7 @@
         <image name="attendance_fill" width="20" height="20"/>
         <image name="call" width="26" height="26"/>
         <image name="cam" width="70" height="70"/>
+        <image name="cameraRotateIcon" width="30" height="30"/>
         <image name="dasboard" width="20" height="20"/>
         <image name="dashboard_fill" width="20" height="20"/>
         <image name="devarakonda" width="200" height="200"/>

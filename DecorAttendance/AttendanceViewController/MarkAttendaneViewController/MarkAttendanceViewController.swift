@@ -369,6 +369,8 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             vc.selSiteModel = self.selSiteModel
             vc.attendanceResponse = self.attendanceResponse
             vc.attendanceType = self.attendanceType
+            vc.selLocation = self.selLocation
+            vc.attendanceResponse = self.attendanceResponse
         }
         else if segue.identifier == "toSickLeaveSceneSegue:MarkAttendance"{
             let vc = segue.destination as! SickLeaveViewController
