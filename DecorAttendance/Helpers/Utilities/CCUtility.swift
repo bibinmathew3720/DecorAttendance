@@ -239,7 +239,7 @@ class CCUtility: NSObject {
         case .StartTime:
             return "start_time"
         case .EndTime:
-            return "end_ime"
+            return "end_time"
         case .SickLeave:
             return "sick_leave"
         case .Absent:

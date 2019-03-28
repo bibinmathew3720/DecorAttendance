@@ -192,7 +192,6 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
     }
     
     func getParamsDict() -> NSMutableDictionary {
-        paramsDict.setValue("0", forKey: "penalty")
         if let site = self.selSiteModel{
             paramsDict.setValue("\(site.locIdNew)", forKey: "site_id")
         }
