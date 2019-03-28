@@ -25,7 +25,7 @@ let sickLeave = "Sick Leave"
 let absent = "Absent"
 let strike = "Strike"
 
-class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filterUpdatedDelegate {
+class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filterUpdatedDelegate,dismissDelegate {
 
     @IBOutlet weak var bttnNext: UIButton!
     @IBOutlet weak var lblName: UILabel!
@@ -343,10 +343,16 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         alertController.titleRef = title
         alertController.explanationRef = message
         alertController.parentController = self
-        
+        alertController.delegate = self
         alertController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         alertController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //Alert Controller Delegate
+    
+    func dismissed() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

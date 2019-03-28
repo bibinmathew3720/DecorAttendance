@@ -55,31 +55,20 @@ class ObeidiAlertViewController: UIViewController {
         self.viewAlertContainer.layer.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.5).cgColor
         self.viewAlertContainer.layer.shadowOpacity = 1
         self.viewAlertContainer.layer.shadowRadius = 18
-        
         self.lblExplained.text = explanationRef
         self.lblTitle.text = titleRef
-
-        
     }
     
 
     @IBAction func bttnActnOK(_ sender: Any) {
-        
         delegate?.dismissed()
         self.dismiss(animated: true, completion: nil)
-        
-        
     }
     
     @IBAction func bttnActnLogOut(_ sender: Any) {
-        
-        self.dismiss(animated: true, completion: nil)
-        
-        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewControllerID") as! LoginViewController
-        UIApplication.shared.keyWindow?.rootViewController = loginViewController
-        self.present(loginViewController, animated: true, completion: nil)
-        
-        
+        CCUtility.processAfterLogOut()
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        delegate.initWindow()
     }
     
     
