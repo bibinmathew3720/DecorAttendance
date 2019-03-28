@@ -23,27 +23,19 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
     var spinner = UIActivityIndicatorView(style: .gray)
     
     enum TextFldEntryStatus {
-        
         case BothOk
         case BothNull
         case PasswordNull
         case UserNameNull
-        
     }
     var textFldCurrentEntryStatus: TextFldEntryStatus!
-    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
         self.txtFldUserName.delegate = self
         self.txtFldPassword.delegate = self
         setUpViewStyles()
-        
         self.txtFldUserName.text = "enghead"
         self.txtFldPassword.text = "123456"
-        
-
     }
 
     // MARK: - Table view data source
@@ -57,40 +49,33 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         // #warning Incomplete implementation, return the number of rows
         return 5
     }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         switch indexPath.row {
-        
         case 0:
             return self.view.frame.size.height * 0.46
         default:
             return 80
-        
         }
-        
     }
 
     //MARK: textfield delegate methods
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
-        
     }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         activeTextField = textField
-        
     }
     
     func setUpViewStyles(){
-        
         self.txtFldUserName.leftViewMode = UITextField.ViewMode.always
         let imageView = UIImageView(frame: CGRect(x: 18, y: 18, width: 20, height: 20))
         let image = UIImage(named: "username")
         imageView.image = image
         self.txtFldUserName.addSubview(imageView)
-        
         
         self.txtFldUserName.layer.cornerRadius = 25.5
         self.txtFldUserName.backgroundColor = UIColor.white
@@ -132,12 +117,10 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         
         ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
         if checkIfTextFieldsNull() == false {
-            
             ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
             callLoginAPI()
             
         }else{
-            
             ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
             switch textFldCurrentEntryStatus! {
             case .BothNull :
@@ -159,106 +142,50 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
                 break
                 
             }
-
-            
-            
         }
-//        if txtFldUserName.text == "hani" && txtFldPassword.text == "hani"{
-//
-//            isSiteEngineer = true
-//            isForeman = false
-//            self.performSegue(withIdentifier: "toHomeSceneSegue", sender: Any.self)
-//
-//
-//        }else if txtFldUserName.text == "foreman" && txtFldPassword.text == "foreman"{
-//
-//            isSiteEngineer = false
-//            isForeman = true
-//            self.performSegue(withIdentifier: "toForemanSceneSegue:Login", sender: Any.self)
-//
-//        }
-//
-//        else{
-//
-//            print("error in credentials")
-//            let alertController = UIAlertController(title: "Alert", message: "Error in credentials.", preferredStyle: .alert)
-//
-//            let actionDest = UIAlertAction(title: "Cancel", style: .destructive) { (action:UIAlertAction) in
-//
-//            }
-//            alertController.addAction(actionDest)
-//            self.present(alertController, animated: true, completion: nil)
-//
-//
-//        }
-        
-        
-        
     }
     func callLoginAPI() {
         
         let passDict = NSMutableDictionary()
         passDict.setValue(self.txtFldUserName.text, forKey: "username")
         passDict.setValue(self.txtFldPassword.text, forKey: "password")
-
-        
         ObeidiModelLogin.callLoginRequest(bodyDict: passDict) {
             (success, result, error) in
-            
             if(success!){
-                
                 print(result!)
                 self.processAPIResponse(apiResponse: result)
-                
-                
-                
             }else if success == false &&  result != nil && error == nil{
-                
                 let responseDict = result as! NSDictionary
                 let message = responseDict.value(forKey: "message") as! String
-                
                 self.showAlert(alertMessage: message)
-                
             }else{
-                
                 self.showAlert(alertMessage: (error?.localizedDescription)!)
-                
             }
-            
-            
-            
-            
         }
-        
-        
     }
+    
     func processAPIResponse(apiResponse: AnyObject!) {
-        
         let dataDict = apiResponse as! NSDictionary
-        
         let accessToken = dataDict.value(forKey: "token") as! String
         UserDefaults.standard.setValue(accessToken, forKey: "accessToken")
         UserDefaults.standard.set(true, forKey: Constant.VariableNames.isLoggedIn)
         UserDefaults.standard.set( dataDict.value(forKey: "id"), forKey: "EmpID")
-
         let role = dataDict.value(forKey: "roles") as! NSArray
-        
         if role.object(at: 0) as! String == "engineering-head"{
-            UserDefaults.standard.setValue("Engineering Head", forKey: "role")
+            UserDefaults.standard.setValue(Constant.Names.EngineeringHead, forKey: Constant.VariableNames.roleKey)
             self.isSiteEngineer = true
             self.isForeman = false
-            let delegate = UIApplication.shared.delegate as! AppDelegate
-            delegate.initWindow()
+            
            // self.performSegue(withIdentifier: "toHomeSceneSegue", sender: Any.self)
             
         }else if (role.object(at: 0) as! String == "foreman"){
-            UserDefaults.standard.setValue("Foreman", forKey: "role")
+            UserDefaults.standard.setValue(Constant.Names.Foreman, forKey: Constant.VariableNames.roleKey)
             self.isSiteEngineer = false
             self.isForeman = true
-            self.performSegue(withIdentifier: "toForemanSceneSegue:Login", sender: Any.self)
-            
+            //self.performSegue(withIdentifier: "toForemanSceneSegue:Login", sender: Any.self)
         }
-        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        delegate.initWindow()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

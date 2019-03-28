@@ -79,8 +79,6 @@
 		46AE08B92216D6BF00A0BC9F /* SafetyEquipmentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE08B82216D6BF00A0BC9F /* SafetyEquipmentsTableViewCell.swift */; };
 		46AE08BB22170B1600A0BC9F /* ObeidiModelSafetyEquipments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE08BA22170B1600A0BC9F /* ObeidiModelSafetyEquipments.swift */; };
 		46AE08BD2217110E00A0BC9F /* ObeidiModelFetchAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AE08BC2217110E00A0BC9F /* ObeidiModelFetchAttendance.swift */; };
-		46C0660821E07064009E731B /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C0660721E07064009E731B /* TestViewController.swift */; };
-		46C0660B21E08BD6009E731B /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C0660A21E08BD6009E731B /* Test.storyboard */; };
 		46C0660D21E0956B009E731B /* ForemanContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C0660C21E0956B009E731B /* ForemanContainerViewController.swift */; };
 		46C0660F21E095D7009E731B /* ForemanLeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C0660E21E095D7009E731B /* ForemanLeftViewController.swift */; };
 		46C0661121E0961E009E731B /* ForemanMenuItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C0661021E0961E009E731B /* ForemanMenuItemsTableViewCell.swift */; };
@@ -214,8 +212,6 @@
 		46AE08B82216D6BF00A0BC9F /* SafetyEquipmentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafetyEquipmentsTableViewCell.swift; sourceTree = "<group>"; };
 		46AE08BA22170B1600A0BC9F /* ObeidiModelSafetyEquipments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObeidiModelSafetyEquipments.swift; sourceTree = "<group>"; };
 		46AE08BC2217110E00A0BC9F /* ObeidiModelFetchAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObeidiModelFetchAttendance.swift; sourceTree = "<group>"; };
-		46C0660721E07064009E731B /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		46C0660A21E08BD6009E731B /* Test.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
 		46C0660C21E0956B009E731B /* ForemanContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForemanContainerViewController.swift; sourceTree = "<group>"; };
 		46C0660E21E095D7009E731B /* ForemanLeftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForemanLeftViewController.swift; sourceTree = "<group>"; };
 		46C0661021E0961E009E731B /* ForemanMenuItemsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForemanMenuItemsTableViewCell.swift; sourceTree = "<group>"; };
@@ -542,7 +538,6 @@
 		46C0660921E07073009E731B /* ForemanControllers */ = {
 			isa = PBXGroup;
 			children = (
-				46C0660721E07064009E731B /* TestViewController.swift */,
 				46C0661A21E0A0E8009E731B /* ForemanNavigationViewController.swift */,
 				46C0661C21E0B371009E731B /* ForemanDashBoardViewController.swift */,
 				46A5FEAD21E2701600C20784 /* ForemanNewEntryViewController.swift */,
@@ -666,7 +661,6 @@
 			children = (
 				46E71D0A21C5194200051C78 /* Main.storyboard */,
 				46D6D21F21DFC625006F354E /* Foreman.storyboard */,
-				46C0660A21E08BD6009E731B /* Test.storyboard */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -850,7 +844,6 @@
 				46D6D22021DFC625006F354E /* Foreman.storyboard in Resources */,
 				46E71D1121C5194400051C78 /* Assets.xcassets in Resources */,
 				46E71D0C21C5194200051C78 /* Main.storyboard in Resources */,
-				46C0660B21E08BD6009E731B /* Test.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1045,7 +1038,6 @@
 				46A11E7221CBCB2500691B76 /* CompleteEntryTableViewCell.swift in Sources */,
 				46A5FEAE21E2701600C20784 /* ForemanNewEntryViewController.swift in Sources */,
 				46C0661121E0961E009E731B /* ForemanMenuItemsTableViewCell.swift in Sources */,
-				46C0660821E07064009E731B /* TestViewController.swift in Sources */,
 				469D712721D639E00057BA7C /* SafetyEquipmentsViewController.swift in Sources */,
 				46E60D1421CC1777009CEB51 /* LabourwiseTableViewCell.swift in Sources */,
 				46CD75B421DBD9C500BE7F20 /* CompleteEntryDetailsViewController.swift in Sources */,

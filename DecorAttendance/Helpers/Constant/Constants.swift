@@ -23,6 +23,12 @@ struct Constant{
     
     struct VariableNames {
         static let isLoggedIn = "isLoggedIn"
+        static let roleKey = "role"
+    }
+    
+    struct Names {
+        static let EngineeringHead = "Engineering Head"
+        static let Foreman = "Foreman"
     }
     
     struct SegueIdentifiers {

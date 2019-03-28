@@ -42,9 +42,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initWindow(){
         if UserDefaults.standard.bool(forKey: Constant.VariableNames.isLoggedIn){
              //if isSiteEngineer{
-            let containerViewController = ContainerViewController()
-            containerViewController.navigationController?.navigationBar.backgroundColor = ObeidiColors.ColorCode.obeidiRed()
-            self.window!.rootViewController = containerViewController
+            if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+                if roleString == Constant.Names.EngineeringHead{
+                    let containerViewController = ContainerViewController()
+                   containerViewController.navigationController?.navigationBar.backgroundColor = ObeidiColors.ColorCode.obeidiRed()
+                    self.window!.rootViewController = containerViewController
+                }
+                else if (roleString == Constant.Names.Foreman){
+                    let containerViewController = ContainerViewController()
+                   containerViewController.navigationController?.navigationBar.backgroundColor = ObeidiColors.ColorCode.obeidiRed()
+                    self.window!.rootViewController = containerViewController
+                }
+            }
         }
         else{
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
