@@ -44,31 +44,59 @@ class ForemanDashBoardViewController: UITableViewController, DropDownDataDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         self.navigationItem.leftItemsSupplementBackButton = true
-        
         self.setUpChartViewStyles()
         setUpViewStyles()
         pieChartViewLabourSummary.myAnimationDelegate = self
-        
         addTapGesturesToLabels()
+        getAttendanceSummaryApi()
         //PieChart.initializeAndPlotGraph(chartView: pieChartView, controller: self, xCoordinateArr: ["23", "45", "32"], yCoordinateArr1: ["23", "45", "32"], yCoordinateArr2: ["23", "45", "32"], yCoordinate1Label: "volume", yCoordinate2Label: "frequency")
         
         setPerformanceIndicatorLines()
         
         pieChartViewLabourSummary.slices =
             [
-                //Slice(radius: 0.75, width: 0.55, isOuterCircleNeeded: false, outerCircleWidth: 0),
-                //Slice(radius: 0.65, width: 0.45, isOuterCircleNeeded: false, outerCircleWidth: 0)
+//                Slice(radius: 0.75, width: 0.55, isOuterCircleNeeded: false, outerCircleWidth: 0),
+//                Slice(radius: 0.65, width: 0.45, isOuterCircleNeeded: false, outerCircleWidth: 0)
         ]
-        
-        
     }
+    
+    //Get Attendance Summary Api
+    
+    func getAttendanceSummaryApi(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        ForemanManager().getAttendanceSummary(with:"", success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let model = model as? AttendanceSummaryResponseModel{
+                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+                if type == StatusEnum.success{
+//                    self.costSummaryDetailResponse = model
+//                    self.populateCostDetails()
+                }
+                else if type == StatusEnum.sessionexpired{
+                    //                    self.callRefreshTokenApi()
+                }
+                else{
+                    CCUtility.showDefaultAlertwith(_title: User.AppName, _message: "", parentController: self)
+                }
+            }
+            
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            
+            print(ErrorType)
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
-        
     }
     
     // MARK: - Table view data source
@@ -80,16 +108,11 @@ class ForemanDashBoardViewController: UITableViewController, DropDownDataDelegat
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        
         return 3
-        
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         switch indexPath.row {
-            
         case 0:
             return 202
         case 1:
@@ -100,12 +123,10 @@ class ForemanDashBoardViewController: UITableViewController, DropDownDataDelegat
             return 0
             
         }
-        
     }
     
     
     @IBAction func bttnActnMenu(_ sender: Any) {
-        
         delegate?.dashBoardDidTapedMenu(tabBarIndex: 1)
     }
     
@@ -114,20 +135,15 @@ class ForemanDashBoardViewController: UITableViewController, DropDownDataDelegat
         //        self.pieChartView.clipsToBounds = true
         //        self.pieChartView.layer.cornerRadius = 8.0
         //        self.pieChartView.dropShadow()
-        
-        
     }
+    
     func setUpViewStyles() {
-        
-        
         self.viewPresentAbsent.layer.cornerRadius = 1
         self.viewPresentAbsent.backgroundColor = UIColor.white
         self.viewPresentAbsent.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.viewPresentAbsent.layer.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.12).cgColor
         self.viewPresentAbsent.layer.shadowOpacity = 1
         self.viewPresentAbsent.layer.shadowRadius = 9
-        
-        
         self.lblMonth.layer.cornerRadius = 1
         self.lblMonth.layer.borderWidth = 0.5
         self.lblMonth.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
@@ -147,7 +163,6 @@ class ForemanDashBoardViewController: UITableViewController, DropDownDataDelegat
     }
     
     func addDropDownLabelAndImage(lblToModify: UILabel, lblText: String) {
-        
         let image = UIImage(named: "dropdown")
         let newSize = CGSize(width: 10, height: 10)
         
@@ -179,16 +194,13 @@ class ForemanDashBoardViewController: UITableViewController, DropDownDataDelegat
         self.lblDay.addGestureRecognizer(tapGestureDay)
         
     }
+    
     @objc func handleMonthLabelTap(){
-        
         presentDropDownController(tableCgPoint: getPointForMonthTable(), dropDownFor: .Month, arr: fetchMonthArr())
-        
-        
     }
+    
     @objc func handleDateLabelTap(){
-        
         presentDropDownController(tableCgPoint: getPointForDateTable(), dropDownFor: .Date, arr: fetchDateArr())
-        
     }
     
     func presentDropDownController(tableCgPoint: CGPoint, dropDownFor:

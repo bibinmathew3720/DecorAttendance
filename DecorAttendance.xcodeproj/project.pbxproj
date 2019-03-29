@@ -119,6 +119,7 @@
 		CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */; };
 		D06B92232239ED1900C98ED7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B92222239ED1800C98ED7 /* Constants.swift */; };
 		D0AB2ADD223AA9D4008C01A4 /* LabourManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */; };
+		D0F2449B224DBBBB0073D153 /* ForemanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F2449A224DBBBB0073D153 /* ForemanManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -263,6 +264,7 @@
 		BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		D06B92222239ED1800C98ED7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabourManager.swift; sourceTree = "<group>"; };
+		D0F2449A224DBBBB0073D153 /* ForemanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForemanManager.swift; sourceTree = "<group>"; };
 		D98D9F27B5CC5C6DFCC53240 /* Pods-DecorAttendanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceTests/Pods-DecorAttendanceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DecorAttendanceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -711,6 +713,7 @@
 			children = (
 				BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */,
 				D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */,
+				D0F2449A224DBBBB0073D153 /* ForemanManager.swift */,
 			);
 			path = ApiManagers;
 			sourceTree = "<group>";
@@ -1029,6 +1032,7 @@
 				469D712E21D642240057BA7C /* PhotoCheckViewController.swift in Sources */,
 				46AC0B8A21CA167B002A2ABD /* ObeidiFont.swift in Sources */,
 				46623B022212A0530072C150 /* ObeidiModelLogin.swift in Sources */,
+				D0F2449B224DBBBB0073D153 /* ForemanManager.swift in Sources */,
 				46AC0B9221CA8578002A2ABD /* LabourwiseViewController.swift in Sources */,
 				4618715D21C6A69B00507F06 /* PieChart.swift in Sources */,
 				46E71D0721C5194200051C78 /* AppDelegate.swift in Sources */,

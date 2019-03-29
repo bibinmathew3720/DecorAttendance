@@ -28,6 +28,11 @@ struct ObeidiConstants {
         static let FETCH_ATTENDANCE = "attendance?"
         static let MARK_ATTENDANCE = "attendance"
         
+        //Forman
+        
+         static let ATTENDANCE_SUMMARY = "attendance/attendance-summary?"
+        
+        
     }
     
     

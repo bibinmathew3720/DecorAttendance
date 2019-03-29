@@ -21,6 +21,16 @@ class HomeTabBarViewController: UITabBarController, DashBoardDelegate, Attendanc
         
         //setTabBarStyle()
         setTabBarStyles()
+        if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+            if roleString == Constant.Names.Foreman{
+                let foremanStoryBoard = UIStoryboard.init(name: "Foreman", bundle: nil)
+                let foremanDashBoard = foremanStoryBoard.instantiateViewController(withIdentifier: "ForemanDashBoardViewControllerID") as? ForemanDashBoardViewController
+                if let dashBoard = foremanDashBoard{
+                    self.viewControllers?[1] = dashBoard
+                }
+            }
+        }
+        
         self.selectedIndex = 1
         
 //        let NVC = self.viewControllers![1] as! UINavigationController
