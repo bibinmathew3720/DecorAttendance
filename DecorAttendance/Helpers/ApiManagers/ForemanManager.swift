@@ -62,3 +62,21 @@ class AttendanceSummaryResponseModel : NSObject{
         }
     }
 }
+
+class ForemanAttendanceRequestModel:NSObject{
+    var attendanceDate:String = ""
+    var siteId:Int = 0
+    func getReqestBody()->String{
+        var requestBody = ""
+        if (attendanceDate.count != 0 ){
+            requestBody = "date=\(attendanceDate)"
+        }
+        if (siteId>0){
+            requestBody = requestBody + "&site_id=\(siteId)"
+        }
+        print("Request Body")
+        print("-------------------------")
+        print(requestBody)
+        return requestBody
+    }
+}

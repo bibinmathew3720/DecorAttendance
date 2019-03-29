@@ -41,10 +41,13 @@ class ForemanDashBoardViewController: UITableViewController, DropDownDataDelegat
     @IBOutlet weak var totalAbsenceIndicatorColred: UIView!
     
     var window: UIWindow?
+    var attendanceSummaryResponse:AttendanceSummaryResponseModel?
+    var formanRequest = ForemanAttendanceRequestModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftItemsSupplementBackButton = true
+        initialisation()
         self.setUpChartViewStyles()
         setUpViewStyles()
         pieChartViewLabourSummary.myAnimationDelegate = self
@@ -61,18 +64,22 @@ class ForemanDashBoardViewController: UITableViewController, DropDownDataDelegat
         ]
     }
     
+    func initialisation(){
+        self.formanRequest.attendanceDate = CCUtility.stringFromDate(date: Date())
+    }
+    
     //Get Attendance Summary Api
     
     func getAttendanceSummaryApi(){
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        ForemanManager().getAttendanceSummary(with:"", success: {
+        ForemanManager().getAttendanceSummary(with:formanRequest.getReqestBody(), success: {
             (model,response)  in
             MBProgressHUD.hide(for: self.view, animated: true)
             if let model = model as? AttendanceSummaryResponseModel{
                 let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
                 if type == StatusEnum.success{
-//                    self.costSummaryDetailResponse = model
-//                    self.populateCostDetails()
+                    self.attendanceSummaryResponse = model
+                    self.populateAttendanceSummaryResponse()
                 }
                 else if type == StatusEnum.sessionexpired{
                     //                    self.callRefreshTokenApi()
@@ -92,6 +99,12 @@ class ForemanDashBoardViewController: UITableViewController, DropDownDataDelegat
             }
             
             print(ErrorType)
+        }
+    }
+    
+    func populateAttendanceSummaryResponse(){
+        if let attendanceSummary = self.attendanceSummaryResponse{
+            
         }
     }
     
