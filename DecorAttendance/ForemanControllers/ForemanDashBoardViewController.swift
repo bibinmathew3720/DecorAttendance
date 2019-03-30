@@ -57,6 +57,8 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     var window: UIWindow?
     var attendanceSummaryResponse:AttendanceSummaryResponseModel?
     var formanRequest = ForemanAttendanceRequestModel()
+    var siteModelObjArr = [ObeidiModelSites]()
+    var spinner = UIActivityIndicatorView(style: .gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,12 +68,38 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
         setUpViewStyles()
         pieChartViewLabourSummary.myAnimationDelegate = self
         addTapGesturesToViews()
+        callGetAllSitesAPI()
         getAttendanceSummaryApi()
     }
     
     func initialisation(){
         self.dateLabel.text = CCUtility.stringFromDate(date: Date())
         self.formanRequest.attendanceDate = CCUtility.stringFromDate(date: Date())
+    }
+    
+    //Get All Sites Api
+    
+    func callGetAllSitesAPI() {
+        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
+        ObeidiModelSites.callListSitesRequset(){
+            (success, result, error) in
+            if success! {
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+                print(result!)
+                if let res = result as? [ObeidiModelSites]{
+                    self.siteModelObjArr = res
+                    if self.siteModelObjArr.count > 0{
+                        self.siteModelObjArr.remove(at: 0)
+                        let firstSite = self.siteModelObjArr.first
+                        if let _firstSite = firstSite{
+                            self.siteLabel.text = _firstSite.nameNew
+                        }
+                    }
+                }
+            }else{
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+            }
+        }
     }
     
     //Get Attendance Summary Api
