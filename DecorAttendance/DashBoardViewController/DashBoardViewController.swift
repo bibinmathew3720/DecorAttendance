@@ -220,7 +220,7 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     @objc func handleMonthLabelTap(){
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
+                //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
                 self.navigationController?.navigationBar.alpha = 0.65
                 
@@ -240,7 +240,7 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
+                //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
                 self.navigationController?.navigationBar.alpha = 0.65
                 
@@ -263,7 +263,7 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
+                //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
                 self.navigationController?.navigationBar.alpha = 0.65
                 

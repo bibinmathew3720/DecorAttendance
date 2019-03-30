@@ -184,12 +184,32 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
         let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(ForemanDashBoardViewController.handleDateViewTap))
         self.dateView.addGestureRecognizer(tapGestureDate)
         
-        self.siteView.isUserInteractionEnabled = true
-        let tapGesturSite = UITapGestureRecognizer(target: self, action: #selector(ForemanDashBoardViewController.handleSiteViewTap))
-        self.siteView.addGestureRecognizer(tapGesturSite)
+//        self.siteView.isUserInteractionEnabled = true
+//        let tapGesturSite = UITapGestureRecognizer(target: self, action: #selector(ForemanDashBoardViewController.handleSiteViewTap))
+//        self.siteView.addGestureRecognizer(tapGesturSite)
     }
     
     @objc func handleDateViewTap(){
+        DispatchQueue.main.async {
+            
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                //self.view.alpha = 0.65
+                //self.tabBarController?.view.alpha = 0.65
+                //self.navigationController?.navigationBar.alpha = 0.65
+                
+                
+            },completion:nil)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let calendarViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
+            calendarViewController.delegate = self
+            //calendarViewController.isDateNeeded = true
+            calendarViewController.filterTypeName = FilterTypeName.endDate
+            calendarViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            calendarViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(calendarViewController, animated: true, completion: nil)
+            
+        }
         
     }
     
@@ -212,4 +232,40 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
         }
     }
 
+}
+
+//POPUP Delegate Methods
+
+extension ForemanDashBoardViewController: filterUpdatedDelegate{
+    
+    func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
+        
+    }
+    func dateUpdated(to date: String, updatedType: FilterTypeName!) {
+        
+    }
+    func calendarColsed() {
+        
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+        },completion:nil)
+    }
+    
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            self.view.alpha = 1
+            //self.tabBarController?.view.alpha = 0.65
+            self.navigationController?.navigationBar.alpha = 1
+        },completion:nil)
+        if (date.count>0){
+            formanRequest.attendanceDate = date
+            self.dateLabel.text = date
+            getAttendanceSummaryApi()
+        }
+    }
+    
+    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName){
+    }
 }
