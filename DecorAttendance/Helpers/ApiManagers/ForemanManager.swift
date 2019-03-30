@@ -44,29 +44,29 @@ class ForemanManager: CLBaseService {
 
 class AttendanceSummaryResponseModel : NSObject{
     var error:Int = 0
-    var presentCount:Int = 0
-    var absentCount:Int = 0
-    var total:Int = 0
-    var absentPercentage:Float = 0.0
-    var presentPercentage:Float = 0.0
+    var presentCount:CGFloat = 0
+    var absentCount:CGFloat = 0
+    var total:CGFloat = 0
+    var absentPercentage:CGFloat = 0.0
+    var presentPercentage:CGFloat = 0.0
     init(dict:[String:Any?]) {
         if let value = dict["error"] as? Int{
             error = value
         }
         if let value = dict["present_count"] as? Int{
-            presentCount = value
+            presentCount =  CGFloat(Float(value))
         }
         if let value = dict["absent_count"] as? Int{
-            absentCount = value
+            absentCount = CGFloat(Float(value))
         }
         if let value = dict["total"] as? Int{
-            total = value
+            total =  CGFloat(Float(value))
         }
-        absentPercentage = (Float(absentCount)/Float(total))*100.0
+        absentPercentage = (absentCount/total)*100.0
         if(absentPercentage.isNaN){
             absentPercentage = 0.0
         }
-        print(presentPercentage)
+        presentPercentage = (presentCount/total)*100.0
         if(presentPercentage.isNaN){
             presentPercentage = 0.0
         }

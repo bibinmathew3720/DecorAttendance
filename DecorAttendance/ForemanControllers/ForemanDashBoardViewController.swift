@@ -9,6 +9,10 @@
 import UIKit
 
 class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelegateProtocol {
+    func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
+        
+    }
+    
     
     weak var delegate: DashBoardDelegate?
     
@@ -56,13 +60,11 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
         pieChartViewLabourSummary.myAnimationDelegate = self
         addTapGesturesToViews()
         getAttendanceSummaryApi()
-        setPerformanceIndicatorLines()
     }
     
     func initialisation(){
         self.dateLabel.text = CCUtility.stringFromDate(date: Date())
         self.formanRequest.attendanceDate = CCUtility.stringFromDate(date: Date())
-        self.title = Constant.PageNames.Dashboard
     }
     
     //Get Attendance Summary Api
@@ -101,14 +103,15 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     
     func populateAttendanceSummaryResponse(){
         if let attendanceSummary = self.attendanceSummaryResponse{
-           self.totalEmployeesLabel.text = "\(attendanceSummary.total)"
-           self.presentEmployeesLabel.text = "\(attendanceSummary.presentCount)"
-            self.absentEmployeesLabel.text = "\(attendanceSummary.absentCount)"
+           self.totalEmployeesLabel.text = String.init(format: "%0.0f", attendanceSummary.total)
+           self.presentEmployeesLabel.text = String.init(format: "%0.0f", attendanceSummary.presentCount)
+          self.absentEmployeesLabel.text = String.init(format: "%0.0f", attendanceSummary.absentCount)
             
-            let absentSlice = Slice(radius: 0.75, width: (CGFloat(attendanceSummary.absentPercentage/100.00)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor:Constant.Colors.bonusColor)
-            let presentSlice = Slice(radius: 0.65, width: (CGFloat(attendanceSummary.presentPercentage/100)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.overTimeColor)
+            let absentSlice = Slice(radius: 0.75, width: (CGFloat(attendanceSummary.absentPercentage/100.00)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor:ObeidiFont.Color.obeidiLinePink())
+            let presentSlice = Slice(radius: 0.65, width: (CGFloat(attendanceSummary.presentPercentage/100)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: ObeidiFont.Color.obeidiLineRed())
             pieChartViewLabourSummary.layer.sublayers = nil
             pieChartViewLabourSummary.slices = [absentSlice,presentSlice]
+            setPerformanceIndicatorLines()
         }
     }
     
@@ -218,19 +221,11 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     
     func setPerformanceIndicatorLines() {
         //This is where the indicators set to their corresponding values
-        ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPresenceIndicatorWhite, lineB: totalPresenceIndicatorColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineRed(), lineAValue: 1, lineBValue: 0.18, lineAMeter: widthPresentLight, lineBMeter: widthPresentColred)
-        
-        ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalAbsenceIndicatorWhite, lineB: totalAbsenceIndicatorColred, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: 0.98, lineAMeter: widthAbsentLight, lineBMeter: widthAbsentColored)
+        if let attendanceSummary = self.attendanceSummaryResponse{
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPresenceIndicatorWhite, lineB: totalPresenceIndicatorColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineRed(), lineAValue: 1, lineBValue:(attendanceSummary.presentPercentage/100.00), lineAMeter: widthPresentLight, lineBMeter: widthPresentColred)
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalAbsenceIndicatorWhite, lineB: totalAbsenceIndicatorColred, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (attendanceSummary.absentPercentage/100.00), lineAMeter: widthAbsentLight, lineBMeter: widthAbsentColored)
+        }
     }
-    
-    func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
-//        if pieChartViewLabourSummary.myAnimationDelegate != nil
-//        {
-//            pieChartViewLabourSummary.animating = false
-//        pieChartViewLabourSummary.myAnimationDelegate?.animationDidStop( theAnimation, finished: true)
-//        }
-    }
-
 }
 
 //POPUP Delegate Methods
