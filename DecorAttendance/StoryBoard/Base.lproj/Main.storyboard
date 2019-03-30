@@ -224,7 +224,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvC-SQ-Gak">
                                                 <rect key="frame" x="15" y="190" width="345" height="90"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FAz-6S-mcO">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="roundedLogo" translatesAutoresizingMaskIntoConstraints="NO" id="FAz-6S-mcO">
                                                         <rect key="frame" x="147.5" y="-25" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="50" id="PZF-QO-eYC"/>
@@ -236,7 +236,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jHf-Aa-mIK">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appName" translatesAutoresizingMaskIntoConstraints="NO" id="jHf-Aa-mIK">
                                                         <rect key="frame" x="20" y="40" width="305" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="u6S-i5-tuI"/>
@@ -270,7 +270,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6R-G7-7hr">
                                                 <rect key="frame" x="15" y="300" width="345" height="87"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RmX-3z-cnz">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RmX-3z-cnz">
                                                         <rect key="frame" x="20" y="25" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="8d9-Fd-FnB"/>
@@ -2278,7 +2278,7 @@
                                     <action selector="bttnActnAttachPicture:" destination="rgm-lH-wSu" eventType="touchUpInside" id="TjY-Rs-wnb"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qjk-wo-rnI">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="qjk-wo-rnI">
                                 <rect key="frame" x="112.5" y="223" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="2NK-E7-atd"/>
@@ -3134,7 +3134,7 @@
                                         <rect key="frame" x="0.0" y="503" width="375" height="481"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cs5-ib-NXb" id="1kM-Dt-ZF7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="481"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="480.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0A-jR-ryY">
@@ -6210,6 +6210,8 @@
     </scenes>
     <resources>
         <image name="Date " width="12" height="12"/>
+        <image name="addImagePlaceholder" width="100" height="100"/>
+        <image name="appName" width="100" height="30"/>
         <image name="attendance" width="20" height="20"/>
         <image name="attendance_fill" width="20" height="20"/>
         <image name="call" width="26" height="26"/>
@@ -7297,6 +7299,7 @@ KRUtFTgVQRVGFU4VURVWFVkVWxVdFV8VZBVmFWg+Sj5PPlI+VD5WPlg+XT5fPmGJt4m8icuJz4naieKJ
 D5wUnBycH5wxnDScOQAAAAAAAAIBAAAAAAAAAG0AAAAAAAAAAAAAAAAAAJw7A
 </mutableData>
         </image>
+        <image name="roundedLogo" width="50" height="50"/>
         <image name="search" width="15" height="15"/>
         <image name="success." width="93" height="93"/>
         <image name="tabBarItem:XFq-mX-yd7:image" width="20" height="20">

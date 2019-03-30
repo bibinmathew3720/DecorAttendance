@@ -80,8 +80,8 @@ class AboutViewController: UIViewController {
                     self.aboutLabel.text = model.about_content
                     self.visionLabel.text = model.mission_and_vision
                     self.BgImage.loadImageUsingCache(withUrl: model.image_base + model.banner_image, colorValue: nil)
-                    self.webIDLabel.text = model.website
-                    self.mailAddress = model.website
+                    self.webIDLabel.text = model.email
+                    self.mailAddress = model.email
                     self.phone = model.phone_number
                 }
                 else if type == StatusEnum.sessionexpired{
