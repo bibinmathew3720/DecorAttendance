@@ -23,6 +23,7 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     var completedEntriesResponseModel:ObeidAttendanceResponseModel?
     var attendanceRequest = ObeidAttendanceRequestModel()
     @IBOutlet weak var emptyView: UIView!
+    var spinner = UIActivityIndicatorView(style: .gray)
     
     
     override func viewDidLoad() {
@@ -33,6 +34,7 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         addTapgesturesToView()
         self.txtFldSearch.text = ""
         initialisation()
+        callGetAllSitesAPI()
         addTapGesturesToLabels()
         callFetchAttendanceaAPI()
         // Do any additional setup after loading the view.
@@ -46,11 +48,11 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     
     func addTapGesturesToLabels() {
         self.dateView.isUserInteractionEnabled = true
-        let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleDateLabelTap))
+        let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(CompleteEntriesViewController.handleDateLabelTap))
         self.dateView.addGestureRecognizer(tapGestureDate)
         
         self.siteView.isUserInteractionEnabled = true
-        let tapGestureSite = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleSiteLabelTap))
+        let tapGestureSite = UITapGestureRecognizer(target: self, action: #selector(CompleteEntriesViewController.handleSiteLabelTap))
         self.siteView.addGestureRecognizer(tapGestureSite)
     }
     
@@ -107,9 +109,9 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
+                //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
-                self.navigationController?.navigationBar.alpha = 0.65
+                //self.navigationController?.navigationBar.alpha = 0.65
                 
                 
             },completion:nil)
@@ -130,9 +132,9 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                self.view.alpha = 0.65
+                //self.view.alpha = 0.65
                 //self.tabBarController?.view.alpha = 0.65
-                self.navigationController?.navigationBar.alpha = 0.65
+                //self.navigationController?.navigationBar.alpha = 0.65
                 
                 
             },completion:nil)
@@ -144,14 +146,30 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
             siteViewController.filterTypeName = FilterTypeName.site
             siteViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             siteViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            //siteViewController.sitesArray = self.siteModelObjArr
+            siteViewController.sitesArray = self.siteModelObjArr
             self.present(siteViewController, animated: true, completion: nil)
-            
+        }
+    }
+    
+    func callGetAllSitesAPI() {
+        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
+        ObeidiModelSites.callListSitesRequset(){
+            (success, result, error) in
+            if success! {
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+                print(result!)
+                if let res = result as? [ObeidiModelSites]{
+                    self.siteModelObjArr = res
+                    self.siteModelObjArr.remove(at: 0)
+                }
+            }else{
+                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+            }
         }
     }
     
     func callFetchAttendanceaAPI()  {
-        ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody:attendanceRequest.getRequestBody()){
+ ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody:attendanceRequest.getRequestBody()){
             (success, result, error) in
             if success! && result != nil {
                 if let res = result as? NSDictionary{
@@ -212,13 +230,13 @@ extension CompleteEntriesViewController:filterUpdatedDelegate{
         self.attendanceRequest.siteId = selSite.locIdNew
         lblSite.text = selSite.nameNew
         self.selectedSite = selSite
-        //callFetchAttendanceaAPI()
+        callFetchAttendanceaAPI()
     }
     
     func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
         self.attendanceRequest.startDate = date
         lblDate.text = date
-        //callFetchAttendanceaAPI()
+        callFetchAttendanceaAPI()
     }
     
     func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
