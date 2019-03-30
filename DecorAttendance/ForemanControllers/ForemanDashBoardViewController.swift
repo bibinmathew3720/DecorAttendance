@@ -17,7 +17,7 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     @IBOutlet weak var viewDropDownButtons: UIView!
     @IBOutlet weak var viewRemainingBonus: UIView!
     @IBOutlet weak var viewPresentAbsent: UIView!
-    @IBOutlet weak var pieChartViewLabourSummary: PieChartSliceView!
+
     
     
     @IBOutlet weak var widthPresentColred: NSLayoutConstraint!
@@ -41,6 +41,7 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     @IBOutlet weak var siteView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var siteLabel: UILabel!
+    @IBOutlet weak var pieChartViewLabourSummary: PieChartSliceView!
     
     var window: UIWindow?
     var attendanceSummaryResponse:AttendanceSummaryResponseModel?
@@ -55,20 +56,13 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
         pieChartViewLabourSummary.myAnimationDelegate = self
         addTapGesturesToViews()
         getAttendanceSummaryApi()
-        //PieChart.initializeAndPlotGraph(chartView: pieChartView, controller: self, xCoordinateArr: ["23", "45", "32"], yCoordinateArr1: ["23", "45", "32"], yCoordinateArr2: ["23", "45", "32"], yCoordinate1Label: "volume", yCoordinate2Label: "frequency")
-        
         setPerformanceIndicatorLines()
-        
-        pieChartViewLabourSummary.slices =
-            [
-//                Slice(radius: 0.75, width: 0.55, isOuterCircleNeeded: false, outerCircleWidth: 0),
-//                Slice(radius: 0.65, width: 0.45, isOuterCircleNeeded: false, outerCircleWidth: 0)
-        ]
     }
     
     func initialisation(){
         self.dateLabel.text = CCUtility.stringFromDate(date: Date())
         self.formanRequest.attendanceDate = CCUtility.stringFromDate(date: Date())
+        self.title = Constant.PageNames.Dashboard
     }
     
     //Get Attendance Summary Api
@@ -110,6 +104,11 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
            self.totalEmployeesLabel.text = "\(attendanceSummary.total)"
            self.presentEmployeesLabel.text = "\(attendanceSummary.presentCount)"
             self.absentEmployeesLabel.text = "\(attendanceSummary.absentCount)"
+            
+            let absentSlice = Slice(radius: 0.75, width: (CGFloat(attendanceSummary.absentPercentage/100.00)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor:Constant.Colors.bonusColor)
+            let presentSlice = Slice(radius: 0.65, width: (CGFloat(attendanceSummary.presentPercentage/100)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: Constant.Colors.overTimeColor)
+            pieChartViewLabourSummary.layer.sublayers = nil
+            pieChartViewLabourSummary.slices = [absentSlice,presentSlice]
         }
     }
     
@@ -225,11 +224,11 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     }
     
     func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
-        if pieChartViewLabourSummary.myAnimationDelegate != nil
-        {
-            pieChartViewLabourSummary.animating = false
-        pieChartViewLabourSummary.myAnimationDelegate?.animationDidStop( theAnimation, finished: true)
-        }
+//        if pieChartViewLabourSummary.myAnimationDelegate != nil
+//        {
+//            pieChartViewLabourSummary.animating = false
+//        pieChartViewLabourSummary.myAnimationDelegate?.animationDidStop( theAnimation, finished: true)
+//        }
     }
 
 }

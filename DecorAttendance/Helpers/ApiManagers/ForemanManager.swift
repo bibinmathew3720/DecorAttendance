@@ -47,6 +47,8 @@ class AttendanceSummaryResponseModel : NSObject{
     var presentCount:Int = 0
     var absentCount:Int = 0
     var total:Int = 0
+    var absentPercentage:Float = 0.0
+    var presentPercentage:Float = 0.0
     init(dict:[String:Any?]) {
         if let value = dict["error"] as? Int{
             error = value
@@ -59,6 +61,14 @@ class AttendanceSummaryResponseModel : NSObject{
         }
         if let value = dict["total"] as? Int{
             total = value
+        }
+        absentPercentage = (Float(absentCount)/Float(total))*100.0
+        if(absentPercentage.isNaN){
+            absentPercentage = 0.0
+        }
+        print(presentPercentage)
+        if(presentPercentage.isNaN){
+            presentPercentage = 0.0
         }
     }
 }
