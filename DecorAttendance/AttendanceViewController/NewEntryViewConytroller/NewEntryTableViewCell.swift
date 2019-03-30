@@ -15,6 +15,7 @@ class NewEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var imageViewLabour: UIImageView!
     @IBOutlet weak var lblID: UILabel!
     @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
     
     
     override func awakeFromNib() {
@@ -51,6 +52,12 @@ class NewEntryTableViewCell: UITableViewCell {
         self.lblID.text = "OAA\(cellData.empId)"
         if let imageUrl = URL(string: cellData.profileBaseUrl+cellData.profileImageUrl){
             self.imageViewLabour.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+        }
+        if (cellData.isStartTimeMarked){
+            self.statusLabel.text = "Start time marked";
+        }
+        else{
+            self.statusLabel.text = "";
         }
     }
 

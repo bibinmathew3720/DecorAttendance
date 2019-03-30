@@ -96,8 +96,7 @@ class UserManager: CLBaseService {
     }
     
     func networkModelForEmployees(with body:String)->CLNetworkModel{
-        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.EMPLOYEES, requestMethod_: "GET")
-        requestModel.requestBody = body
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.EMPLOYEES+body, requestMethod_: "GET")
         return requestModel
     }
     
@@ -481,6 +480,20 @@ class ForgotPwdRequestModel:NSObject {
         var dict:[String:AnyObject] = [String:AnyObject]()
         dict.updateValue(email as AnyObject, forKey: "email")
         return CCUtility.getJSONfrom(dictionary: dict)
+    }
+}
+
+class  EmployeesRequestModel{
+    var searchText = ""
+    func getReqestBody()->String{
+        var requestBody = ""
+        if (searchText.count != 0 ){
+            requestBody = "keyword=\(searchText)"
+        }
+        print("Request Body")
+        print("-------------------------")
+        print(requestBody)
+        return requestBody
     }
 }
 

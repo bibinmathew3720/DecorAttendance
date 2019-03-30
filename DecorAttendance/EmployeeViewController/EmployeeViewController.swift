@@ -14,9 +14,11 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var viewSearchBar: UIView!
     @IBOutlet weak var txtFldSearch: UITextField!
     @IBOutlet weak var tableViewEmployee: UITableView!
+    @IBOutlet weak var emptyView: UIView!
     var selectedIndex:Int = -1
     var activeTextField: UITextField!
     var employeeResponse:DecoreEmployeeResponseModel?
+    var employeeRequest = EmployeesRequestModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         getEmployeesApi()
@@ -34,14 +36,24 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
         // Do any additional setup after loading the view.
     }
     
+    //Search Button Action
+    
+    @IBAction func searchButtonAction(_ sender: UIButton) {
+        if let searchText = self.txtFldSearch.text{
+            employeeRequest.searchText = searchText
+            self.view.endEditing(true)
+            getEmployeesApi()
+        }
+    }
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
         if (touch.view?.isDescendant(of: tableViewEmployee))!{
             
             return false
         }
         return true
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let model = self.employeeResponse{
             return model.employees.count
@@ -81,7 +93,9 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
+    
     //MARK: textfield delegate methods
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
@@ -95,7 +109,6 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func setViewStyle() {
-        
         let layer = self.viewSearchBar!
         layer.backgroundColor = UIColor.white
         layer.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -107,37 +120,37 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
         layer1.layer.cornerRadius = 3
         layer1.layer.borderWidth = 0.5
         layer1.layer.borderColor = UIColor(red:0.78, green:0.78, blue:0.78, alpha:1).cgColor
-        
     }
     
     func addTapgesturesToView()  {
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(EmployeeViewController.dismissKeyBoard))
         tapGesture.delegate = self
-        
         self.view.addGestureRecognizer(tapGesture)
-        
     }
+    
     @objc func dismissKeyBoard()  {
-        
         if activeTextField != nil{
-            
             activeTextField.resignFirstResponder()
-            
         }
-        
-        
     }
 
     func getEmployeesApi(){
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        UserManager().getEmployeesApi(with:"", success: {
+        UserManager().getEmployeesApi(with:employeeRequest.getReqestBody(), success: {
             (model,response)  in
             MBProgressHUD.hide(for: self.view, animated: true)
             if let model = model as? DecoreEmployeeResponseModel{
                 let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
                 if type == StatusEnum.success{
                     self.employeeResponse = model
+                    if (model.employees.count == 0){
+                       self.tableViewEmployee.isHidden = true
+                       self.emptyView.isHidden = false
+                    }
+                    else{
+                        self.tableViewEmployee.isHidden = false
+                        self.emptyView.isHidden = true
+                    }
                     self.tableViewEmployee.reloadData()
                 }
                 else if type == StatusEnum.sessionexpired{
