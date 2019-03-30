@@ -47,6 +47,13 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     @IBOutlet weak var siteLabel: UILabel!
     @IBOutlet weak var pieChartViewLabourSummary: PieChartSliceView!
     
+    @IBOutlet weak var absentPerLabel: UILabel!
+    @IBOutlet weak var absentProgressLabel: UILabel!
+    @IBOutlet weak var presentPerLabel: UILabel!
+    @IBOutlet weak var presentProgressLabel: UILabel!
+    
+    
+    
     var window: UIWindow?
     var attendanceSummaryResponse:AttendanceSummaryResponseModel?
     var formanRequest = ForemanAttendanceRequestModel()
@@ -222,6 +229,15 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     func setPerformanceIndicatorLines() {
         //This is where the indicators set to their corresponding values
         if let attendanceSummary = self.attendanceSummaryResponse{
+            
+            self.absentPerLabel.text = String.init(format: "%0.2f%%", attendanceSummary.absentPercentage)
+            self.absentPerLabel.textColor = ObeidiFont.Color.obeidiLinePink()
+            self.absentProgressLabel.text = String.init(format: "%0.0f / %0.0f", attendanceSummary.absentCount,attendanceSummary.total)
+            
+            self.presentPerLabel.text = String.init(format: "%0.2f%%", attendanceSummary.presentPercentage)
+            self.presentPerLabel.textColor = ObeidiFont.Color.obeidiLineRed()
+            self.presentProgressLabel.text = String.init(format: "%0.0f / %0.0f", attendanceSummary.presentCount,attendanceSummary.total)
+            
             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPresenceIndicatorWhite, lineB: totalPresenceIndicatorColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineRed(), lineAValue: 1, lineBValue:(attendanceSummary.presentPercentage/100.00), lineAMeter: widthPresentLight, lineBMeter: widthPresentColred)
             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalAbsenceIndicatorWhite, lineB: totalAbsenceIndicatorColred, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (attendanceSummary.absentPercentage/100.00), lineAMeter: widthAbsentLight, lineBMeter: widthAbsentColored)
         }
