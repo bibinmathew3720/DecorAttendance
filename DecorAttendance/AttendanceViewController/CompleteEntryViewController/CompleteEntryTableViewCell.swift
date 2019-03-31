@@ -72,6 +72,33 @@ class CompleteEntryTableViewCell: UITableViewCell {
         if let imageUrl = URL(string: cellData.profileBaseUrl+cellData.profileImageUrl){
              self.imageViewLabour.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
         }
+        if cellData.isStrike{
+            self.statusView.isHidden = false
+            self.timeLabelView.isHidden = true
+            
+            self.statusLabel.text = "Strike"
+        }
+        else if !cellData.isPresent{
+            self.statusView.isHidden = false
+            self.timeLabelView.isHidden = true
+            
+            self.statusLabel.text = "Absent"
+        }
+        else{
+           self.statusView.isHidden = true
+           self.timeLabelView.isHidden = false
+            
+            self.lblStartTime.text = cellData.startTimeMarkedAt
+            if cellData.isEndTimeMarkd{
+                self.lblEndTime.text = cellData.endTimeMarkedAt
+            }
+            else{
+                self.lblEndTime.text = "--"
+            }
+            self.lblWorkTime.text = "--"
+            self.lblOverTime.text = "--"
+            self.lblTotalBonus.text = String.init(format: "%0.2f", cellData.bonusAmount)
+        }
 //        self.lblStartTime.text = (cellData.start_time_marked_at as? String)
 //        self.lblEndTime.text = (cellData.end_time_marked_at as? String)
 //        self.setMultipleColorsToLabelFont(lbl: self.lblTotalBonusHeader, labelStr: "Total bonus AED \(String(cellData.bonus_amount as! Int))")
