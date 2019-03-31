@@ -222,7 +222,7 @@ extension CompleteEntriesViewController:UITableViewDataSource,UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 134
+        return 150
     }
 }
 extension CompleteEntriesViewController:filterUpdatedDelegate{

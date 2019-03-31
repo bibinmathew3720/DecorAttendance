@@ -16,20 +16,24 @@ class CompleteEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblStartTime: UILabel!
     @IBOutlet weak var lblEndTime: UILabel!
-    @IBOutlet weak var lblTotalBonusHeader: UILabel!
-    @IBOutlet weak var lblTotalBonusAmnt: UILabel!
+    @IBOutlet weak var lblWorkTime: UILabel!
+    @IBOutlet weak var lblOverTime: UILabel!
+    @IBOutlet weak var lblTotalBonus: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    @IBOutlet weak var statusView: UIView!
+    @IBOutlet weak var timeLabelView: UIView!
+    
+
     @IBOutlet weak var bttnDetails: UIButton!
+    @IBOutlet weak var approveButton: UIButton!
     
     var parentViewController: UIViewController!
     var modelObjArr = NSMutableArray()
     
     override func awakeFromNib() {
-        
         super.awakeFromNib()
         setViewStyle()
-        setMultipleColorsToLabelFont(lbl: lblTotalBonusHeader, labelStr: "Total bonus AED 200")
-        
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -56,11 +60,6 @@ class CompleteEntryTableViewCell: UITableViewCell {
         
         ObeidiTextStyle.setLabelFontStyleAndSize(label: lblID, fontSize: ObeidiFont.Size.smallA(), fontColor: ObeidiFont.Color.obeidiMediumBlack(), fontName: ObeidiFont.Family.normalFont())
         
-        ObeidiTextStyle.setLabelFontStyleAndSize(label: lblStartTime, fontSize: ObeidiFont.Size.smallA(), fontColor: ObeidiFont.Color.obeidiMediumBlack(), fontName: ObeidiFont.Family.normalFont())
-        
-        ObeidiTextStyle.setLabelFontStyleAndSize(label: lblEndTime, fontSize: ObeidiFont.Size.smallA(), fontColor: ObeidiFont.Color.obeidiMediumBlack(), fontName: ObeidiFont.Family.normalFont())
-        
-        ObeidiTextStyle.setLabelFontStyleAndSize(label: lblTotalBonusHeader, fontSize: ObeidiFont.Size.smallA(), fontColor: ObeidiFont.Color.obeidiMediumBlack(), fontName: ObeidiFont.Family.normalFont())
         
         //ObeidiTextStyle.setLabelFontStyleAndSize(label: lblTotalBonusAmnt, fontSize: ObeidiFont.Size.smallA(), fontColor: ObeidiFont.Color.obeidiLineRed(), fontName: ObeidiFont.Family.normalFont())
         
@@ -77,20 +76,6 @@ class CompleteEntryTableViewCell: UITableViewCell {
 //        self.lblEndTime.text = (cellData.end_time_marked_at as? String)
 //        self.setMultipleColorsToLabelFont(lbl: self.lblTotalBonusHeader, labelStr: "Total bonus AED \(String(cellData.bonus_amount as! Int))")
         self.modelObjArr.add(cellData)
-        
-    }
-    
-    func setMultipleColorsToLabelFont(lbl: UILabel, labelStr: String){
-        
-        let myString:NSString = labelStr as NSString
-        var myMutableString = NSMutableAttributedString()
-        
-        myMutableString = NSMutableAttributedString(string: myString as String, attributes: [NSAttributedString.Key.font:UIFont(name: ObeidiFont.Family.normalFont(), size: ObeidiFont.Size.smallA())!])
-        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ObeidiFont.Color.obeidiLineRed(), range: NSRange(location:12,length:labelStr.count - 12))
-        // set label Attribute
-        lbl.attributedText = myMutableString
-        
-        
         
     }
     
