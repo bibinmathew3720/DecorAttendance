@@ -145,11 +145,15 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
                     self.employeeResponse = model
                     if (model.employees.count == 0){
                        self.tableViewEmployee.isHidden = true
-                       self.emptyView.isHidden = false
+                        if let empView = self.emptyView{
+                            empView.isHidden = false
+                        }
                     }
                     else{
                         self.tableViewEmployee.isHidden = false
-                        self.emptyView.isHidden = true
+                        if let empView = self.emptyView{
+                            empView.isHidden = true
+                        }
                     }
                     self.tableViewEmployee.reloadData()
                 }
