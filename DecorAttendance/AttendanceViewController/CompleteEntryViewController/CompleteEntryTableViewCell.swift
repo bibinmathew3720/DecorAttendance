@@ -43,7 +43,8 @@ class CompleteEntryTableViewCell: UITableViewCell {
     }
 
     func setViewStyle() {
-        
+        settingRedBackgroundToButton(button: bttnDetails)
+        settingGreenBackgrounfToButton(button: approveButton)
         let layer = self.innerView!
         layer.layer.cornerRadius = 3
         layer.backgroundColor = UIColor.white
@@ -52,20 +53,19 @@ class CompleteEntryTableViewCell: UITableViewCell {
         layer.layer.shadowOpacity = 1
         layer.layer.shadowRadius = 7
         
-        let bttn = bttnDetails!
-        bttn.layer.cornerRadius = 1
-        bttn.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
-        
         ObeidiTextStyle.setLabelFontStyleAndSize(label: lblName, fontSize: ObeidiFont.Size.smallB(), fontColor: ObeidiFont.Color.obeidiMediumBlack(), fontName: ObeidiFont.Family.boldFont())
         
         ObeidiTextStyle.setLabelFontStyleAndSize(label: lblID, fontSize: ObeidiFont.Size.smallA(), fontColor: ObeidiFont.Color.obeidiMediumBlack(), fontName: ObeidiFont.Family.normalFont())
-        
-        
-        //ObeidiTextStyle.setLabelFontStyleAndSize(label: lblTotalBonusAmnt, fontSize: ObeidiFont.Size.smallA(), fontColor: ObeidiFont.Color.obeidiLineRed(), fontName: ObeidiFont.Family.normalFont())
-        
-        
-        
     }
+    
+    func settingRedBackgroundToButton(button:UIButton){
+        button.backgroundColor = Constant.Colors.commonRedColor
+    }
+    
+    func settingGreenBackgrounfToButton(button:UIButton){
+        button.backgroundColor  = Constant.Colors.commonGreenColor
+    }
+    
     func setCellContents(cellData: ObeidiModelFetchAttendance)  {
         self.lblID.text = "OAA\(cellData.empId)"
         self.lblName.text = cellData.name
@@ -99,8 +99,8 @@ class CompleteEntryTableViewCell: UITableViewCell {
             self.lblOverTime.text = "--"
             self.lblTotalBonus.text = String.init(format: "%0.2f", cellData.bonusAmount)
         }
-//        self.lblStartTime.text = (cellData.start_time_marked_at as? String)
-//        self.lblEndTime.text = (cellData.end_time_marked_at as? String)
+        self.approveButton.isSelected = cellData.isApproved
+
 //        self.setMultipleColorsToLabelFont(lbl: self.lblTotalBonusHeader, labelStr: "Total bonus AED \(String(cellData.bonus_amount as! Int))")
         self.modelObjArr.add(cellData)
         
@@ -123,9 +123,12 @@ class CompleteEntryTableViewCell: UITableViewCell {
     
     @IBAction func bttnActnDetails(_ sender: Any) {
         
-        
+    }
+    
+    @IBAction func approveButtonAction(_ sender: UIButton) {
         
     }
+    
     func callAttendanceByIDAPI() {
         
 //        let attendanceId = (self.modelObjArr.object(at: self.bttnDetails.tag) as! ObeidiModelFetchAttendance).attendance_id as! String

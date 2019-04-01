@@ -47,6 +47,9 @@ struct Constant{
         static let ashColor = UIColor(red:0.28, green:0.28, blue:0.28, alpha:1.0) //484747
         static let blackColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0) //000000
         static let whiteColor = UIColor(red:1.00, green:1.00, blue:1.00, alpha:1.0) //FFFFFF
+        
+        static let commonRedColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1.0) //E92E2F - Red Color
+        static let commonGreenColor = UIColor(red:0.49, green:0.83, blue:0.13, alpha:1.0)//7ED321 - Green Color
     }
     
     struct Font {
