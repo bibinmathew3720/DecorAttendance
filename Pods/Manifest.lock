@@ -19,6 +19,7 @@ PODS:
   - JTAppleCalendar (7.1.6)
   - Kingfisher (5.1.1)
   - MBProgressHUD (1.1.0)
+  - OneSignal (2.9.5)
   - SDWebImage (4.4.6):
     - SDWebImage/Core (= 4.4.6)
   - SDWebImage/Core (4.4.6)
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - JTAppleCalendar (~> 7.0)
   - Kingfisher
   - MBProgressHUD
+  - OneSignal (< 3.0, >= 2.6.2)
   - SDWebImage
 
 SPEC REPOS:
@@ -40,6 +42,7 @@ SPEC REPOS:
     - JTAppleCalendar
     - Kingfisher
     - MBProgressHUD
+    - OneSignal
     - SDWebImage
 
 SPEC CHECKSUMS:
@@ -49,8 +52,9 @@ SPEC CHECKSUMS:
   JTAppleCalendar: abb30678f42a4ef8a340a932b1dcb8c85a33dac2
   Kingfisher: 2558186963e5be42d98c5b110ccb3130148b77e4
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  OneSignal: ccdeb961882f8668305e5b694e2cb7cb325fc907
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
 
-PODFILE CHECKSUM: 3bee6691f961858ec8f5b6fae62224d72824d3f1
+PODFILE CHECKSUM: 9305c95ccbac21d97f9f56d46b46d9109a63d024
 
 COCOAPODS: 1.5.3
