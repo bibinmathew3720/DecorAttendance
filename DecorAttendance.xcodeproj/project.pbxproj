@@ -105,6 +105,7 @@
 		46F1FF23221D30CD0002C138 /* SickLeaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1FF22221D30CD0002C138 /* SickLeaveViewController.swift */; };
 		46F1FF25221D31EA0002C138 /* EndTimeBonusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1FF24221D31EA0002C138 /* EndTimeBonusViewController.swift */; };
 		46F1FF2D221D81FD0002C138 /* ObeidiAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1FF2C221D81FD0002C138 /* ObeidiAlertController.swift */; };
+		580090C7FC1CF89654D5B8B2 /* Pods_NotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC75B7FD558C6B55C2FA7704 /* Pods_NotificationServiceExtension.framework */; };
 		BB5A4FC42233B43100F4FC82 /* CLNetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC02233B43100F4FC82 /* CLNetworkUtility.swift */; };
 		BB5A4FC52233B43100F4FC82 /* CLNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC12233B43100F4FC82 /* CLNetworkModel.swift */; };
 		BB5A4FC62233B43100F4FC82 /* CLNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC22233B43100F4FC82 /* CLNetworkManager.swift */; };
@@ -164,6 +165,7 @@
 
 /* Begin PBXFileReference section */
 		12EF689C5E57ED94176CDF08 /* Pods-DecorAttendanceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceTests/Pods-DecorAttendanceTests.release.xcconfig"; sourceTree = "<group>"; };
+		394D7DDA0C671F72663256C2 /* Pods-NotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		3CB0EF0F591114FB851FFC11 /* Pods_DecorAttendance.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DecorAttendance.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E04DEC04AEDF52A0DA4BDB /* Pods-DecorAttendanceUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceUITests/Pods-DecorAttendanceUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		46118643221472370031DFC4 /* POPUPSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POPUPSelectorViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 		6A329E0CB13BC3C908E81160 /* Pods-DecorAttendance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendance.release.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendance/Pods-DecorAttendance.release.xcconfig"; sourceTree = "<group>"; };
 		8D4E2991A8626FB16099B41A /* Pods-DecorAttendance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendance.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendance/Pods-DecorAttendance.debug.xcconfig"; sourceTree = "<group>"; };
 		96713BDDDE0BD47883F94507 /* Pods-DecorAttendanceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceUITests/Pods-DecorAttendanceUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9A9C1665DD0B77878819D974 /* Pods-NotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		B9999E7CBD95E87A7A7864C1 /* Pods_DecorAttendanceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DecorAttendanceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5A4FBE2233B1D700F4FC82 /* DecorAttendance-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DecorAttendance-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB5A4FC02233B43100F4FC82 /* CLNetworkUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLNetworkUtility.swift; sourceTree = "<group>"; };
@@ -292,6 +295,7 @@
 		D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabourManager.swift; sourceTree = "<group>"; };
 		D0F2449A224DBBBB0073D153 /* ForemanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForemanManager.swift; sourceTree = "<group>"; };
 		D98D9F27B5CC5C6DFCC53240 /* Pods-DecorAttendanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceTests/Pods-DecorAttendanceTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DC75B7FD558C6B55C2FA7704 /* Pods_NotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DecorAttendanceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -324,6 +328,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				580090C7FC1CF89654D5B8B2 /* Pods_NotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +344,8 @@
 				12EF689C5E57ED94176CDF08 /* Pods-DecorAttendanceTests.release.xcconfig */,
 				41E04DEC04AEDF52A0DA4BDB /* Pods-DecorAttendanceUITests.debug.xcconfig */,
 				96713BDDDE0BD47883F94507 /* Pods-DecorAttendanceUITests.release.xcconfig */,
+				394D7DDA0C671F72663256C2 /* Pods-NotificationServiceExtension.debug.xcconfig */,
+				9A9C1665DD0B77878819D974 /* Pods-NotificationServiceExtension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -349,6 +356,7 @@
 				3CB0EF0F591114FB851FFC11 /* Pods_DecorAttendance.framework */,
 				B9999E7CBD95E87A7A7864C1 /* Pods_DecorAttendanceTests.framework */,
 				FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */,
+				DC75B7FD558C6B55C2FA7704 /* Pods_NotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -844,6 +852,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D02615442252838000FC3643 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */;
 			buildPhases = (
+				6E3E7DFF4AEDACD1ED472744 /* [CP] Check Pods Manifest.lock */,
 				D02615362252838000FC3643 /* Sources */,
 				D02615372252838000FC3643 /* Frameworks */,
 				D02615382252838000FC3643 /* Resources */,
@@ -971,6 +980,24 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-DecorAttendanceUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E3E7DFF4AEDACD1ED472744 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NotificationServiceExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1331,10 +1358,7 @@
 				DEVELOPMENT_TEAM = WVYK59KXPF;
 				INFOPLIST_FILE = DecorAttendance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qootcustomer.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1357,10 +1381,7 @@
 				DEVELOPMENT_TEAM = WVYK59KXPF;
 				INFOPLIST_FILE = DecorAttendance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qootcustomer.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1378,11 +1399,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DecorAttendanceTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cocoalabs.attendance.DecorAttendanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1399,11 +1416,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DecorAttendanceTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cocoalabs.attendance.DecorAttendanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1419,11 +1432,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DecorAttendanceUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cocoalabs.attendance.DecorAttendanceUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1439,11 +1448,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = DecorAttendanceUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cocoalabs.attendance.DecorAttendanceUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -1454,17 +1459,14 @@
 		};
 		D02615422252838000FC3643 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 394D7DDA0C671F72663256C2 /* Pods-NotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WVYK59KXPF;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qootcustomer.ios.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1475,17 +1477,14 @@
 		};
 		D02615432252838000FC3643 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A9C1665DD0B77878819D974 /* Pods-NotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WVYK59KXPF;
 				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qootcustomer.ios.NotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
