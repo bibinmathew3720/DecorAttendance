@@ -127,11 +127,17 @@ class CompleteEntryTableViewCell: UITableViewCell {
     }
     
     @IBAction func bttnActnDetails(_ sender: Any) {
-        
+        if let _delegate = delegate{
+           _delegate.viewDetailsButtonActionAt(index: self.tag)
+        }
     }
     
     @IBAction func approveButtonAction(_ sender: UIButton) {
-        
+        if (!sender.isSelected){
+            if let _delegate = delegate{
+                _delegate.approveButtonActionAt(index: self.tag)
+            }
+        }
     }
     
     func callAttendanceByIDAPI() {

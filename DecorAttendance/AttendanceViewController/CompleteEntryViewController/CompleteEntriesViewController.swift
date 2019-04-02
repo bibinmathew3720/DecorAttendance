@@ -259,10 +259,10 @@ extension CompleteEntriesViewController:filterUpdatedDelegate{
 
 extension CompleteEntriesViewController:CompltedEntryCellDelegate{
     func viewDetailsButtonActionAt(index: Int) {
-        
+        print("Detail")
     }
     
     func approveButtonActionAt(index: Int) {
-        
+        print("Approve")
     }
 }
