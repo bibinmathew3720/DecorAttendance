@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import OneSignal
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
@@ -36,8 +37,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         setNavigationBarProperties()
         initWindow()
+        
+        
+        
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+        
+        // Replace 'YOUR_APP_ID' with your OneSignal App ID.
+        OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: Constant.OneSignalAppId,
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+        
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+        
+        // Recommend moving the below line to prompt for push after informing the user about
+        //   how your app will use them.
+        OneSignal.promptForPushNotifications(userResponse: { accepted in
+            print("User accepted notifications: \(accepted)")
+        })
+        
         return true
     }
+    
     
     func initWindow(){
         if UserDefaults.standard.bool(forKey: Constant.VariableNames.isLoggedIn){

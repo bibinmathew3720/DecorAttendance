@@ -10,6 +10,7 @@ import UIKit
 
 struct Constant{
     static let AppName = "Obaid Al Abdi"
+    static let OneSignalAppId = "dd140ece-75a8-4890-8d24-2cbb2b81611c"
     
     struct PageNames {
         static let Attendance = "ATTENDANCE"
