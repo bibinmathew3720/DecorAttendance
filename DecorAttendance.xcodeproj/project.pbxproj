@@ -105,7 +105,6 @@
 		46F1FF23221D30CD0002C138 /* SickLeaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1FF22221D30CD0002C138 /* SickLeaveViewController.swift */; };
 		46F1FF25221D31EA0002C138 /* EndTimeBonusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1FF24221D31EA0002C138 /* EndTimeBonusViewController.swift */; };
 		46F1FF2D221D81FD0002C138 /* ObeidiAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F1FF2C221D81FD0002C138 /* ObeidiAlertController.swift */; };
-		580090C7FC1CF89654D5B8B2 /* Pods_NotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC75B7FD558C6B55C2FA7704 /* Pods_NotificationServiceExtension.framework */; };
 		BB5A4FC42233B43100F4FC82 /* CLNetworkUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC02233B43100F4FC82 /* CLNetworkUtility.swift */; };
 		BB5A4FC52233B43100F4FC82 /* CLNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC12233B43100F4FC82 /* CLNetworkModel.swift */; };
 		BB5A4FC62233B43100F4FC82 /* CLNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5A4FC22233B43100F4FC82 /* CLNetworkManager.swift */; };
@@ -118,8 +117,6 @@
 		BBCFA9FE223D76FF00414717 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCFA9FD223D76FF00414717 /* StringExtensions.swift */; };
 		BBE01C76223439B300C534F6 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */; };
 		CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */; };
-		D026153D2252838000FC3643 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D026153C2252838000FC3643 /* NotificationService.swift */; };
-		D02615412252838000FC3643 /* NotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D026153A2252838000FC3643 /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D06B92232239ED1900C98ED7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B92222239ED1800C98ED7 /* Constants.swift */; };
 		D0AB2ADD223AA9D4008C01A4 /* LabourManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */; };
 		D0F2449B224DBBBB0073D153 /* ForemanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F2449A224DBBBB0073D153 /* ForemanManager.swift */; };
@@ -140,13 +137,6 @@
 			remoteGlobalIDString = 46E71D0221C5194200051C78;
 			remoteInfo = DecorAttendance;
 		};
-		D026153F2252838000FC3643 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 46E71CFB21C5194200051C78 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D02615392252838000FC3643;
-			remoteInfo = NotificationServiceExtension;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -156,7 +146,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D02615412252838000FC3643 /* NotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,9 +278,6 @@
 		BBCFA9FD223D76FF00414717 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		D00F2A172253CD84007174F8 /* DecorAttendance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DecorAttendance.entitlements; sourceTree = "<group>"; };
-		D026153A2252838000FC3643 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		D026153C2252838000FC3643 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		D026153E2252838000FC3643 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D06B92222239ED1800C98ED7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabourManager.swift; sourceTree = "<group>"; };
 		D0F2449A224DBBBB0073D153 /* ForemanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForemanManager.swift; sourceTree = "<group>"; };
@@ -322,14 +308,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D02615372252838000FC3643 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				580090C7FC1CF89654D5B8B2 /* Pods_NotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,7 +608,6 @@
 				46E71D0521C5194200051C78 /* DecorAttendance */,
 				46E71D1D21C5194500051C78 /* DecorAttendanceTests */,
 				46E71D2821C5194500051C78 /* DecorAttendanceUITests */,
-				D026153B2252838000FC3643 /* NotificationServiceExtension */,
 				46E71D0421C5194200051C78 /* Products */,
 				04AD74097EE6E47AA4933695 /* Pods */,
 				291D50BEA09D3FD7C9A1DC7C /* Frameworks */,
@@ -643,7 +620,6 @@
 				46E71D0321C5194200051C78 /* DecorAttendance.app */,
 				46E71D1A21C5194500051C78 /* DecorAttendanceTests.xctest */,
 				46E71D2521C5194500051C78 /* DecorAttendanceUITests.xctest */,
-				D026153A2252838000FC3643 /* NotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -771,15 +747,6 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		D026153B2252838000FC3643 /* NotificationServiceExtension */ = {
-			isa = PBXGroup;
-			children = (
-				D026153C2252838000FC3643 /* NotificationService.swift */,
-				D026153E2252838000FC3643 /* Info.plist */,
-			);
-			path = NotificationServiceExtension;
-			sourceTree = "<group>";
-		};
 		D06B92212239ECF800C98ED7 /* Constant */ = {
 			isa = PBXGroup;
 			children = (
@@ -805,7 +772,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D02615402252838000FC3643 /* PBXTargetDependency */,
 			);
 			name = DecorAttendance;
 			productName = DecorAttendance;
@@ -850,24 +816,6 @@
 			productReference = 46E71D2521C5194500051C78 /* DecorAttendanceUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		D02615392252838000FC3643 /* NotificationServiceExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D02615442252838000FC3643 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */;
-			buildPhases = (
-				6E3E7DFF4AEDACD1ED472744 /* [CP] Check Pods Manifest.lock */,
-				D02615362252838000FC3643 /* Sources */,
-				D02615372252838000FC3643 /* Frameworks */,
-				D02615382252838000FC3643 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = NotificationServiceExtension;
-			productName = NotificationServiceExtension;
-			productReference = D026153A2252838000FC3643 /* NotificationServiceExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -898,9 +846,6 @@
 						CreatedOnToolsVersion = 10.1;
 						TestTargetID = 46E71D0221C5194200051C78;
 					};
-					D02615392252838000FC3643 = {
-						CreatedOnToolsVersion = 10.1;
-					};
 				};
 			};
 			buildConfigurationList = 46E71CFE21C5194200051C78 /* Build configuration list for PBXProject "DecorAttendance" */;
@@ -919,7 +864,6 @@
 				46E71D0221C5194200051C78 /* DecorAttendance */,
 				46E71D1921C5194500051C78 /* DecorAttendanceTests */,
 				46E71D2421C5194500051C78 /* DecorAttendanceUITests */,
-				D02615392252838000FC3643 /* NotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -944,13 +888,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		46E71D2321C5194500051C78 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D02615382252838000FC3643 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -990,24 +927,6 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-DecorAttendanceUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6E3E7DFF4AEDACD1ED472744 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NotificationServiceExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1192,14 +1111,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D02615362252838000FC3643 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D026153D2252838000FC3643 /* NotificationService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1212,11 +1123,6 @@
 			isa = PBXTargetDependency;
 			target = 46E71D0221C5194200051C78 /* DecorAttendance */;
 			targetProxy = 46E71D2621C5194500051C78 /* PBXContainerItemProxy */;
-		};
-		D02615402252838000FC3643 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D02615392252838000FC3643 /* NotificationServiceExtension */;
-			targetProxy = D026153F2252838000FC3643 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1497,52 +1403,6 @@
 			};
 			name = Release;
 		};
-		D02615422252838000FC3643 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 394D7DDA0C671F72663256C2 /* Pods-NotificationServiceExtension.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.obaidAlAbdi.ios;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		D02615432252838000FC3643 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A9C1665DD0B77878819D974 /* Pods-NotificationServiceExtension.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.obaidAlAbdi.ios;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1578,15 +1438,6 @@
 			buildConfigurations = (
 				46E71D3521C5194500051C78 /* Debug */,
 				46E71D3621C5194500051C78 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D02615442252838000FC3643 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D02615422252838000FC3643 /* Debug */,
-				D02615432252838000FC3643 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
