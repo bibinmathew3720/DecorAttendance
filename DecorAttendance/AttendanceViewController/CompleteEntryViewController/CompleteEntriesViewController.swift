@@ -216,7 +216,8 @@ extension CompleteEntriesViewController:UITableViewDataSource,UITableViewDelegat
         if let attendanceRes = self.completedEntriesResponseModel{
             cell.setCellContents(cellData: attendanceRes.attendanceResultArray[indexPath.row])
         }
-        cell.bttnDetails.tag = indexPath.row
+        cell.tag = indexPath.row
+        cell.delegate = self
         cell.parentViewController = self
         return cell
     }
@@ -253,5 +254,15 @@ extension CompleteEntriesViewController:filterUpdatedDelegate{
             //self.tabBarController?.view.alpha = 0.65
             self.navigationController?.navigationBar.alpha = 1
         },completion:nil)
+    }
+}
+
+extension CompleteEntriesViewController:CompltedEntryCellDelegate{
+    func viewDetailsButtonActionAt(index: Int) {
+        
+    }
+    
+    func approveButtonActionAt(index: Int) {
+        
     }
 }

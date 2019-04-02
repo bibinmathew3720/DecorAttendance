@@ -7,7 +7,10 @@
 //
 
 import UIKit
-
+protocol CompltedEntryCellDelegate {
+    func viewDetailsButtonActionAt(index:Int)
+    func approveButtonActionAt(index:Int)
+}
 class CompleteEntryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var innerView: UIView!
@@ -28,8 +31,10 @@ class CompleteEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var bttnDetails: UIButton!
     @IBOutlet weak var approveButton: UIButton!
     
+    
     var parentViewController: UIViewController!
     var modelObjArr = NSMutableArray()
+    var delegate:CompltedEntryCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

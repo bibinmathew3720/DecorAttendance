@@ -142,7 +142,7 @@ class ObeidiModelFetchAttendance: NSObject {
         serviceName = ObeidiConstants.API.FETCH_ATTENDANCE + requestBody
         
         let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
-        AFNetworkingServiceManager.sharedmanager.parseLinkUsingGetMethodAndHeader(serviceName, parameter: nil, token: accessToken){
+    AFNetworkingServiceManager.sharedmanager.parseLinkUsingGetMethodAndHeader(serviceName, parameter: nil, token: accessToken){
             (success, result, error) in
             if (success! && result != nil){
                 print(result as Any)
@@ -211,7 +211,7 @@ class ObeidAttendanceRequestModel:NSObject{
            requestBody = "is_attendance_completed=0"
         }
         if (startDate.count != 0 ){
-            requestBody = "&start_date=\(startDate)"
+            requestBody = requestBody + "&date=\(startDate)"
         }
         if (siteId != 0){
             requestBody = requestBody + "&site_id=\(siteId)"
