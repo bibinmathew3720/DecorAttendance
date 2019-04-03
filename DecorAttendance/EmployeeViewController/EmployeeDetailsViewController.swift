@@ -22,7 +22,6 @@ class EmployeeDetailsViewController: UITableViewController {
     @IBOutlet weak var penaltyColorWidth: NSLayoutConstraint!
     @IBOutlet weak var strikeColorWidth: NSLayoutConstraint!
     @IBOutlet weak var widthUncoloredIndicator: NSLayoutConstraint!
-    @IBOutlet weak var widthColoredIndicator: NSLayoutConstraint!
     @IBOutlet weak var viewColouredIndicator: UIView!
     @IBOutlet weak var lblRating: UILabel!
     @IBOutlet weak var viewUncoloredIndctr: UIView!
@@ -76,8 +75,8 @@ class EmployeeDetailsViewController: UITableViewController {
             
             if let rat = Double(model.rating){
                 lblRating.text =  model.rating + "/10"
-                widthColoredIndicator.constant = CGFloat(4 * rat)
-                viewColouredIndicator.backgroundColor = getColorFromRating(rating: CGFloat(rat))
+                lobourRateWidthColored.constant = CGFloat(4 * rat)
+                //viewColouredIndicator.backgroundColor = getColorFromRating(rating: CGFloat(rat))
             }
             getEmployeeDetailsApi(empId: model.emp_id)
         }
@@ -193,7 +192,7 @@ class EmployeeDetailsViewController: UITableViewController {
   
     
     func setIndicatorValue(value: CGFloat) {
-        ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.viewUncoloredIndctr, lineB: self.viewColouredIndicator, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiColors.ColorCode.obeidiLineGreen(), lineAValue: 1, lineBValue: value, lineAMeter: widthUncoloredIndicator, lineBMeter: widthColoredIndicator)
+//        ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.viewUncoloredIndctr, lineB: self.viewColouredIndicator, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiColors.ColorCode.obeidiLineGreen(), lineAValue: 1, lineBValue: value, lineAMeter: widthUncoloredIndicator, lineBMeter: widthColoredIndicator)
         
     }
     
