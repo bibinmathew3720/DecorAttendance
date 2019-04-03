@@ -11,6 +11,7 @@ import UIKit
 class EmployeeDetailsViewController: UITableViewController {
     @IBOutlet weak var absenseColorWidth: NSLayoutConstraint!
     
+    @IBOutlet weak var lobourRateWidthColored: NSLayoutConstraint!
     @IBOutlet weak var performanceColorView: UIView!
     @IBOutlet weak var incentiveColorView: UIView!
     @IBOutlet weak var penaltyColorView: UIView!
@@ -70,11 +71,11 @@ class EmployeeDetailsViewController: UITableViewController {
             if let img = imageBase{
             imageViewLabour.loadImageUsingCache(withUrl: img + model.image, colorValue: nil)
             }
-            lblAge.text = String(CCUtility.calcAge(birthday: model.dob)) + "years old"
+            lblAge.text = String(CCUtility.calcAge(birthday: model.dob)) + " years old"
             lblOccupation.text = UserDefaults.standard.string(forKey: "role")
-            lblRating.text = model.rating + "/10"
-            let rating = Double(model.rating)
-            if let rat = rating{
+            
+            if let rat = Double(model.rating){
+                lblRating.text =  model.rating + "/10"
                 widthColoredIndicator.constant = CGFloat(4 * rat)
                 viewColouredIndicator.backgroundColor = getColorFromRating(rating: CGFloat(rat))
             }
