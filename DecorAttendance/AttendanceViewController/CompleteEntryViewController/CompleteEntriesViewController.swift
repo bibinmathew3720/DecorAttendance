@@ -259,10 +259,24 @@ extension CompleteEntriesViewController:filterUpdatedDelegate{
 
 extension CompleteEntriesViewController:CompltedEntryCellDelegate{
     func viewDetailsButtonActionAt(index: Int) {
-        print("Detail")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailsController = storyboard.instantiateViewController(withIdentifier: "CompleteEntryDetailsViewControllerID") as! CompleteEntryDetailsViewController
+        detailsController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        detailsController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        //detailsController.modelDataRef = modelDataDict
+        if let response = self.completedEntriesResponseModel{
+            detailsController.attendanceDetails = response.attendanceResultArray[index]
+        }
+        self.present(detailsController, animated: true, completion: nil)
     }
     
     func approveButtonActionAt(index: Int) {
         print("Approve")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == Constant.SegueIdentifiers.AttendanceCompletedListToDetail ){
+           
+        }
     }
 }

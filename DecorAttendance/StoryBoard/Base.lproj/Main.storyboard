@@ -5438,6 +5438,7 @@
                         <outlet property="tableViewCompleteEntry" destination="ubv-PD-9Wz" id="474-DI-yjE"/>
                         <outlet property="txtFldSearch" destination="n61-l2-jyN" id="qLI-4W-wSC"/>
                         <outlet property="viewSearchBar" destination="ghI-ah-1yI" id="SgN-aU-UFx"/>
+                        <segue destination="bgz-yD-zhT" kind="show" identifier="completedEntryListToCompletedEntryDetail" id="VCO-hS-Q0s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sIy-pn-vU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5449,11 +5450,11 @@
             <objects>
                 <viewController storyboardIdentifier="CompleteEntryDetailsViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bgz-yD-zhT" customClass="CompleteEntryDetailsViewController" customModule="DecorAttendance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LwU-KN-NAE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="464"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MMP-Ew-puK">
-                                <rect key="frame" x="33" y="100" width="309" height="467"/>
+                                <rect key="frame" x="33" y="69.5" width="309" height="325"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VHg-re-bXT">
                                         <rect key="frame" x="0.0" y="0.0" width="309" height="90"/>
@@ -5487,24 +5488,24 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mPe-1U-Mdt">
-                                        <rect key="frame" x="4" y="233" width="301" height="1"/>
+                                        <rect key="frame" x="4" y="162" width="301" height="1"/>
                                         <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="jgK-hX-xAn"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWD-Id-mvy">
-                                        <rect key="frame" x="154" y="120" width="1" height="302"/>
+                                        <rect key="frame" x="154" y="120" width="1" height="160"/>
                                         <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="1" id="yOc-n7-bpI"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="devarakonda" translatesAutoresizingMaskIntoConstraints="NO" id="ZDa-pf-HeW">
-                                        <rect key="frame" x="8" y="241" width="137" height="177"/>
+                                        <rect key="frame" x="8" y="170" width="137" height="106"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="devarakonda" translatesAutoresizingMaskIntoConstraints="NO" id="qPa-gb-NfT">
-                                        <rect key="frame" x="164" y="241" width="138" height="177"/>
+                                        <rect key="frame" x="164" y="170" width="138" height="106"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8U-j4-3XA">
                                         <rect key="frame" x="8" y="98" width="100" height="22"/>
@@ -5552,7 +5553,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ntc-Pg-gbT">
-                                        <rect key="frame" x="21.5" y="425" width="110" height="30"/>
+                                        <rect key="frame" x="21.5" y="283" width="110" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="110" id="aku-Nb-Oti"/>
                                             <constraint firstAttribute="height" constant="30" id="hk6-t6-zAp"/>
@@ -5566,7 +5567,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRk-iD-H0h">
-                                        <rect key="frame" x="178" y="425" width="110" height="30"/>
+                                        <rect key="frame" x="178" y="283" width="110" height="30"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                         <state key="normal" title="Disapprove">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5633,7 +5634,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.40313042534722221" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MMP-Ew-puK" firstAttribute="centerY" secondItem="LwU-KN-NAE" secondAttribute="centerY" id="9fY-Fs-7nb"/>
                             <constraint firstItem="MMP-Ew-puK" firstAttribute="leading" secondItem="YlO-iQ-5IP" secondAttribute="leading" constant="33" id="X0I-t1-tvC"/>

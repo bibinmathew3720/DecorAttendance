@@ -28,7 +28,7 @@ class CompleteEntryDetailsViewController: UIViewController {
     var lngCapturedRef: String!
     var modelDataRef: NSMutableDictionary!
     
-    
+    var attendanceDetails:ObeidiModelFetchAttendance?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +39,8 @@ class CompleteEntryDetailsViewController: UIViewController {
     
 
     func setViewStyles() {
-        
        
         viewAllData.dropShadow()
-    
-        self.view.backgroundColor = UIColor.clear
         
         bttnApprove.layer.cornerRadius = bttnApprove.frame.height / 2
         bttnApprove.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)

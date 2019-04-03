@@ -34,6 +34,7 @@ struct Constant{
     
     struct SegueIdentifiers {
         static let  labourWisetoLabourSummary = "labourWiseToLabourSummary"
+        static let AttendanceCompletedListToDetail = "completedEntryListToCompletedEntryDetail"
     }
     
     struct Colors {
