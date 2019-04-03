@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_NotificationServiceExtensionVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_NotificationServiceExtensionVersionString[];
+FOUNDATION_EXPORT double Pods_OneSignalNotificationServiceExtensionVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_OneSignalNotificationServiceExtensionVersionString[];
 
