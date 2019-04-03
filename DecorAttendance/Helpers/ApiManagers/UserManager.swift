@@ -192,7 +192,7 @@ class UserManager: CLBaseService {
     }
     
     func networkModelGetEmployeeDetails(with body:String)->CLNetworkModel{
-        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.EMPLOYEES + "/" + body, requestMethod_: "GET")
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.EMPLOYEEDETAIL + "/" + body, requestMethod_: "GET")
         return requestModel
     }
     
