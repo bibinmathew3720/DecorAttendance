@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import OneSignal
 
 class LoginViewController: UITableViewController, UITextFieldDelegate {
 
@@ -21,6 +22,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
     var isForeman: Bool!
     var isSiteEngineer: Bool!
     var spinner = UIActivityIndicatorView(style: .gray)
+    var loginResponse:LoginResponseModel?
     
     enum TextFldEntryStatus {
         case BothOk
@@ -36,6 +38,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         setUpViewStyles()
         self.txtFldUserName.text = "enghead"
         self.txtFldPassword.text = "123456"
+        
     }
 
     // MARK: - Table view data source
@@ -149,43 +152,53 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         let passDict = NSMutableDictionary()
         passDict.setValue(self.txtFldUserName.text, forKey: "username")
         passDict.setValue(self.txtFldPassword.text, forKey: "password")
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         ObeidiModelLogin.callLoginRequest(bodyDict: passDict) {
             (success, result, error) in
+            
             if(success!){
                 print(result!)
-                self.processAPIResponse(apiResponse: result)
+                self.loginResponse = result as! LoginResponseModel
+                self.processAPIResponse()
             }else if success == false &&  result != nil && error == nil{
+                MBProgressHUD.hide(for: self.view, animated: true)
                 let responseDict = result as! NSDictionary
                 let message = responseDict.value(forKey: "message") as! String
                 self.showAlert(alertMessage: message)
             }else{
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.showAlert(alertMessage: (error?.localizedDescription)!)
             }
         }
     }
     
-    func processAPIResponse(apiResponse: AnyObject!) {
-        let dataDict = apiResponse as! NSDictionary
-        let accessToken = dataDict.value(forKey: "token") as! String
-        UserDefaults.standard.setValue(accessToken, forKey: "accessToken")
-        UserDefaults.standard.set(true, forKey: Constant.VariableNames.isLoggedIn)
-        UserDefaults.standard.set( dataDict.value(forKey: "id"), forKey: "EmpID")
-        let role = dataDict.value(forKey: "roles") as! NSArray
-        if role.object(at: 0) as! String == "engineering-head"{
-            UserDefaults.standard.setValue(Constant.Names.EngineeringHead, forKey: Constant.VariableNames.roleKey)
-            self.isSiteEngineer = true
-            self.isForeman = false
-            
-           // self.performSegue(withIdentifier: "toHomeSceneSegue", sender: Any.self)
-            
-        }else if (role.object(at: 0) as! String == "foreman"){
-            UserDefaults.standard.setValue(Constant.Names.Foreman, forKey: Constant.VariableNames.roleKey)
-            self.isSiteEngineer = false
-            self.isForeman = true
-            //self.performSegue(withIdentifier: "toForemanSceneSegue:Login", sender: Any.self)
+    func processAPIResponse() {
+        if let _loginResponse = self.loginResponse{
+            UserDefaults.standard.setValue(_loginResponse.token, forKey: "accessToken")
+            UserDefaults.standard.set(true, forKey: Constant.VariableNames.isLoggedIn)
+            UserDefaults.standard.set( "\(_loginResponse.empId)", forKey: "EmpID")
+            if _loginResponse.roles.first == "engineering-head"{
+                UserDefaults.standard.setValue(Constant.Names.EngineeringHead, forKey: Constant.VariableNames.roleKey)
+                self.isSiteEngineer = true
+                self.isForeman = false
+                
+                // self.performSegue(withIdentifier: "toHomeSceneSegue", sender: Any.self)
+                
+            }else if (_loginResponse.roles.first == "foreman"){
+                UserDefaults.standard.setValue(Constant.Names.Foreman, forKey: Constant.VariableNames.roleKey)
+                self.isSiteEngineer = false
+                self.isForeman = true
+                //self.performSegue(withIdentifier: "toForemanSceneSegue:Login", sender: Any.self)
+            }
+            OneSignal.sendTag("emp_id", value: "\(_loginResponse.empId)", onSuccess: { (success) in
+                let delegate = UIApplication.shared.delegate as! AppDelegate
+                delegate.initWindow()
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }) { (error) in
+                print(error)
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
         }
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        delegate.initWindow()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
