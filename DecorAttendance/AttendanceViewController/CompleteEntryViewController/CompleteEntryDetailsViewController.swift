@@ -9,6 +9,7 @@
 
 import UIKit
 import MapKit
+import GoogleMaps
 import CoreLocation
 
 class CompleteEntryDetailsViewController: UIViewController {
@@ -161,4 +162,68 @@ class CompleteEntryDetailsViewController: UIViewController {
     @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func getAddressStringfFrom(latitude:Double,longitude:Double){
+        var destinationLocation = CLLocation()
+        destinationLocation = CLLocation(latitude: latitude, longitude: longitude)
+        let destinationCoordinate:CLLocationCoordinate2D = destinationLocation.coordinate
+        let geoCoder = GMSGeocoder()
+        geoCoder.reverseGeocodeCoordinate(destinationCoordinate) { (results, error) in
+            if let res = results {
+                var addressString = ""
+                if let addressDetails = res.firstResult() {
+                    if let throughFare = addressDetails.thoroughfare {
+                        addressString = addressString + throughFare
+                    }
+                    if let subLocality = addressDetails.subLocality {
+                        if addressString.count > 0{
+                            addressString = addressString + ", " + subLocality
+                        }
+                        else{
+                            addressString = addressString + subLocality
+                        }
+                    }
+                    if let locality = addressDetails.locality {
+                        if addressString.count > 0{
+                            addressString = addressString + ", " + locality
+                        }
+                        else{
+                            addressString = addressString + locality
+                        }
+                    }
+                    if let adArea = addressDetails.administrativeArea {
+                        if addressString.count > 0{
+                            addressString = addressString + ", " + adArea
+                        }
+                        else{
+                            addressString = addressString + adArea
+                        }
+                    }
+                    if let postalCode = addressDetails.postalCode {
+                        if addressString.count > 0{
+                            addressString = addressString + ", " + postalCode
+                        }
+                        else{
+                            addressString = addressString + postalCode
+                        }
+                    }
+                    if let country = addressDetails.country {
+                        if addressString.count > 0{
+                            addressString = addressString + ", " + country
+                        }
+                        else{
+                            addressString = addressString + country
+                        }
+                    }
+                }
+                //self.addressTV.text = addressString
+            }
+            print("Ad Area:\(results?.firstResult()?.administrativeArea)")
+            print("Locality:\(results?.firstResult()?.locality)")
+            print("Sub locality:\(results?.firstResult()?.subLocality)")
+            print("Country:\(results?.firstResult()?.country)")
+            print("Through Fare:\(results?.firstResult()?.thoroughfare)")
+            print("Postal Code:\(results?.firstResult()?.postalCode)")
+        }
+   }
 }

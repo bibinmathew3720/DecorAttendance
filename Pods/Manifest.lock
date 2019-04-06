@@ -14,6 +14,11 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - GoogleMaps (3.0.3):
+    - GoogleMaps/Maps (= 3.0.3)
+  - GoogleMaps/Base (3.0.3)
+  - GoogleMaps/Maps (3.0.3):
+    - GoogleMaps/Base
   - GrowingTextView (0.6.1)
   - IQKeyboardManagerSwift (6.2.0)
   - JTAppleCalendar (7.1.6)
@@ -26,6 +31,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.2)
+  - GoogleMaps
   - GrowingTextView
   - IQKeyboardManagerSwift
   - JTAppleCalendar (~> 7.0)
@@ -37,6 +43,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - GoogleMaps
     - GrowingTextView
     - IQKeyboardManagerSwift
     - JTAppleCalendar
@@ -47,6 +54,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  GoogleMaps: fd5c9fa58871781b9fb94d4936f19c69fe60ce32
   GrowingTextView: 335aefa45df7df06b01edede1363414d6ee5d6bc
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   JTAppleCalendar: abb30678f42a4ef8a340a932b1dcb8c85a33dac2
@@ -55,6 +63,6 @@ SPEC CHECKSUMS:
   OneSignal: ccdeb961882f8668305e5b694e2cb7cb325fc907
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
 
-PODFILE CHECKSUM: 18c2ea615a513fc7c85f5dbe4045479b911d1731
+PODFILE CHECKSUM: b4eab39c409940d1eed2aea688c2991a1f478ddc
 
 COCOAPODS: 1.5.3

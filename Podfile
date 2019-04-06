@@ -16,6 +16,7 @@ pod 'IQKeyboardManagerSwift'
 pod 'MBProgressHUD'
 pod 'SDWebImage'
 pod 'OneSignal', '>= 2.6.2', '< 3.0'
+pod 'GoogleMaps'
 
 
 
