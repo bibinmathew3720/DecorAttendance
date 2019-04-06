@@ -66,6 +66,16 @@ class CompleteEntryDetailsViewController: UIViewController {
             }
             if (_attendanceDetails.isPresent){
                 self.statusLabel.text = "Start Time"
+                self.getAddressStringfFrom(latitude: _attendanceDetails.startTimeLatitude, longitude: _attendanceDetails.startTimeLongitude) { (status, addressString, error) in
+                    if let address = addressString{
+                        self.startTimeLocationLabel.text = address
+                    }
+                }
+                self.getAddressStringfFrom(latitude: _attendanceDetails.endTimeLatitude, longitude: _attendanceDetails.endTimeLongitude) { (status, addressString, error) in
+                    if let address = addressString{
+                        self.endTimeLocationLabel.text = address
+                    }
+                }
             }
             else{
                 self.statusLabel.text = "Absent"
@@ -73,6 +83,8 @@ class CompleteEntryDetailsViewController: UIViewController {
                 self.endTimeStackView.isHidden = true
                 self.endTimeHeadingStackView.isHidden = true
             }
+            
+            
         }
     }
     
@@ -163,7 +175,7 @@ class CompleteEntryDetailsViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func getAddressStringfFrom(latitude:Double,longitude:Double){
+    func getAddressStringfFrom(latitude:Double,longitude:Double, withCompletion completion:@escaping(Bool?,String?,Any?)->Void){
         var destinationLocation = CLLocation()
         destinationLocation = CLLocation(latitude: latitude, longitude: longitude)
         let destinationCoordinate:CLLocationCoordinate2D = destinationLocation.coordinate
@@ -216,6 +228,7 @@ class CompleteEntryDetailsViewController: UIViewController {
                         }
                     }
                 }
+                completion(true,addressString,nil)
                 //self.addressTV.text = addressString
             }
             print("Ad Area:\(results?.firstResult()?.administrativeArea)")

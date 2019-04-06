@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import OneSignal
+import GoogleMaps
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
@@ -37,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         setNavigationBarProperties()
         initWindow()
-        
+        GMSServices.provideAPIKey("AIzaSyD73Kd4qEQyYAlC4s1ajaXf8uHNuObZH9E")
         
         
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
