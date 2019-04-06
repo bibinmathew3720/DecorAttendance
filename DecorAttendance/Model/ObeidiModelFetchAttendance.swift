@@ -18,6 +18,9 @@ class ObeidiModelFetchAttendance: NSObject {
     var isEndTimeMarkd:Bool = false
     var endTimeMarkedAt:String = ""
     var endTimeMarkedBy:String = ""
+    var endTimeImage:String = ""
+    var endTimeLatitude:String = ""
+    var endTimeLongitude:String = ""
     var profileImageUrl:String = ""
     var profileBaseUrl:String = ""
     var isApproved:Bool = false
@@ -32,10 +35,20 @@ class ObeidiModelFetchAttendance: NSObject {
     var isStartTimeMarked:Bool = false
     var startTimeMarkedAt:String = ""
     var startTimeMarkedBy:String = ""
+    var startTimeImage:String = ""
+    var startTimeLatitude:String = ""
+    var startTimeLongitude:String = ""
+    var imageBaseUrl:String = ""
     
     init(dictionaryDetails : NSDictionary)
     {
         super.init()
+        if let value = dictionaryDetails["profile_image"] as? String{
+            profileImageUrl = value
+        }
+        if let value = dictionaryDetails["image_base"] as? String{
+            imageBaseUrl = value
+        }
         if let value = dictionaryDetails["attendance_id"] as? Int{
             attendanceId = value
         }
@@ -58,6 +71,15 @@ class ObeidiModelFetchAttendance: NSObject {
         }
         if let value = dictionaryDetails["end_time_marked_by"] as? String{
             endTimeMarkedBy = value
+        }
+        if let value = dictionaryDetails["end_time_image"] as? String{
+            endTimeImage = value
+        }
+        if let value = dictionaryDetails["lat_end_time"] as? String{
+            endTimeLatitude = value
+        }
+        if let value = dictionaryDetails["lng_end_time"] as? String{
+            endTimeLongitude = value
         }
         if let value = dictionaryDetails["image"] as? String{
             profileImageUrl = value
@@ -134,6 +156,15 @@ class ObeidiModelFetchAttendance: NSObject {
         if let value = dictionaryDetails["start_time_marked_by"] as? String{
             startTimeMarkedBy = value
         }
+        if let value = dictionaryDetails["start_time_image"] as? String{
+            startTimeImage = value
+        }
+        if let value = dictionaryDetails["lat_start_time"] as? String{
+            startTimeLatitude = value
+        }
+        if let value = dictionaryDetails["lng_start_time"] as? String{
+            startTimeLongitude = value
+        }
     }
 
     
@@ -143,6 +174,44 @@ class ObeidiModelFetchAttendance: NSObject {
         
         let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
     AFNetworkingServiceManager.sharedmanager.parseLinkUsingGetMethodAndHeader(serviceName, parameter: nil, token: accessToken){
+            (success, result, error) in
+            if (success! && result != nil){
+                print(result as Any)
+                let dict = result as! NSDictionary
+                if let val = dict["error"] {
+                    if case let isError as Bool = val{
+                        if isError {
+                            completion(false, result, nil)
+                        }else{//MARK: SUCCESS CASE
+                            completion(true,result,nil)
+                        }
+                        
+                    } else {
+                        print("value is nil")
+                    }
+                } else {
+                    
+                    print("error key is not present in dict")
+                    let dataDict = result as! NSDictionary
+                    completion(false, dataDict, error)
+                }
+            }else if (success! && result == nil){
+                let customError: NSError!
+                customError = NSError(domain: "Obeidi Errors ", code: 404, userInfo: ["error": "no data to show"])
+                completion(false, nil, customError)
+                
+            }else{
+                completion(false, nil, error)
+            }
+        }
+    }
+    
+    class func callGetAttendanceDetailApi(requestBody: String, withCompletion completion: @escaping(Bool?, AnyObject?, NSError?) -> Void){
+        let serviceName: String!
+        serviceName = ObeidiConstants.API.GET_ATTENDANCE_DETAIL + requestBody
+        
+        let accessToken = UserDefaults.standard.value(forKey: "accessToken") as! String
+        AFNetworkingServiceManager.sharedmanager.parseLinkUsingGetMethodAndHeader(serviceName, parameter: nil, token: accessToken){
             (success, result, error) in
             if (success! && result != nil){
                 print(result as Any)

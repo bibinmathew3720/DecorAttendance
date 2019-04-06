@@ -28,6 +28,7 @@ struct ObeidiConstants {
         static let SAFETY_EQUIPMENTS = "safety-equipments"
         static let FETCH_ATTENDANCE = "attendance?"
         static let MARK_ATTENDANCE = "attendance"
+        static let GET_ATTENDANCE_DETAIL = "attendance/"
         
         //Forman
         

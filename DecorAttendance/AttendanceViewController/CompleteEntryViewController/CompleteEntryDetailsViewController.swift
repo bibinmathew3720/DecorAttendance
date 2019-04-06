@@ -41,6 +41,9 @@ class CompleteEntryDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         populateAttendanceDetails()
+        if let _attendanceDetails = self.attendanceDetails{
+             callingAttendanceDetailAPI(attendanceId: "\(_attendanceDetails.attendanceId)")
+        }
         // setViewStyles()
         // Do any additional setup after loading the view.
     }
@@ -48,6 +51,22 @@ class CompleteEntryDetailsViewController: UIViewController {
     func populateAttendanceDetails(){
         if let _attendanceDetails = self.attendanceDetails{
             
+        }
+    }
+    
+    func callingAttendanceDetailAPI(attendanceId:String)  {
+        MBProgressHUD.showAdded(to: self.view, animated: true); ObeidiModelFetchAttendance.callGetAttendanceDetailApi(requestBody:attendanceId){
+            (success, result, error) in
+            if success! && result != nil {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                if let res = result as? NSDictionary{
+                    self.attendanceDetails = ObeidiModelFetchAttendance.init(dictionaryDetails: res)
+                    self.populateAttendanceDetails()
+                }
+                
+            }else{
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
         }
     }
     
