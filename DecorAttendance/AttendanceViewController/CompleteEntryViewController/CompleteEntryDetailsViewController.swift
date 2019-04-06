@@ -13,14 +13,6 @@ import GoogleMaps
 import CoreLocation
 
 class CompleteEntryDetailsViewController: UIViewController {
-
-    @IBOutlet weak var viewAllData: UIView!
-    @IBOutlet weak var bttnApprove: UIButton!
-    @IBOutlet weak var bttnDisApprove: UIButton!
-    @IBOutlet weak var bttnViewMapOrignl: UIButton!
-    @IBOutlet weak var bttnViewMapCaptured: UIButton!
-    @IBOutlet weak var lblOrginalLctn: UILabel!
-    @IBOutlet weak var lblCapturedLctn: UILabel!
     
     
     var latOrignlRef: String!
@@ -39,6 +31,12 @@ class CompleteEntryDetailsViewController: UIViewController {
     @IBOutlet weak var endTimeLocationLabel: UILabel!
     @IBOutlet weak var endTimeImageview: UIImageView!
     @IBOutlet weak var endTimeStackView: UIStackView!
+    
+    @IBOutlet weak var disApproveButton: UIButton!
+    @IBOutlet weak var approveButton: UIButton!
+    @IBOutlet weak var disApproveStackView: UIStackView!
+    @IBOutlet weak var approveStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -51,6 +49,22 @@ class CompleteEntryDetailsViewController: UIViewController {
     }
     
     func initialisation(){
+        settingRedBackgroundToButton(button: self.disApproveButton)
+        settingGreenBackgrounfToButton(button: self.approveButton)
+        if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+            if roleString == Constant.Names.Foreman{
+                approveStackView.isHidden = true
+                disApproveStackView.isHidden = true
+            }
+        }
+    }
+    
+    func settingRedBackgroundToButton(button:UIButton){
+        button.backgroundColor = Constant.Colors.commonRedColor
+    }
+    
+    func settingGreenBackgrounfToButton(button:UIButton){
+        button.backgroundColor  = Constant.Colors.commonGreenColor
     }
     
     func populateAttendanceDetails(){
@@ -83,8 +97,24 @@ class CompleteEntryDetailsViewController: UIViewController {
                 self.endTimeStackView.isHidden = true
                 self.endTimeHeadingStackView.isHidden = true
             }
-            
-            
+            if _attendanceDetails.isApproved == 1{
+                disApproveStackView.isHidden = true
+                approveButton.isSelected = true
+            }
+            else if (_attendanceDetails.isApproved == 0){
+                approveStackView.isHidden = true
+                disApproveButton.isSelected = true
+            }
+            else{
+                approveButton.isSelected = false
+                disApproveButton.isSelected = false
+            }
+            if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+                if roleString == Constant.Names.Foreman{
+                    approveStackView.isHidden = true
+                    disApproveStackView.isHidden = true
+                }
+            }
         }
     }
     
@@ -104,39 +134,6 @@ class CompleteEntryDetailsViewController: UIViewController {
         }
     }
     
-
-    func setViewStyles() {
-       
-        viewAllData.dropShadow()
-        
-        bttnApprove.layer.cornerRadius = bttnApprove.frame.height / 2
-        bttnApprove.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
-        
-        bttnDisApprove.layer.cornerRadius = bttnDisApprove.frame.height / 2
-        bttnDisApprove.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
-        
-        bttnViewMapOrignl.layer.cornerRadius = bttnViewMapOrignl.frame.height / 2
-        bttnViewMapOrignl.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
-        
-        bttnViewMapCaptured.layer.cornerRadius = bttnViewMapCaptured.frame.height / 2
-        bttnViewMapCaptured.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
-    }
-    
-    @IBAction func bttnActnDispprove(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func bttnActnApprove(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func bttnActnViewOriginalLoctn(){
-        openMapForPlace(latitude: "9.93", longitude: "76.26")
-    }
-    
-    @IBAction func bttnActnViewCapturedLoctn(){
-        openMapForPlace(latitude: "9.93", longitude: "76.26")
-    }
     
     func openMapForPlace(latitude: String, longitude: String) {
         let latitude: CLLocationDegrees = Double(latitude)!//37.2
@@ -169,6 +166,12 @@ class CompleteEntryDetailsViewController: UIViewController {
         if let _attendanceDetails = self.attendanceDetails{
             openMapForPlace(latitude: "\(_attendanceDetails.endTimeLatitude)", longitude: "\(_attendanceDetails.endTimeLongitude)")
         }
+    }
+    
+    @IBAction func disApproveButtonAction(_ sender: UIButton) {
+    }
+    
+    @IBAction func approveButtonAction(_ sender: UIButton) {
     }
     
     @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
@@ -239,4 +242,6 @@ class CompleteEntryDetailsViewController: UIViewController {
             print("Postal Code:\(results?.firstResult()?.postalCode)")
         }
    }
+    
+    
 }

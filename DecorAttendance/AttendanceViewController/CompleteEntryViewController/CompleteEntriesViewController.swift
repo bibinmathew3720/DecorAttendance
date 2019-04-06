@@ -24,8 +24,8 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     var attendanceRequest = ObeidAttendanceRequestModel()
     @IBOutlet weak var emptyView: UIView!
     var spinner = UIActivityIndicatorView(style: .gray)
-    
-    
+    var updateAttendanceStatus = ChangeAttendanceStatusRequestModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         txtFldSearch.delegate = self
@@ -273,16 +273,46 @@ extension CompleteEntriesViewController:CompltedEntryCellDelegate{
     }
     
     func approveButtonActionAt(index: Int) {
-        print("Approve")
+        updateAttendanceStatus.status = 1
+        if let attendanceRes = self.completedEntriesResponseModel{
+            updateAttendanceStatus.attendanceId =  attendanceRes.attendanceResultArray[index].attendanceId
+        }
+        updateAttendanceStatusApi()
     }
     
     func disApproveButtonActionAt(index: Int) {
-        print("DisApprove")
+        updateAttendanceStatus.status = 0
+        if let attendanceRes = self.completedEntriesResponseModel{
+            updateAttendanceStatus.attendanceId =  attendanceRes.attendanceResultArray[index].attendanceId
+        }
+        updateAttendanceStatusApi()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == Constant.SegueIdentifiers.AttendanceCompletedListToDetail ){
            
+        }
+    }
+    
+    func updateAttendanceStatusApi(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        LabourManager().callUpdateAttendanceStatusApi(with: updateAttendanceStatus.getRequestBody(), success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let _model = model as? ChangeAttendanceResponseModel{
+                if _model.success == 1{
+                    self.callFetchAttendanceaAPI()
+                }
+            }
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            print(ErrorType)
         }
     }
 }

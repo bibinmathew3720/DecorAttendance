@@ -125,6 +125,13 @@ class CompleteEntryTableViewCell: UITableViewCell {
             approveButton.isSelected = false
             disApproveButton.isSelected = false
         }
+        
+        if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+            if roleString == Constant.Names.Foreman{
+                approveStackView.isHidden = true
+                disApproveStackView.isHidden = true
+            }
+        }
 
 //        self.setMultipleColorsToLabelFont(lbl: self.lblTotalBonusHeader, labelStr: "Total bonus AED \(String(cellData.bonus_amount as! Int))")
         self.modelObjArr.add(cellData)

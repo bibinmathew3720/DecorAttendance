@@ -75,6 +75,40 @@ class LabourManager: CLBaseService {
         let responseModel = AddAttendanceResponseModel.init(dict:dict)
         return responseModel
     }
+    
+    //Update Attendance Status
+    
+    func callUpdateAttendanceStatusApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelForUpdateAttendanceStatus(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.updateAttendanceStatusResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
+    
+    func networkModelForUpdateAttendanceStatus(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.UPDATE_ATTENDANCE_STATUS, requestMethod_: "POST")
+        requestModel.requestBody = body
+        return requestModel
+    }
+    
+    func updateAttendanceStatusResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = ChangeAttendanceResponseModel.init(dict:dict)
+        return responseModel
+    }
 }
 
 class AddAttendanceRequestModel:NSObject{
@@ -402,3 +436,29 @@ class AddAttendanceResponseModel : NSObject{
     }
     
 }
+
+class ChangeAttendanceStatusRequestModel:NSObject{
+    var status:Int = 0
+    var attendanceId:Int = 0
+    func getRequestBody()->String{
+        var dict:[String:AnyObject] = [String:AnyObject]()
+        dict.updateValue(status as AnyObject, forKey: "status")
+        dict.updateValue(attendanceId as AnyObject, forKey: "attendance_id")
+        return CCUtility.getJSONfrom(dictionary: dict)
+    }
+}
+
+class ChangeAttendanceResponseModel : NSObject{
+    var error:Int = 0
+    var success:Int = 0
+    
+    init(dict:[String:Any?]) {
+        if let value = dict["error"] as? Int{
+            error = value
+        }
+        if let value = dict["success"] as? Int{
+            success = value
+        }
+    }
+}
+
