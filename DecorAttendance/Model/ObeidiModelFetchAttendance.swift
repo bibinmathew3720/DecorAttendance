@@ -19,8 +19,8 @@ class ObeidiModelFetchAttendance: NSObject {
     var endTimeMarkedAt:String = ""
     var endTimeMarkedBy:String = ""
     var endTimeImage:String = ""
-    var endTimeLatitude:String = ""
-    var endTimeLongitude:String = ""
+    var endTimeLatitude:Double = 0.0
+    var endTimeLongitude:Double = 0.0
     var profileImageUrl:String = ""
     var profileBaseUrl:String = ""
     var isApproved:Bool = false
@@ -36,8 +36,8 @@ class ObeidiModelFetchAttendance: NSObject {
     var startTimeMarkedAt:String = ""
     var startTimeMarkedBy:String = ""
     var startTimeImage:String = ""
-    var startTimeLatitude:String = ""
-    var startTimeLongitude:String = ""
+    var startTimeLatitude:Double = 0.0
+    var startTimeLongitude:Double = 0.0
     var imageBaseUrl:String = ""
     
     init(dictionaryDetails : NSDictionary)
@@ -75,10 +75,10 @@ class ObeidiModelFetchAttendance: NSObject {
         if let value = dictionaryDetails["end_time_image"] as? String{
             endTimeImage = value
         }
-        if let value = dictionaryDetails["lat_end_time"] as? String{
+        if let value = dictionaryDetails["lat_end_time"] as? Double{
             endTimeLatitude = value
         }
-        if let value = dictionaryDetails["lng_end_time"] as? String{
+        if let value = dictionaryDetails["lng_end_time"] as? Double{
             endTimeLongitude = value
         }
         if let value = dictionaryDetails["image"] as? String{
@@ -159,10 +159,10 @@ class ObeidiModelFetchAttendance: NSObject {
         if let value = dictionaryDetails["start_time_image"] as? String{
             startTimeImage = value
         }
-        if let value = dictionaryDetails["lat_start_time"] as? String{
+        if let value = dictionaryDetails["lat_start_time"] as? Double{
             startTimeLatitude = value
         }
-        if let value = dictionaryDetails["lng_start_time"] as? String{
+        if let value = dictionaryDetails["lng_start_time"] as? Double{
             startTimeLongitude = value
         }
     }

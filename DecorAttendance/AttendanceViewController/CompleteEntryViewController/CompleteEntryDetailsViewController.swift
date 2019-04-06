@@ -40,12 +40,16 @@ class CompleteEntryDetailsViewController: UIViewController {
     @IBOutlet weak var endTimeStackView: UIStackView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialisation()
         populateAttendanceDetails()
         if let _attendanceDetails = self.attendanceDetails{
              callingAttendanceDetailAPI(attendanceId: "\(_attendanceDetails.attendanceId)")
         }
         // setViewStyles()
         // Do any additional setup after loading the view.
+    }
+    
+    func initialisation(){
     }
     
     func populateAttendanceDetails(){
@@ -143,9 +147,15 @@ class CompleteEntryDetailsViewController: UIViewController {
     }
     
     @IBAction func startTimeLocationButtonAction(_ sender: UIButton) {
+        if let _attendanceDetails = self.attendanceDetails{
+            openMapForPlace(latitude: "\(_attendanceDetails.startTimeLatitude)", longitude: "\(_attendanceDetails.startTimeLongitude)")
+        }
     }
     
     @IBAction func endTimeLocationButtonAction(_ sender: UIButton) {
+        if let _attendanceDetails = self.attendanceDetails{
+            openMapForPlace(latitude: "\(_attendanceDetails.endTimeLatitude)", longitude: "\(_attendanceDetails.endTimeLongitude)")
+        }
     }
     
     @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
