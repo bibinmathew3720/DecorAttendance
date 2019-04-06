@@ -119,7 +119,6 @@ class CompleteEntryTableViewCell: UITableViewCell {
         let detailsController = storyboard.instantiateViewController(withIdentifier: "CompleteEntryDetailsViewControllerID") as! CompleteEntryDetailsViewController
         detailsController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         detailsController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        detailsController.modelDataRef = modelDataDict
         self.parentViewController.present(detailsController, animated: true, completion: nil)
         
     }

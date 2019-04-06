@@ -263,7 +263,9 @@ extension CompleteEntriesViewController:CompltedEntryCellDelegate{
         let detailsController = storyboard.instantiateViewController(withIdentifier: "CompleteEntryDetailsViewControllerID") as! CompleteEntryDetailsViewController
         detailsController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         detailsController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        //detailsController.modelDataRef = modelDataDict
+        if let attendanceRes = self.completedEntriesResponseModel{
+            detailsController.attendanceDetails =  attendanceRes.attendanceResultArray[index]
+        }
         if let response = self.completedEntriesResponseModel{
             detailsController.attendanceDetails = response.attendanceResultArray[index]
         }

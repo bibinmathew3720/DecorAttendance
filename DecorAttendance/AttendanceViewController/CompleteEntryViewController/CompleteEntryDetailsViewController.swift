@@ -26,15 +26,29 @@ class CompleteEntryDetailsViewController: UIViewController {
     var lngOriginlRef: String!
     var latCapturedRef: String!
     var lngCapturedRef: String!
-    var modelDataRef: NSMutableDictionary!
     
     var attendanceDetails:ObeidiModelFetchAttendance?
-    
+    @IBOutlet weak var firstLocationLabel: UILabel!
+    @IBOutlet weak var userProfileImageView: UIImageView!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var startTimeLocationLabel: UILabel!
+    @IBOutlet weak var startTimeStackView: UIStackView!
+    @IBOutlet weak var startTimeImageView: UIImageView!
+    @IBOutlet weak var endTimeHeadingStackView: UIStackView!
+    @IBOutlet weak var endTimeLocationLabel: UILabel!
+    @IBOutlet weak var endTimeImageview: UIImageView!
+    @IBOutlet weak var endTimeStackView: UIStackView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setViewStyles()
+        populateAttendanceDetails()
+        // setViewStyles()
         // Do any additional setup after loading the view.
+    }
+    
+    func populateAttendanceDetails(){
+        if let _attendanceDetails = self.attendanceDetails{
+            
+        }
     }
     
 
@@ -53,35 +67,25 @@ class CompleteEntryDetailsViewController: UIViewController {
         
         bttnViewMapCaptured.layer.cornerRadius = bttnViewMapCaptured.frame.height / 2
         bttnViewMapCaptured.backgroundColor = UIColor(red:0.91, green:0.18, blue:0.18, alpha:1)
-        
-        
-        
     }
+    
     @IBAction func bttnActnDispprove(_ sender: Any) {
-        
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     @IBAction func bttnActnApprove(_ sender: Any) {
-        
         self.dismiss(animated: true, completion: nil)
-        
     }
+    
     @IBAction func bttnActnViewOriginalLoctn(){
-        
         openMapForPlace(latitude: "9.93", longitude: "76.26")
-        
-        
     }
+    
     @IBAction func bttnActnViewCapturedLoctn(){
-        
-        
         openMapForPlace(latitude: "9.93", longitude: "76.26")
-        
     }
+    
     func openMapForPlace(latitude: String, longitude: String) {
-        
         let latitude: CLLocationDegrees = Double(latitude)!//37.2
         let longitude: CLLocationDegrees = Double(longitude)!//22.9
         
@@ -96,8 +100,19 @@ class CompleteEntryDetailsViewController: UIViewController {
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = "Place Name"
         mapItem.openInMaps(launchOptions: options)
+    }
+    
+    @IBAction func firstLocationButtonAction(_ sender: UIButton){
         
     }
     
-
+    @IBAction func startTimeLocationButtonAction(_ sender: UIButton) {
+    }
+    
+    @IBAction func endTimeLocationButtonAction(_ sender: UIButton) {
+    }
+    
+    @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

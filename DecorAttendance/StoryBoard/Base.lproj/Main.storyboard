@@ -5528,9 +5528,12 @@
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ic0-gR-Uae">
-                                                                                <rect key="frame" x="56" y="42" width="46" height="30"/>
-                                                                                <state key="normal" title="Button"/>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ic0-gR-Uae">
+                                                                                <rect key="frame" x="64" y="42" width="30" height="30"/>
+                                                                                <state key="normal" image="locationIcon"/>
+                                                                                <connections>
+                                                                                    <action selector="firstLocationButtonAction:" destination="bgz-yD-zhT" eventType="touchUpInside" id="HnS-e3-qvT"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5546,7 +5549,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rmF-6p-WKR">
                                                                         <rect key="frame" x="157.5" y="0.0" width="157.5" height="100"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7v6-rU-WxK">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7v6-rU-WxK">
                                                                                 <rect key="frame" x="49" y="20" width="60" height="60"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="60" id="32D-uw-paP"/>
@@ -5587,11 +5590,10 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCV-0h-OWZ">
                                                                 <rect key="frame" x="129.5" y="5" width="56" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.91372549020000005" green="0.18039215689999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="861-rb-pyi"/>
                                                             <constraint firstItem="aCV-0h-OWZ" firstAttribute="centerY" secondItem="kzh-6V-4Vp" secondAttribute="centerY" id="DyS-jV-ehA"/>
@@ -5648,9 +5650,12 @@
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMy-3S-qZQ">
-                                                                                <rect key="frame" x="56" y="42" width="46" height="30"/>
-                                                                                <state key="normal" title="Button"/>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMy-3S-qZQ">
+                                                                                <rect key="frame" x="64" y="42" width="30" height="30"/>
+                                                                                <state key="normal" image="locationIcon"/>
+                                                                                <connections>
+                                                                                    <action selector="startTimeLocationButtonAction:" destination="bgz-yD-zhT" eventType="touchUpInside" id="DFW-LC-a1w"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5666,7 +5671,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QHA-j1-bFf">
                                                                         <rect key="frame" x="157.5" y="0.0" width="157.5" height="100"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="04r-FQ-WhS">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="04r-FQ-WhS">
                                                                                 <rect key="frame" x="49" y="20" width="60" height="60"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="60" id="8JG-9W-tka"/>
@@ -5704,14 +5709,13 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOo-05-bZB">
                                                         <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJE-Ac-sIf">
-                                                                <rect key="frame" x="129.5" y="5" width="56" height="20.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJE-Ac-sIf">
+                                                                <rect key="frame" x="125.5" y="5" width="64.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.91372549020000005" green="0.18039215689999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="0I7-37-98K"/>
                                                             <constraint firstItem="XJE-Ac-sIf" firstAttribute="centerX" secondItem="bOo-05-bZB" secondAttribute="centerX" id="Ry3-I6-SH3"/>
@@ -5768,9 +5772,12 @@
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6O3-YZ-giI">
-                                                                                <rect key="frame" x="56" y="42" width="46" height="30"/>
-                                                                                <state key="normal" title="Button"/>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6O3-YZ-giI">
+                                                                                <rect key="frame" x="64" y="42" width="30" height="30"/>
+                                                                                <state key="normal" image="locationIcon"/>
+                                                                                <connections>
+                                                                                    <action selector="endTimeLocationButtonAction:" destination="bgz-yD-zhT" eventType="touchUpInside" id="ccV-lx-lYD"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5786,7 +5793,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrJ-OH-ETj">
                                                                         <rect key="frame" x="157.5" y="0.0" width="157.5" height="100"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Im3-6A-ukc">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Im3-6A-ukc">
                                                                                 <rect key="frame" x="49" y="20" width="60" height="60"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="60" id="FZB-eq-gAj"/>
@@ -5839,15 +5846,36 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.40313042534722221" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="ryW-a5-MOz" firstAttribute="leading" secondItem="YlO-iQ-5IP" secondAttribute="leading" constant="30" id="F25-cu-ytj"/>
                             <constraint firstItem="ryW-a5-MOz" firstAttribute="top" secondItem="YlO-iQ-5IP" secondAttribute="top" constant="20" id="ISD-fJ-hob"/>
                             <constraint firstItem="YlO-iQ-5IP" firstAttribute="trailing" secondItem="ryW-a5-MOz" secondAttribute="trailing" constant="30" id="nUl-8r-Rap"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YlO-iQ-5IP"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="uEN-47-NKp" appends="YES" id="fik-Mf-i5C"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="endTimeHeadingStackView" destination="LhZ-e5-WEw" id="cix-ZR-fAi"/>
+                        <outlet property="endTimeImageview" destination="Im3-6A-ukc" id="bRx-zd-OnK"/>
+                        <outlet property="endTimeLocationLabel" destination="mMR-hN-Cgp" id="RJq-dC-zyx"/>
+                        <outlet property="endTimeStackView" destination="ofg-gD-kbQ" id="Usg-LA-ObM"/>
+                        <outlet property="firstLocationLabel" destination="dZG-UG-kbQ" id="AvN-oo-ipf"/>
+                        <outlet property="startTimeImageView" destination="04r-FQ-WhS" id="jpz-45-QQJ"/>
+                        <outlet property="startTimeLocationLabel" destination="i6h-ac-5wg" id="Gzt-I5-iu5"/>
+                        <outlet property="startTimeStackView" destination="E5D-2O-tdB" id="0kh-RY-8DB"/>
+                        <outlet property="statusLabel" destination="aCV-0h-OWZ" id="ghq-ut-kpb"/>
+                        <outlet property="userProfileImageView" destination="7v6-rU-WxK" id="aOv-dt-Gzx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eFJ-Dq-38x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="uEN-47-NKp">
+                    <connections>
+                        <action selector="tapGestureAction:" destination="bgz-yD-zhT" id="VAK-Ai-iBR"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="5205.6000000000004" y="1624.5877061469266"/>
         </scene>
@@ -6939,6 +6967,7 @@ JkkoSTFJNkk8SURJRklISUpJTElRSVlaxVrHWsxa2lreWuVa6lr3WvpbB1sMWxRbF1scWyRbJ1s5Wzxb
 QQAAAAAAAAIBAAAAAAAAAG0AAAAAAAAAAAAAAAAAAFtDA
 </mutableData>
         </image>
+        <image name="locationIcon" width="30" height="30"/>
         <image name="logo" width="1024" height="1024"/>
         <image name="mail" width="33" height="33"/>
         <image name="menu" width="32" height="32"/>
