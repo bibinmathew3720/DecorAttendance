@@ -10,6 +10,7 @@ import UIKit
 protocol CompltedEntryCellDelegate {
     func viewDetailsButtonActionAt(index:Int)
     func approveButtonActionAt(index:Int)
+    func disApproveButtonActionAt(index:Int)
 }
 class CompleteEntryTableViewCell: UITableViewCell {
 
@@ -29,7 +30,11 @@ class CompleteEntryTableViewCell: UITableViewCell {
     
 
     @IBOutlet weak var bttnDetails: UIButton!
+    @IBOutlet weak var buttonDetailStackView: UIStackView!
+    @IBOutlet weak var disApproveButton: UIButton!
+    @IBOutlet weak var disApproveStackView: UIStackView!
     @IBOutlet weak var approveButton: UIButton!
+    @IBOutlet weak var approveStackView: UIStackView!
     
     
     var parentViewController: UIViewController!
@@ -50,6 +55,7 @@ class CompleteEntryTableViewCell: UITableViewCell {
     func setViewStyle() {
         settingRedBackgroundToButton(button: bttnDetails)
         settingGreenBackgrounfToButton(button: approveButton)
+        settingRedBackgroundToButton(button: disApproveButton)
         let layer = self.innerView!
         layer.layer.cornerRadius = 3
         layer.backgroundColor = UIColor.white
@@ -104,7 +110,21 @@ class CompleteEntryTableViewCell: UITableViewCell {
             self.lblOverTime.text = "--"
             self.lblTotalBonus.text = String.init(format: "%0.2f", cellData.bonusAmount)
         }
-        self.approveButton.isSelected = cellData.isApproved
+        //self.approveButton.isSelected = cellData.isApproved
+        self.disApproveStackView.isHidden = false
+        self.approveStackView.isHidden = false
+        if cellData.isApproved == 1{
+            disApproveStackView.isHidden = true
+            approveButton.isSelected = true
+        }
+        else if cellData.isApproved == 0{
+            approveStackView.isHidden = true
+             disApproveButton.isSelected = true
+        }
+        else{
+            approveButton.isSelected = false
+            disApproveButton.isSelected = false
+        }
 
 //        self.setMultipleColorsToLabelFont(lbl: self.lblTotalBonusHeader, labelStr: "Total bonus AED \(String(cellData.bonus_amount as! Int))")
         self.modelObjArr.add(cellData)
@@ -126,6 +146,14 @@ class CompleteEntryTableViewCell: UITableViewCell {
     @IBAction func bttnActnDetails(_ sender: Any) {
         if let _delegate = delegate{
            _delegate.viewDetailsButtonActionAt(index: self.tag)
+        }
+    }
+    
+    @IBAction func disApproveButtonAction(_ sender: UIButton) {
+        if (!sender.isSelected){
+            if let _delegate = delegate{
+                _delegate.disApproveButtonActionAt(index: self.tag)
+            }
         }
     }
     

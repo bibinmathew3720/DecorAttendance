@@ -23,7 +23,7 @@ class ObeidiModelFetchAttendance: NSObject {
     var endTimeLongitude:Double = 0.0
     var profileImageUrl:String = ""
     var profileBaseUrl:String = ""
-    var isApproved:Bool = false
+    var isApproved:Int = -1
     var isAttendanceCompleted:Bool = false
     var isPresent:Bool = false
     var isSickLeave:Bool = false
@@ -85,13 +85,7 @@ class ObeidiModelFetchAttendance: NSObject {
             profileImageUrl = value
         }
         if let value = dictionaryDetails["is_approved"] as? Int{
-            if value == 1
-            {
-               isApproved = true
-            }
-            else{
-               isApproved = false
-            }
+               isApproved = value
         }
         if let value = dictionaryDetails["is_attendance_completed"] as? Int{
             if value == 1{

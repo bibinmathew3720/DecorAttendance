@@ -276,6 +276,10 @@ extension CompleteEntriesViewController:CompltedEntryCellDelegate{
         print("Approve")
     }
     
+    func disApproveButtonActionAt(index: Int) {
+        print("DisApprove")
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == Constant.SegueIdentifiers.AttendanceCompletedListToDetail ){
            
