@@ -5453,7 +5453,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryW-a5-MOz">
-                                <rect key="frame" x="30" y="20" width="315" height="444"/>
+                                <rect key="frame" x="30" y="10" width="315" height="444"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b6U-Ed-u2h">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="444"/>
@@ -5849,8 +5849,8 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="ryW-a5-MOz" firstAttribute="leading" secondItem="YlO-iQ-5IP" secondAttribute="leading" constant="30" id="F25-cu-ytj"/>
-                            <constraint firstItem="ryW-a5-MOz" firstAttribute="top" secondItem="YlO-iQ-5IP" secondAttribute="top" constant="20" id="ISD-fJ-hob"/>
                             <constraint firstItem="YlO-iQ-5IP" firstAttribute="trailing" secondItem="ryW-a5-MOz" secondAttribute="trailing" constant="30" id="nUl-8r-Rap"/>
+                            <constraint firstItem="ryW-a5-MOz" firstAttribute="centerY" secondItem="YlO-iQ-5IP" secondAttribute="centerY" id="scO-nQ-yks"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YlO-iQ-5IP"/>
                         <connections>

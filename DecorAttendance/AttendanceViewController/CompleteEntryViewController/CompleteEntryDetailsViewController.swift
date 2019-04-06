@@ -50,7 +50,24 @@ class CompleteEntryDetailsViewController: UIViewController {
     
     func populateAttendanceDetails(){
         if let _attendanceDetails = self.attendanceDetails{
-            
+            if let imageUrl = URL(string: _attendanceDetails.profileImageUrl){
+                self.userProfileImageView.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+            }
+            if let imageUrl = URL(string: _attendanceDetails.imageBaseUrl + _attendanceDetails.startTimeImage){
+                self.startTimeImageView.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+            }
+            if let imageUrl = URL(string: _attendanceDetails.imageBaseUrl + _attendanceDetails.endTimeImage){
+                self.endTimeImageview.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+            }
+            if (_attendanceDetails.isPresent){
+                self.statusLabel.text = "Start Time"
+            }
+            else{
+                self.statusLabel.text = "Absent"
+                self.startTimeStackView.isHidden = true
+                self.endTimeStackView.isHidden = true
+                self.endTimeHeadingStackView.isHidden = true
+            }
         }
     }
     
