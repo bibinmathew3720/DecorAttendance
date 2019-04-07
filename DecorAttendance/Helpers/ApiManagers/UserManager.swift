@@ -200,6 +200,40 @@ class UserManager: CLBaseService {
         let responseModel = GetEmployeeDetailsResponseModel.init(dict:dict)
         return responseModel
     }
+    
+    //OTP verify api
+    
+    func callVerifyOTPApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelForVerifyOTP(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.getVerifyOTPResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
+    
+    func networkModelForVerifyOTP(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.VERIFY_OTP, requestMethod_: "POST")
+        requestModel.requestBody = body
+        return requestModel
+    }
+    
+    func getVerifyOTPResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = VerifyOTPResponseModel.init(dict:dict)
+        return responseModel
+    }
 
 }
 class DecoreProfileResponseModel : NSObject{
@@ -403,6 +437,34 @@ class ForgotPasswordResponseModel : NSObject{
     }
 }
 
+class VerifyOTPResponseModel : NSObject{
+    var error:Int = 0
+    var message:String = ""
+    
+    init(dict:[String:Any?]) {
+        
+        if let value = dict["error"] as? Int{
+            error = value
+        }
+        if let value = dict["message"] as? String{
+            message = value
+        }
+    }
+}
+
+class VerifyOTPRequestModel:NSObject{
+    var resetSecret:String = ""
+    var clientId:Int = 0
+    var email:String = ""
+    func getRequestBody()->String{
+        var dict:[String:AnyObject] = [String:AnyObject]()
+        dict.updateValue(resetSecret as AnyObject, forKey: "reset_secret")
+        dict.updateValue(clientId as AnyObject, forKey: "client_id")
+        dict.updateValue(email as AnyObject, forKey: "email")
+        return CCUtility.getJSONfrom(dictionary: dict)
+    }
+}
+
 
 class DecoreEmployeeModel : NSObject{
     var employee_type:String = ""
@@ -490,16 +552,15 @@ class ChangePwdRequestModel:NSObject {
     var current:String = ""
     var new:String = ""
     var confirm:String = ""
-    
     func getRequestBody()->String{
         var dict:[String:AnyObject] = [String:AnyObject]()
         dict.updateValue(new as AnyObject, forKey: "new_password")
         return CCUtility.getJSONfrom(dictionary: dict)
     }
 }
+
 class ForgotPwdRequestModel:NSObject {
     var email:String = ""
-    
     func getRequestBody()->String{
         var dict:[String:AnyObject] = [String:AnyObject]()
         dict.updateValue(email as AnyObject, forKey: "email")

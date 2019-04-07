@@ -26,6 +26,7 @@ class ForgotPasswordViewController: UITableViewController, UITextFieldDelegate {
     var clientID: String!
     
     var forgot = ForgotPwdRequestModel()
+    var forgotPasswordResponse:ForgotPasswordResponseModel?
     enum TextFldEntryStatus {
         
         case AllOk
@@ -265,6 +266,12 @@ class ForgotPasswordViewController: UITableViewController, UITextFieldDelegate {
             //_ = storyBoard.instantiateViewController(withIdentifier: "TestViewControllerID") as! TestViewController
             
         }
+        else if segue.identifier == Constant.SegueIdentifiers.forgotToOTP{
+            let destController = segue.destination as? OTVC
+            if let _sender = sender as? ForgotPasswordResponseModel{
+                destController?.forgotPasswordResponse = _sender
+            }
+        }
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -318,7 +325,8 @@ class ForgotPasswordViewController: UITableViewController, UITextFieldDelegate {
                 MBProgressHUD.hide(for: self.view, animated: true)
                 if let _model = model as? ForgotPasswordResponseModel{
                     if _model.error == 0{
-                        self.performSegue(withIdentifier: Constant.SegueIdentifiers.forgotToOTP, sender: self)
+                        self.forgotPasswordResponse = _model
+                        self.performSegue(withIdentifier: Constant.SegueIdentifiers.forgotToOTP, sender: _model)
                     }
                     else{
                         CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: _model.message, parentController: self)

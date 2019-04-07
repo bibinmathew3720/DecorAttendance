@@ -6151,9 +6151,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <segue destination="BMF-CS-R49" kind="show" identifier="forgotToOTP" id="oc0-nZ-bMN"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="78" id="Ppw-3S-EnZ">
                                         <rect key="frame" x="0.0" y="286" width="375" height="78"/>
@@ -6321,6 +6318,7 @@
                         <outlet property="txtFldConfrmPasswd" destination="xPc-CA-Teo" id="gli-aG-PgP"/>
                         <outlet property="txtFldEmail" destination="CcS-ih-C3x" id="zNq-Am-Ko9"/>
                         <outlet property="txtFldNewPasswd" destination="XTr-7c-DDY" id="66f-HB-Bf5"/>
+                        <segue destination="BMF-CS-R49" kind="show" identifier="forgotToOTP" id="y8H-bU-xcK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WeC-bF-kPU" userLabel="First Responder" sceneMemberID="firstResponder"/>
