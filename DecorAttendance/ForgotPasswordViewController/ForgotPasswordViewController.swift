@@ -42,12 +42,16 @@ class ForgotPasswordViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        initialisation()
         self.txtFldEmail.delegate = self
         self.txtFldNewPasswd.delegate = self
         self.txtFldConfrmPasswd.delegate = self
         self.setUpViewStyles()
         
+    }
+    
+    func initialisation(){
+       self.navigationController?.navigationBar.isHidden = true
     }
     // MARK: - Table view data source
     
@@ -192,13 +196,9 @@ class ForgotPasswordViewController: UITableViewController, UITextFieldDelegate {
                 break
                 
             }
-
-            
-            
         }
-
-        
     }
+    
     func isNullValuePresent() -> Bool {
         
         if self.txtFldEmail.text == "" && self.txtFldNewPasswd.text == "" && self.txtFldConfrmPasswd.text == "" {
@@ -316,18 +316,14 @@ class ForgotPasswordViewController: UITableViewController, UITextFieldDelegate {
             UserManager().callForgotPasswordApi(with: getChangePwdRequestBody(), success: {
                 (model,response)  in
                 MBProgressHUD.hide(for: self.view, animated: true)
-                if let _model = model as? ChangePasswordModel{
-                    let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
-                    if type == StatusEnum.success{
-                        self.showAlert(alertMessage: "")
-                    }
-                    else if type == StatusEnum.sessionexpired{
+                if let _model = model as? ForgotPasswordResponseModel{
+                    if _model.error == 0{
+                        self.performSegue(withIdentifier: Constant.SegueIdentifiers.forgotToOTP, sender: self)
                     }
                     else{
-                        self.showAlert(alertMessage: "Something went wrong. Please try again")
-                    }            }
-                
-                
+                        CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: _model.message, parentController: self)
+                    }
+                }
             }) { (ErrorType) in
                 MBProgressHUD.hide(for: self.view, animated: true)
                 if(ErrorType == .noNetwork){
@@ -339,42 +335,18 @@ class ForgotPasswordViewController: UITableViewController, UITextFieldDelegate {
                 
                 print(ErrorType)
             }
-        
-        
-        
-//        ObeidiModelForgotPassword.callForgotPasswordRequest(email: self.txtFldEmail.text!) {
-//            (success, result, error) in
-//
-//            if success!{
-//                if result != nil{
-//
-//                    let dict = result as! NSDictionary
-//                    self.resetSecret = (dict.value(forKey: "reset_secret") as! String)
-//                    self.clientID = (dict.value(forKey: "client_id") as! String)
-//
-//
-//                }
-//
-//            }else{
-//
-//
-//                print("error")
-//            }
-//
-//
-//        }
-        
     }
+    
     func getChangePwdRequestBody()->String{
         if let _text = self.txtFldEmail.text{
             forgot.email = _text
         }
         return forgot.getRequestBody()
     }
+    
     func callAccessTokenAPI() {
         
     }
-
     
     @IBAction func bttnActnLoginNow(_ sender: Any) {
         

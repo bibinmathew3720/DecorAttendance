@@ -165,7 +165,7 @@ class UserManager: CLBaseService {
     }
     
     func getForgotPasswordResponseModel(dict:[String : Any?]) -> Any? {
-        let responseModel = ChangePasswordModel.init(dict:dict)
+        let responseModel = ForgotPasswordResponseModel.init(dict:dict)
         return responseModel
     }
     //Get Employee Details Api
@@ -379,6 +379,30 @@ class ChangePasswordModel : NSObject{
         }
     }
 }
+
+class ForgotPasswordResponseModel : NSObject{
+    var error:Int = 0
+    var message:String = ""
+    var resetSecret:String = ""
+    var clientId:Int = 0
+    
+    init(dict:[String:Any?]) {
+        
+        if let value = dict["error"] as? Int{
+            error = value
+        }
+        if let value = dict["message"] as? String{
+            message = value
+        }
+        if let value = dict["reset_secret"] as? String{
+            resetSecret = value
+        }
+        if let value = dict["client_id"] as? Int{
+            clientId = value
+        }
+    }
+}
+
 
 class DecoreEmployeeModel : NSObject{
     var employee_type:String = ""
