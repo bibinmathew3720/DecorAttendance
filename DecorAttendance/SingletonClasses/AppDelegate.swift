@@ -61,7 +61,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print(userInfo)
+        if UserDefaults.standard.bool(forKey: Constant.VariableNames.isLoggedIn){
+            //if isSiteEngineer{
+            if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+                if roleString == Constant.Names.EngineeringHead{
+                    let rootController = self.window?.rootViewController
+                    let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+                    let completedEntriesVC = storyBoard.instantiateViewController(withIdentifier: "CompleteEntriesViewController") as? CompleteEntriesViewController
+                    if let completedEntriesVC = completedEntriesVC{
+                        completedEntriesVC.isSuspicious = true
+                        let navController = UINavigationController.init(rootViewController: completedEntriesVC)
+                        rootController?.present(navController, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
     }
     
     

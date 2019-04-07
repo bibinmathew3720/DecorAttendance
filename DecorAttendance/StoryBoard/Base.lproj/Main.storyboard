@@ -1706,7 +1706,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dd5-wc-ebb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1796" y="-99"/>
+            <point key="canvasLocation" x="2054" y="27"/>
         </scene>
         <!--Attendance-->
         <scene sceneID="sVl-Ra-CEv">
@@ -5051,7 +5051,7 @@
         <!--Complete Entries View Controller-->
         <scene sceneID="bIe-qS-BhU">
             <objects>
-                <viewController id="Oby-0u-XVH" customClass="CompleteEntriesViewController" customModule="DecorAttendance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CompleteEntriesViewController" id="Oby-0u-XVH" customClass="CompleteEntriesViewController" customModule="DecorAttendance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l4D-sZ-1q4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="464"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

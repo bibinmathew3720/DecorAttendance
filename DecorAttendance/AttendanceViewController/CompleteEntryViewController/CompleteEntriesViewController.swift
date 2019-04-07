@@ -17,6 +17,7 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var siteView: UIView!
     @IBOutlet weak var dateView: UIView!
     @IBOutlet weak var lblDate: UILabel!
+    var leftButton:UIButton?
     var activeTextField: UITextField!
     var selectedSite: ObeidiModelSites?
     var siteModelObjArr = [ObeidiModelSites]()
@@ -25,7 +26,7 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emptyView: UIView!
     var spinner = UIActivityIndicatorView(style: .gray)
     var updateAttendanceStatus = ChangeAttendanceStatusRequestModel()
-
+    var isSuspicious:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         txtFldSearch.delegate = self
@@ -36,7 +37,14 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         initialisation()
         callGetAllSitesAPI()
         addTapGesturesToLabels()
-        callFetchAttendanceaAPI()
+        if self.isSuspicious{
+            self.title = "SUSPICIOUS ENTRIES"
+            addingLeftBarButton()
+            callFetchSuspiciousAttendanceAPI()
+        }
+        else{
+            callFetchAttendanceaAPI()
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -44,6 +52,19 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         attendanceRequest.isAttendanceCompleteEntry = true
         self.lblDate.text = ""
         self.lblSite.text = ""
+    }
+    
+    func addingLeftBarButton(){
+        self.leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        self.leftButton?.addTarget(self, action: #selector(leftNavButtonAction), for: .touchUpInside)
+        self.leftButton?.setImage(UIImage.init(named: Constant.ImageNames.backArrow), for: UIControl.State.normal)
+        var leftBarButton = UIBarButtonItem()
+        leftBarButton = UIBarButtonItem.init(customView: self.leftButton!)
+        self.navigationItem.leftBarButtonItem = leftBarButton
+    }
+    
+    @objc func leftNavButtonAction(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     func addTapGesturesToLabels() {
@@ -168,8 +189,7 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func callFetchAttendanceaAPI()  {
- ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody:attendanceRequest.getRequestBody()){
+    func callFetchAttendanceaAPI()  { ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody:attendanceRequest.getRequestBody()){
             (success, result, error) in
             if success! && result != nil {
                 if let res = result as? NSDictionary{
@@ -315,4 +335,32 @@ extension CompleteEntriesViewController:CompltedEntryCellDelegate{
             print(ErrorType)
         }
     }
+    
+    //MARK - Suspicious Attendance Api
+    
+    func callFetchSuspiciousAttendanceAPI()  {
+        attendanceRequest.isSuspicious = true
+        ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody:attendanceRequest.getRequestBody()){
+        (success, result, error) in
+        if success! && result != nil {
+            if let res = result as? NSDictionary{
+                self.completedEntriesResponseModel = ObeidAttendanceResponseModel.init(dictionaryDetails: res)
+                if let response = self.completedEntriesResponseModel{
+                    if (response.attendanceResultArray.count == 0){
+                        self.emptyView.isHidden = false
+                        self.tableViewCompleteEntry.isHidden = true
+                    }
+                    else{
+                        self.emptyView.isHidden = true
+                        self.tableViewCompleteEntry.isHidden = false
+                    }
+                }
+                self.tableViewCompleteEntry.reloadData()
+            }
+            
+        }else{
+        }
+        }
+    }
+    
 }

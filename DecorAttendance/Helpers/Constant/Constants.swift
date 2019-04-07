@@ -20,6 +20,7 @@ struct Constant{
     }
     struct ImageNames {
         static let placeholderImage = "placeholder"
+        static let backArrow = "back"
     }
     
     struct VariableNames {

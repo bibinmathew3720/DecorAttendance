@@ -265,13 +265,19 @@ class ObeidAttendanceRequestModel:NSObject{
     var startDate:String = ""
     var siteId:Int = 0
     var isAttendanceCompleteEntry:Bool = false
+    var isSuspicious:Bool = false
     func getRequestBody()->String{
         var requestBody = ""
-        if (isAttendanceCompleteEntry){
-            requestBody = "is_attendance_completed=1"
+        if (isSuspicious){
+           requestBody = "is_suspicious=1"
         }
         else{
-           requestBody = "is_attendance_completed=0"
+            if (isAttendanceCompleteEntry){
+                requestBody = "is_attendance_completed=1"
+            }
+            else{
+                requestBody = "is_attendance_completed=0"
+            }
         }
         if (startDate.count != 0 ){
             requestBody = requestBody + "&date=\(startDate)"
