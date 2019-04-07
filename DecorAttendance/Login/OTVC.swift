@@ -14,6 +14,7 @@ class OTVC: UIViewController {
     
     var forgotPasswordResponse:ForgotPasswordResponseModel?
     var verifyOTPRequestModel = VerifyOTPRequestModel()
+    var loginResponse:LoginResponseModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         addingShadowToView(view: otpTextField)
@@ -56,12 +57,20 @@ class OTVC: UIViewController {
     
     func callVerifyOTPApi(){
         MBProgressHUD.showAdded(to: self.view, animated: true)
+        verifyOTPRequestModel.clientId = self.otpTextField.text ?? ""
+        verifyOTPRequestModel.resetSecret =  self.forgotPasswordResponse?.resetSecret ?? ""
         UserManager().callVerifyOTPApi(with: verifyOTPRequestModel.getRequestBody(), success: {
             (model,response)  in
-            MBProgressHUD.hide(for: self.view, animated: true)
-            if let _model = model as? VerifyOTPResponseModel{
+           
+            if let _model = model as? LoginResponseModel{
                 if _model.error == 0{
-                    
+                    self.loginResponse = _model
+                    self.processAPIResponse()
+                    self.callChangePwdApi()
+                }
+                else{
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                   CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: _model.message, parentController: self)
                 }
             }
         }) { (ErrorType) in
@@ -71,6 +80,47 @@ class OTVC: UIViewController {
             }
             else{
                 CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            print(ErrorType)
+        }
+    }
+    
+    func processAPIResponse() {
+        if let _loginResponse = self.loginResponse{
+            UserDefaults.standard.setValue(_loginResponse.token, forKey: "accessToken")
+        }
+    }
+    
+    func callChangePwdApi(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        let changePasswordModel = ChangePwdRequestModel()
+        changePasswordModel.new = self.verifyOTPRequestModel.password
+        UserManager().callChangePasswordApi(with: changePasswordModel.getRequestBody(), success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let _model = model as? ChangePasswordModel{
+                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
+                if type == StatusEnum.success{
+                    CCUtility.showDefaultAlertwithCompletionHandler(_title: Constant.AppName, _message: "Your password has been changed successfully", parentController: self, completion: { (status) in
+                        if status{
+                           self.dismiss(animated: true, completion: nil)
+                        }
+                    })
+                }
+                else if type == StatusEnum.sessionexpired{
+                }
+                else{
+                    CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Something went wrong. Please try again", parentController: self)
+                }
+            }
+            
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                 CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                 CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
             }
             print(ErrorType)
         }
@@ -87,4 +137,11 @@ class OTVC: UIViewController {
     }
     */
 
+}
+
+extension OTVC:UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

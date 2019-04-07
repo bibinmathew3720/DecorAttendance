@@ -231,7 +231,7 @@ class UserManager: CLBaseService {
     }
     
     func getVerifyOTPResponseModel(dict:[String : Any?]) -> Any? {
-        let responseModel = VerifyOTPResponseModel.init(dict:dict)
+        let responseModel = LoginResponseModel.init(dict:dict)
         return responseModel
     }
 
@@ -404,7 +404,6 @@ class ChangePasswordModel : NSObject{
     var message:String = ""
     
     init(dict:[String:Any?]) {
-    
         if let value = dict["error"] as? Int{
             error = value
         }
@@ -437,25 +436,11 @@ class ForgotPasswordResponseModel : NSObject{
     }
 }
 
-class VerifyOTPResponseModel : NSObject{
-    var error:Int = 0
-    var message:String = ""
-    
-    init(dict:[String:Any?]) {
-        
-        if let value = dict["error"] as? Int{
-            error = value
-        }
-        if let value = dict["message"] as? String{
-            message = value
-        }
-    }
-}
-
 class VerifyOTPRequestModel:NSObject{
     var resetSecret:String = ""
-    var clientId:Int = 0
+    var clientId:String = ""
     var email:String = ""
+    var password:String = ""
     func getRequestBody()->String{
         var dict:[String:AnyObject] = [String:AnyObject]()
         dict.updateValue(resetSecret as AnyObject, forKey: "reset_secret")

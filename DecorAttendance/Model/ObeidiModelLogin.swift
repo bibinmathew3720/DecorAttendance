@@ -56,10 +56,18 @@ class LoginResponseModel:NSObject{
     var status:Int = 0
     var token:String = ""
     var userName:String = ""
+    var error:Int = 0
+    var message:String = ""
     
     init(dict:[String:Any?]) {
         if let value = dict["email"] as? String{
             email = value
+        }
+        if let value = dict["error"] as? Int{
+            error = value
+        }
+        if let value = dict["message"] as? String{
+            message = value
         }
         if let value = dict["id"] as? Int{
             empId = value

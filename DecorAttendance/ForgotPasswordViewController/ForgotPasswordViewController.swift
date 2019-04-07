@@ -270,6 +270,8 @@ class ForgotPasswordViewController: UITableViewController, UITextFieldDelegate {
             let destController = segue.destination as? OTVC
             if let _sender = sender as? ForgotPasswordResponseModel{
                 destController?.forgotPasswordResponse = _sender
+                destController?.verifyOTPRequestModel.email = self.txtFldEmail.text ?? ""
+                destController?.verifyOTPRequestModel.password = self.txtFldNewPasswd.text ?? ""
             }
         }
         

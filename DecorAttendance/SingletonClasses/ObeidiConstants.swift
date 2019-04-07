@@ -20,7 +20,7 @@ struct ObeidiConstants {
         static let EMPLOYEEDETAIL = "employees"
         static let RESET_PASSWORD = "auth/send-reset-password"
         static let CHANGE_PASSWORD = "auth/change-password"
-        static let VERIFY_OTP = "auth/access-token?"
+        static let VERIFY_OTP = "auth/access-token"
         static let GET_ALL_SITES = "sites"
         static let COST_SUMMARY_SITEWISE = "reports/cost-summary-sitewise?"
         static let ACCESS_TOKEN = "auth/access-token?"
