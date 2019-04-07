@@ -5308,13 +5308,13 @@
                                                             </constraints>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXN-JF-PV2">
-                                                            <rect key="frame" x="34" y="89" width="315" height="30"/>
+                                                            <rect key="frame" x="9" y="89" width="340" height="30"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6eh-9h-uSI">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYB-qf-DIt">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
                                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                                             <state key="normal" title="Details">
                                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5329,16 +5329,40 @@
                                                                             </connections>
                                                                         </button>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMA-XV-lZn">
-                                                                            <rect key="frame" x="100" y="0.0" width="5" height="30"/>
+                                                                            <rect key="frame" x="80" y="0.0" width="5" height="30"/>
+                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        </view>
+                                                                    </subviews>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePw-av-dmF">
+                                                                    <rect key="frame" x="85" y="0.0" width="85" height="30"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ObS-9v-bJe">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
+                                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                                            <state key="normal" title="Add Bonus">
+                                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                    <integer key="value" value="15"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
+                                                                            <connections>
+                                                                                <action selector="addBonusButtonAction:" destination="ZNk-Mt-WME" eventType="touchUpInside" id="ZHV-Cb-2DE"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UxG-bd-XAD">
+                                                                            <rect key="frame" x="80" y="0.0" width="5" height="30"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </view>
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iY8-sl-GUl">
-                                                                    <rect key="frame" x="105" y="0.0" width="105" height="30"/>
+                                                                    <rect key="frame" x="170" y="0.0" width="85" height="30"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JK2-a3-cnC">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
                                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <state key="normal" title="Disapprove">
@@ -5355,19 +5379,19 @@
                                                                             </connections>
                                                                         </button>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EWb-0O-xXU">
-                                                                            <rect key="frame" x="100" y="0.0" width="5" height="30"/>
+                                                                            <rect key="frame" x="80" y="0.0" width="5" height="30"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </view>
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-Eq-KnP">
-                                                                    <rect key="frame" x="210" y="0.0" width="105" height="30"/>
+                                                                    <rect key="frame" x="255" y="0.0" width="85" height="30"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AxX-Wb-IqN">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="30" id="0AI-Dd-F6i"/>
-                                                                                <constraint firstAttribute="width" constant="100" id="yKO-HX-FhJ"/>
+                                                                                <constraint firstAttribute="width" constant="80" id="yKO-HX-FhJ"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5385,7 +5409,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xwq-DS-K4p">
-                                                                            <rect key="frame" x="100" y="0.0" width="5" height="30"/>
+                                                                            <rect key="frame" x="80" y="0.0" width="5" height="30"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="5" id="5GO-Rr-Uju"/>
@@ -5398,8 +5422,10 @@
                                                                 <constraint firstItem="6eh-9h-uSI" firstAttribute="leading" secondItem="fXN-JF-PV2" secondAttribute="leading" id="6aH-VR-xuP"/>
                                                                 <constraint firstItem="AxX-Wb-IqN" firstAttribute="height" secondItem="JK2-a3-cnC" secondAttribute="height" id="7cC-s0-exj"/>
                                                                 <constraint firstAttribute="trailing" secondItem="hlZ-Eq-KnP" secondAttribute="trailing" id="LK5-l9-6Xt"/>
+                                                                <constraint firstItem="UxG-bd-XAD" firstAttribute="width" secondItem="EWb-0O-xXU" secondAttribute="width" id="Oyl-dn-6m0"/>
                                                                 <constraint firstItem="AxX-Wb-IqN" firstAttribute="width" secondItem="JK2-a3-cnC" secondAttribute="width" id="PxJ-mC-WJD"/>
                                                                 <constraint firstItem="EWb-0O-xXU" firstAttribute="width" secondItem="SMA-XV-lZn" secondAttribute="width" id="bfG-Kw-aNX"/>
+                                                                <constraint firstItem="ObS-9v-bJe" firstAttribute="width" secondItem="JK2-a3-cnC" secondAttribute="width" id="eJK-gh-fWw"/>
                                                                 <constraint firstItem="JK2-a3-cnC" firstAttribute="width" secondItem="wYB-qf-DIt" secondAttribute="width" id="sPA-U2-FTG"/>
                                                                 <constraint firstItem="JK2-a3-cnC" firstAttribute="height" secondItem="wYB-qf-DIt" secondAttribute="height" id="tqp-CW-MAF"/>
                                                                 <constraint firstItem="Xwq-DS-K4p" firstAttribute="width" secondItem="EWb-0O-xXU" secondAttribute="width" id="ukj-4t-tIN"/>
@@ -5432,6 +5458,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="addBonusButton" destination="ObS-9v-bJe" id="rKi-3U-KfR"/>
+                                            <outlet property="addBonusStackView" destination="ePw-av-dmF" id="1AT-Un-wq3"/>
                                             <outlet property="approveButton" destination="AxX-Wb-IqN" id="90Q-Q4-B4m"/>
                                             <outlet property="approveStackView" destination="hlZ-Eq-KnP" id="VRU-kd-Nmb"/>
                                             <outlet property="bttnDetails" destination="wYB-qf-DIt" id="JVh-q6-jUF"/>
@@ -5998,13 +6026,37 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Fq-vN-3gP">
-                                        <rect key="frame" x="52.5" y="444" width="210" height="30"/>
+                                        <rect key="frame" x="30" y="444" width="255" height="30"/>
                                         <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTM-lz-W0P">
+                                                <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJw-yT-i7M">
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                        <state key="normal" title="Add Bonus">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="15"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="addBonusButtonAction:" destination="bgz-yD-zhT" eventType="touchUpInside" id="D7b-Du-eug"/>
+                                                        </connections>
+                                                    </button>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="82Z-nj-3pP">
+                                                        <rect key="frame" x="80" y="0.0" width="5" height="30"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6hI-Qd-Rpe">
-                                                <rect key="frame" x="0.0" y="0.0" width="105" height="30"/>
+                                                <rect key="frame" x="85" y="0.0" width="85" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YR0-ps-NsB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
                                                         <color key="backgroundColor" red="0.91372549020000005" green="0.18039215689999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -6022,18 +6074,18 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2XL-6L-OCC">
-                                                        <rect key="frame" x="100" y="0.0" width="5" height="30"/>
+                                                        <rect key="frame" x="80" y="0.0" width="5" height="30"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j5p-C0-Xkj">
-                                                <rect key="frame" x="105" y="0.0" width="105" height="30"/>
+                                                <rect key="frame" x="170" y="0.0" width="85" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAZ-Qd-YmR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="100" id="0Gz-Ul-WPH"/>
+                                                            <constraint firstAttribute="width" constant="80" id="0Gz-Ul-WPH"/>
                                                             <constraint firstAttribute="height" constant="30" id="hry-pw-X5B"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -6052,7 +6104,7 @@
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ziJ-mn-tBO">
-                                                        <rect key="frame" x="100" y="0.0" width="5" height="30"/>
+                                                        <rect key="frame" x="80" y="0.0" width="5" height="30"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="5" id="SAL-g7-RcM"/>
@@ -6067,6 +6119,8 @@
                                             <constraint firstAttribute="trailing" secondItem="j5p-C0-Xkj" secondAttribute="trailing" id="d30-5i-cGK"/>
                                             <constraint firstItem="BAZ-Qd-YmR" firstAttribute="height" secondItem="YR0-ps-NsB" secondAttribute="height" id="edT-8O-yFZ"/>
                                             <constraint firstAttribute="height" constant="30" id="iYk-pw-0DD"/>
+                                            <constraint firstItem="82Z-nj-3pP" firstAttribute="width" secondItem="2XL-6L-OCC" secondAttribute="width" id="ihX-TC-9V1"/>
+                                            <constraint firstItem="eJw-yT-i7M" firstAttribute="width" secondItem="YR0-ps-NsB" secondAttribute="width" id="p40-bJ-nN3"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -6094,6 +6148,8 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="addBonusButton" destination="eJw-yT-i7M" id="z4I-KR-CzV"/>
+                        <outlet property="addBonusStackView" destination="mTM-lz-W0P" id="5IO-7s-Mt7"/>
                         <outlet property="approveButton" destination="BAZ-Qd-YmR" id="gE9-aM-EVI"/>
                         <outlet property="approveStackView" destination="j5p-C0-Xkj" id="kN8-vd-9ek"/>
                         <outlet property="disApproveButton" destination="YR0-ps-NsB" id="Dq3-sa-Ado"/>

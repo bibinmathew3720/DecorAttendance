@@ -32,6 +32,8 @@ class CompleteEntryDetailsViewController: UIViewController {
     @IBOutlet weak var endTimeImageview: UIImageView!
     @IBOutlet weak var endTimeStackView: UIStackView!
     
+    @IBOutlet weak var addBonusButton: UIButton!
+    @IBOutlet weak var addBonusStackView: UIStackView!
     @IBOutlet weak var disApproveButton: UIButton!
     @IBOutlet weak var approveButton: UIButton!
     @IBOutlet weak var disApproveStackView: UIStackView!
@@ -51,12 +53,14 @@ class CompleteEntryDetailsViewController: UIViewController {
     func initialisation(){
         settingRedBackgroundToButton(button: self.disApproveButton)
         settingGreenBackgrounfToButton(button: self.approveButton)
+        settingRedBackgroundToButton(button: addBonusButton)
         if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
             if roleString == Constant.Names.Foreman{
                 approveStackView.isHidden = true
                 disApproveStackView.isHidden = true
             }
         }
+        
     }
     
     func settingRedBackgroundToButton(button:UIButton){
@@ -108,6 +112,23 @@ class CompleteEntryDetailsViewController: UIViewController {
             else{
                 approveButton.isSelected = false
                 disApproveButton.isSelected = false
+                
+                if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+                    if roleString == Constant.Names.EngineeringHead{
+                        addBonusStackView.isHidden = false
+                    }
+                    else{
+                        if let empIdString = UserDefaults.standard.value(forKey: Constant.VariableNames.employeeId) as? String{
+                            if empIdString == "\(_attendanceDetails.empId)"{
+                                addBonusStackView.isHidden = false
+                            }
+                            else{
+                                addBonusStackView.isHidden = true
+                            }
+                        }
+                    }
+                }
+                
             }
             if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
                 if roleString == Constant.Names.Foreman{
@@ -172,6 +193,9 @@ class CompleteEntryDetailsViewController: UIViewController {
     }
     
     @IBAction func approveButtonAction(_ sender: UIButton) {
+    }
+    
+    @IBAction func addBonusButtonAction(_ sender: UIButton) {
     }
     
     @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {

@@ -176,7 +176,7 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         if let _loginResponse = self.loginResponse{
             UserDefaults.standard.setValue(_loginResponse.token, forKey: "accessToken")
             UserDefaults.standard.set(true, forKey: Constant.VariableNames.isLoggedIn)
-            UserDefaults.standard.set( "\(_loginResponse.empId)", forKey: "EmpID")
+            UserDefaults.standard.set( "\(_loginResponse.empId)", forKey: Constant.VariableNames.employeeId)
             if _loginResponse.roles.first == "engineering-head"{
                 UserDefaults.standard.setValue(Constant.Names.EngineeringHead, forKey: Constant.VariableNames.roleKey)
                 self.isSiteEngineer = true

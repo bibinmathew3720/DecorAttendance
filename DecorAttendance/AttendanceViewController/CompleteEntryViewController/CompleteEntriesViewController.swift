@@ -308,6 +308,11 @@ extension CompleteEntriesViewController:CompltedEntryCellDelegate{
         updateAttendanceStatusApi()
     }
     
+    func addBonusButtonActionAt(index: Int) {
+        
+    
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == Constant.SegueIdentifiers.AttendanceCompletedListToDetail ){
            

@@ -11,6 +11,7 @@ protocol CompltedEntryCellDelegate {
     func viewDetailsButtonActionAt(index:Int)
     func approveButtonActionAt(index:Int)
     func disApproveButtonActionAt(index:Int)
+    func addBonusButtonActionAt(index:Int)
 }
 class CompleteEntryTableViewCell: UITableViewCell {
 
@@ -35,6 +36,8 @@ class CompleteEntryTableViewCell: UITableViewCell {
     @IBOutlet weak var disApproveStackView: UIStackView!
     @IBOutlet weak var approveButton: UIButton!
     @IBOutlet weak var approveStackView: UIStackView!
+    @IBOutlet weak var addBonusStackView: UIStackView!
+    @IBOutlet weak var addBonusButton: UIButton!
     
     
     var parentViewController: UIViewController!
@@ -55,6 +58,7 @@ class CompleteEntryTableViewCell: UITableViewCell {
     func setViewStyle() {
         settingRedBackgroundToButton(button: bttnDetails)
         settingGreenBackgrounfToButton(button: approveButton)
+        settingRedBackgroundToButton(button: addBonusButton)
         settingRedBackgroundToButton(button: disApproveButton)
         let layer = self.innerView!
         layer.layer.cornerRadius = 3
@@ -113,6 +117,7 @@ class CompleteEntryTableViewCell: UITableViewCell {
         //self.approveButton.isSelected = cellData.isApproved
         self.disApproveStackView.isHidden = false
         self.approveStackView.isHidden = false
+        self.addBonusStackView.isHidden = true
         if cellData.isApproved == 1{
             disApproveStackView.isHidden = true
             approveButton.isSelected = true
@@ -122,6 +127,21 @@ class CompleteEntryTableViewCell: UITableViewCell {
              disApproveButton.isSelected = true
         }
         else{
+            if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+                if roleString == Constant.Names.EngineeringHead{
+                    addBonusStackView.isHidden = false
+                }
+                else{
+                    if let empIdString = UserDefaults.standard.value(forKey: Constant.VariableNames.employeeId) as? String{
+                        if empIdString == "\(cellData.empId)"{
+                            addBonusStackView.isHidden = false
+                        }
+                        else{
+                            addBonusStackView.isHidden = true
+                        }
+                    }
+                }
+            }
             approveButton.isSelected = false
             disApproveButton.isSelected = false
         }
@@ -169,6 +189,12 @@ class CompleteEntryTableViewCell: UITableViewCell {
             if let _delegate = delegate{
                 _delegate.approveButtonActionAt(index: self.tag)
             }
+        }
+    }
+    
+    @IBAction func addBonusButtonAction(_ sender: UIButton) {
+        if let _delegate = delegate{
+            _delegate.addBonusButtonActionAt(index: self.tag)
         }
     }
     

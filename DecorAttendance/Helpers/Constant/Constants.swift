@@ -26,6 +26,8 @@ struct Constant{
     struct VariableNames {
         static let isLoggedIn = "isLoggedIn"
         static let roleKey = "role"
+        static let employeeId = "EmpID"
+        
     }
     
     struct Names {
