@@ -167,7 +167,6 @@ class CompleteEntryTableViewCell: UITableViewCell {
         detailsController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         detailsController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.parentViewController.present(detailsController, animated: true, completion: nil)
-        
     }
     
     @IBAction func bttnActnDetails(_ sender: Any) {

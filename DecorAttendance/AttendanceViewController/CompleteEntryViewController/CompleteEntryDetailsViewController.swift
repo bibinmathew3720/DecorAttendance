@@ -196,6 +196,12 @@ class CompleteEntryDetailsViewController: UIViewController {
     }
     
     @IBAction func addBonusButtonAction(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let addBonusViewController = storyboard.instantiateViewController(withIdentifier: "AddBonusAmountVC") as! AddBonusAmountVC
+        addBonusViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        addBonusViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        addBonusViewController.attendanceDetails = attendanceDetails
+        self.present(addBonusViewController, animated: true, completion: nil)
     }
     
     @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {

@@ -121,6 +121,7 @@
 		D00F2A4D2254AA69007174F8 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00F2A4C2254AA69007174F8 /* NotificationService.swift */; };
 		D00F2A512254AA6A007174F8 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D00F2A4A2254AA69007174F8 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D015303F22597C3E002AAEE6 /* OTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D015303E22597C3E002AAEE6 /* OTVC.swift */; };
+		D0503670225ACCA500294D40 /* AddBonusAmountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */; };
 		D06B92232239ED1900C98ED7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B92222239ED1800C98ED7 /* Constants.swift */; };
 		D0AB2ADD223AA9D4008C01A4 /* LabourManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */; };
 		D0F2449B224DBBBB0073D153 /* ForemanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F2449A224DBBBB0073D153 /* ForemanManager.swift */; };
@@ -298,6 +299,7 @@
 		D00F2A4E2254AA69007174F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D00F2A552254AE7F007174F8 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		D015303E22597C3E002AAEE6 /* OTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTVC.swift; sourceTree = "<group>"; };
+		D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBonusAmountVC.swift; path = AttendanceContainerViewController/AddBonusAmountVC.swift; sourceTree = "<group>"; };
 		D06B92222239ED1800C98ED7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabourManager.swift; sourceTree = "<group>"; };
 		D0F2449A224DBBBB0073D153 /* ForemanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForemanManager.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 			isa = PBXGroup;
 			children = (
 				4618715421C66EC100507F06 /* AttendanceViewController.swift */,
+				D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */,
 				469D712621D639E00057BA7C /* SafetyEquipmentsViewController.swift */,
 				46AE08B82216D6BF00A0BC9F /* SafetyEquipmentsTableViewCell.swift */,
 				469D712D21D642240057BA7C /* PhotoCheckViewController.swift */,
@@ -1134,6 +1137,7 @@
 				46A5FEB021E2702C00C20784 /* ForemanCompleteEntryViewController.swift in Sources */,
 				46623B0A2212E0270072C150 /* ObeidiModelSites.swift in Sources */,
 				46449DDF221F1C9C00169089 /* ObeidiModelSpecificEmployeeAttendance.swift in Sources */,
+				D0503670225ACCA500294D40 /* AddBonusAmountVC.swift in Sources */,
 				46C0661D21E0B371009E731B /* ForemanDashBoardViewController.swift in Sources */,
 				BBE01C76223439B300C534F6 /* UIImageViewExtensions.swift in Sources */,
 				46AE08BB22170B1600A0BC9F /* ObeidiModelSafetyEquipments.swift in Sources */,

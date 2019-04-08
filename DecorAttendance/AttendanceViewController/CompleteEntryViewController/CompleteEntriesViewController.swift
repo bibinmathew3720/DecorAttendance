@@ -309,8 +309,14 @@ extension CompleteEntriesViewController:CompltedEntryCellDelegate{
     }
     
     func addBonusButtonActionAt(index: Int) {
-        
-    
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let addBonusViewController = storyboard.instantiateViewController(withIdentifier: "AddBonusAmountVC") as! AddBonusAmountVC
+        addBonusViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        addBonusViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        if let response = self.completedEntriesResponseModel{
+            addBonusViewController.attendanceDetails = response.attendanceResultArray[index]
+        }
+        self.present(addBonusViewController, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

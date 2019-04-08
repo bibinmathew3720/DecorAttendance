@@ -2002,6 +2002,72 @@
             </objects>
             <point key="canvasLocation" x="6084" y="1190.1049475262371"/>
         </scene>
+        <!--Add Bonus AmountVC-->
+        <scene sceneID="UmZ-X5-emW">
+            <objects>
+                <viewController storyboardIdentifier="AddBonusAmountVC" id="11a-cD-fdQ" customClass="AddBonusAmountVC" customModule="DecorAttendance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jIq-7j-bmm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBa-z8-bEz">
+                                <rect key="frame" x="10" y="218.5" width="355" height="250"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Bonus Amount" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GiE-4O-fKg">
+                                        <rect key="frame" x="5" y="20" width="345" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="gTw-fh-d6X"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="11a-cD-fdQ" id="CoU-Y8-5eZ"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i19-Bx-yfi">
+                                        <rect key="frame" x="5" y="190" width="345" height="50"/>
+                                        <color key="backgroundColor" red="0.91372549020000005" green="0.18039215689999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="kSV-1M-5nj"/>
+                                        </constraints>
+                                        <state key="normal" title="SUBMIT">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="submitButtonAction:" destination="11a-cD-fdQ" eventType="touchUpInside" id="HZb-pF-W2T"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="GiE-4O-fKg" secondAttribute="trailing" constant="5" id="625-wm-CFP"/>
+                                    <constraint firstAttribute="bottom" secondItem="i19-Bx-yfi" secondAttribute="bottom" constant="10" id="DiJ-qL-yMj"/>
+                                    <constraint firstAttribute="height" constant="250" id="NG9-jH-YMd"/>
+                                    <constraint firstItem="i19-Bx-yfi" firstAttribute="leading" secondItem="GiE-4O-fKg" secondAttribute="leading" id="PfZ-du-fOG"/>
+                                    <constraint firstItem="GiE-4O-fKg" firstAttribute="leading" secondItem="WBa-z8-bEz" secondAttribute="leading" constant="5" id="ScD-zG-F5H"/>
+                                    <constraint firstItem="i19-Bx-yfi" firstAttribute="trailing" secondItem="GiE-4O-fKg" secondAttribute="trailing" id="Wd7-a0-DTG"/>
+                                    <constraint firstItem="GiE-4O-fKg" firstAttribute="top" secondItem="WBa-z8-bEz" secondAttribute="top" constant="20" id="rvb-RZ-cZS"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.401611328125" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WBa-z8-bEz" firstAttribute="centerY" secondItem="nST-uD-URb" secondAttribute="centerY" id="EqN-3g-Wqr"/>
+                            <constraint firstItem="nST-uD-URb" firstAttribute="trailing" secondItem="WBa-z8-bEz" secondAttribute="trailing" constant="10" id="mdb-Qp-VWT"/>
+                            <constraint firstItem="WBa-z8-bEz" firstAttribute="leading" secondItem="nST-uD-URb" secondAttribute="leading" constant="10" id="sxI-RB-ox1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nST-uD-URb"/>
+                    </view>
+                    <connections>
+                        <outlet property="addBonusTF" destination="GiE-4O-fKg" id="VLP-9k-Alz"/>
+                        <outlet property="submitButton" destination="i19-Bx-yfi" id="2Ix-FO-s66"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KTb-fT-sfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6084" y="1907"/>
+        </scene>
         <!--Safety Equipments View Controller-->
         <scene sceneID="xf4-1M-8lF">
             <objects>
