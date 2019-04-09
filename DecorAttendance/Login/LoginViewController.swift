@@ -36,8 +36,8 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
         self.txtFldUserName.delegate = self
         self.txtFldPassword.delegate = self
         setUpViewStyles()
-        self.txtFldUserName.text = "enghead"
-        self.txtFldPassword.text = "123456"
+        //self.txtFldUserName.text = "bibin.mathew"
+        //self.txtFldPassword.text = "qwertyui"
         
     }
 
