@@ -40,10 +40,6 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         if self.isSuspicious{
             self.title = "SUSPICIOUS ENTRIES"
             addingLeftBarButton()
-            callFetchSuspiciousAttendanceAPI()
-        }
-        else{
-            callFetchAttendanceaAPI()
         }
         // Do any additional setup after loading the view.
     }
@@ -79,6 +75,12 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        if self.isSuspicious{
+            callFetchSuspiciousAttendanceAPI()
+        }
+        else{
+            callFetchAttendanceaAPI()
+        }
     }
     
     func setViewStyles() {

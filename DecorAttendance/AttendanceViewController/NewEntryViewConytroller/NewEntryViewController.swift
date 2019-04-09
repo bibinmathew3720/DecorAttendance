@@ -33,12 +33,19 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
         self.navigationItem.backBarButtonItem?.title = ""
         initialisation()
         txtFldSearch.delegate = self
-        callGetAllSitesAPI()
         setUpViewStyles()
+        callGetAllSitesAPI()
         addTapGesturesToLabels()
         addTapgesturesToView()
-        callFetchAttendanceaAPI()
+        
+        attendanceRequest.startDate = CCUtility.stringFromDate(date: Date())
+        self.lblDate.text = "\(CCUtility.stringFromDate(date: Date()))"
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        callFetchAttendanceaAPI()
     }
     
     func initialisation(){
@@ -102,9 +109,9 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
     }
     
     func addTapGesturesToLabels() {
-        self.dateView.isUserInteractionEnabled = true
-        let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleDateLabelTap))
-        self.dateView.addGestureRecognizer(tapGestureDate)
+//        self.dateView.isUserInteractionEnabled = true
+//        let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleDateLabelTap))
+//        self.dateView.addGestureRecognizer(tapGestureDate)
         
         self.siteView.isUserInteractionEnabled = true
         let tapGestureSite = UITapGestureRecognizer(target: self, action: #selector(DashBoardViewController.handleSiteLabelTap))
@@ -193,7 +200,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
             }
         }
     }
-    
+   
     func callFetchAttendanceaAPI()  {
         ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody: attendanceRequest.getRequestBody()){
             (success, result, error) in
