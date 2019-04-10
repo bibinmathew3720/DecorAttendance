@@ -5728,7 +5728,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryW-a5-MOz">
-                                <rect key="frame" x="30" y="-5" width="315" height="474"/>
+                                <rect key="frame" x="30" y="-6.5" width="315" height="477"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b6U-Ed-u2h">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="444"/>
@@ -6220,14 +6220,24 @@
                                             <constraint firstItem="eJw-yT-i7M" firstAttribute="width" secondItem="YR0-ps-NsB" secondAttribute="width" id="p40-bJ-nN3"/>
                                         </constraints>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DRu-8j-ew1">
+                                        <rect key="frame" x="30" y="474" width="255" height="3"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="3" id="nBn-65-Trb"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="DRu-8j-ew1" secondAttribute="bottom" id="7qX-CP-9oK"/>
                                     <constraint firstItem="b6U-Ed-u2h" firstAttribute="top" secondItem="ryW-a5-MOz" secondAttribute="top" id="8EF-ZP-aZc"/>
-                                    <constraint firstAttribute="bottom" secondItem="1Fq-vN-3gP" secondAttribute="bottom" id="KHr-Gz-QZl"/>
+                                    <constraint firstItem="DRu-8j-ew1" firstAttribute="trailing" secondItem="1Fq-vN-3gP" secondAttribute="trailing" id="anQ-Ne-ehX"/>
                                     <constraint firstItem="1Fq-vN-3gP" firstAttribute="top" secondItem="b6U-Ed-u2h" secondAttribute="bottom" id="cP5-co-89I"/>
+                                    <constraint firstItem="DRu-8j-ew1" firstAttribute="leading" secondItem="1Fq-vN-3gP" secondAttribute="leading" id="hGS-Dw-4FC"/>
                                     <constraint firstItem="1Fq-vN-3gP" firstAttribute="centerX" secondItem="ryW-a5-MOz" secondAttribute="centerX" id="hzA-G2-rRG"/>
                                     <constraint firstAttribute="trailing" secondItem="b6U-Ed-u2h" secondAttribute="trailing" id="i56-Hw-3E6"/>
+                                    <constraint firstItem="DRu-8j-ew1" firstAttribute="top" secondItem="1Fq-vN-3gP" secondAttribute="bottom" id="jBQ-E6-46z"/>
                                     <constraint firstItem="b6U-Ed-u2h" firstAttribute="leading" secondItem="ryW-a5-MOz" secondAttribute="leading" id="uYe-MG-scS"/>
                                 </constraints>
                             </view>

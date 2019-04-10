@@ -23,6 +23,8 @@ class CompleteEntryDetailsViewController: UIViewController {
      var selectedSite: ObeidiModelSites?
     var attendanceDetails:ObeidiModelFetchAttendance?
     var attendanceId:Int?
+    var updateAttendanceStatus = ChangeAttendanceStatusRequestModel()
+    
     @IBOutlet weak var firstLocationLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var statusLabel: UILabel!
@@ -48,7 +50,16 @@ class CompleteEntryDetailsViewController: UIViewController {
         if let _attendanceDetails = self.attendanceDetails{
             callingAttendanceDetailAPI(attendanceId: "\(_attendanceDetails.attendanceId)")
         }
-       
+        if let site = self.selectedSite{
+            self.getAddressStringfFrom(latitude: site.latitudeNew, longitude: site.longitudeNew) { (status, addressString, error) in
+                if let address = addressString{
+                    self.firstLocationLabel.text = address
+                }
+            }
+        }
+        if let _attendanceId = self.attendanceId{
+            updateAttendanceStatus.attendanceId =  _attendanceId
+        }
         // setViewStyles()
         // Do any additional setup after loading the view.
     }
@@ -182,7 +193,9 @@ class CompleteEntryDetailsViewController: UIViewController {
     }
     
     @IBAction func firstLocationButtonAction(_ sender: UIButton){
-        
+        if let site = self.selectedSite{
+            openMapForPlace(latitude: "\(site.latitudeNew)", longitude: "\(site.longitudeNew)")
+        }
     }
     
     @IBAction func startTimeLocationButtonAction(_ sender: UIButton) {
@@ -198,9 +211,13 @@ class CompleteEntryDetailsViewController: UIViewController {
     }
     
     @IBAction func disApproveButtonAction(_ sender: UIButton) {
+        updateAttendanceStatus.status = 0
+        updateAttendanceStatusApi()
     }
     
     @IBAction func approveButtonAction(_ sender: UIButton) {
+        updateAttendanceStatus.status = 1
+        updateAttendanceStatusApi()
     }
     
     @IBAction func addBonusButtonAction(_ sender: UIButton) {
@@ -217,6 +234,30 @@ class CompleteEntryDetailsViewController: UIViewController {
     
     @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func updateAttendanceStatusApi(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        LabourManager().callUpdateAttendanceStatusApi(with: updateAttendanceStatus.getRequestBody(), success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let _model = model as? ChangeAttendanceResponseModel{
+                if _model.success == 1{
+                    CCUtility.showDefaultAlertwithCompletionHandler(_title: Constant.AppName, _message: "Status Updated successfully", parentController: self, completion: { (status) in
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }
+            }
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            print(ErrorType)
+        }
     }
     
     func getAddressStringfFrom(latitude:Double,longitude:Double, withCompletion completion:@escaping(Bool?,String?,Any?)->Void){
