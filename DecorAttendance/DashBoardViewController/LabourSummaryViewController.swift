@@ -112,6 +112,7 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         self.lblStartDate.text = ""
         self.lblEndDate.text = ""
         self.lblSite.text = "All"
+        self.title = Constant.PageNames.Dashboard
     }
     
     func populateCostSummary(){

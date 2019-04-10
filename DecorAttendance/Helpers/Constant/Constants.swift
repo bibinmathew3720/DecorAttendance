@@ -17,6 +17,7 @@ struct Constant{
         static let Profile = "PROFILE"
         static let AboutUs = "ABOUT US"
         static let ChangePassword = "CHANGE PASSWORD"
+        static let Dashboard = "DASHBOARD"
     }
     struct ImageNames {
         static let placeholderImage = "placeholder"
