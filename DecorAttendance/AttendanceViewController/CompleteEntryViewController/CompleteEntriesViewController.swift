@@ -38,7 +38,7 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         callGetAllSitesAPI()
         addTapGesturesToLabels()
         if self.isSuspicious{
-            self.title = "SUSPICIOUS ENTRIES"
+            self.title = Constant.PageNames.SuspiciousEntries
             addingLeftBarButton()
         }
         // Do any additional setup after loading the view.
@@ -48,6 +48,8 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         attendanceRequest.isAttendanceCompleteEntry = true
         self.lblDate.text = ""
         self.lblSite.text = ""
+        attendanceRequest.startDate = CCUtility.stringFromDate(date: Date())
+        self.lblDate.text = "\(CCUtility.stringFromDate(date: Date()))"
     }
     
     func isValidSelection()->Bool{
