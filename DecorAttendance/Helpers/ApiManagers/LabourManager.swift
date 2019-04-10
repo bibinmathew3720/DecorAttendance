@@ -109,6 +109,40 @@ class LabourManager: CLBaseService {
         let responseModel = ChangeAttendanceResponseModel.init(dict:dict)
         return responseModel
     }
+    
+    //Update Bonus Amount api
+    
+    func updateBonusAmountApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelForUpdateBonusAmount(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.getUpdateBonusAmountResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
+    
+    func networkModelForUpdateBonusAmount(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.UPDATE_BONUS_AMOUNT, requestMethod_: "POST")
+        requestModel.requestBody = body
+        return requestModel
+    }
+    
+    func getUpdateBonusAmountResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = UpdateBonusAmountResponseModel.init(dict:dict)
+        return responseModel
+    }
 }
 
 class AddAttendanceRequestModel:NSObject{
@@ -459,6 +493,36 @@ class ChangeAttendanceResponseModel : NSObject{
         if let value = dict["success"] as? Int{
             success = value
         }
+    }
+}
+
+class UpdateBonusAmountResponseModel : NSObject{
+    var error:Int = 0
+    var message:String = ""
+    var success:Int = 0
+    
+    init(dict:[String:Any?]) {
+        
+        if let value = dict["error"] as? Int{
+            error = value
+        }
+        if let value = dict["message"] as? String{
+            message = value
+        }
+        if let value = dict["success"] as? Int{
+            success = value
+        }
+    }
+}
+
+class UpdateBonusAmountRequestModel:NSObject{
+    var bonus:String = ""
+    var attendanceId:Int = 0
+    func getRequestBody()->String{
+        var dict:[String:AnyObject] = [String:AnyObject]()
+        dict.updateValue(bonus as AnyObject, forKey: "bonus")
+        dict.updateValue(1522 as AnyObject, forKey: "attendance_id")
+        return CCUtility.getJSONfrom(dictionary: dict)
     }
 }
 

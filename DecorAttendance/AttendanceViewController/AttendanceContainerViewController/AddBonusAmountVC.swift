@@ -12,6 +12,7 @@ class AddBonusAmountVC: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var addBonusTF: UITextField!
     var attendanceDetails:ObeidiModelFetchAttendance?
+    var updateBonusRequest = UpdateBonusAmountRequestModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -28,6 +29,7 @@ class AddBonusAmountVC: UIViewController {
     func dataPopulation(){
         if let attendanceRes = self.attendanceDetails{
             self.addBonusTF.text = "\(attendanceRes.bonusAmount)"
+            updateBonusRequest.attendanceId = attendanceRes.attendanceId
         }
     }
     
@@ -50,9 +52,64 @@ class AddBonusAmountVC: UIViewController {
     }
     
     @IBAction func submitButtonAction(_ sender: UIButton) {
+        if isValid(){
+            callingAddBonusAmountApi()
+        }
     }
     
-
+    @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func isValid()->Bool{
+        var valid = true
+        if let bonusText = addBonusTF.text{
+            if let bonusValue = Float (bonusText){
+                let bonusValueCGFloat = CGFloat(bonusValue)
+                print(bonusValueCGFloat)
+                if let selSite = self.attendanceDetails{
+//                    if bonusValueCGFloat > selSite.remainingBonusNew{
+//                        valid = false
+//                        CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Entered bonus amount greater than available bonus point", parentController: self)
+//                    }
+                }
+            }
+        }
+        return valid
+    }
+    
+    func callingAddBonusAmountApi(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        if let bonusAmountString = self.addBonusTF.text{
+            updateBonusRequest.bonus = bonusAmountString
+        }
+        LabourManager().updateBonusAmountApi(with: updateBonusRequest.getRequestBody(), success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let _model = model as? UpdateBonusAmountResponseModel{
+                if _model.error == 0{
+                    CCUtility.showDefaultAlertwithCompletionHandler(_title: Constant.AppName, _message: "Bonus Ammount Updated Successfully", parentController: self, completion: { (status) in
+                        if status {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    })
+                }
+                else{
+                    CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: _model.message, parentController: self)
+                }
+            }
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            print(ErrorType)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

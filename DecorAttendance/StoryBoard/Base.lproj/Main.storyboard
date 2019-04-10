@@ -2049,15 +2049,24 @@
                                     <constraint firstItem="i19-Bx-yfi" firstAttribute="trailing" secondItem="GiE-4O-fKg" secondAttribute="trailing" id="Wd7-a0-DTG"/>
                                     <constraint firstItem="GiE-4O-fKg" firstAttribute="top" secondItem="WBa-z8-bEz" secondAttribute="top" constant="20" id="rvb-RZ-cZS"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.401611328125" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="WBa-z8-bEz" firstAttribute="centerY" secondItem="nST-uD-URb" secondAttribute="centerY" id="EqN-3g-Wqr"/>
                             <constraint firstItem="nST-uD-URb" firstAttribute="trailing" secondItem="WBa-z8-bEz" secondAttribute="trailing" constant="10" id="mdb-Qp-VWT"/>
                             <constraint firstItem="WBa-z8-bEz" firstAttribute="leading" secondItem="nST-uD-URb" secondAttribute="leading" constant="10" id="sxI-RB-ox1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nST-uD-URb"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="EvK-V2-qzV" appends="YES" id="eFD-cU-6Nf"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="addBonusTF" destination="GiE-4O-fKg" id="VLP-9k-Alz"/>
@@ -2065,6 +2074,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KTb-fT-sfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="EvK-V2-qzV">
+                    <connections>
+                        <action selector="tapGestureAction:" destination="11a-cD-fdQ" id="eSz-dc-y1l"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="6084" y="1907"/>
         </scene>
