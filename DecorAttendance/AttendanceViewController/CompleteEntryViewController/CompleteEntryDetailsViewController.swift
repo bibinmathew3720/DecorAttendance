@@ -211,6 +211,7 @@ class CompleteEntryDetailsViewController: UIViewController {
         addBonusViewController.selectedSite = self.selectedSite
         addBonusViewController.attendanceDetails = attendanceDetails
         addBonusViewController.attendanceId = self.attendanceId
+        addBonusViewController.delegate = self
         self.present(addBonusViewController, animated: true, completion: nil)
     }
     
@@ -282,6 +283,12 @@ class CompleteEntryDetailsViewController: UIViewController {
             print("Postal Code:\(results?.firstResult()?.postalCode)")
         }
    }
-    
-    
+}
+
+extension CompleteEntryDetailsViewController: AddBonusAmountVCDelegate{
+    func bonusAmountUpdatedDeleagte() {
+        if let _attendanceId = self.attendanceId{
+            callingAttendanceDetailAPI(attendanceId: "\(_attendanceId)")
+        }
+    }
 }

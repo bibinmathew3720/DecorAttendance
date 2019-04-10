@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol AddBonusAmountVCDelegate{
+    func bonusAmountUpdatedDeleagte()
+}
 
 class AddBonusAmountVC: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
@@ -15,6 +18,7 @@ class AddBonusAmountVC: UIViewController {
     var attendanceDetails:ObeidiModelFetchAttendance?
     var updateBonusRequest = UpdateBonusAmountRequestModel()
     var attendanceId:Int?
+    var delegate:AddBonusAmountVCDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -92,6 +96,9 @@ class AddBonusAmountVC: UIViewController {
             MBProgressHUD.hide(for: self.view, animated: true)
             if let _model = model as? UpdateBonusAmountResponseModel{
                 if _model.error == 0{
+                    if let _delegate = self.delegate{
+                        _delegate.bonusAmountUpdatedDeleagte()
+                    }
                     CCUtility.showDefaultAlertwithCompletionHandler(_title: Constant.AppName, _message: "Bonus Amount Updated Successfully", parentController: self, completion: { (status) in
                         if status {
                             self.dismiss(animated: true, completion: nil)
