@@ -11,8 +11,10 @@ import UIKit
 class AddBonusAmountVC: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var addBonusTF: UITextField!
+    var selectedSite: ObeidiModelSites?
     var attendanceDetails:ObeidiModelFetchAttendance?
     var updateBonusRequest = UpdateBonusAmountRequestModel()
+    var attendanceId:Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -29,7 +31,9 @@ class AddBonusAmountVC: UIViewController {
     func dataPopulation(){
         if let attendanceRes = self.attendanceDetails{
             self.addBonusTF.text = "\(attendanceRes.bonusAmount)"
-            updateBonusRequest.attendanceId = attendanceRes.attendanceId
+            if let attId = attendanceId{
+                updateBonusRequest.attendanceId = attId
+            }
         }
     }
     
@@ -67,11 +71,11 @@ class AddBonusAmountVC: UIViewController {
             if let bonusValue = Float (bonusText){
                 let bonusValueCGFloat = CGFloat(bonusValue)
                 print(bonusValueCGFloat)
-                if let selSite = self.attendanceDetails{
-//                    if bonusValueCGFloat > selSite.remainingBonusNew{
-//                        valid = false
-//                        CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Entered bonus amount greater than available bonus point", parentController: self)
-//                    }
+                if let selSite = self.selectedSite{
+                    if bonusValueCGFloat > selSite.remainingBonusNew{
+                        valid = false
+                        CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Entered bonus amount greater than available bonus point", parentController: self)
+                    }
                 }
             }
         }
@@ -88,7 +92,7 @@ class AddBonusAmountVC: UIViewController {
             MBProgressHUD.hide(for: self.view, animated: true)
             if let _model = model as? UpdateBonusAmountResponseModel{
                 if _model.error == 0{
-                    CCUtility.showDefaultAlertwithCompletionHandler(_title: Constant.AppName, _message: "Bonus Ammount Updated Successfully", parentController: self, completion: { (status) in
+                    CCUtility.showDefaultAlertwithCompletionHandler(_title: Constant.AppName, _message: "Bonus Amount Updated Successfully", parentController: self, completion: { (status) in
                         if status {
                             self.dismiss(animated: true, completion: nil)
                         }

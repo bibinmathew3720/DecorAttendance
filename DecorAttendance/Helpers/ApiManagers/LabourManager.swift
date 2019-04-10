@@ -521,7 +521,7 @@ class UpdateBonusAmountRequestModel:NSObject{
     func getRequestBody()->String{
         var dict:[String:AnyObject] = [String:AnyObject]()
         dict.updateValue(bonus as AnyObject, forKey: "bonus")
-        dict.updateValue(1522 as AnyObject, forKey: "attendance_id")
+        dict.updateValue(attendanceId as AnyObject, forKey: "attendance_id")
         return CCUtility.getJSONfrom(dictionary: dict)
     }
 }

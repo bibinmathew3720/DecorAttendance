@@ -20,7 +20,9 @@ class CompleteEntryDetailsViewController: UIViewController {
     var latCapturedRef: String!
     var lngCapturedRef: String!
     
+     var selectedSite: ObeidiModelSites?
     var attendanceDetails:ObeidiModelFetchAttendance?
+    var attendanceId:Int?
     @IBOutlet weak var firstLocationLabel: UILabel!
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var statusLabel: UILabel!
@@ -44,10 +46,16 @@ class CompleteEntryDetailsViewController: UIViewController {
         initialisation()
         populateAttendanceDetails()
         if let _attendanceDetails = self.attendanceDetails{
-             callingAttendanceDetailAPI(attendanceId: "\(_attendanceDetails.attendanceId)")
+            callingAttendanceDetailAPI(attendanceId: "\(_attendanceDetails.attendanceId)")
         }
+       
         // setViewStyles()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+       
     }
     
     func initialisation(){
@@ -200,7 +208,9 @@ class CompleteEntryDetailsViewController: UIViewController {
         let addBonusViewController = storyboard.instantiateViewController(withIdentifier: "AddBonusAmountVC") as! AddBonusAmountVC
         addBonusViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         addBonusViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        addBonusViewController.selectedSite = self.selectedSite
         addBonusViewController.attendanceDetails = attendanceDetails
+        addBonusViewController.attendanceId = self.attendanceId
         self.present(addBonusViewController, animated: true, completion: nil)
     }
     

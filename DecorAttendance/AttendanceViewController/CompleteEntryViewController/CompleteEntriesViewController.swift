@@ -50,6 +50,18 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         self.lblSite.text = ""
     }
     
+    func isValidSelection()->Bool{
+        var valid = true
+        if let selSite = self.selectedSite{
+            
+        }
+        else{
+            valid = false
+            CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Choose a site to continue..", parentController: self)
+        }
+        return valid
+    }
+    
     func addingLeftBarButton(){
         self.leftButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         self.leftButton?.addTarget(self, action: #selector(leftNavButtonAction), for: .touchUpInside)
@@ -281,17 +293,21 @@ extension CompleteEntriesViewController:filterUpdatedDelegate{
 
 extension CompleteEntriesViewController:CompltedEntryCellDelegate{
     func viewDetailsButtonActionAt(index: Int) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let detailsController = storyboard.instantiateViewController(withIdentifier: "CompleteEntryDetailsViewControllerID") as! CompleteEntryDetailsViewController
-        detailsController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        detailsController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        if let attendanceRes = self.completedEntriesResponseModel{
-            detailsController.attendanceDetails =  attendanceRes.attendanceResultArray[index]
+        if isValidSelection(){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let detailsController = storyboard.instantiateViewController(withIdentifier: "CompleteEntryDetailsViewControllerID") as! CompleteEntryDetailsViewController
+            detailsController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            detailsController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            if let attendanceRes = self.completedEntriesResponseModel{
+                detailsController.attendanceDetails =  attendanceRes.attendanceResultArray[index]
+                detailsController.attendanceId = attendanceRes.attendanceResultArray[index].attendanceId
+            }
+            if let response = self.completedEntriesResponseModel{
+                detailsController.attendanceDetails = response.attendanceResultArray[index]
+            }
+            detailsController.selectedSite = self.selectedSite
+            self.present(detailsController, animated: true, completion: nil)
         }
-        if let response = self.completedEntriesResponseModel{
-            detailsController.attendanceDetails = response.attendanceResultArray[index]
-        }
-        self.present(detailsController, animated: true, completion: nil)
     }
     
     func approveButtonActionAt(index: Int) {
@@ -311,14 +327,18 @@ extension CompleteEntriesViewController:CompltedEntryCellDelegate{
     }
     
     func addBonusButtonActionAt(index: Int) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let addBonusViewController = storyboard.instantiateViewController(withIdentifier: "AddBonusAmountVC") as! AddBonusAmountVC
-        addBonusViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        addBonusViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        if let response = self.completedEntriesResponseModel{
-            addBonusViewController.attendanceDetails = response.attendanceResultArray[index]
+        if isValidSelection(){
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let addBonusViewController = storyboard.instantiateViewController(withIdentifier: "AddBonusAmountVC") as! AddBonusAmountVC
+            addBonusViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            addBonusViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            addBonusViewController.selectedSite = self.selectedSite
+            if let response = self.completedEntriesResponseModel{
+                addBonusViewController.attendanceDetails = response.attendanceResultArray[index]
+                addBonusViewController.attendanceId = response.attendanceResultArray[index].attendanceId
+            }
+            self.present(addBonusViewController, animated: true, completion: nil)
         }
-        self.present(addBonusViewController, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

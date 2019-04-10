@@ -2010,8 +2010,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vpu-ve-e3X">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="EvK-V2-qzV" appends="YES" id="66a-6B-jUx"/>
+                                </connections>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBa-z8-bEz">
-                                <rect key="frame" x="10" y="218.5" width="355" height="250"/>
+                                <rect key="frame" x="10" y="248.5" width="355" height="190"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Bonus Amount" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GiE-4O-fKg">
                                         <rect key="frame" x="5" y="20" width="345" height="50"/>
@@ -2026,7 +2034,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i19-Bx-yfi">
-                                        <rect key="frame" x="5" y="190" width="345" height="50"/>
+                                        <rect key="frame" x="5" y="130" width="345" height="50"/>
                                         <color key="backgroundColor" red="0.91372549020000005" green="0.18039215689999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="kSV-1M-5nj"/>
@@ -2043,11 +2051,11 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="GiE-4O-fKg" secondAttribute="trailing" constant="5" id="625-wm-CFP"/>
                                     <constraint firstAttribute="bottom" secondItem="i19-Bx-yfi" secondAttribute="bottom" constant="10" id="DiJ-qL-yMj"/>
-                                    <constraint firstAttribute="height" constant="250" id="NG9-jH-YMd"/>
                                     <constraint firstItem="i19-Bx-yfi" firstAttribute="leading" secondItem="GiE-4O-fKg" secondAttribute="leading" id="PfZ-du-fOG"/>
                                     <constraint firstItem="GiE-4O-fKg" firstAttribute="leading" secondItem="WBa-z8-bEz" secondAttribute="leading" constant="5" id="ScD-zG-F5H"/>
                                     <constraint firstItem="i19-Bx-yfi" firstAttribute="trailing" secondItem="GiE-4O-fKg" secondAttribute="trailing" id="Wd7-a0-DTG"/>
                                     <constraint firstItem="GiE-4O-fKg" firstAttribute="top" secondItem="WBa-z8-bEz" secondAttribute="top" constant="20" id="rvb-RZ-cZS"/>
+                                    <constraint firstItem="i19-Bx-yfi" firstAttribute="top" secondItem="GiE-4O-fKg" secondAttribute="bottom" constant="60" id="yOJ-A5-HEc"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -2059,14 +2067,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.401611328125" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="vpu-ve-e3X" firstAttribute="leading" secondItem="nST-uD-URb" secondAttribute="leading" id="Abt-cR-8V2"/>
                             <constraint firstItem="WBa-z8-bEz" firstAttribute="centerY" secondItem="nST-uD-URb" secondAttribute="centerY" id="EqN-3g-Wqr"/>
+                            <constraint firstItem="vpu-ve-e3X" firstAttribute="top" secondItem="nST-uD-URb" secondAttribute="top" id="LkA-EV-WRx"/>
+                            <constraint firstItem="nST-uD-URb" firstAttribute="trailing" secondItem="vpu-ve-e3X" secondAttribute="trailing" id="NUZ-g7-Om3"/>
                             <constraint firstItem="nST-uD-URb" firstAttribute="trailing" secondItem="WBa-z8-bEz" secondAttribute="trailing" constant="10" id="mdb-Qp-VWT"/>
                             <constraint firstItem="WBa-z8-bEz" firstAttribute="leading" secondItem="nST-uD-URb" secondAttribute="leading" constant="10" id="sxI-RB-ox1"/>
+                            <constraint firstItem="nST-uD-URb" firstAttribute="bottom" secondItem="vpu-ve-e3X" secondAttribute="bottom" id="yYQ-9T-qSP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nST-uD-URb"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="EvK-V2-qzV" appends="YES" id="eFD-cU-6Nf"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="addBonusTF" destination="GiE-4O-fKg" id="VLP-9k-Alz"/>
@@ -5710,6 +5719,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="464"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myC-8S-CoZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="464"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="uEN-47-NKp" appends="YES" id="r8C-XP-ErO"/>
+                                </connections>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryW-a5-MOz">
                                 <rect key="frame" x="30" y="-5" width="315" height="474"/>
                                 <subviews>
@@ -6219,13 +6236,14 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="ryW-a5-MOz" firstAttribute="leading" secondItem="YlO-iQ-5IP" secondAttribute="leading" constant="30" id="F25-cu-ytj"/>
+                            <constraint firstItem="YlO-iQ-5IP" firstAttribute="trailing" secondItem="myC-8S-CoZ" secondAttribute="trailing" id="JK3-fi-8V8"/>
+                            <constraint firstItem="myC-8S-CoZ" firstAttribute="top" secondItem="YlO-iQ-5IP" secondAttribute="top" id="OTC-OU-APT"/>
+                            <constraint firstItem="YlO-iQ-5IP" firstAttribute="bottom" secondItem="myC-8S-CoZ" secondAttribute="bottom" id="bib-r6-UZx"/>
                             <constraint firstItem="YlO-iQ-5IP" firstAttribute="trailing" secondItem="ryW-a5-MOz" secondAttribute="trailing" constant="30" id="nUl-8r-Rap"/>
+                            <constraint firstItem="myC-8S-CoZ" firstAttribute="leading" secondItem="YlO-iQ-5IP" secondAttribute="leading" id="pJn-rj-wMd"/>
                             <constraint firstItem="ryW-a5-MOz" firstAttribute="centerY" secondItem="YlO-iQ-5IP" secondAttribute="centerY" id="scO-nQ-yks"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YlO-iQ-5IP"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="uEN-47-NKp" appends="YES" id="fik-Mf-i5C"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="addBonusButton" destination="eJw-yT-i7M" id="z4I-KR-CzV"/>
