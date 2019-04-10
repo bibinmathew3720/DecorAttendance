@@ -120,6 +120,7 @@ class CompleteEntryDetailsViewController: UIViewController {
                 self.endTimeStackView.isHidden = true
                 self.endTimeHeadingStackView.isHidden = true
             }
+            addBonusStackView.isHidden = true
             if _attendanceDetails.isApproved == 1{
                 disApproveStackView.isHidden = true
                 approveButton.isSelected = true
@@ -131,23 +132,23 @@ class CompleteEntryDetailsViewController: UIViewController {
             else{
                 approveButton.isSelected = false
                 disApproveButton.isSelected = false
-                
-                if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
-                    if roleString == Constant.Names.EngineeringHead{
-                        addBonusStackView.isHidden = false
-                    }
-                    else{
-                        if let empIdString = UserDefaults.standard.value(forKey: Constant.VariableNames.employeeId) as? String{
-                            if empIdString == "\(_attendanceDetails.empId)"{
-                                addBonusStackView.isHidden = false
-                            }
-                            else{
-                                addBonusStackView.isHidden = true
+                if _attendanceDetails.isPresent{
+                    if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+                        if roleString == Constant.Names.EngineeringHead{
+                            addBonusStackView.isHidden = false
+                        }
+                        else{
+                            if let empIdString = UserDefaults.standard.value(forKey: Constant.VariableNames.employeeId) as? String{
+                                if empIdString == "\(_attendanceDetails.empId)"{
+                                    addBonusStackView.isHidden = false
+                                }
+                                else{
+                                    addBonusStackView.isHidden = true
+                                }
                             }
                         }
                     }
                 }
-                
             }
             if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
                 if roleString == Constant.Names.Foreman{
@@ -211,13 +212,17 @@ class CompleteEntryDetailsViewController: UIViewController {
     }
     
     @IBAction func disApproveButtonAction(_ sender: UIButton) {
-        updateAttendanceStatus.status = 0
-        updateAttendanceStatusApi()
+        if (!sender.isSelected){
+            updateAttendanceStatus.status = 0
+            updateAttendanceStatusApi()
+        }
     }
     
     @IBAction func approveButtonAction(_ sender: UIButton) {
-        updateAttendanceStatus.status = 1
-        updateAttendanceStatusApi()
+        if (!sender.isSelected){
+            updateAttendanceStatus.status = 1
+            updateAttendanceStatusApi()
+        }
     }
     
     @IBAction func addBonusButtonAction(_ sender: UIButton) {

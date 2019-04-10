@@ -127,17 +127,19 @@ class CompleteEntryTableViewCell: UITableViewCell {
              disApproveButton.isSelected = true
         }
         else{
-            if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
-                if roleString == Constant.Names.EngineeringHead{
-                    addBonusStackView.isHidden = false
-                }
-                else{
-                    if let empIdString = UserDefaults.standard.value(forKey: Constant.VariableNames.employeeId) as? String{
-                        if empIdString == "\(cellData.empId)"{
-                            addBonusStackView.isHidden = false
-                        }
-                        else{
-                            addBonusStackView.isHidden = true
+            if cellData.isPresent{
+                if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+                    if roleString == Constant.Names.EngineeringHead{
+                        addBonusStackView.isHidden = false
+                    }
+                    else{
+                        if let empIdString = UserDefaults.standard.value(forKey: Constant.VariableNames.employeeId) as? String{
+                            if empIdString == "\(cellData.empId)"{
+                                addBonusStackView.isHidden = false
+                            }
+                            else{
+                                addBonusStackView.isHidden = true
+                            }
                         }
                     }
                 }
@@ -195,29 +197,5 @@ class CompleteEntryTableViewCell: UITableViewCell {
         if let _delegate = delegate{
             _delegate.addBonusButtonActionAt(index: self.tag)
         }
-    }
-    
-    func callAttendanceByIDAPI() {
-        
-//        let attendanceId = (self.modelObjArr.object(at: self.bttnDetails.tag) as! ObeidiModelFetchAttendance).attendance_id as! String
-//        ObeidiModelSpecificEmployeeAttendance.callAtendanceDetailsByIDRequset(attendanceId: attendanceId){
-//
-//            (success, result, error)in
-//
-//
-//            if success! {
-//
-//                let resultDict = result as! NSMutableDictionary
-//                self.gotoEmployeeDetails(modelDataDict: resultDict)
-//
-//            }else{
-//
-//
-//
-//            }
-//
-//        }
-//
-//
     }
 }
