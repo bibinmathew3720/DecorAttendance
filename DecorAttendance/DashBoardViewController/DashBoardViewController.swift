@@ -109,7 +109,7 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     }
     
     func initialisation(){
-        callSiteWiseCostSummaryApi()
+        
     }
     
     func callSiteWiseCostSummaryApi(){
@@ -130,6 +130,11 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        callSiteWiseCostSummaryApi()
     }
     
     // MARK: - Table view data source
