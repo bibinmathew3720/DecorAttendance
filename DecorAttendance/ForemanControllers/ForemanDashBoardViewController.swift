@@ -33,6 +33,7 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     @IBOutlet weak var totalEmployeesLabel: UILabel!
     @IBOutlet weak var presentEmployeesLabel: UILabel!
     @IBOutlet weak var absentEmployeesLabel: UILabel!
+    @IBOutlet weak var pendingEmployeesLabel: UILabel!
     @IBOutlet weak var dateView: UIView!
     @IBOutlet weak var siteView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
@@ -90,6 +91,8 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
                         let firstSite = self.siteModelObjArr.first
                         if let _firstSite = firstSite{
                             self.siteLabel.text = _firstSite.nameNew
+                            self.formanRequest.siteId = _firstSite.locIdNew
+                            self.getAttendanceSummaryApi()
                         }
                     }
                 }
@@ -138,6 +141,7 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
            self.totalEmployeesLabel.text = String.init(format: "%0.0f", attendanceSummary.total)
            self.presentEmployeesLabel.text = String.init(format: "%0.0f", attendanceSummary.presentCount)
           self.absentEmployeesLabel.text = String.init(format: "%0.0f", attendanceSummary.absentCount)
+          self.pendingEmployeesLabel.text = String.init(format: "%0.0f", attendanceSummary.pendingCount)
             
             let absentSlice = Slice(radius: 0.75, width: (CGFloat(attendanceSummary.absentPercentage/100.00)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor:ObeidiFont.Color.obeidiLinePink())
             let presentSlice = Slice(radius: 0.65, width: (CGFloat(attendanceSummary.presentPercentage/100)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: ObeidiFont.Color.obeidiLineRed())
