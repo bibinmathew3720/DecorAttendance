@@ -22,13 +22,15 @@ class ChangePasswordViewController: UIViewController {
     }
     
     @IBAction func submitAction(_ sender: Any) {
-        callChangePwdApi()
+        if isValid(){
+            callChangePwdApi()
+        }
     }
     
      func showAlert(alertMessage: String) {
         let alertData = alertMessage
         let alert = UIAlertController(title: "Alert", message: alertData, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "cancel", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
         }))
         self.present(alert, animated: true, completion: nil)
         
@@ -151,7 +153,9 @@ class ChangePasswordViewController: UIViewController {
             if let _model = model as? ChangePasswordModel{
                 let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
                 if type == StatusEnum.success{
-                    self.showAlert(alertMessage: "Your password has been changed successfully")
+                    CCUtility.showDefaultAlertwithCompletionHandler(_title: Constant.AppName, _message: "Your password has been changed successfully", parentController: self, completion: { (status) in
+                        self.navigationController?.popViewController(animated: true)
+                    })
                 }
                 else if type == StatusEnum.sessionexpired{
                 }
