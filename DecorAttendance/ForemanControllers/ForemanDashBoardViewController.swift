@@ -69,12 +69,15 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
         pieChartViewLabourSummary.myAnimationDelegate = self
         addTapGesturesToViews()
         callGetAllSitesAPI()
-        getAttendanceSummaryApi()
     }
     
     func initialisation(){
         self.dateLabel.text = CCUtility.stringFromDate(date: Date())
         self.formanRequest.attendanceDate = CCUtility.stringFromDate(date: Date())
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        getAttendanceSummaryApi()
     }
     
     //Get All Sites Api
