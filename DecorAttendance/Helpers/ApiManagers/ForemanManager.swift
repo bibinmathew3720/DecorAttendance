@@ -46,9 +46,11 @@ class AttendanceSummaryResponseModel : NSObject{
     var error:Int = 0
     var presentCount:CGFloat = 0
     var absentCount:CGFloat = 0
+    var pendingCount:CGFloat = 0
     var total:CGFloat = 0
     var absentPercentage:CGFloat = 0.0
     var presentPercentage:CGFloat = 0.0
+    var pendingPercentage:CGFloat = 0.0
     init(dict:[String:Any?]) {
         if let value = dict["error"] as? Int{
             error = value
@@ -58,6 +60,9 @@ class AttendanceSummaryResponseModel : NSObject{
         }
         if let value = dict["absent_count"] as? Int{
             absentCount = CGFloat(Float(value))
+        }
+        if let value = dict["not_marked"] as? Int{
+            pendingCount = CGFloat(Float(value))
         }
         if let value = dict["total"] as? Int{
             total =  CGFloat(Float(value))
@@ -70,15 +75,26 @@ class AttendanceSummaryResponseModel : NSObject{
         if(presentPercentage.isNaN){
             presentPercentage = 0.0
         }
+        pendingPercentage = (pendingCount/total)*100.0
+        if(pendingPercentage.isNaN){
+            pendingPercentage = 0.0
+        }
     }
 }
 
 class ForemanAttendanceRequestModel:NSObject{
     var attendanceDate:String = ""
+    var siteId:Int = 0
     func getReqestBody()->String{
         var requestBody = ""
         if (attendanceDate.count != 0 ){
             requestBody = "date=\(attendanceDate)"
+        }
+        if (requestBody.count>0){
+            requestBody = requestBody + "&site_id=\(siteId)"
+        }
+        else{
+            requestBody = requestBody + "site_id=\(siteId)"
         }
         print("Request Body")
         print("-------------------------")

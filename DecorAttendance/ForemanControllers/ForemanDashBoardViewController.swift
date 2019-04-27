@@ -12,31 +12,23 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
         
     }
-    
-    
     weak var delegate: DashBoardDelegate?
-    
-    
     @IBOutlet weak var viewAttendanceStatics: UIView!
-    @IBOutlet weak var viewDropDownButtons: UIView!
-    @IBOutlet weak var viewRemainingBonus: UIView!
     @IBOutlet weak var viewPresentAbsent: UIView!
-
-    
     
     @IBOutlet weak var widthPresentColred: NSLayoutConstraint!
     @IBOutlet weak var widthPresentLight: NSLayoutConstraint!
     @IBOutlet weak var widthAbsentColored: NSLayoutConstraint!
     @IBOutlet weak var widthAbsentLight: NSLayoutConstraint!
-    @IBOutlet weak var widthBonusColored: NSLayoutConstraint!
-    @IBOutlet weak var widthBonusLight: NSLayoutConstraint!
-    @IBOutlet weak var heightBonusIndLight: NSLayoutConstraint!
-    @IBOutlet weak var bonusIndicatorLineWhite: UIView!
-    @IBOutlet weak var bonusIndicatorLineColored: UIView!
+    @IBOutlet weak var widthPendingColored: NSLayoutConstraint!
+    @IBOutlet weak var widthPendingLight: NSLayoutConstraint!
+    
     @IBOutlet weak var totalPresenceIndicatorWhite: UIView!
     @IBOutlet weak var totalPresenceIndicatorColored: UIView!
     @IBOutlet weak var totalAbsenceIndicatorWhite: UIView!
     @IBOutlet weak var totalAbsenceIndicatorColred: UIView!
+    @IBOutlet weak var totalPendingIndicatorWhite: UIView!
+    @IBOutlet weak var totalPendingIndicatorColored: UIView!
     
     @IBOutlet weak var totalEmployeesLabel: UILabel!
     @IBOutlet weak var presentEmployeesLabel: UILabel!
@@ -51,6 +43,8 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     @IBOutlet weak var absentProgressLabel: UILabel!
     @IBOutlet weak var presentPerLabel: UILabel!
     @IBOutlet weak var presentProgressLabel: UILabel!
+    @IBOutlet weak var pendingPerLabel: UILabel!
+    @IBOutlet weak var pendingProgressLabel: UILabel!
     
     
     
@@ -147,8 +141,9 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
             
             let absentSlice = Slice(radius: 0.75, width: (CGFloat(attendanceSummary.absentPercentage/100.00)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor:ObeidiFont.Color.obeidiLinePink())
             let presentSlice = Slice(radius: 0.65, width: (CGFloat(attendanceSummary.presentPercentage/100)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: ObeidiFont.Color.obeidiLineRed())
+            let pendingSlice = Slice(radius: 0.55, width: (CGFloat(attendanceSummary.pendingPercentage/100)), isOuterCircleNeeded: false, outerCircleWidth: 0, fillColor: ObeidiFont.Color.obeidiLineOrange())
             pieChartViewLabourSummary.layer.sublayers = nil
-            pieChartViewLabourSummary.slices = [absentSlice,presentSlice]
+            pieChartViewLabourSummary.slices = [absentSlice,presentSlice,pendingSlice]
             setPerformanceIndicatorLines()
         }
     }
@@ -224,9 +219,9 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
         let tapGestureDate = UITapGestureRecognizer(target: self, action: #selector(ForemanDashBoardViewController.handleDateViewTap))
         self.dateView.addGestureRecognizer(tapGestureDate)
         
-//        self.siteView.isUserInteractionEnabled = true
-//        let tapGesturSite = UITapGestureRecognizer(target: self, action: #selector(ForemanDashBoardViewController.handleSiteViewTap))
-//        self.siteView.addGestureRecognizer(tapGesturSite)
+        self.siteView.isUserInteractionEnabled = true
+        let tapGesturSite = UITapGestureRecognizer(target: self, action: #selector(ForemanDashBoardViewController.handleSiteViewTap))
+        self.siteView.addGestureRecognizer(tapGesturSite)
     }
     
     @objc func handleDateViewTap(){
@@ -254,7 +249,27 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
     }
     
     @objc func handleSiteViewTap(){
-       
+        DispatchQueue.main.async {
+            
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                //self.view.alpha = 0.65
+                //self.tabBarController?.view.alpha = 0.65
+                //self.navigationController?.navigationBar.alpha = 0.65
+                
+                
+            },completion:nil)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let siteViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
+            siteViewController.delegate = self
+            //calendarViewController.isDateNeeded = true
+            siteViewController.filterTypeName = FilterTypeName.site
+            siteViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            siteViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            siteViewController.sitesArray = self.siteModelObjArr
+            self.present(siteViewController, animated: true, completion: nil)
+            
+        }
     }
     
     func setPerformanceIndicatorLines() {
@@ -269,8 +284,13 @@ class ForemanDashBoardViewController: UITableViewController, MyCAAnimationDelega
             self.presentPerLabel.textColor = ObeidiFont.Color.obeidiLineRed()
             self.presentProgressLabel.text = String.init(format: "%0.0f / %0.0f", attendanceSummary.presentCount,attendanceSummary.total)
             
+            self.pendingPerLabel.text = String.init(format: "%0.2f%%", attendanceSummary.pendingPercentage)
+            self.pendingPerLabel.textColor = ObeidiFont.Color.obeidiLineRed()
+            self.pendingProgressLabel.text = String.init(format: "%0.0f / %0.0f", attendanceSummary.pendingCount,attendanceSummary.total)
+            
             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPresenceIndicatorWhite, lineB: totalPresenceIndicatorColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineRed(), lineAValue: 1, lineBValue:(attendanceSummary.presentPercentage/100.00), lineAMeter: widthPresentLight, lineBMeter: widthPresentColred)
             ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalAbsenceIndicatorWhite, lineB: totalAbsenceIndicatorColred, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLinePink(), lineAValue: 1, lineBValue: (attendanceSummary.absentPercentage/100.00), lineAMeter: widthAbsentLight, lineBMeter: widthAbsentColored)
+            ObeidiPerformanceIndicatorStyle.setIndicatorsByValues(lineA: self.totalPendingIndicatorWhite, lineB: totalPendingIndicatorColored, lineAColor: ObeidiFont.Color.obeidiLineWhite(), lineBColor: ObeidiFont.Color.obeidiLineOrange(), lineAValue: 1, lineBValue: (attendanceSummary.pendingPercentage/100.00), lineAMeter: widthPendingLight, lineBMeter: widthPendingColored)
         }
     }
 }
@@ -308,5 +328,8 @@ extension ForemanDashBoardViewController: filterUpdatedDelegate{
     }
     
     func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName){
+        self.siteLabel.text = selSite.nameNew
+        formanRequest.siteId = selSite.locIdNew
+        getAttendanceSummaryApi()
     }
 }
