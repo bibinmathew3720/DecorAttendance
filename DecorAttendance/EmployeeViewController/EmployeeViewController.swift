@@ -97,16 +97,16 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: textfield delegate methods
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+        employeeRequest.searchText = textField.text ?? ""
+        getEmployeesApi()
         textField.resignFirstResponder()
         return true
-        
     }
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+    
+    func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
-        
     }
+    
     
     func setViewStyle() {
         let layer = self.viewSearchBar!
