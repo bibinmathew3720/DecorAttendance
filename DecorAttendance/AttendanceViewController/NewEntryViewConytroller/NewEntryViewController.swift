@@ -194,6 +194,12 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
                 if let res = result as? [ObeidiModelSites]{
                     self.siteModelObjArr = res
                     self.siteModelObjArr.remove(at: 0)
+                    if self.siteModelObjArr.count>0{
+                        let firstSite = self.siteModelObjArr.first
+                        self.attendanceRequest.siteId = firstSite?.locIdNew ?? 0
+                        self.lblSite.text = firstSite?.nameNew
+                        self.callFetchAttendanceaAPI()
+                    }
                 }
             }else{
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
