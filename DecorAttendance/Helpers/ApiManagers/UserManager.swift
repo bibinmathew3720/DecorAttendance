@@ -537,9 +537,12 @@ class ChangePwdRequestModel:NSObject {
     var current:String = ""
     var new:String = ""
     var confirm:String = ""
+
+    
     func getRequestBody()->String{
         var dict:[String:AnyObject] = [String:AnyObject]()
         dict.updateValue(new as AnyObject, forKey: "new_password")
+        dict.updateValue(current as AnyObject, forKey: "old_password")
         return CCUtility.getJSONfrom(dictionary: dict)
     }
 }

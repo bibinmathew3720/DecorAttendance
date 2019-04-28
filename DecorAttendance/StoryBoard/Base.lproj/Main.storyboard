@@ -1651,7 +1651,7 @@
                                         <rect key="frame" x="27.5" y="13" width="320" height="54"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                         <connections>
                                             <action selector="textFieldEditingChangedMethod:" destination="cZj-jS-ZHv" eventType="editingDidEnd" id="RLW-Rw-BqD"/>
                                             <outlet property="delegate" destination="cZj-jS-ZHv" id="KLj-ci-cXg"/>

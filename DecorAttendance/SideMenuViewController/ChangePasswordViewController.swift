@@ -151,13 +151,13 @@ class ChangePasswordViewController: UIViewController {
             (model,response)  in
             MBProgressHUD.hide(for: self.view, animated: true)
             if let _model = model as? ChangePasswordModel{
-                let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
-                if type == StatusEnum.success{
+                if _model.error == 0{
                     CCUtility.showDefaultAlertwithCompletionHandler(_title: Constant.AppName, _message: "Your password has been changed successfully", parentController: self, completion: { (status) in
                         self.navigationController?.popViewController(animated: true)
                     })
                 }
-                else if type == StatusEnum.sessionexpired{
+                else if _model.message.count>0{
+                    self.showAlert(alertMessage: _model.message)
                 }
                 else{
                     self.showAlert(alertMessage: "Something went wrong. Please try again")
