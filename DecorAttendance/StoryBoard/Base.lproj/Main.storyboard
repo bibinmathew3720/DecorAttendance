@@ -1801,7 +1801,7 @@
                                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1C-Gu-AK7">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1C-Gu-AK7">
                                         <rect key="frame" x="12" y="174.5" width="110" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="I3p-Fi-aXM"/>
@@ -1815,7 +1815,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FoR-4I-Y2s">
-                                        <rect key="frame" x="178" y="174.5" width="110" height="35"/>
+                                        <rect key="frame" x="95" y="174.5" width="110" height="35"/>
                                         <state key="normal" title="Ok">
                                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -1831,7 +1831,7 @@
                                     <constraint firstItem="psW-9P-CF8" firstAttribute="centerX" secondItem="8dX-hs-nBi" secondAttribute="centerX" id="8le-WR-haf"/>
                                     <constraint firstItem="k1C-Gu-AK7" firstAttribute="top" secondItem="psW-9P-CF8" secondAttribute="bottom" constant="30" id="BVn-Kz-uZl"/>
                                     <constraint firstItem="xuT-kG-RzD" firstAttribute="top" secondItem="azH-IF-kfY" secondAttribute="top" constant="-47.5" id="FGn-W0-cgd"/>
-                                    <constraint firstAttribute="trailing" secondItem="FoR-4I-Y2s" secondAttribute="trailing" constant="12" id="OAQ-Fj-e40"/>
+                                    <constraint firstItem="FoR-4I-Y2s" firstAttribute="centerX" secondItem="azH-IF-kfY" secondAttribute="centerX" id="Igz-TE-sWE"/>
                                     <constraint firstItem="psW-9P-CF8" firstAttribute="width" secondItem="8dX-hs-nBi" secondAttribute="width" id="OBz-6q-xmt"/>
                                     <constraint firstItem="8dX-hs-nBi" firstAttribute="top" secondItem="xuT-kG-RzD" secondAttribute="bottom" constant="8" id="RpU-vU-qel"/>
                                     <constraint firstItem="FoR-4I-Y2s" firstAttribute="height" secondItem="k1C-Gu-AK7" secondAttribute="height" id="Ugq-Gy-FM8"/>
