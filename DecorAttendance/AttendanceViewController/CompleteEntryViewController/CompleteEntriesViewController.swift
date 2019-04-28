@@ -124,6 +124,8 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        self.attendanceRequest.searchText = textField.text ?? ""
+        callFetchAttendanceaAPI()
         return true
     }
     
@@ -200,6 +202,7 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
                     if self.siteModelObjArr.count>0{
                         self.siteModelObjArr.remove(at: 0)
                         let firstSite = self.siteModelObjArr.first
+                         self.selectedSite = firstSite
                         self.attendanceRequest.siteId = firstSite?.locIdNew ?? 0
                         self.lblSite.text = firstSite?.nameNew
                         self.callFetchAttendanceaAPI()

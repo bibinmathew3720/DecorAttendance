@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRecognizerDelegate {
+class NewEntryViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var tableViewNewEntry: UITableView!
     @IBOutlet weak var viewDropDownButtons: UIView!
     @IBOutlet weak var lblSite: UILabel!
@@ -196,6 +196,7 @@ class NewEntryViewController: UIViewController, UITextFieldDelegate, UIGestureRe
                     self.siteModelObjArr.remove(at: 0)
                     if self.siteModelObjArr.count>0{
                         let firstSite = self.siteModelObjArr.first
+                        self.selectedSite = firstSite
                         self.attendanceRequest.siteId = firstSite?.locIdNew ?? 0
                         self.lblSite.text = firstSite?.nameNew
                         self.callFetchAttendanceaAPI()
@@ -311,5 +312,14 @@ extension NewEntryViewController:UITableViewDataSource,UITableViewDelegate{
         else{
            CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Choose a site to continue..", parentController: self)
         }
+    }
+}
+
+extension NewEntryViewController:UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.attendanceRequest.searchText = textField.text ?? ""
+        callFetchAttendanceaAPI()
+        return true
     }
 }
