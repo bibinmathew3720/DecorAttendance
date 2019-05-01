@@ -1609,7 +1609,7 @@
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
                                         <connections>
-                                            <action selector="textFieldEditingChangedMethod:" destination="cZj-jS-ZHv" eventType="editingDidEnd" id="Abj-mD-2rz"/>
+                                            <action selector="textFieldEditingChangedMethod:" destination="cZj-jS-ZHv" eventType="editingChanged" id="CPe-ER-iUB"/>
                                             <outlet property="delegate" destination="cZj-jS-ZHv" id="BYR-MV-gK6"/>
                                         </connections>
                                     </textField>
@@ -1631,7 +1631,7 @@
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
                                         <connections>
-                                            <action selector="textFieldEditingChangedMethod:" destination="cZj-jS-ZHv" eventType="editingDidEnd" id="dgC-Go-xEY"/>
+                                            <action selector="textFieldEditingChangedMethod:" destination="cZj-jS-ZHv" eventType="editingChanged" id="fwQ-5i-No2"/>
                                             <outlet property="delegate" destination="cZj-jS-ZHv" id="XlH-T3-9Pi"/>
                                         </connections>
                                     </textField>
@@ -1653,7 +1653,7 @@
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                         <connections>
-                                            <action selector="textFieldEditingChangedMethod:" destination="cZj-jS-ZHv" eventType="editingDidEnd" id="RLW-Rw-BqD"/>
+                                            <action selector="textFieldEditingChangedMethod:" destination="cZj-jS-ZHv" eventType="editingChanged" id="cXB-WH-oxE"/>
                                             <outlet property="delegate" destination="cZj-jS-ZHv" id="KLj-ci-cXg"/>
                                         </connections>
                                     </textField>

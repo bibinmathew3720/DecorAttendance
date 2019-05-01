@@ -113,28 +113,34 @@ class ChangePasswordViewController: UIViewController {
     func isValid()->Bool {
         if !pwd.current.isValidString(){
             if !pwd.new.isValidString(){
-                if pwd.new.isPassowrdValid(){
-                    if !pwd.confirm.isValidString(){
-                        if pwd.new == pwd.confirm{
-                            return true
+                if pwd.new.count >= 6{
+                    if pwd.new.count <= 16{
+                        if !pwd.confirm.isValidString(){
+                            if pwd.new == pwd.confirm{
+                                return true
+                            }
+                            else{
+                                self.showAlert(alertMessage: "Password does not match the confirm password")
+                                return false
+                            }
                         }
                         else{
-                            self.showAlert(alertMessage: "Password does not match the confirm password")
+                            self.showAlert(alertMessage: "Please confirm your password")
                             return false
                         }
                     }
                     else{
-                        self.showAlert(alertMessage: "Please confirm your password")
+                        self.showAlert(alertMessage: "Maximum password character limit is 16")
                         return false
                     }
                 }
                 else{
-                     self.showAlert(alertMessage: "Your password should be at least 6 characters")
+                    self.showAlert(alertMessage: "Your password should be at least 6 characters")
                     return false
                 }
             }
             else{
-               self.showAlert(alertMessage: "Please enter your new password")
+                self.showAlert(alertMessage: "Please enter your new password")
                 return false
             }
         }

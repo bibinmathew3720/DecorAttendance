@@ -75,7 +75,7 @@
             <objects>
                 <tableViewController id="gBL-mw-NAX" customClass="LabourSummaryViewController" customModule="DecorAttendance" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pse-Fu-a9W">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="577"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
@@ -1674,7 +1674,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="ForemanDashBoardViewControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="k3f-U5-rHB" customClass="ForemanDashBoardViewController" customModule="DecorAttendance" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="PTf-n4-Se7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
@@ -1991,7 +1991,7 @@
                                         <rect key="frame" x="0.0" y="623" width="375" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cs5-ib-NXb" id="1kM-Dt-ZF7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="107.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0A-jR-ryY">
@@ -2897,7 +2897,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DVu-Cy-0Ve">
-                                                    <rect key="frame" x="8" y="4" width="359" height="103.5"/>
+                                                    <rect key="frame" x="8" y="4" width="359" height="104"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Penalty Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2n-tn-Y5P">
                                                             <rect key="frame" x="8" y="41.5" width="122" height="21"/>
