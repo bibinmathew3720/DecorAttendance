@@ -45,6 +45,8 @@ class NewEntryViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.attendanceRequest.searchText = ""
+        txtFldSearch.text = ""
         callFetchAttendanceaAPI()
     }
     
@@ -53,6 +55,11 @@ class NewEntryViewController: UIViewController, UIGestureRecognizerDelegate {
         self.lblDate.text = ""
         self.lblSite.text = ""
         self.title = Constant.PageNames.Attendance
+    }
+    
+    @IBAction func searchTextFieldTextChanged(_ sender: UITextField, forEvent event: UIEvent) {
+        self.attendanceRequest.searchText = sender.text ?? ""
+        callFetchAttendanceaAPI()
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
@@ -318,8 +325,6 @@ extension NewEntryViewController:UITableViewDataSource,UITableViewDelegate{
 extension NewEntryViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        self.attendanceRequest.searchText = textField.text ?? ""
-        callFetchAttendanceaAPI()
         return true
     }
 }

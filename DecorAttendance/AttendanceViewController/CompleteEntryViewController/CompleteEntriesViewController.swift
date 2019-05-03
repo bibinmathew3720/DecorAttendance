@@ -89,6 +89,8 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.txtFldSearch.text = ""
+        attendanceRequest.searchText = ""
         if self.isSuspicious{
             callFetchSuspiciousAttendanceAPI()
         }
@@ -124,13 +126,20 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        self.attendanceRequest.searchText = textField.text ?? ""
-        callFetchAttendanceaAPI()
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
+    }
+    @IBAction func textFieldEditingChanged(_ sender: UITextField, forEvent event: UIEvent) {
+        attendanceRequest.searchText = sender.text ?? ""
+        if self.isSuspicious{
+            callFetchSuspiciousAttendanceAPI()
+        }
+        else{
+            callFetchAttendanceaAPI()
+        }
     }
     
     func addTapgesturesToView()  {
@@ -205,7 +214,12 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
                          self.selectedSite = firstSite
                         self.attendanceRequest.siteId = firstSite?.locIdNew ?? 0
                         self.lblSite.text = firstSite?.nameNew
-                        self.callFetchAttendanceaAPI()
+                        if self.isSuspicious{
+                            self.callFetchSuspiciousAttendanceAPI()
+                        }
+                        else{
+                            self.callFetchAttendanceaAPI()
+                        }
                     }
                 }
             }else{
@@ -242,7 +256,12 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         if let searchText = txtFldSearch.text{
             attendanceRequest.searchText = searchText
         }
-        callFetchAttendanceaAPI()
+        if self.isSuspicious{
+            callFetchSuspiciousAttendanceAPI()
+        }
+        else{
+            callFetchAttendanceaAPI()
+        }
     }
     
 }
@@ -276,7 +295,12 @@ extension CompleteEntriesViewController:filterUpdatedDelegate{
         self.attendanceRequest.siteId = selSite.locIdNew
         lblSite.text = selSite.nameNew
         self.selectedSite = selSite
-        callFetchAttendanceaAPI()
+        if self.isSuspicious{
+            callFetchSuspiciousAttendanceAPI()
+        }
+        else{
+            callFetchAttendanceaAPI()
+        }
     }
     
     func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
@@ -365,7 +389,12 @@ extension CompleteEntriesViewController:CompltedEntryCellDelegate{
             MBProgressHUD.hide(for: self.view, animated: true)
             if let _model = model as? ChangeAttendanceResponseModel{
                 if _model.success == 1{
-                    self.callFetchAttendanceaAPI()
+                    if self.isSuspicious{
+                        self.callFetchSuspiciousAttendanceAPI()
+                    }
+                    else{
+                        self.callFetchAttendanceaAPI()
+                    }
                 }
             }
         }) { (ErrorType) in

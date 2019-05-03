@@ -36,6 +36,12 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.txtFldSearch.text = ""
+        employeeRequest.searchText = ""
+        getEmployeesApi()
+    }
+    
     //Search Button Action
     
     @IBAction func searchButtonAction(_ sender: UIButton) {
@@ -97,8 +103,7 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: textfield delegate methods
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        employeeRequest.searchText = textField.text ?? ""
-        getEmployeesApi()
+       
         textField.resignFirstResponder()
         return true
     }
@@ -106,6 +111,12 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
     func textFieldDidBeginEditing(_ textField: UITextField){
         activeTextField = textField
     }
+    
+    @IBAction func textFieldEditingChanged(_ sender: UITextField, forEvent event: UIEvent) {
+        employeeRequest.searchText = sender.text ?? ""
+        getEmployeesApi()
+    }
+    
     
     
     func setViewStyle() {
