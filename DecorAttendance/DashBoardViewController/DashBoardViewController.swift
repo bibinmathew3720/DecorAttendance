@@ -92,12 +92,12 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     var sitesArr: NSMutableArray!
     var spinner = UIActivityIndicatorView(style: .gray)
     var siteModelObjArr = [ObeidiModelSites]()
-    var siteSelectedIndex: Int!
     var daySelectedIndex: Int!
     var monthSelectedIndex: Int!
-    var siteIdSelected: String!
     var costSummaryModel: ObeidiModelCostSummarySiteWise!
     var siteWiseRequestModel = SiteWiseRequestModel()
+    var isSiteChanged:Bool = false
+    var selectedSite:ObeidiModelSites?
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -242,25 +242,30 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     }
     
     @objc func handleDateLabelTap(){
-        DispatchQueue.main.async {
-            
-            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                //self.view.alpha = 0.65
-                //self.tabBarController?.view.alpha = 0.65
-                self.navigationController?.navigationBar.alpha = 0.65
+        if (!isSiteChanged){
+            DispatchQueue.main.async {
                 
+                UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                    //self.view.alpha = 0.65
+                    //self.tabBarController?.view.alpha = 0.65
+                    self.navigationController?.navigationBar.alpha = 0.65
+                    
+                    
+                },completion:nil)
                 
-            },completion:nil)
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let calendarViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
-            calendarViewController.delegate = self
-            //calendarViewController.isDateNeeded = true
-            calendarViewController.filterTypeName = FilterTypeName.endDate
-            calendarViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            calendarViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            self.present(calendarViewController, animated: true, completion: nil)
-            
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let calendarViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
+                calendarViewController.delegate = self
+                //calendarViewController.isDateNeeded = true
+                calendarViewController.filterTypeName = FilterTypeName.endDate
+                calendarViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                calendarViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                self.present(calendarViewController, animated: true, completion: nil)
+                
+            }
+        }
+        else{
+           CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "You won't able to choose start date and end date from different sites", parentController: self)
         }
         
     }
@@ -284,7 +289,6 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
             siteViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             siteViewController.sitesArray = self.siteModelObjArr
             self.present(siteViewController, animated: true, completion: nil)
-            
         }
     }
     
@@ -385,6 +389,9 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
         },completion:nil)
         if (type == .startDate){
             if (date.count>0){
+                if (self.isSiteChanged){
+                    self.isSiteChanged = false
+                }
                 siteWiseRequestModel.startDate = date
                 self.lblStratDate.text = date
                 callSiteWiseCostSummaryApi()
@@ -400,6 +407,12 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     }
     
     func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName){
+        if let _selSite = self.selectedSite{
+            if _selSite != selSite{
+                isSiteChanged = true;
+            }
+        }
+        selectedSite = selSite
         UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
             self.view.alpha = 1
             //self.tabBarController?.view.alpha = 0.65
