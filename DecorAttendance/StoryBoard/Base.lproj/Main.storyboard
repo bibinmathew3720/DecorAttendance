@@ -3951,8 +3951,9 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
                                         <connections>
+                                            <action selector="textFieldChangeCharacters:" destination="gKM-BO-7OY" eventType="editingChanged" id="aGY-lF-BiX"/>
                                             <outlet property="delegate" destination="gKM-BO-7OY" id="MIM-UR-xl8"/>
                                         </connections>
                                     </textField>

@@ -30,6 +30,12 @@ class LabourwiseViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        labourWiseRequestModel.searchText = ""
+        txtFldSearch.text = ""
+        callLabourWiseCostSummaryAPI()
+    }
+    
     func initialisation(){
        resetRequestModel()
     }
@@ -67,6 +73,11 @@ class LabourwiseViewController: UIViewController {
         }
     }
     
+    @IBAction func textFieldChangeCharacters(_ sender: UITextField) {
+        self.labourWiseRequestModel.searchText = sender.text ?? ""
+        callLabourWiseCostSummaryAPI()
+    }
+    
     @objc func dismissKeyBoard()  {
         if activeTextField != nil{
             activeTextField.resignFirstResponder()
@@ -75,12 +86,12 @@ class LabourwiseViewController: UIViewController {
     
     func callLabourWiseCostSummaryAPI()  {
         self.isApiCalling = true
-        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
-    ObeidiModelCostSummaryLabourWise.callCostSummaryRequset(requestBody:self.labourWiseRequestModel.getReqestBody()) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+ ObeidiModelCostSummaryLabourWise.callCostSummaryRequset(requestBody:self.labourWiseRequestModel.getReqestBody()) {
             (success, result, error) in
            self.isApiCalling = false
             if success! {
-                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+                MBProgressHUD.hide(for: self.view, animated: true)
                 if let res = result as? ObeidiModelCostSummaryLabourWise{
                     self.labourWiseCostSummaryResponse = res
                     self.tableViewLabourwise.reloadData()
@@ -94,7 +105,7 @@ class LabourwiseViewController: UIViewController {
                     }
                 }
             }else{
-                ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
+                MBProgressHUD.hide(for: self.view, animated: true)
             }
         }
     }
