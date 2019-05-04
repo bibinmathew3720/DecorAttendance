@@ -40,6 +40,7 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     
     func initialisation(){
         self.title = Constant.PageNames.Attendance
+        self.navigationController?.navigationBar.topItem?.title = ""
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -132,6 +133,16 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
             stillImageOutput.capturePhoto(with: settings, delegate: self)
         } else {
             // Fallback on earlier versions
+            
+            let settings = AVCapturePhotoSettings()
+            let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
+            let previewFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
+                                 kCVPixelBufferWidthKey as String: 160,
+                                 kCVPixelBufferHeightKey as String: 160]
+            settings.previewPhotoFormat = previewFormat
+            
+            //let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecJPEG])
+            stillImageOutput.capturePhoto(with: settings, delegate: self)
         }
         #endif
     }
@@ -144,9 +155,24 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
             else { return }
         
         let image = UIImage(data: imageData)
+        if let _image = image{
+            self.moveToCapturedImagePage(image: _image, imageData: imageData)
+        }
+    }
+    
+     //Delegate for ios 10
+    func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?){
+        if let sampleBuffer = photoSampleBuffer, let previewBuffer = previewPhotoSampleBuffer, let dataImage = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: previewBuffer) {
+            let image = UIImage(data: dataImage)
+            if let _image = image{
+                self.moveToCapturedImagePage(image: _image, imageData: dataImage)
+            }
+        }
+    }
+    
+    func moveToCapturedImagePage(image:UIImage,imageData:Data){
         capturedImage = image
         self.imageDataRep  = imageData
-        //captureImageView.image = image
         if self.attendanceType == AttendanceType.SickLeave{
             if let _delegate = self.delegate{
                 _delegate.capturedImage(image: capturedImage, imageData: imageData)

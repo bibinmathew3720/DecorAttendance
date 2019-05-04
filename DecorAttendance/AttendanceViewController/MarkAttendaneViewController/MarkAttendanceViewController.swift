@@ -70,7 +70,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     
     func askForLocationAuthorisation(){
         // Ask for Authorisation from the User.
-        self.locationManager.requestAlwaysAuthorization()
+        //self.locationManager.requestAlwaysAuthorization()
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -310,29 +310,34 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     }
 
     @IBAction func bttnActnNext(_ sender: Any) {
-        if let attType = self.attendanceType{
-            switch attType{
-            case .StartTime:
-                     self.performSegue(withIdentifier: "toSafetyEquipmentsSceneSegue:MarkAttendance", sender: Any.self)
+        if let _selLocation = self.selLocation{
+            if let attType = self.attendanceType{
+                switch attType{
+                case .StartTime:
+                    self.performSegue(withIdentifier: "toSafetyEquipmentsSceneSegue:MarkAttendance", sender: Any.self)
                     break
-            case .EndTime:
-                User.Attendance.type = User.attendanceType.endTime
-                self.performSegue(withIdentifier: "toCaptureImageSceneSegue:MarkAttendanceScene", sender: Any.self)
-                break
-            case .SickLeave:
-                self.performSegue(withIdentifier: "toSickLeaveSceneSegue:MarkAttendance", sender: Any.self)
-                break
-            case .Absent:
-                if inValidEntry(){
-                    callPostAttendanceAPI()
+                case .EndTime:
+                    User.Attendance.type = User.attendanceType.endTime
+                    self.performSegue(withIdentifier: "toCaptureImageSceneSegue:MarkAttendanceScene", sender: Any.self)
+                    break
+                case .SickLeave:
+                    self.performSegue(withIdentifier: "toSickLeaveSceneSegue:MarkAttendance", sender: Any.self)
+                    break
+                case .Absent:
+                    if inValidEntry(){
+                        callPostAttendanceAPI()
+                    }
+                    break
+                case .Strike:
+                    if inValidEntry(){
+                        callPostAttendanceAPI()
+                    }
+                    break
                 }
-                 break
-            case .Strike:
-                if inValidEntry(){
-                    callPostAttendanceAPI()
-                }
-                break
             }
+        }
+        else{
+            CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Location Not Available", parentController: self)
         }
     }
     
@@ -448,4 +453,7 @@ extension MarkAttendanceViewController:CLLocationManagerDelegate{
         manager.stopUpdatingLocation()
     }
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print (error.localizedDescription)
+    }
 }
