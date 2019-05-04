@@ -41,7 +41,7 @@ class SafetyEquipmentsViewController: UIViewController, UITableViewDelegate, UIT
     func initialisation(){
         isAllButtonChecked = false
         self.title = Constant.PageNames.Attendance
-        self.navigationController?.navigationBar.topItem?.title = ""
+         self.navigationController?.navigationItem.leftBarButtonItem?.title = ""
        self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "back")
 

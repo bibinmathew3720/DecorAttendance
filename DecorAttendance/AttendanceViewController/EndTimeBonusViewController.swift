@@ -41,11 +41,13 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
         if let selSite = self.selSiteModel{
             self.lblRemainingBonus.text = "AED " + "\(selSite.remainingBonusNew) / \(selSite.bonusBudgetNew)"
         }
+        drawOuterPieChart(center: CGPoint(x: 100, y: 100), radius: 50, filValue: 10)
         // Do any additional setup after loading the view.
     }
     
     func initialisation(){
        self.title = Constant.PageNames.Attendance
+         self.navigationController?.navigationItem.leftBarButtonItem?.title = ""
     }
     
     //MARK: textfield delegate methods

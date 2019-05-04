@@ -40,7 +40,8 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     
     func initialisation(){
         self.title = Constant.PageNames.Attendance
-        self.navigationController?.navigationBar.topItem?.title = ""
+        
+        self.navigationController?.navigationItem.leftBarButtonItem?.title = ""
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -162,6 +163,7 @@ class CaptureImageViewController: UIViewController, AVCapturePhotoCaptureDelegat
     
      //Delegate for ios 10
     func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?){
+
         if let sampleBuffer = photoSampleBuffer, let previewBuffer = previewPhotoSampleBuffer, let dataImage = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: previewBuffer) {
             let image = UIImage(data: dataImage)
             if let _image = image{

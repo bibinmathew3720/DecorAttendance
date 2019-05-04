@@ -42,6 +42,7 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     
     func initialisation(){
         self.title = Constant.PageNames.Attendance
+         self.navigationController?.navigationItem.leftBarButtonItem?.title = ""
     }
     
     func populateData(){
