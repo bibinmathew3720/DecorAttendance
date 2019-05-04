@@ -299,13 +299,12 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     }
 
     func animationDidStop(_ theAnimation: CAAnimation!, finished flag: Bool) {
-        if slicedPieChart.myAnimationDelegate != nil
-        {
-            slicedPieChart.animating = false
-            slicedPieChart.myAnimationDelegate?.animationDidStop( theAnimation, finished: true)
-        }
-        
-        
+//        if slicedPieChart.myAnimationDelegate != nil
+//        {
+//            slicedPieChart.animating = false
+//            slicedPieChart.myAnimationDelegate?.animationDidStop( theAnimation, finished: true)
+//        }
+//
     }
     func setUpViewStyles() {
         
