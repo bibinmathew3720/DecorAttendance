@@ -10,6 +10,7 @@ import UIKit
 
 class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, dismissDelegate {
 
+    @IBOutlet weak var piceChartslice: PieChartSliceView!
     
     @IBOutlet weak var pieChartBonus: UIView!
     
@@ -41,13 +42,23 @@ class EndTimeBonusViewController: UITableViewController, UITextFieldDelegate, di
         if let selSite = self.selSiteModel{
             self.lblRemainingBonus.text = "AED " + "\(selSite.remainingBonusNew) / \(selSite.bonusBudgetNew)"
         }
-        drawOuterPieChart(center: CGPoint(x: 100, y: 100), radius: 50, filValue: 10)
+        addingPieChart()
+        //drawOuterPieChart(center: CGPoint(x: 100, y: 100), radius: 50, filValue: 10)
         // Do any additional setup after loading the view.
     }
     
     func initialisation(){
        self.title = Constant.PageNames.Attendance
          self.navigationController?.navigationItem.leftBarButtonItem?.title = ""
+        addingPieChart()
+    }
+    
+    func addingPieChart(){
+        if let selSite = self.selSiteModel{
+            let remainingBonusSlice = Slice(radius: 0, width: 0.5, isOuterCircleNeeded: true, outerCircleWidth: selSite.remainingBonusNew/selSite.bonusBudgetNew, fillColor: Constant.Colors.paidVacancColor)
+            piceChartslice.layer.sublayers = nil
+            piceChartslice.slices = [remainingBonusSlice]
+        }
     }
     
     //MARK: textfield delegate methods

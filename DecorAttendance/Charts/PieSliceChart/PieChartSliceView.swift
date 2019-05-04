@@ -165,8 +165,9 @@ class PieChartSliceView: UIView, CAAnimationDelegate
         
         startAngle = endAngle
       }
-        
-        drawCentreHoles(center: center, maxRadius: maxRadius)
+        if (slices[0].radius != 0){
+            drawCentreHoles(center: center, maxRadius: maxRadius)
+        }
         
         //add outer graph
 //        if slices.count == 2{
