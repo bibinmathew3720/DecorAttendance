@@ -38,6 +38,8 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
         // Do any additional setup after loading the view.
     }
     
+    //MARK- Adding Refrsh Control
+    
     func addingPulltoRefresh(){
         refreshControl.addTarget(self,   action: #selector(refreshControlAction), for: .valueChanged)
         tableViewEmployee.refreshControl = refreshControl

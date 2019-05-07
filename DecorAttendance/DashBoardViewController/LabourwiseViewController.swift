@@ -21,6 +21,8 @@ class LabourwiseViewController: UIViewController {
     var labourWiseCostSummaryResponse:ObeidiModelCostSummaryLabourWise?
     var labourWiseRequestModel = LabourWiseRequestModel()
     var isApiCalling:Bool =  true
+    let refreshControl = UIRefreshControl()
+    var isFromRefreshControl = false
     override func viewDidLoad() {
         super.viewDidLoad()
         setViewStyles()
@@ -38,6 +40,22 @@ class LabourwiseViewController: UIViewController {
     
     func initialisation(){
        resetRequestModel()
+       addingPulltoRefresh()
+    }
+    
+    //MARK- Adding Refrsh Control
+    
+    func addingPulltoRefresh(){
+        refreshControl.addTarget(self,   action: #selector(refreshControlAction), for: .valueChanged)
+        tableViewLabourwise.refreshControl = refreshControl
+    }
+    
+    @objc func refreshControlAction(){
+        isFromRefreshControl = true
+        self.labourWiseRequestModel.searchText = ""
+        txtFldSearch.text = ""
+        callLabourWiseCostSummaryAPI()
+        
     }
     
     func resetRequestModel(){
@@ -86,11 +104,15 @@ class LabourwiseViewController: UIViewController {
     
     func callLabourWiseCostSummaryAPI()  {
         self.isApiCalling = true
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        if (!self.isFromRefreshControl){
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
  ObeidiModelCostSummaryLabourWise.callCostSummaryRequset(requestBody:self.labourWiseRequestModel.getReqestBody()) {
             (success, result, error) in
            self.isApiCalling = false
             if success! {
+                self.isFromRefreshControl = false
+                self.refreshControl.endRefreshing()
                 MBProgressHUD.hide(for: self.view, animated: true)
                 if let res = result as? ObeidiModelCostSummaryLabourWise{
                     self.labourWiseCostSummaryResponse = res
@@ -105,6 +127,8 @@ class LabourwiseViewController: UIViewController {
                     }
                 }
             }else{
+                self.isFromRefreshControl = false
+                self.refreshControl.endRefreshing()
                 MBProgressHUD.hide(for: self.view, animated: true)
             }
         }
