@@ -3291,7 +3291,7 @@
                                         <rect key="frame" x="0.0" y="503" width="375" height="481"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cs5-ib-NXb" id="1kM-Dt-ZF7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="481"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="480.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0A-jR-ryY">
@@ -3728,6 +3728,7 @@
                         <outlet property="pieChartViewCostSummary" destination="66v-r0-ObI" id="Ddz-DW-5Tx"/>
                         <outlet property="selectSite" destination="wdX-0l-fMf" id="R6Q-0r-zFw"/>
                         <outlet property="startDateView" destination="0f9-vV-c0K" id="A5w-D4-Xo5"/>
+                        <outlet property="tableView" destination="PTf-n4-Se7" id="uuu-ci-0Xq"/>
                         <outlet property="totalBonusIndicatorColored" destination="SKn-RJ-Q4x" id="ZEW-xo-sbu"/>
                         <outlet property="totalBonusIndicatorWhite" destination="VUZ-5p-Okw" id="5Hs-Ed-Cmu"/>
                         <outlet property="totalOTIndicatorColred" destination="yFY-Rc-iM3" id="thy-KW-Xk9"/>

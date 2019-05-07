@@ -24,7 +24,8 @@ class NewEntryViewController: UIViewController, UIGestureRecognizerDelegate {
     var siteModelObjArr = [ObeidiModelSites]()
     var spinner = UIActivityIndicatorView(style: .gray)
     var selectedIndex: Int!
-    
+    let refreshControl = UIRefreshControl()
+    var isFromRefreshControl = false
     @IBOutlet weak var emptyView: UIView!
     var attendanceResponseModel:ObeidAttendanceResponseModel?
     var attendanceRequest = ObeidAttendanceRequestModel()
@@ -43,6 +44,8 @@ class NewEntryViewController: UIViewController, UIGestureRecognizerDelegate {
         // Do any additional setup after loading the view.
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.attendanceRequest.searchText = ""
@@ -55,6 +58,22 @@ class NewEntryViewController: UIViewController, UIGestureRecognizerDelegate {
         self.lblDate.text = ""
         self.lblSite.text = ""
         self.title = Constant.PageNames.Attendance
+        addingPulltoRefresh()
+    }
+    
+    //MARK- Adding Refresh Control
+    
+    func addingPulltoRefresh(){
+        refreshControl.addTarget(self,   action: #selector(refreshControlAction), for: .valueChanged)
+        tableViewNewEntry.refreshControl = refreshControl
+    }
+    
+    @objc func refreshControlAction(){
+        isFromRefreshControl = true
+        self.attendanceRequest.searchText = ""
+        txtFldSearch.text = ""
+        callFetchAttendanceaAPI()
+        
     }
     
     @IBAction func searchTextFieldTextChanged(_ sender: UITextField, forEvent event: UIEvent) {
@@ -192,9 +211,10 @@ class NewEntryViewController: UIViewController, UIGestureRecognizerDelegate {
     
    
     func callGetAllSitesAPI() {
-        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
         ObeidiModelSites.callListSitesRequset(){
             (success, result, error) in
+            self.isFromRefreshControl = false
+            self.refreshControl.endRefreshing()
             if success! {
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 print(result!)
@@ -216,8 +236,14 @@ class NewEntryViewController: UIViewController, UIGestureRecognizerDelegate {
     }
    
     func callFetchAttendanceaAPI()  {
+        if (!self.isFromRefreshControl){
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
         ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody: attendanceRequest.getRequestBody()){
             (success, result, error) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.isFromRefreshControl = false
+            self.refreshControl.endRefreshing()
             if success! && result != nil {
                 if let res = result as? NSDictionary{
                     self.attendanceResponseModel = ObeidAttendanceResponseModel.init(dictionaryDetails: res)

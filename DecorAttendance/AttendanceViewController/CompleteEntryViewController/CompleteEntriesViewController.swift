@@ -27,6 +27,8 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     var spinner = UIActivityIndicatorView(style: .gray)
     var updateAttendanceStatus = ChangeAttendanceStatusRequestModel()
     var isSuspicious:Bool = false
+    let refreshControl = UIRefreshControl()
+    var isFromRefreshControl = false
     override func viewDidLoad() {
         super.viewDidLoad()
         txtFldSearch.delegate = self
@@ -45,11 +47,31 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
     }
     
     func initialisation(){
+        addingPulltoRefresh()
         attendanceRequest.isAttendanceCompleteEntry = true
         self.lblDate.text = ""
         self.lblSite.text = ""
         attendanceRequest.startDate = CCUtility.stringFromDate(date: Date())
         self.lblDate.text = "\(CCUtility.stringFromDate(date: Date()))"
+    }
+    
+    //MARK- Adding Refresh Control
+    
+    func addingPulltoRefresh(){
+        refreshControl.addTarget(self,   action: #selector(refreshControlAction), for: .valueChanged)
+        tableViewCompleteEntry.refreshControl = refreshControl
+    }
+    
+    @objc func refreshControlAction(){
+        isFromRefreshControl = true
+        self.attendanceRequest.searchText = ""
+        txtFldSearch.text = ""
+        if (self.isSuspicious){
+            callFetchSuspiciousAttendanceAPI()
+        }
+        else{
+            callFetchAttendanceaAPI()
+        }
     }
     
     func isValidSelection()->Bool{
@@ -228,8 +250,11 @@ class CompleteEntriesViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func callFetchAttendanceaAPI()  { ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody:attendanceRequest.getRequestBody()){
+    func callFetchAttendanceaAPI()  {
+        ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody:attendanceRequest.getRequestBody()){
             (success, result, error) in
+        self.isFromRefreshControl = false
+            self.refreshControl.endRefreshing()
             if success! && result != nil {
                 if let res = result as? NSDictionary{
                     self.completedEntriesResponseModel = ObeidAttendanceResponseModel.init(dictionaryDetails: res)
@@ -415,6 +440,8 @@ extension CompleteEntriesViewController:CompltedEntryCellDelegate{
         attendanceRequest.isSuspicious = true
         ObeidiModelFetchAttendance.callfetchAtendanceRequset(requestBody:attendanceRequest.getRequestBody()){
         (success, result, error) in
+        self.isFromRefreshControl = false
+        self.refreshControl.endRefreshing()
         if success! && result != nil {
             if let res = result as? NSDictionary{
                 self.completedEntriesResponseModel = ObeidAttendanceResponseModel.init(dictionaryDetails: res)
