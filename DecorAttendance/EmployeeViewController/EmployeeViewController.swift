@@ -19,11 +19,13 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
     var activeTextField: UITextField!
     var employeeResponse:DecoreEmployeeResponseModel?
     var employeeRequest = EmployeesRequestModel()
+    let refreshControl = UIRefreshControl()
+    var isFromRefreshControl = false
     override func viewDidLoad() {
         super.viewDidLoad()
         getEmployeesApi()
         addTapgesturesToView()
-        
+        addingPulltoRefresh()
         txtFldSearch.delegate = self
         self.tableViewEmployee.delegate = self
         self.tableViewEmployee.dataSource = self
@@ -34,6 +36,19 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
         setViewStyle()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func addingPulltoRefresh(){
+        refreshControl.addTarget(self,   action: #selector(refreshControlAction), for: .valueChanged)
+        tableViewEmployee.refreshControl = refreshControl
+    }
+    
+    @objc func refreshControlAction(){
+        isFromRefreshControl = true
+        self.employeeRequest.searchText = ""
+        txtFldSearch.text = ""
+        getEmployeesApi()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,10 +161,14 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func getEmployeesApi(){
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        if (!self.isFromRefreshControl){
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
         UserManager().getEmployeesApi(with:employeeRequest.getReqestBody(), success: {
             (model,response)  in
             MBProgressHUD.hide(for: self.view, animated: true)
+            self.refreshControl.endRefreshing()
+            self.isFromRefreshControl = false
             if let model = model as? DecoreEmployeeResponseModel{
                 let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
                 if type == StatusEnum.success{
@@ -178,6 +197,8 @@ class EmployeeViewController: UIViewController, UITableViewDelegate, UITableView
             
         }) { (ErrorType) in
             MBProgressHUD.hide(for: self.view, animated: true)
+            self.isFromRefreshControl = false
+            self.refreshControl.endRefreshing()
             if(ErrorType == .noNetwork){
                 CCUtility.showDefaultAlertwith(_title: User.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
             }
