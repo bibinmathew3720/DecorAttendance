@@ -87,7 +87,6 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     @IBOutlet weak var widthBonusLight: NSLayoutConstraint!
     @IBOutlet weak var heightBonusIndLight: NSLayoutConstraint!
     
-    
     var window: UIWindow?
     var sitesArr: NSMutableArray!
     var spinner = UIActivityIndicatorView(style: .gray)
@@ -98,6 +97,9 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     var siteWiseRequestModel = SiteWiseRequestModel()
     var isSiteChanged:Bool = false
     var selectedSite:ObeidiModelSites?
+    
+     let refrControl = UIRefreshControl()
+    var isFromRefreshControl = false
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -109,14 +111,30 @@ class DashBoardViewController: UITableViewController, MyCAAnimationDelegateProto
     }
     
     func initialisation(){
-        
+       addingPulltoRefresh()
+    }
+    
+    //MARK- Adding Refresh Control
+    
+    func addingPulltoRefresh(){
+        refrControl.addTarget(self,   action: #selector(refreshControlAction), for: .valueChanged)
+        tableView.refreshControl = refrControl
+    }
+    
+    @objc func refreshControlAction(){
+        isFromRefreshControl = true
+        callSiteWiseCostSummaryApi()
     }
     
     func callSiteWiseCostSummaryApi(){
-        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
+        if (!self.isFromRefreshControl){
+            ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
+        }
         print("Sitewise Request Body:\n---------()")
     ObeidiModelCostSummarySiteWise.callCostSummaryRequset(requestBody:self.siteWiseRequestModel.getReqestBody()) {
             (success, result, error) in
+        self.isFromRefreshControl = true
+        self.refreshControl?.endRefreshing()
             if success! {
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 self.processSiteWiseCostSummaryResponse(apiResponse: result! as! ObeidiModelCostSummarySiteWise)

@@ -96,6 +96,8 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     var spinner = UIActivityIndicatorView(style: .gray)
     var labourSummaryDetailRequestModel = LabourSummaryDetailsRequestModel()
     
+    let refrControl = UIRefreshControl()
+    var isFromRefreshControl = false
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -113,6 +115,19 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
         self.lblEndDate.text = ""
         self.lblSite.text = "All"
         self.title = Constant.PageNames.Dashboard
+        addingPulltoRefresh()
+    }
+    
+    //MARK- Adding Refresh Control
+    
+    func addingPulltoRefresh(){
+        refrControl.addTarget(self,   action: #selector(refreshControlAction), for: .valueChanged)
+        tableView.refreshControl = refrControl
+    }
+    
+    @objc func refreshControlAction(){
+        isFromRefreshControl = true
+        getCostSummaryDetailApi()
     }
     
     func populateCostSummary(){
@@ -125,9 +140,10 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     //MARK: Get All Sites Api
     
     func callGetAllSitesAPI() {
-        ObeidiSpinner.showSpinner(self.view, activityView: self.spinner)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         ObeidiModelSites.callListSitesRequset(){
             (success, result, error) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             if success! {
                 ObeidiSpinner.hideSpinner(self.view, activityView: self.spinner)
                 print(result!)
@@ -143,14 +159,19 @@ class LabourSummaryViewController: UITableViewController, MyCAAnimationDelegateP
     //Get Cost Summary Detail Api
     
     func getCostSummaryDetailApi(){
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        if (!self.isFromRefreshControl){
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+        }
         var detailString = ""
         if let costSum = self.costSummary{
             detailString = "\(costSum.empId)"
         }
         LabourManager().getCostSummaryDetail(with:detailString, success: {
             (model,response)  in
+            
             MBProgressHUD.hide(for: self.view, animated: true)
+            self.isFromRefreshControl = false
+            self.refrControl.endRefreshing()
             if let model = model as? CostSummaryDetailResponseModel{
                 let type:StatusEnum = CCUtility.getErrorTypeFromStatusCode(errorValue: response.statusCode)
                 if type == StatusEnum.success{
