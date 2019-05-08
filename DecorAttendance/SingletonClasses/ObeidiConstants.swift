@@ -12,7 +12,8 @@ struct ObeidiConstants {
     
     struct API {
         
-        static let MAIN_DOMAIN = "http://172.104.61.150:8080/"
+        //static let MAIN_DOMAIN = "http://172.104.61.150:8080/" //Test Server
+        static let MAIN_DOMAIN = "http://api.hkbsolution.com/" //Production Server
         static let ABOUT = "meta"
         static let LOGIN = "auth/login"
         static let PROFILE = "profile"

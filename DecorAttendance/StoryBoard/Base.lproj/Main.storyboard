@@ -1403,8 +1403,8 @@
                                                 <color key="textColor" red="1" green="0.46666666670000001" blue="0.46666666670000001" alpha="0.52000000000000002" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OTP has beeen sent to your email. Please verify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yh-bt-GZj">
-                                                <rect key="frame" x="25" y="265" width="325" height="20.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OTP has beeen sent to your email. Please verify" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yh-bt-GZj">
+                                                <rect key="frame" x="5" y="265" width="365" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                 <color key="textColor" red="0.28235294117647058" green="0.27843137254901962" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1440,12 +1440,13 @@
                                         <constraints>
                                             <constraint firstItem="1IV-9P-gyD" firstAttribute="top" secondItem="8yh-bt-GZj" secondAttribute="bottom" constant="30" id="1EH-t3-LSg"/>
                                             <constraint firstAttribute="trailing" secondItem="1IV-9P-gyD" secondAttribute="trailing" constant="27.5" id="4Oh-eu-qua"/>
+                                            <constraint firstItem="8yh-bt-GZj" firstAttribute="leading" secondItem="aa5-ee-OfH" secondAttribute="leading" constant="5" id="4tK-1D-PpV"/>
                                             <constraint firstItem="kT8-lk-tH4" firstAttribute="top" secondItem="1IV-9P-gyD" secondAttribute="bottom" constant="40.5" id="6YH-2f-mUr"/>
                                             <constraint firstItem="kT8-lk-tH4" firstAttribute="leading" secondItem="1IV-9P-gyD" secondAttribute="leading" id="Cjx-VN-2kN"/>
                                             <constraint firstItem="kT8-lk-tH4" firstAttribute="trailing" secondItem="1IV-9P-gyD" secondAttribute="trailing" id="Dqr-Xp-Vxv"/>
                                             <constraint firstItem="i3A-wD-E6l" firstAttribute="centerX" secondItem="aa5-ee-OfH" secondAttribute="centerX" id="NW6-ip-Rbv"/>
-                                            <constraint firstItem="8yh-bt-GZj" firstAttribute="centerX" secondItem="aa5-ee-OfH" secondAttribute="centerX" id="OW7-WI-e2C"/>
                                             <constraint firstItem="07r-ZH-yuE" firstAttribute="top" secondItem="aa5-ee-OfH" secondAttribute="top" constant="30" id="jX2-wI-1Zf"/>
+                                            <constraint firstAttribute="trailing" secondItem="8yh-bt-GZj" secondAttribute="trailing" constant="5" id="nGH-AI-U38"/>
                                             <constraint firstItem="07r-ZH-yuE" firstAttribute="centerX" secondItem="aa5-ee-OfH" secondAttribute="centerX" id="ruJ-O1-FTN"/>
                                             <constraint firstItem="1IV-9P-gyD" firstAttribute="leading" secondItem="aa5-ee-OfH" secondAttribute="leading" constant="27.5" id="sHd-ml-LwN"/>
                                             <constraint firstItem="8yh-bt-GZj" firstAttribute="top" secondItem="i3A-wD-E6l" secondAttribute="bottom" constant="20" id="u4J-OA-rs2"/>
