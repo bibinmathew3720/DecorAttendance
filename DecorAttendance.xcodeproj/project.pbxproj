@@ -120,6 +120,7 @@
 		D015303F22597C3E002AAEE6 /* OTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D015303E22597C3E002AAEE6 /* OTVC.swift */; };
 		D0503670225ACCA500294D40 /* AddBonusAmountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */; };
 		D06B92232239ED1900C98ED7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B92222239ED1800C98ED7 /* Constants.swift */; };
+		D09BC50923313F72005CEABD /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BC50823313F72005CEABD /* ReportVC.swift */; };
 		D0AB2ADD223AA9D4008C01A4 /* LabourManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */; };
 		D0F2449B224DBBBB0073D153 /* ForemanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F2449A224DBBBB0073D153 /* ForemanManager.swift */; };
 /* End PBXBuildFile section */
@@ -286,6 +287,7 @@
 		D015303E22597C3E002AAEE6 /* OTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTVC.swift; sourceTree = "<group>"; };
 		D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBonusAmountVC.swift; path = AttendanceContainerViewController/AddBonusAmountVC.swift; sourceTree = "<group>"; };
 		D06B92222239ED1800C98ED7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D09BC50823313F72005CEABD /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 		D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabourManager.swift; sourceTree = "<group>"; };
 		D0F2449A224DBBBB0073D153 /* ForemanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForemanManager.swift; sourceTree = "<group>"; };
 		D98D9F27B5CC5C6DFCC53240 /* Pods-DecorAttendanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DecorAttendanceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DecorAttendanceTests/Pods-DecorAttendanceTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -638,6 +640,7 @@
 		46E71D0521C5194200051C78 /* DecorAttendance */ = {
 			isa = PBXGroup;
 			children = (
+				D09BC50423313F50005CEABD /* StaffModule */,
 				D00F2A172253CD84007174F8 /* DecorAttendance.entitlements */,
 				BB5A4FAE2233AF5100F4FC82 /* Helpers */,
 				46C7E00421C8D6AB00F3247D /* DropDownViewController */,
@@ -765,6 +768,38 @@
 				D06B92222239ED1800C98ED7 /* Constants.swift */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		D09BC50423313F50005CEABD /* StaffModule */ = {
+			isa = PBXGroup;
+			children = (
+				D09BC50523313F50005CEABD /* ReportVC */,
+				D09BC50623313F50005CEABD /* HomeVC */,
+				D09BC50723313F50005CEABD /* MedicalLeaveVC */,
+			);
+			path = StaffModule;
+			sourceTree = "<group>";
+		};
+		D09BC50523313F50005CEABD /* ReportVC */ = {
+			isa = PBXGroup;
+			children = (
+				D09BC50823313F72005CEABD /* ReportVC.swift */,
+			);
+			path = ReportVC;
+			sourceTree = "<group>";
+		};
+		D09BC50623313F50005CEABD /* HomeVC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HomeVC;
+			sourceTree = "<group>";
+		};
+		D09BC50723313F50005CEABD /* MedicalLeaveVC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MedicalLeaveVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1050,6 +1085,7 @@
 				46623B0A2212E0270072C150 /* ObeidiModelSites.swift in Sources */,
 				46449DDF221F1C9C00169089 /* ObeidiModelSpecificEmployeeAttendance.swift in Sources */,
 				D0503670225ACCA500294D40 /* AddBonusAmountVC.swift in Sources */,
+				D09BC50923313F72005CEABD /* ReportVC.swift in Sources */,
 				46C0661D21E0B371009E731B /* ForemanDashBoardViewController.swift in Sources */,
 				BBE01C76223439B300C534F6 /* UIImageViewExtensions.swift in Sources */,
 				46AE08BB22170B1600A0BC9F /* ObeidiModelSafetyEquipments.swift in Sources */,

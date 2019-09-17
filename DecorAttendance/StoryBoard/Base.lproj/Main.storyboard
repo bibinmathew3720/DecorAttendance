@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EL1-dG-hK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EL1-dG-hK3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -3830,6 +3830,27 @@
             </objects>
             <point key="canvasLocation" x="948" y="-500.59970014992507"/>
         </scene>
+        <!--ReportVC-->
+        <scene sceneID="UQD-Ef-PMz">
+            <objects>
+                <viewController storyboardIdentifier="ReportVCID" id="lhT-ES-6VY" customClass="ReportVC" customModule="DecorAttendance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hql-Gi-dWZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yTj-Am-md9">
+                                <rect key="frame" x="139" y="297" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="aN6-Lq-A9j"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0uj-CF-YhG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2309" y="784"/>
+        </scene>
         <!--Attendance-->
         <scene sceneID="Ova-Dc-pls">
             <objects>
@@ -7389,7 +7410,7 @@ QQAAAAAAAAIBAAAAAAAAAG0AAAAAAAAAAAAAAAAAAFtDA
 </mutableData>
         </image>
         <image name="locationIcon" width="30" height="30"/>
-        <image name="logo" width="1024" height="1024"/>
+        <image name="logo" width="341.33334350585938" height="341.33334350585938"/>
         <image name="mail" width="33" height="33"/>
         <image name="menu" width="32" height="32"/>
         <image name="navigationBar:gb8-uu-Qyd:backIndicatorImage" width="21" height="21">
