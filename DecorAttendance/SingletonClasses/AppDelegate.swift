@@ -93,6 +93,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                    containerViewController.navigationController?.navigationBar.backgroundColor = ObeidiColors.ColorCode.obeidiRed()
                     self.window!.rootViewController = containerViewController
                 }
+                else if (roleString == Constant.Names.Staff){
+                    let containerViewController = ContainerViewController()
+                    containerViewController.navigationController?.navigationBar.backgroundColor = ObeidiColors.ColorCode.obeidiRed()
+                    self.window!.rootViewController = containerViewController
+                }
             }
         }
         else{

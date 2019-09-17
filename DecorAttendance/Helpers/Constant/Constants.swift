@@ -35,6 +35,7 @@ struct Constant{
     struct Names {
         static let EngineeringHead = "Engineering Head"
         static let Foreman = "Foreman"
+        static let Staff = "staff"
     }
     
     struct SegueIdentifiers {

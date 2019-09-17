@@ -190,6 +190,11 @@ class LoginViewController: UITableViewController, UITextFieldDelegate {
                 self.isForeman = true
                 //self.performSegue(withIdentifier: "toForemanSceneSegue:Login", sender: Any.self)
             }
+            else if (_loginResponse.roles.first == "staff"){
+                self.isSiteEngineer = false
+                self.isForeman = false
+                UserDefaults.standard.setValue(Constant.Names.Staff, forKey: Constant.VariableNames.roleKey)
+            }
             OneSignal.sendTag("emp_id", value: "\(_loginResponse.empId)", onSuccess: { (success) in
                 let delegate = UIApplication.shared.delegate as! AppDelegate
                 delegate.initWindow()
