@@ -75,7 +75,7 @@ extension JTAppleCalendarView {
         #endif
     }
     
-    func scrollTo(indexPath: IndexPath, triggerScrollToDateDelegate: Bool, isAnimationEnabled: Bool, position: UICollectionView.ScrollPosition, extraAddedOffset: CGFloat, completionHandler: (() -> Void)?) {
+     func scrollTo(indexPath: IndexPath, triggerScrollToDateDelegate: Bool, isAnimationEnabled: Bool, position: UICollectionView.ScrollPosition, extraAddedOffset: CGFloat, completionHandler: (() -> Void)?) {
         isScrollInProgress = true
         if let validCompletionHandler = completionHandler { scrollDelayedExecutionClosure.append(validCompletionHandler) }
         self.triggerScrollToDateDelegate = triggerScrollToDateDelegate
