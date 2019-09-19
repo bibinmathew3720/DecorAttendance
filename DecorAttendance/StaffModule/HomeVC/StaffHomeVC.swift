@@ -9,7 +9,8 @@
 import UIKit
 
 class StaffHomeVC: UIViewController {
-
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var attendanceCountLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
