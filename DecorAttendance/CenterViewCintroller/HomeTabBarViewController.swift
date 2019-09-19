@@ -29,6 +29,33 @@ class HomeTabBarViewController: UITabBarController, DashBoardDelegate, Attendanc
                     self.viewControllers?[1] = dashBoard
                 }
             }
+            else if roleString == Constant.Names.Staff{
+                let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+                
+                let medicalLeaveVC = storyBoard.instantiateViewController(withIdentifier: "MedicalLeaveVCID") as? MedicalLeaveVC
+                if let _medicalLeaveVC = medicalLeaveVC{
+                    self.viewControllers?[0] = _medicalLeaveVC
+                }
+                let medicalTabBarItem:UITabBarItem = UITabBarItem(title: "Medical Leave", image: UIImage(named: "medicalUnsel")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "medicalSel"))
+                self.viewControllers?[0].tabBarItem = medicalTabBarItem
+                
+                let staffHomeVC = storyBoard.instantiateViewController(withIdentifier: "StaffHomeVCID") as? StaffHomeVC
+                if let _staffHomeVC = staffHomeVC{
+                    self.viewControllers?[1] = _staffHomeVC
+                }
+                let homeTabBarItem:UITabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "homeUnSel")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "homeSel"))
+                self.viewControllers?[1].tabBarItem = homeTabBarItem
+                
+                
+                let reportVC = storyBoard.instantiateViewController(withIdentifier: "ReportVCID") as? ReportVC
+                if let _reportVC = reportVC{
+                    self.viewControllers?[2] = _reportVC
+                }
+                let reportTabBarItem:UITabBarItem = UITabBarItem(title: "Report", image: UIImage(named: "reportsUnsel")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "reportsSel"))
+                self.viewControllers?[2].tabBarItem = reportTabBarItem
+                
+                
+            }
         }
         
         self.selectedIndex = 1
@@ -38,6 +65,8 @@ class HomeTabBarViewController: UITabBarController, DashBoardDelegate, Attendanc
 //        VC.delegate = self
 
         // Do any additional setup after loading the view.
+        
+        
     }
     
     
@@ -110,6 +139,13 @@ class HomeTabBarViewController: UITabBarController, DashBoardDelegate, Attendanc
         tabBarController.tabBar.shadowImage = UIImage()
         
         
+//        if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+//            if roleString == Constant.Names.Staff{
+//                tabBarController.tabBar.items?[0].selectedImage = UIImage.init(named: "medicalSel")
+//                tabBarController.tabBar.items?[0].image = UIImage.init(named: "medicalUnsel")
+//            }
+//        }
+//
         for item in self.tabBar.items!{
             item.selectedImage = item.selectedImage?.withRenderingMode(.alwaysOriginal)
             item.image = item.image?.withRenderingMode(.alwaysOriginal)
