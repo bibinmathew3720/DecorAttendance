@@ -45,8 +45,10 @@ class ReportFilterVC: UIViewController {
             fromDateButton.setTitle(_date.stringFromDate(format:"yyyy/MM"), for: .normal)
         }
         else{
-           startDate = Date()
-           fromDateButton.setTitle(Date().stringFromDate(format:"yyyy/MM"), for: .normal)
+           startDate = Date().getStartDateOfYear()
+           if let _date = startDate{
+                fromDateButton.setTitle(_date.stringFromDate(format:"yyyy/MM"), for: .normal)
+            }
         }
         if let _date = endDate{
             toDateButton.setTitle(_date.stringFromDate(format:"yyyy/MM"), for: .normal)

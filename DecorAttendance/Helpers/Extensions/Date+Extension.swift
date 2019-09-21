@@ -23,4 +23,13 @@ extension Date{
         let dateString = dateFormatter.string(from: self)
         return dateString
     }
+    
+    func getStartDateOfYear()->Date{
+        var monthComponent = DateComponents()
+        if let _month = self.getComponents().month{
+            monthComponent.month = 0 - _month + 1
+        }
+        let calendar = NSCalendar.current
+        return calendar.date(byAdding: monthComponent, to:Date()) ?? self
+    }
 }
