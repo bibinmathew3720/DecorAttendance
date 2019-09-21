@@ -118,6 +118,7 @@
 		BBE01C76223439B300C534F6 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */; };
 		CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */; };
 		D015303F22597C3E002AAEE6 /* OTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D015303E22597C3E002AAEE6 /* OTVC.swift */; };
+		D02D85EE23350BB900F54CC3 /* StaffManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D85ED23350BB900F54CC3 /* StaffManager.swift */; };
 		D0503670225ACCA500294D40 /* AddBonusAmountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */; };
 		D06B92232239ED1900C98ED7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B92222239ED1800C98ED7 /* Constants.swift */; };
 		D09BC50923313F72005CEABD /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BC50823313F72005CEABD /* ReportVC.swift */; };
@@ -287,6 +288,7 @@
 		BBE01C75223439B300C534F6 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		D00F2A172253CD84007174F8 /* DecorAttendance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DecorAttendance.entitlements; sourceTree = "<group>"; };
 		D015303E22597C3E002AAEE6 /* OTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTVC.swift; sourceTree = "<group>"; };
+		D02D85ED23350BB900F54CC3 /* StaffManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffManager.swift; sourceTree = "<group>"; };
 		D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBonusAmountVC.swift; path = AttendanceContainerViewController/AddBonusAmountVC.swift; sourceTree = "<group>"; };
 		D06B92222239ED1800C98ED7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D09BC50823313F72005CEABD /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
@@ -754,6 +756,7 @@
 				BB5A4FCE2233C0C300F4FC82 /* UserManager.swift */,
 				D0AB2ADC223AA9D4008C01A4 /* LabourManager.swift */,
 				D0F2449A224DBBBB0073D153 /* ForemanManager.swift */,
+				D02D85ED23350BB900F54CC3 /* StaffManager.swift */,
 			);
 			path = ApiManagers;
 			sourceTree = "<group>";
@@ -1160,6 +1163,7 @@
 				4611864722147F810031DFC4 /* CalenderViewCell.swift in Sources */,
 				46623B082212DB880072C150 /* ObeidiModelForgotPassword.swift in Sources */,
 				46AD094D21C77F9B005BBDEB /* LargeValueFormatter.swift in Sources */,
+				D02D85EE23350BB900F54CC3 /* StaffManager.swift in Sources */,
 				469D712921D639F70057BA7C /* CaptureImageViewController.swift in Sources */,
 				466DE3CA2211FC65003F0F76 /* AFNetworkingServiceManager.swift in Sources */,
 				D015303F22597C3E002AAEE6 /* OTVC.swift in Sources */,

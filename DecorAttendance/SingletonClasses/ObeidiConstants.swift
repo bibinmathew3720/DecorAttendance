@@ -38,6 +38,10 @@ struct ObeidiConstants {
         
          static let ATTENDANCE_SUMMARY = "attendance/attendance-summary?"
         
+        //For Staff
+        
+        static let STAFF_ATTENDANCE_LIST_URL = "staffs/leaves-for-period?"
+        
         
     }
     
