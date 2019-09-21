@@ -155,7 +155,7 @@ extension MedicalLeaveVC : UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "medicalLeaveCell", for: indexPath) as! MedicalLeaveTVC
         if let _leaveListResponse = self.leaveListResponse{
-            //cell.setLeaveMonth(leaveMonth:_leaveListResponse.leaveMonths[indexPath.row])
+            cell.setMedicalLeave(medicalLeave:_leaveListResponse.medicalLeaves[indexPath.row])
         }
         return cell
     }

@@ -46,7 +46,7 @@ class CCUtility: NSObject {
     
    class func calcAge(birthday: String) -> Int {
         let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "yyyy-MM-dd"
+        dateFormater.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let birthdayDate = dateFormater.date(from: birthday)
         let calendar: NSCalendar! = NSCalendar(calendarIdentifier: .gregorian)
         let now = Date()
