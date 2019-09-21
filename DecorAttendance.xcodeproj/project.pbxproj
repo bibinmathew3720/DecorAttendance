@@ -123,6 +123,7 @@
 		D03579252335C8FB00811D61 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03579242335C8FB00811D61 /* View+Extension.swift */; };
 		D03579292335D4AD00811D61 /* ReportFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03579282335D4AD00811D61 /* ReportFilterVC.swift */; };
 		D035792B2335F13B00811D61 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D035792A2335F13B00811D61 /* Date+Extension.swift */; };
+		D035792D23363AFF00811D61 /* MedicalLeaveTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D035792C23363AFF00811D61 /* MedicalLeaveTVC.swift */; };
 		D0503670225ACCA500294D40 /* AddBonusAmountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */; };
 		D06B92232239ED1900C98ED7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B92222239ED1800C98ED7 /* Constants.swift */; };
 		D09BC50923313F72005CEABD /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BC50823313F72005CEABD /* ReportVC.swift */; };
@@ -297,6 +298,7 @@
 		D03579242335C8FB00811D61 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		D03579282335D4AD00811D61 /* ReportFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFilterVC.swift; sourceTree = "<group>"; };
 		D035792A2335F13B00811D61 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		D035792C23363AFF00811D61 /* MedicalLeaveTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalLeaveTVC.swift; sourceTree = "<group>"; };
 		D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBonusAmountVC.swift; path = AttendanceContainerViewController/AddBonusAmountVC.swift; sourceTree = "<group>"; };
 		D06B92222239ED1800C98ED7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D09BC50823313F72005CEABD /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
@@ -782,6 +784,7 @@
 			isa = PBXGroup;
 			children = (
 				D03579212335BBAF00811D61 /* StaffReportTVC.swift */,
+				D035792C23363AFF00811D61 /* MedicalLeaveTVC.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1191,6 +1194,7 @@
 				46AC0B8C21CA22DC002A2ABD /* ObeidiPerformanceIndicatorStyle.swift in Sources */,
 				46623B042212B04C0072C150 /* ObeidiSpinner.swift in Sources */,
 				4618715921C6A57400507F06 /* ObeidiColorMeter.swift in Sources */,
+				D035792D23363AFF00811D61 /* MedicalLeaveTVC.swift in Sources */,
 				46A5FEB421E2709100C20784 /* ForemanCompleteEntryTableViewCell.swift in Sources */,
 				4611864722147F810031DFC4 /* CalenderViewCell.swift in Sources */,
 				46623B082212DB880072C150 /* ObeidiModelForgotPassword.swift in Sources */,

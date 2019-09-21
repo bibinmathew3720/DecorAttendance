@@ -41,7 +41,7 @@ struct ObeidiConstants {
         //For Staff
         
         static let STAFF_ATTENDANCE_LIST_URL = "staff/leaves-for-period?"
-        
+        static let STAFF_MEDICAL_ATTENDANCE_LIST_URL = "staff/medical-leaves?"
         
     }
     

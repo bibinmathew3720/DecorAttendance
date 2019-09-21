@@ -4292,17 +4292,124 @@
                                     <constraint firstItem="jdL-Iy-DNT" firstAttribute="centerX" secondItem="5c3-uF-MU5" secondAttribute="centerX" id="zww-jt-gwI"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qUP-TN-bVl">
+                                <rect key="frame" x="10" y="153.5" width="355" height="508.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="medicalLeaveCell" id="Ido-AV-gK2" customClass="MedicalLeaveTVC" customModule="DecorAttendance" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="355" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ido-AV-gK2" id="2PU-lB-YMU">
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eek-Eh-puU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="2" height="43.5"/>
+                                                    <color key="backgroundColor" red="0.91372549020000005" green="0.18039215689999999" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="2" id="uTQ-jw-SMN"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="int-uf-P76">
+                                                    <rect key="frame" x="2" y="0.0" width="148" height="43.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leave Start Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8P-Pm-DPA">
+                                                            <rect key="frame" x="17" y="1.5" width="114" height="21"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leave Start Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8B4-oa-n9H">
+                                                            <rect key="frame" x="36" y="25" width="76" height="14"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
+                                                            <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="8B4-oa-n9H" firstAttribute="centerY" secondItem="int-uf-P76" secondAttribute="centerY" constant="10" id="ECC-Ir-Ozg"/>
+                                                        <constraint firstItem="h8P-Pm-DPA" firstAttribute="centerY" secondItem="int-uf-P76" secondAttribute="centerY" constant="-10" id="btS-lY-d0q"/>
+                                                        <constraint firstItem="8B4-oa-n9H" firstAttribute="centerX" secondItem="int-uf-P76" secondAttribute="centerX" id="jJH-IL-J9J"/>
+                                                        <constraint firstItem="h8P-Pm-DPA" firstAttribute="centerX" secondItem="int-uf-P76" secondAttribute="centerX" id="kiI-eU-r9k"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FVd-y6-akk">
+                                                    <rect key="frame" x="150" y="0.0" width="148" height="43.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leave End Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TM4-iS-gMb">
+                                                            <rect key="frame" x="20" y="1.5" width="108" height="21"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leave Start Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dir-SM-tTa">
+                                                            <rect key="frame" x="36" y="25" width="76" height="14"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
+                                                            <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="dir-SM-tTa" firstAttribute="centerY" secondItem="FVd-y6-akk" secondAttribute="centerY" constant="10" id="7n8-Kg-peh"/>
+                                                        <constraint firstItem="TM4-iS-gMb" firstAttribute="centerY" secondItem="FVd-y6-akk" secondAttribute="centerY" constant="-10" id="OwO-Uw-Rly"/>
+                                                        <constraint firstItem="TM4-iS-gMb" firstAttribute="centerX" secondItem="FVd-y6-akk" secondAttribute="centerX" id="aHS-EE-Gi1"/>
+                                                        <constraint firstItem="dir-SM-tTa" firstAttribute="centerX" secondItem="FVd-y6-akk" secondAttribute="centerX" id="rou-et-qUw"/>
+                                                    </constraints>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cby-0T-dMn">
+                                                    <rect key="frame" x="303" y="7" width="47" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="zFX-fK-AUh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                                    <state key="normal" title="Button"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="eek-Eh-puU" firstAttribute="top" secondItem="2PU-lB-YMU" secondAttribute="top" id="Smg-q4-qYL"/>
+                                                <constraint firstItem="int-uf-P76" firstAttribute="leading" secondItem="eek-Eh-puU" secondAttribute="trailing" id="St0-iB-3yj"/>
+                                                <constraint firstAttribute="trailing" secondItem="cby-0T-dMn" secondAttribute="trailing" constant="5" id="Tyd-PZ-3af"/>
+                                                <constraint firstAttribute="bottom" secondItem="eek-Eh-puU" secondAttribute="bottom" id="VRV-hH-s21"/>
+                                                <constraint firstItem="eek-Eh-puU" firstAttribute="leading" secondItem="2PU-lB-YMU" secondAttribute="leading" id="VwV-iX-EA2"/>
+                                                <constraint firstItem="cby-0T-dMn" firstAttribute="leading" secondItem="FVd-y6-akk" secondAttribute="trailing" constant="5" id="XUY-WF-hQS"/>
+                                                <constraint firstItem="FVd-y6-akk" firstAttribute="leading" secondItem="int-uf-P76" secondAttribute="trailing" id="YRr-ex-5Nh"/>
+                                                <constraint firstAttribute="bottom" secondItem="int-uf-P76" secondAttribute="bottom" id="YgH-vg-fA0"/>
+                                                <constraint firstItem="FVd-y6-akk" firstAttribute="top" secondItem="int-uf-P76" secondAttribute="top" id="ZLY-Vd-wuj"/>
+                                                <constraint firstItem="FVd-y6-akk" firstAttribute="bottom" secondItem="int-uf-P76" secondAttribute="bottom" id="aXv-Z4-Grc"/>
+                                                <constraint firstItem="cby-0T-dMn" firstAttribute="centerY" secondItem="2PU-lB-YMU" secondAttribute="centerY" id="gmB-2G-bvp"/>
+                                                <constraint firstItem="int-uf-P76" firstAttribute="top" secondItem="2PU-lB-YMU" secondAttribute="top" id="qA1-Fg-DYM"/>
+                                                <constraint firstItem="FVd-y6-akk" firstAttribute="width" secondItem="int-uf-P76" secondAttribute="width" id="veV-Es-nb6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="endDateLabel" destination="dir-SM-tTa" id="xC6-a7-Qyv"/>
+                                            <outlet property="startDateLabel" destination="8B4-oa-n9H" id="kfF-me-YCx"/>
+                                            <outlet property="statusButton" destination="cby-0T-dMn" id="dcV-DH-nvZ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="dCh-h8-zHb" id="yAT-dx-u8Z"/>
+                                    <outlet property="delegate" destination="dCh-h8-zHb" id="oIu-KA-VUf"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4AM-ER-lbb" firstAttribute="top" secondItem="V10-vN-hNp" secondAttribute="bottom" constant="30" id="0bl-1i-2ab"/>
                             <constraint firstItem="4AM-ER-lbb" firstAttribute="width" secondItem="gPe-bT-0aF" secondAttribute="width" id="0eR-Dj-fyR"/>
+                            <constraint firstItem="qUP-TN-bVl" firstAttribute="leading" secondItem="4AM-ER-lbb" secondAttribute="leading" id="22S-aY-kCh"/>
+                            <constraint firstItem="qUP-TN-bVl" firstAttribute="trailing" secondItem="gPe-bT-0aF" secondAttribute="trailing" id="2gj-yY-PgY"/>
                             <constraint firstItem="gPe-bT-0aF" firstAttribute="centerY" secondItem="4AM-ER-lbb" secondAttribute="centerY" id="2iz-Ou-hSf"/>
                             <constraint firstItem="5c3-uF-MU5" firstAttribute="leading" secondItem="hlR-pX-teg" secondAttribute="leading" id="3TI-oN-q4d"/>
                             <constraint firstItem="5c3-uF-MU5" firstAttribute="top" secondItem="4AM-ER-lbb" secondAttribute="bottom" constant="10" id="DgZ-wo-KZ6"/>
+                            <constraint firstItem="qUP-TN-bVl" firstAttribute="top" secondItem="4AM-ER-lbb" secondAttribute="bottom" constant="10" id="Fnu-g1-sYB"/>
                             <constraint firstItem="4AM-ER-lbb" firstAttribute="leading" secondItem="V10-vN-hNp" secondAttribute="leading" id="Jl4-AD-NQM"/>
                             <constraint firstItem="hlR-pX-teg" firstAttribute="bottom" secondItem="5c3-uF-MU5" secondAttribute="bottom" id="LVH-j3-xwZ"/>
                             <constraint firstItem="gPe-bT-0aF" firstAttribute="leading" secondItem="4AM-ER-lbb" secondAttribute="trailing" constant="20" id="MDs-gq-rFi"/>
+                            <constraint firstItem="hlR-pX-teg" firstAttribute="bottom" secondItem="qUP-TN-bVl" secondAttribute="bottom" constant="5" id="YYM-BS-TaC"/>
                             <constraint firstItem="hlR-pX-teg" firstAttribute="trailing" secondItem="gPe-bT-0aF" secondAttribute="trailing" constant="10" id="exu-Eo-z4k"/>
                             <constraint firstItem="V10-vN-hNp" firstAttribute="leading" secondItem="hlR-pX-teg" secondAttribute="leading" constant="10" id="huZ-3g-f4e"/>
                             <constraint firstItem="V10-vN-hNp" firstAttribute="top" secondItem="hlR-pX-teg" secondAttribute="top" constant="30" id="ipv-7e-yfd"/>
@@ -4315,6 +4422,8 @@
                         <outlet property="emptyView" destination="5c3-uF-MU5" id="dLW-30-ltN"/>
                         <outlet property="endDateLabel" destination="F4X-O9-evO" id="aH3-F1-kVR"/>
                         <outlet property="endDateView" destination="gPe-bT-0aF" id="NBC-Gm-euR"/>
+                        <outlet property="medicalLeaveTV" destination="qUP-TN-bVl" id="qIQ-Fk-z2b"/>
+                        <outlet property="medicalLeavesHeadingLabel" destination="V10-vN-hNp" id="p4S-AC-5aJ"/>
                         <outlet property="startDateLabel" destination="gUP-fy-WTy" id="mw5-BM-u0T"/>
                         <outlet property="startDateView" destination="4AM-ER-lbb" id="VKn-18-m6G"/>
                     </connections>
