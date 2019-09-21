@@ -22,5 +22,10 @@ class StaffReportTVC: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func setLeaveMonth(leaveMonth:LeaveMonth){
+        monthLabel.text = leaveMonth.monthName
+        leavesCountLabel.text = "\(leaveMonth.leaveCount) leaves in total"
+    }
 
 }
