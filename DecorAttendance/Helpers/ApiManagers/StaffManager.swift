@@ -207,12 +207,19 @@ class LeavesListRequest:NSObject {
 }
 
 class ReportListingRequest:NSObject {
+    var startDay:Int = 01
+    var endDay:Int = 31
+    var startMonth:Int = 0
+    var endMonth:Int = 0
+    var startYear:Int = 0
+    var endYear:Int = 0
+    
     var startDate:String = "2019-9-01"
     var endDate:String = "2019-9-31"
     func getRequestBody()->String{
         var requestString = ""
-        requestString = "start_date=\(startDate)"
-        requestString = requestString + "&end_date=\(endDate)"
+        requestString = "start_date=\(startYear)-\(startMonth)-\(startDay)"
+        requestString = requestString + "&end_date=\(endYear)-\(endMonth)-\(endDay)"
         print(requestString)
         return requestString
     }

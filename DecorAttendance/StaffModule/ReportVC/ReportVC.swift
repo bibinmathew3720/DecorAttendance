@@ -16,6 +16,7 @@ class ReportVC: UIViewController {
     var leaveListResponse:LeavesListResponseModel?
     var startDate:Date?
     var endDate:Date?
+    var selIndex:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,8 +121,41 @@ extension ReportVC : UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selIndex = indexPath.row
         self.performSegue(withIdentifier: "reportToListing", sender: Any.self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "reportToListing"{
+            let vc = segue.destination as! ReportListingVC
+             if let _leaveListResponse = self.leaveListResponse{
+                vc.listingRequest.startMonth = _leaveListResponse.leaveMonths[selIndex].monthCount
+                vc.listingRequest.endMonth = _leaveListResponse.leaveMonths[selIndex].monthCount
+            }
+            if let _date = self.startDate{
+                if let _year = _date.getComponents().year{
+                    vc.listingRequest.startYear = _year
+                }
+            }
+            else{
+                if let _year = Date().getComponents().year{
+                    vc.listingRequest.startYear = _year
+                }
+            }
+            if let _date = self.endDate{
+                if let _year = _date.getComponents().year{
+                    vc.listingRequest.endYear = _year
+                }
+            }
+            else{
+                if let _year = Date().getComponents().year{
+                    vc.listingRequest.endYear = _year
+                }
+            }
+        }
+    }
+    
+    
 }
 
 extension ReportVC:ReporterFilterVCDelegate{

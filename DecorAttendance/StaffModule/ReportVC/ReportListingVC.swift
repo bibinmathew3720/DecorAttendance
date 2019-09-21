@@ -17,8 +17,13 @@ class ReportListingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Report"
+        initialisation()
         callingReportListingAPI()
         // Do any additional setup after loading the view.
+    }
+    
+    func initialisation(){
+       
     }
     
     func callingReportListingAPI(){
