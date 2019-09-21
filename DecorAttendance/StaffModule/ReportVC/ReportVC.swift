@@ -9,7 +9,9 @@
 import UIKit
 
 class ReportVC: UIViewController {
-
+    @IBOutlet weak var reportHeadingLabel: UILabel!
+    @IBOutlet weak var reportTV: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,4 +29,26 @@ class ReportVC: UIViewController {
     }
     */
 
+}
+
+extension ReportVC : UITableViewDataSource, UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "staffReportTVC", for: indexPath) as! StaffReportTVC
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 105
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }

@@ -119,6 +119,7 @@
 		CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */; };
 		D015303F22597C3E002AAEE6 /* OTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D015303E22597C3E002AAEE6 /* OTVC.swift */; };
 		D02D85EE23350BB900F54CC3 /* StaffManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D85ED23350BB900F54CC3 /* StaffManager.swift */; };
+		D03579222335BBAF00811D61 /* StaffReportTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03579212335BBAF00811D61 /* StaffReportTVC.swift */; };
 		D0503670225ACCA500294D40 /* AddBonusAmountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */; };
 		D06B92232239ED1900C98ED7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B92222239ED1800C98ED7 /* Constants.swift */; };
 		D09BC50923313F72005CEABD /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BC50823313F72005CEABD /* ReportVC.swift */; };
@@ -289,6 +290,7 @@
 		D00F2A172253CD84007174F8 /* DecorAttendance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DecorAttendance.entitlements; sourceTree = "<group>"; };
 		D015303E22597C3E002AAEE6 /* OTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTVC.swift; sourceTree = "<group>"; };
 		D02D85ED23350BB900F54CC3 /* StaffManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffManager.swift; sourceTree = "<group>"; };
+		D03579212335BBAF00811D61 /* StaffReportTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffReportTVC.swift; sourceTree = "<group>"; };
 		D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBonusAmountVC.swift; path = AttendanceContainerViewController/AddBonusAmountVC.swift; sourceTree = "<group>"; };
 		D06B92222239ED1800C98ED7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D09BC50823313F72005CEABD /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
@@ -769,6 +771,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		D03579202335BB9600811D61 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				D03579212335BBAF00811D61 /* StaffReportTVC.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		D06B92212239ECF800C98ED7 /* Constant */ = {
 			isa = PBXGroup;
 			children = (
@@ -780,6 +790,7 @@
 		D09BC50423313F50005CEABD /* StaffModule */ = {
 			isa = PBXGroup;
 			children = (
+				D03579202335BB9600811D61 /* CustomViews */,
 				D09BC50523313F50005CEABD /* ReportVC */,
 				D09BC50623313F50005CEABD /* HomeVC */,
 				D09BC50723313F50005CEABD /* MedicalLeaveVC */,
@@ -1140,6 +1151,7 @@
 				469D712E21D642240057BA7C /* PhotoCheckViewController.swift in Sources */,
 				46AC0B8A21CA167B002A2ABD /* ObeidiFont.swift in Sources */,
 				46623B022212A0530072C150 /* ObeidiModelLogin.swift in Sources */,
+				D03579222335BBAF00811D61 /* StaffReportTVC.swift in Sources */,
 				D0F2449B224DBBBB0073D153 /* ForemanManager.swift in Sources */,
 				46AC0B9221CA8578002A2ABD /* LabourwiseViewController.swift in Sources */,
 				4618715D21C6A69B00507F06 /* PieChart.swift in Sources */,
