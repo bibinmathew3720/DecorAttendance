@@ -328,7 +328,7 @@ extension CompleteEntriesViewController:filterUpdatedDelegate{
         }
     }
     
-    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName,dateInDateFormat:Date) {
         self.attendanceRequest.startDate = date
         lblDate.text = date
         callFetchAttendanceaAPI()

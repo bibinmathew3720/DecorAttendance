@@ -14,6 +14,8 @@ class ReportVC: UIViewController {
     
     var leaveListRequest = LeavesListRequest()
     var leaveListResponse:LeavesListResponseModel?
+    var startDate:Date?
+    var endDate:Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +77,9 @@ class ReportVC: UIViewController {
     @IBAction func filterButtonAction(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let reportFilterVC = storyboard.instantiateViewController(withIdentifier: "ReportFilterVCID") as! ReportFilterVC
+        reportFilterVC.delegate = self
+        reportFilterVC.startDate = self.startDate
+        reportFilterVC.endDate = self.endDate
         reportFilterVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         reportFilterVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.present(reportFilterVC, animated: true, completion: nil)
@@ -116,5 +121,35 @@ extension ReportVC : UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+}
+
+extension ReportVC:ReporterFilterVCDelegate{
+    func okButtonActionDelegate(startDate: Date?, endDate: Date?) {
+        self.startDate = startDate
+        self.endDate = endDate
+        recallList()
+    }
+    
+    func recallList(){
+        if let _date = startDate{
+            let dateComponents = _date.getComponents()
+            if let _month = dateComponents.month{
+                leaveListRequest.startMonth = _month
+            }
+            if let _year = dateComponents.year{
+                leaveListRequest.startYear = _year
+            }
+        }
+        if let _date = endDate{
+            let dateComponents = _date.getComponents()
+            if let _month = dateComponents.month{
+                leaveListRequest.endMonth = _month
+            }
+            if let _year = dateComponents.year{
+                leaveListRequest.endYear = _year
+            }
+        }
+        callingLeaveListAPI()
     }
 }

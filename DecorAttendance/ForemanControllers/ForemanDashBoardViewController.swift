@@ -318,7 +318,7 @@ extension ForemanDashBoardViewController: filterUpdatedDelegate{
         },completion:nil)
     }
     
-    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName,dateInDateFormat:Date) {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
             self.view.alpha = 1
             //self.tabBarController?.view.alpha = 0.65

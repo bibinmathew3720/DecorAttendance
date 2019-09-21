@@ -227,7 +227,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         populateSelectedSite()
     }
     
-    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName,dateInDateFormat:Date) {
         
     }
     

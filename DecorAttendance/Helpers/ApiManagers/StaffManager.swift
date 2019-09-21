@@ -92,6 +92,7 @@ class LeavesListRequest:NSObject {
         requestString = requestString + "&end_month=\(endMonth)"
         requestString = requestString + "&start_year=\(startYear)"
         requestString = requestString + "&end_year=\(endYear)"
+        print(requestString)
         return requestString
     }
 }

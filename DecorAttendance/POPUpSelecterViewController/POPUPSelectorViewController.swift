@@ -15,7 +15,7 @@ protocol filterUpdatedDelegate: class  {
     func dateUpdated(to date: String, updatedType: FilterTypeName!)
     func calendarColsed()
     
-    func doneButtonActionDelegateWithSelectedDate(date:String,type:FilterTypeName)
+    func doneButtonActionDelegateWithSelectedDate(date:String,type:FilterTypeName, dateInDateFormat:Date)
     func selectedSite(selSite:ObeidiModelSites, withType:FilterTypeName)
 }
 
@@ -50,6 +50,7 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
     var filterDataArr: NSMutableArray!
     var filterTypeName: FilterTypeName!
     var selectedDate:String = ""
+    var selectedDateInDateFormat:Date = Date()
     
     var sitesArray = [ObeidiModelSites]()
     override func viewDidLoad() {
@@ -257,6 +258,7 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
             self.formatter.locale = Calendar.current.locale
             let strDate = formatter.string(from: date)
             self.selectedDate = strDate;
+            self.selectedDateInDateFormat = date
             print(strDate)
             if self.filterTypeName == FilterTypeName.startDate {
                 //delegate.dateUpdated(to: strDate, updatedType: self.filterTypeName)
@@ -474,7 +476,7 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
             
         },completion:nil)
         delegate.doneButtonActionDelegateWithSelectedDate(date: self.selectedDate
-            , type: self.filterTypeName)
+            , type: self.filterTypeName,dateInDateFormat:self.selectedDateInDateFormat)
         self.dismiss(animated: true, completion: nil)
         
     }

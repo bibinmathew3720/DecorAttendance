@@ -277,7 +277,7 @@ extension SickLeaveViewController:filterUpdatedDelegate{
         
     }
     
-    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName,dateInDateFormat:Date) {
         if type == FilterTypeName.endDate{
             self.endDate = date
             self.lblEndDate.text = "\(date)"

@@ -8,16 +8,29 @@
 
 import UIKit
 
+protocol ReporterFilterVCDelegate {
+    func okButtonActionDelegate(startDate:Date?,endDate:Date?)
+}
+
 class ReportFilterVC: UIViewController {
 
     @IBOutlet weak var fromDateButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var toDateButton: UIButton!
     @IBOutlet weak var okButton: UIButton!
+    
+    var startDate:Date?
+    var endDate:Date?
+    var delegate:ReporterFilterVCDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialisation()
         customisation()
+        populaDates()
         // Do any additional setup after loading the view.
+    }
+    
+    func initialisation(){
     }
     
     func customisation(){
@@ -25,6 +38,23 @@ class ReportFilterVC: UIViewController {
        toDateButton.setRoundedRedBorder()
        cancelButton.setRoundedRedBackgroundView()
        okButton.setRoundedRedBackgroundView()
+    }
+    
+    func populaDates(){
+        if let _date = startDate{
+            fromDateButton.setTitle(_date.stringFromDate(format:"yyyy/MM"), for: .normal)
+        }
+        else{
+           startDate = Date()
+           fromDateButton.setTitle(Date().stringFromDate(format:"yyyy/MM"), for: .normal)
+        }
+        if let _date = endDate{
+            toDateButton.setTitle(_date.stringFromDate(format:"yyyy/MM"), for: .normal)
+        }
+        else{
+            endDate = Date()
+            toDateButton.setTitle(Date().stringFromDate(format:"yyyy/MM"), for: .normal)
+        }
     }
     
     @IBAction func fromDateButtonAction(_ sender: UIButton) {
@@ -40,6 +70,10 @@ class ReportFilterVC: UIViewController {
     }
     
     @IBAction func okButtonAction(_ sender: UIButton) {
+        if let _delegate = delegate{
+            _delegate.okButtonActionDelegate(startDate: self.startDate, endDate: self.endDate)
+        }
+        self.dismiss(animated: true, completion: nil)
     }
     
     func showDatePicker(filterType:FilterTypeName){
@@ -80,12 +114,17 @@ extension ReportFilterVC : filterUpdatedDelegate{
         
     }
     
-    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
-        
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName,dateInDateFormat:Date) {
+        if type == .startDate{
+            startDate =  dateInDateFormat
+        }
+        if type == .endDate{
+            endDate =  dateInDateFormat
+        }
+        populaDates()
     }
     
     func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
-        
     }
     
     

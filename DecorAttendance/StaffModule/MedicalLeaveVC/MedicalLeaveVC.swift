@@ -78,7 +78,7 @@ extension MedicalLeaveVC : filterUpdatedDelegate{
         
     }
     
-    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName,dateInDateFormat:Date) {
         
     }
     
