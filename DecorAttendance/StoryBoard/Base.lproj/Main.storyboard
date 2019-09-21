@@ -5946,6 +5946,35 @@
                                                                 <constraint firstItem="RqP-1h-QTT" firstAttribute="leading" secondItem="Or4-ie-oab" secondAttribute="leading" id="w21-O4-Dv3"/>
                                                             </constraints>
                                                         </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DoR-mO-Ijn">
+                                                            <rect key="frame" x="206" y="20" width="153" height="24"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rXI-VI-le7">
+                                                                    <rect key="frame" x="0.0" y="5" width="70" height="14"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="70" id="86d-FY-89g"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25f-AP-COk">
+                                                                    <rect key="frame" x="70" y="5" width="24.5" height="14"/>
+                                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="rXI-VI-le7" firstAttribute="leading" secondItem="DoR-mO-Ijn" secondAttribute="leading" id="0JK-Jg-1R6"/>
+                                                                <constraint firstItem="rXI-VI-le7" firstAttribute="centerY" secondItem="DoR-mO-Ijn" secondAttribute="centerY" id="C73-bv-jqY"/>
+                                                                <constraint firstItem="rXI-VI-le7" firstAttribute="top" secondItem="DoR-mO-Ijn" secondAttribute="top" constant="5" id="Gmz-fM-wgZ"/>
+                                                                <constraint firstItem="25f-AP-COk" firstAttribute="leading" secondItem="rXI-VI-le7" secondAttribute="trailing" id="SFs-21-lan"/>
+                                                                <constraint firstItem="25f-AP-COk" firstAttribute="centerY" secondItem="rXI-VI-le7" secondAttribute="centerY" id="cQS-vJ-rFf"/>
+                                                                <constraint firstAttribute="bottom" secondItem="rXI-VI-le7" secondAttribute="bottom" constant="5" id="lRY-4C-HBu"/>
+                                                            </constraints>
+                                                        </view>
                                                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqT-Tf-SgM">
                                                             <rect key="frame" x="161" y="94" width="37" height="30"/>
                                                             <constraints>
@@ -5968,7 +5997,10 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="Or4-ie-oab" firstAttribute="leading" secondItem="PFb-KB-rew" secondAttribute="trailing" constant="12" id="ATJ-5A-0Co"/>
+                                                        <constraint firstItem="DoR-mO-Ijn" firstAttribute="leading" secondItem="Or4-ie-oab" secondAttribute="leading" id="Evu-sa-qSD"/>
+                                                        <constraint firstItem="DoR-mO-Ijn" firstAttribute="centerY" secondItem="PFb-KB-rew" secondAttribute="centerY" id="HJj-Hd-WSg"/>
                                                         <constraint firstAttribute="trailing" secondItem="Or4-ie-oab" secondAttribute="trailing" id="LzU-jM-P3I"/>
+                                                        <constraint firstItem="DoR-mO-Ijn" firstAttribute="trailing" secondItem="Or4-ie-oab" secondAttribute="trailing" id="Rsh-lW-zoN"/>
                                                         <constraint firstItem="PFb-KB-rew" firstAttribute="top" secondItem="ADl-tg-50P" secondAttribute="top" constant="13" id="SAL-NU-gOi"/>
                                                         <constraint firstItem="ENM-NF-pKg" firstAttribute="top" secondItem="ADl-tg-50P" secondAttribute="top" constant="8" id="WRt-Lf-Hxm"/>
                                                         <constraint firstItem="PFb-KB-rew" firstAttribute="leading" secondItem="ENM-NF-pKg" secondAttribute="trailing" constant="12.5" id="hGq-Nr-AGV"/>
@@ -5997,6 +6029,9 @@
                                             <outlet property="nameLabel" destination="K4S-PQ-CKl" id="q5C-cj-CGJ"/>
                                             <outlet property="overTimeLabel" destination="2mQ-LX-bnU" id="ToU-dM-FyV"/>
                                             <outlet property="startTimeLabel" destination="o5z-LM-2h6" id="SnO-G1-pWT"/>
+                                            <outlet property="statusLabel" destination="rXI-VI-le7" id="Efe-Pe-Rt4"/>
+                                            <outlet property="statusView" destination="DoR-mO-Ijn" id="0oL-9C-TG2"/>
+                                            <outlet property="timeLabelView" destination="Or4-ie-oab" id="fGG-Ad-pfU"/>
                                             <outlet property="workTimeLabel" destination="d5M-Zu-oyl" id="pF9-Oa-nYB"/>
                                         </connections>
                                     </tableViewCell>
@@ -6006,17 +6041,43 @@
                                     <outlet property="delegate" destination="lr5-Be-z5V" id="8Ri-VM-DSb"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zH4-Ff-SmH">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="ccf-DI-g2K">
+                                        <rect key="frame" x="137.5" y="243.5" width="100" height="100"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ooops!!! Empty List.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E31-u8-TeT">
+                                        <rect key="frame" x="108" y="353.5" width="159.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ccf-DI-g2K" firstAttribute="centerY" secondItem="zH4-Ff-SmH" secondAttribute="centerY" constant="-30" id="Ejw-HC-egY"/>
+                                    <constraint firstItem="E31-u8-TeT" firstAttribute="top" secondItem="ccf-DI-g2K" secondAttribute="bottom" constant="10" id="cpW-R6-GNx"/>
+                                    <constraint firstItem="E31-u8-TeT" firstAttribute="centerX" secondItem="zH4-Ff-SmH" secondAttribute="centerX" id="f8b-z5-gEC"/>
+                                    <constraint firstItem="ccf-DI-g2K" firstAttribute="centerX" secondItem="zH4-Ff-SmH" secondAttribute="centerX" id="tRO-RE-mze"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4yw-Ho-DUH" firstAttribute="bottom" secondItem="Ec5-qF-ZOm" secondAttribute="bottom" constant="5" id="I7f-mU-c6m"/>
+                            <constraint firstItem="zH4-Ff-SmH" firstAttribute="leading" secondItem="4yw-Ho-DUH" secondAttribute="leading" id="NAe-S0-fyK"/>
                             <constraint firstItem="Ec5-qF-ZOm" firstAttribute="top" secondItem="4yw-Ho-DUH" secondAttribute="top" constant="5" id="Pji-Sw-MBd"/>
                             <constraint firstItem="Ec5-qF-ZOm" firstAttribute="leading" secondItem="4yw-Ho-DUH" secondAttribute="leading" id="Qau-2k-cp4"/>
+                            <constraint firstItem="zH4-Ff-SmH" firstAttribute="top" secondItem="4yw-Ho-DUH" secondAttribute="top" id="RZb-dj-rLt"/>
                             <constraint firstItem="4yw-Ho-DUH" firstAttribute="trailing" secondItem="Ec5-qF-ZOm" secondAttribute="trailing" id="YOq-yg-BCF"/>
+                            <constraint firstItem="4yw-Ho-DUH" firstAttribute="bottom" secondItem="zH4-Ff-SmH" secondAttribute="bottom" id="omv-PM-4qw"/>
+                            <constraint firstItem="4yw-Ho-DUH" firstAttribute="trailing" secondItem="zH4-Ff-SmH" secondAttribute="trailing" id="ssV-A0-h6M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4yw-Ho-DUH"/>
                     </view>
                     <connections>
+                        <outlet property="emptyView" destination="zH4-Ff-SmH" id="QQb-F8-YUh"/>
                         <outlet property="reportListingTV" destination="Ec5-qF-ZOm" id="p2V-WO-2TF"/>
                     </connections>
                 </viewController>

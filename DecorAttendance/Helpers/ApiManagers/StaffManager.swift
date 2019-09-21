@@ -72,6 +72,38 @@ class StaffManager: CLBaseService {
         return responseModel
     }
     
+    //Calling Report Listing Api
+    
+    func  getReportListingApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+        CLNetworkManager().initateWebRequest(networkModelForReportList(with:body), success: {
+            (resultData,response)  in
+            let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
+            if error == nil {
+                if let jdict = jsonDict{
+                    print(jsonDict)
+                    success(self.getReportListResponseModel(dict: jdict) as Any, response)
+                }else{
+                    failure(ErrorType.dataError)
+                }
+            }else{
+                failure(ErrorType.dataError)
+            }
+            
+        }, failiure: {(error)-> () in failure(error)
+            
+        })
+        
+    }
+    
+    func networkModelForReportList(with body:String)->CLNetworkModel{
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.REPORT_LISTING_URL+body, requestMethod_: "GET")
+        return requestModel
+    }
+    func getReportListResponseModel(dict:[String : Any?]) -> Any? {
+        let responseModel = ObeidAttendanceResponseModel.init(dictionaryDetails:dict as NSDictionary)
+        return responseModel
+    }
+    
 }
 
 class LeavesListResponseModel : NSObject{
@@ -169,6 +201,18 @@ class LeavesListRequest:NSObject {
         requestString = requestString + "&end_month=\(endMonth)"
         requestString = requestString + "&start_year=\(startYear)"
         requestString = requestString + "&end_year=\(endYear)"
+        print(requestString)
+        return requestString
+    }
+}
+
+class ReportListingRequest:NSObject {
+    var startDate:String = "2019-9-01"
+    var endDate:String = "2019-9-31"
+    func getRequestBody()->String{
+        var requestString = ""
+        requestString = "start_date=\(startDate)"
+        requestString = requestString + "&end_date=\(endDate)"
         print(requestString)
         return requestString
     }
