@@ -18,7 +18,14 @@ class ReportVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func filterButtonAction(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let reportFilterVC = storyboard.instantiateViewController(withIdentifier: "ReportFilterVCID") as! ReportFilterVC
+        reportFilterVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        reportFilterVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(reportFilterVC, animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
