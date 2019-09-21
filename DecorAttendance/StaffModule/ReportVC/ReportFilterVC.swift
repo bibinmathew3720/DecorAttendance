@@ -21,9 +21,11 @@ class ReportFilterVC: UIViewController {
     }
     
     @IBAction func fromDateButtonAction(_ sender: UIButton) {
+        showDatePicker(filterType: .startDate)
     }
     
     @IBAction func toDateButtonAction(_ sender: UIButton) {
+        showDatePicker(filterType: .endDate)
     }
     
     @IBAction func cancelButtonAction(_ sender: UIButton) {
@@ -31,6 +33,19 @@ class ReportFilterVC: UIViewController {
     }
     
     @IBAction func okButtonAction(_ sender: UIButton) {
+    }
+    
+    func showDatePicker(filterType:FilterTypeName){
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let calendarViewController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
+            calendarViewController.delegate = self
+            calendarViewController.filterTypeName = filterType
+            calendarViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            calendarViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(calendarViewController, animated: true, completion: nil)
+            
+        }
     }
     /*
     
@@ -43,4 +58,28 @@ class ReportFilterVC: UIViewController {
     }
     */
 
+}
+
+extension ReportFilterVC : filterUpdatedDelegate{
+    func filterValueUpdated(to value: AnyObject!, updatedType: FilterTypeName!) {
+        
+    }
+    
+    func dateUpdated(to date: String, updatedType: FilterTypeName!) {
+        
+    }
+    
+    func calendarColsed() {
+        
+    }
+    
+    func doneButtonActionDelegateWithSelectedDate(date: String, type: FilterTypeName) {
+        
+    }
+    
+    func selectedSite(selSite: ObeidiModelSites, withType: FilterTypeName) {
+        
+    }
+    
+    
 }
