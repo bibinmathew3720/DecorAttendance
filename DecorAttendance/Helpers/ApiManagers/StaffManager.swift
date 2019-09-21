@@ -9,7 +9,7 @@
 import UIKit
 
 class StaffManager: CLBaseService {
-    func getLeavesListApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
+    func  getLeavesListApi(with body:String, success : @escaping (Any,_ response:HTTPURLResponse)->(),failure : @escaping (_ errorType:ErrorType)->()){
         CLNetworkManager().initateWebRequest(networkModelForLeavesList(with:body), success: {
             (resultData,response)  in
             let (jsonDict, error) = self.didReceiveStatesResponseSuccessFully(resultData)
@@ -78,5 +78,20 @@ class LeaveMonth : NSObject {
         if let value = dict["leave_count"] as? Int{
             leaveCount = value
         }
+    }
+}
+
+class LeavesListRequest:NSObject {
+    var startMonth:Int = 0
+    var endMonth:Int = 0
+    var startYear:Int = 0
+    var endYear:Int = 0
+    func getRequestBody()->String{
+        var requestString = ""
+        requestString = "start_month=\(startMonth)"
+        requestString = requestString + "&end_month=\(endMonth)"
+        requestString = requestString + "&start_year=\(startYear)"
+        requestString = requestString + "&end_year=\(endYear)"
+        return requestString
     }
 }
