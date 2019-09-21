@@ -119,6 +119,8 @@
 		CA27683A3E9BAA1F5C983444 /* Pods_DecorAttendanceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC3BF694B13224B965D13E /* Pods_DecorAttendanceUITests.framework */; };
 		D015303F22597C3E002AAEE6 /* OTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D015303E22597C3E002AAEE6 /* OTVC.swift */; };
 		D02D85EE23350BB900F54CC3 /* StaffManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02D85ED23350BB900F54CC3 /* StaffManager.swift */; };
+		D02E2E4323367F3800D23A82 /* ReportListingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02E2E4223367F3800D23A82 /* ReportListingVC.swift */; };
+		D02E2E4523367F5E00D23A82 /* ReportListingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02E2E4423367F5E00D23A82 /* ReportListingTVC.swift */; };
 		D03579222335BBAF00811D61 /* StaffReportTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03579212335BBAF00811D61 /* StaffReportTVC.swift */; };
 		D03579252335C8FB00811D61 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03579242335C8FB00811D61 /* View+Extension.swift */; };
 		D03579292335D4AD00811D61 /* ReportFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03579282335D4AD00811D61 /* ReportFilterVC.swift */; };
@@ -294,6 +296,8 @@
 		D00F2A172253CD84007174F8 /* DecorAttendance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DecorAttendance.entitlements; sourceTree = "<group>"; };
 		D015303E22597C3E002AAEE6 /* OTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTVC.swift; sourceTree = "<group>"; };
 		D02D85ED23350BB900F54CC3 /* StaffManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffManager.swift; sourceTree = "<group>"; };
+		D02E2E4223367F3800D23A82 /* ReportListingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportListingVC.swift; sourceTree = "<group>"; };
+		D02E2E4423367F5E00D23A82 /* ReportListingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportListingTVC.swift; sourceTree = "<group>"; };
 		D03579212335BBAF00811D61 /* StaffReportTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffReportTVC.swift; sourceTree = "<group>"; };
 		D03579242335C8FB00811D61 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		D03579282335D4AD00811D61 /* ReportFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFilterVC.swift; sourceTree = "<group>"; };
@@ -785,6 +789,7 @@
 			children = (
 				D03579212335BBAF00811D61 /* StaffReportTVC.swift */,
 				D035792C23363AFF00811D61 /* MedicalLeaveTVC.swift */,
+				D02E2E4423367F5E00D23A82 /* ReportListingTVC.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -822,6 +827,7 @@
 			children = (
 				D09BC50823313F72005CEABD /* ReportVC.swift */,
 				D03579282335D4AD00811D61 /* ReportFilterVC.swift */,
+				D02E2E4223367F3800D23A82 /* ReportListingVC.swift */,
 			);
 			path = ReportVC;
 			sourceTree = "<group>";
@@ -1129,6 +1135,7 @@
 				D09BC50923313F72005CEABD /* ReportVC.swift in Sources */,
 				46C0661D21E0B371009E731B /* ForemanDashBoardViewController.swift in Sources */,
 				BBE01C76223439B300C534F6 /* UIImageViewExtensions.swift in Sources */,
+				D02E2E4323367F3800D23A82 /* ReportListingVC.swift in Sources */,
 				46AE08BB22170B1600A0BC9F /* ObeidiModelSafetyEquipments.swift in Sources */,
 				D09BC50D23314257005CEABD /* StaffHomeVC.swift in Sources */,
 				46C0661821E09925009E731B /* ForemanCenterViewController.swift in Sources */,
@@ -1199,6 +1206,7 @@
 				4611864722147F810031DFC4 /* CalenderViewCell.swift in Sources */,
 				46623B082212DB880072C150 /* ObeidiModelForgotPassword.swift in Sources */,
 				46AD094D21C77F9B005BBDEB /* LargeValueFormatter.swift in Sources */,
+				D02E2E4523367F5E00D23A82 /* ReportListingTVC.swift in Sources */,
 				D02D85EE23350BB900F54CC3 /* StaffManager.swift in Sources */,
 				469D712921D639F70057BA7C /* CaptureImageViewController.swift in Sources */,
 				466DE3CA2211FC65003F0F76 /* AFNetworkingServiceManager.swift in Sources */,

@@ -120,7 +120,7 @@ extension ReportVC : UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.performSegue(withIdentifier: "reportToListing", sender: Any.self)
     }
 }
 
