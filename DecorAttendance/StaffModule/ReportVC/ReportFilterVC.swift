@@ -10,14 +10,21 @@ import UIKit
 
 class ReportFilterVC: UIViewController {
 
-    @IBOutlet weak var fromDateButtonAction: UIButton!
+    @IBOutlet weak var fromDateButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var toDateButton: UIButton!
     @IBOutlet weak var okButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        customisation()
         // Do any additional setup after loading the view.
+    }
+    
+    func customisation(){
+       fromDateButton.setRoundedRedBorder()
+       toDateButton.setRoundedRedBorder()
+       cancelButton.setRoundedRedBackgroundView()
+       okButton.setRoundedRedBackgroundView()
     }
     
     @IBAction func fromDateButtonAction(_ sender: UIButton) {
