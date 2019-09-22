@@ -49,7 +49,13 @@ class HomeTabBarViewController: UITabBarController, DashBoardDelegate, Attendanc
                 
                 let reportVC = storyBoard.instantiateViewController(withIdentifier: "ReportVCID") as? ReportVC
                 if let _reportVC = reportVC{
-                    self.viewControllers?[2] = _reportVC
+                    if self.viewControllers!.count > 2 {
+                        self.viewControllers?[2] = _reportVC
+                    }
+                    else{
+                        self.viewControllers?.append(_reportVC)
+                    }
+
                 }
                 let reportTabBarItem:UITabBarItem = UITabBarItem(title: "Report", image: UIImage(named: "reportsUnsel")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "reportsSel"))
                 self.viewControllers?[2].tabBarItem = reportTabBarItem
