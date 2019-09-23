@@ -11,8 +11,15 @@ import UIKit
 class ObeidiModelMarkAttendance: NSObject {
     
     class func callMarkAttendanceRequest(dataDict: NSMutableDictionary, image: Data?, withCompletion completion: @escaping(Bool?, AnyObject?, NSError?) -> Void){
-        
-        let serviceName = ObeidiConstants.API.MARK_ATTENDANCE
+        var serviceName = ""
+        if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+            if roleString == Constant.Names.Staff{
+                serviceName = ObeidiConstants.API.MARK_ATTENDANCE_FOR_STAFF
+            }
+            else{
+                serviceName = ObeidiConstants.API.MARK_ATTENDANCE
+            }
+        }
         let passDict = dataDict
         let token = UserDefaults.standard.value(forKey: "accessToken") as! String
         AFNetworkingServiceManager.sharedmanager.parseLinkWithImageAndHeaderUsingPostMethod(serviceName, parameter: passDict, imgData: image, pathKey: "image", token: token){

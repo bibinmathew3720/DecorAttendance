@@ -35,6 +35,10 @@ class StaffHomeVC: UIViewController {
         if let _endYear = dateComponents.year{
             leaveListRequest.endYear = _endYear
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         callingLeaveListAPI()
     }
     

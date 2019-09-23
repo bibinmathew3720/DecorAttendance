@@ -419,6 +419,11 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
                     break
                 }
             }
+            else{
+                if loginUserType == .Staff{
+                    CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Attendance already marked", parentController: self)
+                }
+            }
         }
         else{
             CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: "Location Not Available", parentController: self)

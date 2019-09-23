@@ -30,6 +30,7 @@ struct ObeidiConstants {
         static let SAFETY_EQUIPMENTS = "safety-equipments"
         static let FETCH_ATTENDANCE = "attendance?"
         static let MARK_ATTENDANCE = "attendance"
+        static let MARK_ATTENDANCE_FOR_STAFF = "staff/attendance"
         static let GET_ATTENDANCE_DETAIL = "attendance/"
         static let UPDATE_ATTENDANCE_STATUS = "attendance/change-attendance-status"
         static let UPDATE_BONUS_AMOUNT = "attendance/update-bonus"

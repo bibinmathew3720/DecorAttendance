@@ -66,7 +66,16 @@ class LabourManager: CLBaseService {
     }
     
     func networkModelForAddAttendance(with body:String)->CLNetworkModel{
-        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + ObeidiConstants.API.MARK_ATTENDANCE, requestMethod_: "POST")
+        var markAttendanceUrlString = ""
+        if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+            if roleString == Constant.Names.Staff{
+                markAttendanceUrlString = ObeidiConstants.API.MARK_ATTENDANCE_FOR_STAFF
+            }
+            else{
+                markAttendanceUrlString = ObeidiConstants.API.MARK_ATTENDANCE
+            }
+        }
+        let requestModel = CLNetworkModel.init(url:ObeidiConstants.API.MAIN_DOMAIN + markAttendanceUrlString, requestMethod_: "POST")
         requestModel.requestBody = body
         return requestModel
     }
