@@ -12,7 +12,7 @@ extension Date{
     
     func getComponents()->DateComponents{
         let calendar = Calendar.current
-        let components = calendar.dateComponents([.hour,.minute,.second,.month,.year], from: self)
+        let components = calendar.dateComponents([.hour,.minute,.second,.month,.year,.day], from: self)
         return components
     }
     

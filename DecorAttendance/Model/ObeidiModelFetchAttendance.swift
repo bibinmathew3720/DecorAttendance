@@ -242,6 +242,7 @@ class ObeidiModelFetchAttendance: NSObject {
 class ObeidAttendanceResponseModel:NSObject{
     var error:Int = 0
     var imageBaseUrl:String = ""
+    var imageUrl:String = ""
     var attendanceResultArray = [ObeidiModelFetchAttendance]()
     init(dictionaryDetails : NSDictionary){
         if let value = dictionaryDetails["error"] as? Int{
@@ -249,6 +250,9 @@ class ObeidAttendanceResponseModel:NSObject{
         }
         if let value = dictionaryDetails["image_base"] as? String{
             imageBaseUrl = value
+        }
+        if let value = dictionaryDetails["image"] as? String{
+            imageUrl = value
         }
         if let value = dictionaryDetails["result"] as? NSArray{
             for item in value{

@@ -74,6 +74,14 @@ class StaffHomeVC: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "staffHomeToMarkAttendance"{
+            if let vc = segue.destination as? MarkAttendanceViewController{
+                vc.loginUserType = .Staff
+            }
+        }
+    }
+    
     
 
     /*
@@ -87,4 +95,6 @@ class StaffHomeVC: UIViewController {
     */
 
 }
+
+
 

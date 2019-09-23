@@ -19,6 +19,11 @@ enum AttendanceType{
     case Strike
 }
 
+enum LoginUserType{
+    case ForeMan
+    case Staff
+}
+
 let startTime = "Start Time"
 let endTime = "End Time"
 let sickLeave = "Sick Leave"
@@ -32,6 +37,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     @IBOutlet weak var lblID: UILabel!
     @IBOutlet weak var imageEmployee: UIImageView!
     @IBOutlet weak var lblSiteSelection: UILabel!
+    @IBOutlet weak var stateHeadingLabel: UILabel!
     @IBOutlet weak var lblAttendanceSelection: UILabel!
     
     var spinner = UIActivityIndicatorView(style: .gray)
@@ -45,6 +51,11 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     
     var locationManager: CLLocationManager! = nil
     var selLocation:Location?
+    var loginUserType:LoginUserType = .ForeMan
+    
+    //For Staff Login
+    var listingRequest = ReportListingRequest()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialisation()
@@ -57,12 +68,72 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         locationManager = CLLocationManager()
         askForLocationAuthorisation()
         // Do any additional setup after loading the view.
+        if loginUserType == .Staff{
+            initialisatingStaffLogin()
+            callingReportListingAPI()
+        }
+    }
+    
+    func initialisatingStaffLogin(){
+        self.lblName.isHidden = true
+        self.lblID.isHidden = true
+        lblSiteSelection.isHidden = true
+        stateHeadingLabel.isHidden = true
+        
+        if let _year = Date().getComponents().year{
+            listingRequest.startYear = _year
+            listingRequest.endYear = _year
+        }
+        if let _month = Date().getComponents().month{
+            listingRequest.startMonth = _month
+            listingRequest.endMonth = _month
+        }
+        if let _day = Date().getComponents().day{
+            listingRequest.startDay = _day
+            listingRequest.endDay = _day
+        }
+        
+    }
+    
+    func callingReportListingAPI(){
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        StaffManager().getReportListingApi(with: listingRequest.getRequestBody(), success: {
+            (model,response)  in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let _model = model as? ObeidAttendanceResponseModel{
+                if _model.error == 0{
+                    if _model.attendanceResultArray.count > 0{
+                        self.attendanceResponse = _model.attendanceResultArray.first
+                        self.setUIContents()
+                        
+                    }
+                    else{
+                        if let imageUrl = URL(string: _model.imageBaseUrl+_model.imageUrl){
+                            self.imageEmployee.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
+                        }
+                    }
+                }
+                self.initialisation()
+            }
+        }) { (ErrorType) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if(ErrorType == .noNetwork){
+                CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.noNetworkMessage, parentController: self)
+            }
+            else{
+                CCUtility.showDefaultAlertwith(_title: Constant.AppName, _message: User.ErrorMessages.serverErrorMessamge, parentController: self)
+            }
+            print(ErrorType)
+        }
     }
     
     func initialisation(){
         self.title = Constant.PageNames.Attendance
         if let attendanceType = fetchAttendanceTypeArr().firstObject as? String{
             self.selAttendanceType = attendanceType
+        }
+        else{
+            self.selAttendanceType = nil
         }
        populateSelectedSite()
        populateAttendanceType()
@@ -104,6 +175,9 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             else if selAttType == strike{
                 self.attendanceType = AttendanceType.Strike
             }
+        }
+        else{
+            self.lblAttendanceSelection.text = ""
         }
     }
     
@@ -155,26 +229,26 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     }
     
     @objc func handleAttendanceLabelTap(){
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-                //self.view.alpha = 0.65
-                //self.tabBarController?.view.alpha = 0.65
-               // self.navigationController?.navigationBar.alpha = 0.65
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.1, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                    //self.view.alpha = 0.65
+                    //self.tabBarController?.view.alpha = 0.65
+                    // self.navigationController?.navigationBar.alpha = 0.65
+                    
+                    
+                },completion:nil)
                 
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let attendanceTypeController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
+                attendanceTypeController.delegate = self
+                //calendarViewController.isDateNeeded = true
+                attendanceTypeController.filterTypeName = FilterTypeName.attendanceType
+                attendanceTypeController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                attendanceTypeController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                attendanceTypeController.filterDataArr = self.fetchAttendanceTypeArr()
+                self.present(attendanceTypeController, animated: true, completion: nil)
                 
-            },completion:nil)
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let attendanceTypeController = storyboard.instantiateViewController(withIdentifier: "POPUPSelectorViewControllerID") as! POPUPSelectorViewController
-            attendanceTypeController.delegate = self
-            //calendarViewController.isDateNeeded = true
-            attendanceTypeController.filterTypeName = FilterTypeName.attendanceType
-            attendanceTypeController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            attendanceTypeController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            attendanceTypeController.filterDataArr = self.fetchAttendanceTypeArr()
-            self.present(attendanceTypeController, animated: true, completion: nil)
-            
-        }
+            }
     }
     
     @objc func handleSiteLabelTap(){
@@ -278,6 +352,11 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     func fetchAttendanceTypeArr() -> NSMutableArray {
         var arr = NSMutableArray()
         if let attResponse = attendanceResponse{
+            if loginUserType == .Staff{
+                if attResponse.isSickLeave || attResponse.isStrike || !attResponse.isPresent{
+                    return []
+                }
+            }
             arr = [startTime, endTime, sickLeave, absent, strike]
             if !attResponse.isStartTimeMarked{
                 arr = [startTime, sickLeave, absent, strike]
@@ -289,6 +368,11 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
                 arr = [startTime, endTime, sickLeave, absent, strike]
             }
             
+        }
+        else{
+            if self.loginUserType == .Staff{
+                arr = [startTime, endTime, sickLeave, absent, strike]
+            }
         }
         return arr
     }

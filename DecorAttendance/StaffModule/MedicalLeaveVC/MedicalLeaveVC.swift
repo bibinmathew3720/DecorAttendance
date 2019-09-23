@@ -27,7 +27,6 @@ class MedicalLeaveVC: UIViewController {
         initialisation()
         customisation()
         callingMedicalLeaveListAPI()
-
         // Do any additional setup after loading the view.
     }
     

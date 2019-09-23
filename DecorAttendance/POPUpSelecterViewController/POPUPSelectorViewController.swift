@@ -483,7 +483,7 @@ class POPUPSelectorViewController: UIViewController, JTAppleCalendarViewDelegate
     
     func showAlert(alertMessage: String) {
         let alertData = alertMessage
-        let alert = UIAlertController(title: "Qomply Alert", message: alertData, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: Constant.AppName, message: alertData, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
             
             self.delegate.calendarColsed()
