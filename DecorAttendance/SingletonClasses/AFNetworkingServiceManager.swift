@@ -99,7 +99,10 @@ class AFNetworkingServiceManager: NSObject {
         let strUrl : String = self.initWithManager()
         
         manager.get(strUrl+servicename, parameters: nil, progress: nil, success: { (operation, responseObj) -> Void in
-            
+            if let _response = operation.response as?  HTTPURLResponse, let status = _response.allHeaderFields[Constant.Names.ExpirationStatusKey] as? String{
+                print(status)
+                CCUtility.showExpirationAlert(statusValue: status)
+            }
             completion(true,responseObj as AnyObject,nil)
             
         }, failure: { (operation, error) in

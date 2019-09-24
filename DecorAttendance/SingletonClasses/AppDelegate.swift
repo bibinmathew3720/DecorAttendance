@@ -119,10 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showExpirationAlert(statusValue:Int){
-        if statusValue == 0{
-            return
-        }
-        if ApplicationController.applicationController.isExpirationPopUpShowed{
+        if statusValue == 0 || ApplicationController.applicationController.isExpirationPopUpShowed {
             return
         }
         ApplicationController.applicationController.isExpirationPopUpShowed = true

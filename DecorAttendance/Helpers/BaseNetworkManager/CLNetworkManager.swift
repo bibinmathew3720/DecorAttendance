@@ -41,7 +41,10 @@ class CLNetworkManager: NSObject {
                         DispatchQueue.main.async(execute: { () -> () in
                             
                             if let _data = data, let _response = response as? HTTPURLResponse{
-                                CCUtility.showExpirationAlert(statusValue: 1)
+                                if let status = _response.allHeaderFields[Constant.Names.ExpirationStatusKey] as? String{
+                                    CCUtility.showExpirationAlert(statusValue: status)
+                                }
+                                
                                 success(_data,_response)
                             }else{
                                 failiure(ErrorType.dataError)
