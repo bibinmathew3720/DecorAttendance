@@ -79,8 +79,14 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     
     @IBAction func bttnActnDone(_ sender: Any) {
         if User.Attendance.type == User.attendanceType.endTime {
-            self.performSegue(withIdentifier: "toEndTimeBonusSceneSegue:PhotoCheck", sender: (Any).self)
-            
+            if let roleString =  UserDefaults.standard.value(forKey: Constant.VariableNames.roleKey) as? String{
+                if roleString == Constant.Names.Staff{
+                    callPostAttendanceAPI()
+                }
+                else{
+                   self.performSegue(withIdentifier: "toEndTimeBonusSceneSegue:PhotoCheck", sender: (Any).self)
+                }
+            }
         }else{
             callPostAttendanceAPI()
         }
@@ -132,11 +138,13 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
                paramsDict.setValue(equipmentIdArray, forKey: "safety_equipments_missed")
             }
         }
-        if let attResponse = self.attendanceResponse{
-            paramsDict.setValue("\(attResponse.empId)", forKey: "emp_id")
+        if (ApplicationController.applicationController.loginUserType != .Staff){
+            if let attResponse = self.attendanceResponse{
+                paramsDict.setValue("\(attResponse.empId)", forKey: "emp_id")
+            }
+            paramsDict.setValue("0", forKey: "bonus")
+            paramsDict.setValue(capturedImageRef, forKey: "image")
         }
-        paramsDict.setValue("0", forKey: "bonus")
-        paramsDict.setValue(capturedImageRef, forKey: "image")
         print(paramsDict)
         return paramsDict
     }

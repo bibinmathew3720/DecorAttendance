@@ -22,6 +22,7 @@ enum AttendanceType{
 enum LoginUserType{
     case ForeMan
     case Staff
+    case EngineeringHead
 }
 
 let startTime = "Start Time"
@@ -356,6 +357,9 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
             if loginUserType == .Staff{
                 if attResponse.isSickLeave || attResponse.isStrike || !attResponse.isPresent{
                     return []
+                }
+                else if (attResponse.isStartTimeMarked && attResponse.isEndTimeMarkd){
+                     return []
                 }
             }
             arr = [startTime, endTime, sickLeave, absent, strike]
