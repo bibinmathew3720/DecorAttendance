@@ -134,6 +134,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
         }
         else{
             self.selAttendanceType = nil
+            self.attendanceType = nil
         }
        populateSelectedSite()
        populateAttendanceType()
