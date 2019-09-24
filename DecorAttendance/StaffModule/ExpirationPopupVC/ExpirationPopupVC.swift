@@ -10,6 +10,7 @@ import UIKit
 
 class ExpirationPopupVC: UIViewController {
 
+    @IBOutlet weak var alertContainerView: UIView!
     @IBOutlet weak var okButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ class ExpirationPopupVC: UIViewController {
     
     func customisation(){
         okButton.setRoundedRedBackgroundView()
+        alertContainerView.dropShadow()
     }
     
     @IBAction func okButtonAction(_ sender: UIButton) {

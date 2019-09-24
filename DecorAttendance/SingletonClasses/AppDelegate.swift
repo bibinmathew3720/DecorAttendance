@@ -117,6 +117,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       UINavigationBar.appearance().titleTextAttributes = attrs
       UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -6000, vertical: 0), for:UIBarMetrics.default)
     }
+    
+    func showExpirationAlert(statusValue:Int){
+        if statusValue == 0{
+            return
+        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let expirationAlertCntrlr = storyboard.instantiateViewController(withIdentifier: "ExpirationPopupVC") as! ExpirationPopupVC
+        expirationAlertCntrlr.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        expirationAlertCntrlr.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        DispatchQueue.main.async {
+            if statusValue == 1{
+                expirationAlertCntrlr.okButton.isHidden = false
+            }
+            else if statusValue == 2{
+                expirationAlertCntrlr.okButton.isHidden = true
+            }
+        }
+        self.window?.rootViewController?.present(expirationAlertCntrlr, animated: true, completion: nil)
+    }
 
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -249,4 +249,10 @@ class CCUtility: NSObject {
         }
     }
     
+    class func showExpirationAlert(statusValue:Int){
+        if let _appDelegate = UIApplication.shared.delegate as? AppDelegate{
+            _appDelegate.showExpirationAlert(statusValue:statusValue)
+        }
+    }
+    
 }
