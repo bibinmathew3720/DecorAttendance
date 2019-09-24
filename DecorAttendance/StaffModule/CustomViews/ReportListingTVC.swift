@@ -40,7 +40,8 @@ class ReportListingTVC: UITableViewCell {
     func setCellContents(cellData: ObeidiModelFetchAttendance)  {
         self.idLabel.text = "OAA\(cellData.empId)"
         self.nameLabel.text = cellData.name
-        if let imageUrl = URL(string: cellData.profileBaseUrl+cellData.profileImageUrl){
+         guard let encodedUrlstring = (cellData.profileBaseUrl+cellData.profileImageUrl).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+        if let imageUrl = URL(string: encodedUrlstring){
             self.labourImageView.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
         }
         if cellData.isStrike{

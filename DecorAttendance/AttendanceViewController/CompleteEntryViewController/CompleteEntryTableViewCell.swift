@@ -84,7 +84,8 @@ class CompleteEntryTableViewCell: UITableViewCell {
     func setCellContents(cellData: ObeidiModelFetchAttendance)  {
         self.lblID.text = "OAA\(cellData.empId)"
         self.lblName.text = cellData.name
-        if let imageUrl = URL(string: cellData.profileBaseUrl+cellData.profileImageUrl){
+         guard let encodedUrlstring = (cellData.profileBaseUrl+cellData.profileImageUrl).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+        if let imageUrl = URL(string: encodedUrlstring){
              self.imageViewLabour.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
         }
         if cellData.isStrike{

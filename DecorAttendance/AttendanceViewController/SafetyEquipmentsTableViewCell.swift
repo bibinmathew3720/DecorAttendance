@@ -45,7 +45,8 @@ class SafetyEquipmentsTableViewCell: UITableViewCell {
     func setCellContents(equipment: SafetyEquipment, isAllChecked: Bool) {
         self.lblPenaltyAmnt.text = "Penalty : \(equipment.penalty)"
         self.lblEquipmentName.text = equipment.name
-        if let imageUrl = URL(string: equipment.imageBaseUrl+equipment.imageName){
+         guard let encodedUrlstring = (equipment.imageBaseUrl+equipment.imageName).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+        if let imageUrl = URL(string: encodedUrlstring){
             self.imageViewEquipment.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
         }
         if isAllChecked{

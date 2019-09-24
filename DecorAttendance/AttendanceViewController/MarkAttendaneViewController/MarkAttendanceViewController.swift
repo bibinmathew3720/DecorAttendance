@@ -109,7 +109,8 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
                         
                     }
                     else{
-                        if let imageUrl = URL(string: _model.imageBaseUrl+_model.imageUrl){
+                         guard let encodedUrlstring = (_model.imageBaseUrl+_model.imageUrl).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+                        if let imageUrl = URL(string: encodedUrlstring){
                             self.imageEmployee.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
                         }
                     }
@@ -185,10 +186,12 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     
     func setUIContents()  {
         if let attResponse = attendanceResponse{
-            if let imageUrl = URL(string: attResponse.profileBaseUrl+attResponse.profileImageUrl){
+            print(attResponse.profileBaseUrl+attResponse.profileImageUrl)
+            guard let encodedUrlstring = (attResponse.profileBaseUrl+attResponse.profileImageUrl).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+            if let imageUrl = URL(string: encodedUrlstring){
                 self.imageEmployee.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
-                addAttendanceRequest.empId = attResponse.empId
             }
+            addAttendanceRequest.empId = attResponse.empId
             self.lblName.text = attResponse.name
             self.lblID.text = "OAA\(attResponse.empId)"
         }

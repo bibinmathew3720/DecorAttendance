@@ -50,7 +50,8 @@ class LabourwiseTableViewCell: UITableViewCell {
     }
     
     func setCostSummary(costDetail:CostSummary){
-        if let imageUrl = URL(string: costDetail.imageBaseUrl+costDetail.profileImageUrl){
+         guard let encodedUrlstring = (costDetail.imageBaseUrl+costDetail.profileImageUrl).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+        if let imageUrl = URL(string: encodedUrlstring){
             self.imageViewLabour.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
         }
         self.lblName.text = costDetail.name
