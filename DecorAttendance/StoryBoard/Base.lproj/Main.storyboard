@@ -370,7 +370,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="call" translatesAutoresizingMaskIntoConstraints="NO" id="FEp-Ie-TqS">
-                                                        <rect key="frame" x="84.5" y="38" width="16" height="16"/>
+                                                        <rect key="frame" x="79.5" y="28" width="26" height="26"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="25"/>
@@ -401,7 +401,7 @@
                                                 <rect key="frame" x="190" y="502" width="185" height="100"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mail" translatesAutoresizingMaskIntoConstraints="NO" id="fbz-aB-JE4">
-                                                        <rect key="frame" x="84.5" y="38" width="16" height="16"/>
+                                                        <rect key="frame" x="76" y="21" width="33" height="33"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                 <integer key="value" value="25"/>
@@ -1395,22 +1395,22 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forgotPwd" translatesAutoresizingMaskIntoConstraints="NO" id="07r-ZH-yuE">
-                                                <rect key="frame" x="179.5" y="30" width="16" height="16"/>
+                                                <rect key="frame" x="125.5" y="30" width="124" height="143"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3A-wD-E6l">
-                                                <rect key="frame" x="64.5" y="76" width="246" height="42"/>
+                                                <rect key="frame" x="64.5" y="203" width="246" height="42"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="31"/>
                                                 <color key="textColor" red="1" green="0.46666666670000001" blue="0.46666666670000001" alpha="0.52000000000000002" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OTP has beeen sent to your email. Please verify" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yh-bt-GZj">
-                                                <rect key="frame" x="5" y="138" width="365" height="20.5"/>
+                                                <rect key="frame" x="5" y="265" width="365" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                 <color key="textColor" red="0.28235294117647058" green="0.27843137254901962" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1IV-9P-gyD">
-                                                <rect key="frame" x="27.5" y="188.5" width="320" height="50"/>
+                                                <rect key="frame" x="27.5" y="315.5" width="320" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="7aO-Vb-ois"/>
                                                 </constraints>
@@ -1422,7 +1422,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kT8-lk-tH4">
-                                                <rect key="frame" x="27.5" y="279" width="320" height="50"/>
+                                                <rect key="frame" x="27.5" y="406" width="320" height="50"/>
                                                 <color key="backgroundColor" red="0.91372549020000005" green="0.18039215689999999" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="kVH-cW-PGy"/>
@@ -1909,7 +1909,6 @@
                                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="bttnActnOK:" destination="4tR-QZ-GDU" eventType="touchUpInside" id="Tp4-ZA-RbA"/>
                                             <action selector="okButtonAction:" destination="wKD-4u-HUg" eventType="touchUpInside" id="jvR-gp-MaS"/>
                                         </connections>
                                     </button>
@@ -4360,10 +4359,10 @@
                                 <rect key="frame" x="0.0" y="153.5" width="375" height="513.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="jdL-Iy-DNT">
-                                        <rect key="frame" x="179.5" y="219" width="16" height="16"/>
+                                        <rect key="frame" x="137.5" y="177" width="100" height="100"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ooops!!! Empty List.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vE8-I9-f8f">
-                                        <rect key="frame" x="108" y="245" width="159.5" height="20.5"/>
+                                        <rect key="frame" x="108" y="287" width="159.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -4928,10 +4927,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="devarakonda" translatesAutoresizingMaskIntoConstraints="NO" id="uNN-AT-MCd">
-                                                    <rect key="frame" x="16" y="11" width="343" height="16"/>
+                                                    <rect key="frame" x="16" y="11" width="343" height="200"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devarakonda Vijay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNZ-fB-dXp">
-                                                    <rect key="frame" x="16" y="35" width="343" height="27"/>
+                                                    <rect key="frame" x="16" y="219" width="343" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="27" id="RoW-kM-68K"/>
                                                     </constraints>
@@ -4940,7 +4939,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID 543" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62d-XL-PdF">
-                                                    <rect key="frame" x="16" y="70" width="343" height="18"/>
+                                                    <rect key="frame" x="16" y="254" width="343" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="wqo-ln-TEh"/>
                                                     </constraints>
@@ -6129,10 +6128,10 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="ccf-DI-g2K">
-                                        <rect key="frame" x="179.5" y="285.5" width="16" height="16"/>
+                                        <rect key="frame" x="137.5" y="243.5" width="100" height="100"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ooops!!! Empty List.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E31-u8-TeT">
-                                        <rect key="frame" x="108" y="311.5" width="159.5" height="20.5"/>
+                                        <rect key="frame" x="108" y="353.5" width="159.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

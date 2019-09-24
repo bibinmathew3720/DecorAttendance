@@ -128,6 +128,7 @@
 		D035792D23363AFF00811D61 /* MedicalLeaveTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D035792C23363AFF00811D61 /* MedicalLeaveTVC.swift */; };
 		D0503670225ACCA500294D40 /* AddBonusAmountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */; };
 		D05408AF2339B4ED00DB0E17 /* ExpirationPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05408AE2339B4EC00DB0E17 /* ExpirationPopupVC.swift */; };
+		D05408B42339F4A900DB0E17 /* ApplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05408B32339F4A900DB0E17 /* ApplicationController.swift */; };
 		D06B92232239ED1900C98ED7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B92222239ED1800C98ED7 /* Constants.swift */; };
 		D09BC50923313F72005CEABD /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BC50823313F72005CEABD /* ReportVC.swift */; };
 		D09BC50B23314228005CEABD /* MedicalLeaveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BC50A23314228005CEABD /* MedicalLeaveVC.swift */; };
@@ -306,6 +307,7 @@
 		D035792C23363AFF00811D61 /* MedicalLeaveTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalLeaveTVC.swift; sourceTree = "<group>"; };
 		D050366F225ACCA500294D40 /* AddBonusAmountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBonusAmountVC.swift; path = AttendanceContainerViewController/AddBonusAmountVC.swift; sourceTree = "<group>"; };
 		D05408AE2339B4EC00DB0E17 /* ExpirationPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationPopupVC.swift; sourceTree = "<group>"; };
+		D05408B32339F4A900DB0E17 /* ApplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationController.swift; sourceTree = "<group>"; };
 		D06B92222239ED1800C98ED7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D09BC50823313F72005CEABD /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
 		D09BC50A23314228005CEABD /* MedicalLeaveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalLeaveVC.swift; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 		BB5A4FAE2233AF5100F4FC82 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D05408B22339F4A900DB0E17 /* ApplicationController */,
 				D03579232335C8E500811D61 /* Extensions */,
 				D06B92212239ECF800C98ED7 /* Constant */,
 				BB5A4FD02233C40500F4FC82 /* Utilities */,
@@ -811,6 +814,14 @@
 				D05408AE2339B4EC00DB0E17 /* ExpirationPopupVC.swift */,
 			);
 			path = ExpirationPopupVC;
+			sourceTree = "<group>";
+		};
+		D05408B22339F4A900DB0E17 /* ApplicationController */ = {
+			isa = PBXGroup;
+			children = (
+				D05408B32339F4A900DB0E17 /* ApplicationController.swift */,
+			);
+			path = ApplicationController;
 			sourceTree = "<group>";
 		};
 		D06B92212239ECF800C98ED7 /* Constant */ = {
@@ -1190,6 +1201,7 @@
 				46AD8DCD21CD0480006B1DEA /* Utils.swift in Sources */,
 				46C0661321E0964F009E731B /* ForemanLeftViewControllerDlegate.swift in Sources */,
 				469D712E21D642240057BA7C /* PhotoCheckViewController.swift in Sources */,
+				D05408B42339F4A900DB0E17 /* ApplicationController.swift in Sources */,
 				46AC0B8A21CA167B002A2ABD /* ObeidiFont.swift in Sources */,
 				46623B022212A0530072C150 /* ObeidiModelLogin.swift in Sources */,
 				D03579222335BBAF00811D61 /* StaffReportTVC.swift in Sources */,

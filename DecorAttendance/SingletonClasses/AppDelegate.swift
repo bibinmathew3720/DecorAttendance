@@ -122,6 +122,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if statusValue == 0{
             return
         }
+        if ApplicationController.applicationController.isExpirationPopUpShowed{
+            return
+        }
+        ApplicationController.applicationController.isExpirationPopUpShowed = true
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let expirationAlertCntrlr = storyboard.instantiateViewController(withIdentifier: "ExpirationPopupVC") as! ExpirationPopupVC
         expirationAlertCntrlr.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
