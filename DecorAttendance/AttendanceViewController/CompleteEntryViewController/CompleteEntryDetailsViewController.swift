@@ -218,6 +218,10 @@ class CompleteEntryDetailsViewController: UIViewController {
         }
     }
     
+    @IBAction func closeButtonAction(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func approveButtonAction(_ sender: UIButton) {
         if (!sender.isSelected){
             updateAttendanceStatus.status = 1

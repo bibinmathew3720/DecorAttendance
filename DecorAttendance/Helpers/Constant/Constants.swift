@@ -36,7 +36,7 @@ struct Constant{
         static let EngineeringHead = "Engineering Head"
         static let Foreman = "Foreman"
         static let Staff = "staff"
-        static let ExpirationStatusKey = "X-grace-period-status"
+        static let ExpirationStatusKey = "x-grace-period-status"
     }
     
     struct SegueIdentifiers {
