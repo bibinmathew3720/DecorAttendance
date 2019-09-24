@@ -1865,6 +1865,89 @@
             </objects>
             <point key="canvasLocation" x="8909.6000000000004" y="441.22938530734638"/>
         </scene>
+        <!--Expiration PopupVC-->
+        <scene sceneID="zU5-Sb-Og7">
+            <objects>
+                <viewController id="wKD-4u-HUg" customClass="ExpirationPopupVC" customModule="DecorAttendance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aaR-Px-eKo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTw-mq-JK9">
+                                <rect key="frame" x="37.5" y="216" width="300" height="255"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="success." translatesAutoresizingMaskIntoConstraints="NO" id="846-Wi-RZU">
+                                        <rect key="frame" x="102.5" y="-47.5" width="95" height="95"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="95" id="5R4-La-9t7"/>
+                                            <constraint firstAttribute="width" constant="95" id="d7l-3A-aNm"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your plan has expired" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAq-JP-fMH">
+                                        <rect key="frame" x="-6.5" y="55.5" width="313" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="mip-MZ-MqD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrade as soon as possible to continue..!!!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGC-Jp-EP8">
+                                        <rect key="frame" x="-6.5" y="100.5" width="313" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="xH2-QF-9Je"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W5a-Ny-Vcc">
+                                        <rect key="frame" x="100" y="174.5" width="100" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="KQa-dy-9Uv"/>
+                                            <constraint firstAttribute="height" constant="30" id="iUL-vj-PMl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <state key="normal" title="Ok">
+                                            <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="bttnActnOK:" destination="4tR-QZ-GDU" eventType="touchUpInside" id="Tp4-ZA-RbA"/>
+                                            <action selector="okButtonAction:" destination="wKD-4u-HUg" eventType="touchUpInside" id="jvR-gp-MaS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="07t-K0-jVw"/>
+                                    <constraint firstItem="xAq-JP-fMH" firstAttribute="centerX" secondItem="846-Wi-RZU" secondAttribute="centerX" id="77T-aP-5xO"/>
+                                    <constraint firstItem="846-Wi-RZU" firstAttribute="top" secondItem="hTw-mq-JK9" secondAttribute="top" constant="-47.5" id="8Zy-lT-qWZ"/>
+                                    <constraint firstItem="EGC-Jp-EP8" firstAttribute="top" secondItem="xAq-JP-fMH" secondAttribute="bottom" constant="12" id="9KP-7z-gNB"/>
+                                    <constraint firstItem="846-Wi-RZU" firstAttribute="centerX" secondItem="hTw-mq-JK9" secondAttribute="centerX" id="BPq-N8-556"/>
+                                    <constraint firstItem="W5a-Ny-Vcc" firstAttribute="top" secondItem="EGC-Jp-EP8" secondAttribute="bottom" constant="30" id="IbU-nA-FRw"/>
+                                    <constraint firstItem="W5a-Ny-Vcc" firstAttribute="centerX" secondItem="hTw-mq-JK9" secondAttribute="centerX" id="Ybt-OE-8wY"/>
+                                    <constraint firstItem="EGC-Jp-EP8" firstAttribute="width" secondItem="xAq-JP-fMH" secondAttribute="width" id="cAn-dI-PC9"/>
+                                    <constraint firstItem="xAq-JP-fMH" firstAttribute="top" secondItem="846-Wi-RZU" secondAttribute="bottom" constant="8" id="jyp-2V-CxC"/>
+                                    <constraint firstAttribute="height" constant="255" id="q8x-9K-LWP"/>
+                                    <constraint firstItem="EGC-Jp-EP8" firstAttribute="centerX" secondItem="xAq-JP-fMH" secondAttribute="centerX" id="uNl-U2-IJk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hTw-mq-JK9" firstAttribute="centerY" secondItem="nxI-OT-1MW" secondAttribute="centerY" id="4TJ-41-TUu"/>
+                            <constraint firstItem="hTw-mq-JK9" firstAttribute="centerX" secondItem="nxI-OT-1MW" secondAttribute="centerX" id="xVE-qd-lFj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nxI-OT-1MW"/>
+                    </view>
+                    <connections>
+                        <outlet property="okButton" destination="W5a-Ny-Vcc" id="WuQ-XF-8xI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w0U-rQ-FMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10191" y="429"/>
+        </scene>
         <!--Mark Attendance View Controller-->
         <scene sceneID="BQk-jA-EIu">
             <objects>
