@@ -92,15 +92,15 @@ class CompleteEntryDetailsViewController: UIViewController {
     
     func populateAttendanceDetails(){
         if let _attendanceDetails = self.attendanceDetails{
-             guard let encodedUrlstring = _attendanceDetails.profileImageUrl.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+             guard let encodedUrlstring = _attendanceDetails.profileImageUrl.trimLeadingAndTrailingSpaces().addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
             if let imageUrl = URL(string: encodedUrlstring){
                 self.userProfileImageView.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
             }
-            guard let encoUrlstring = (_attendanceDetails.imageBaseUrl + _attendanceDetails.startTimeImage).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+            guard let encoUrlstring = (_attendanceDetails.imageBaseUrl.trimLeadingAndTrailingSpaces() + _attendanceDetails.startTimeImage.trimLeadingAndTrailingSpaces()).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
             if let imageUrl = URL(string: encoUrlstring){
                 self.startTimeImageView.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
             }
-             guard let encodedString = (_attendanceDetails.imageBaseUrl + _attendanceDetails.endTimeImage).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+             guard let encodedString = (_attendanceDetails.imageBaseUrl.trimLeadingAndTrailingSpaces() + _attendanceDetails.endTimeImage.trimLeadingAndTrailingSpaces()).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
             if let imageUrl = URL(string: encodedString){
                 self.endTimeImageview.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
             }

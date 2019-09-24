@@ -109,7 +109,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
                         
                     }
                     else{
-                         guard let encodedUrlstring = (_model.imageBaseUrl+_model.imageUrl).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+                         guard let encodedUrlstring = (_model.imageBaseUrl.trimLeadingAndTrailingSpaces()+_model.imageUrl.trimLeadingAndTrailingSpaces()).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
                         if let imageUrl = URL(string: encodedUrlstring){
                             self.imageEmployee.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
                         }
@@ -187,7 +187,7 @@ class MarkAttendanceViewController: UIViewController, DropDownDataDelegate, filt
     func setUIContents()  {
         if let attResponse = attendanceResponse{
             print(attResponse.profileBaseUrl+attResponse.profileImageUrl)
-            guard let encodedUrlstring = (attResponse.profileBaseUrl+attResponse.profileImageUrl).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+            guard let encodedUrlstring = (attResponse.profileBaseUrl.trimLeadingAndTrailingSpaces()+attResponse.profileImageUrl.trimLeadingAndTrailingSpaces()).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
             if let imageUrl = URL(string: encodedUrlstring){
                 self.imageEmployee.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
             }

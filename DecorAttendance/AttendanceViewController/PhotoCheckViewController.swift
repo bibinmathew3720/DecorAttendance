@@ -47,7 +47,7 @@ class PhotoCheckViewController: UIViewController, dismissDelegate, CLLocationMan
     
     func populateData(){
         if let selAttendance = self.attendanceResponse{
-             guard let encodedUrlstring = (selAttendance.profileBaseUrl+selAttendance.profileImageUrl).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+             guard let encodedUrlstring = (selAttendance.profileBaseUrl.trimLeadingAndTrailingSpaces()+selAttendance.profileImageUrl.trimLeadingAndTrailingSpaces()).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
             if let imageUrl = URL(string: encodedUrlstring){
                 self.imageViewDataBase.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
             }

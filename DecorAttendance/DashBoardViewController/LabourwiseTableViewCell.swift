@@ -50,7 +50,7 @@ class LabourwiseTableViewCell: UITableViewCell {
     }
     
     func setCostSummary(costDetail:CostSummary){
-         guard let encodedUrlstring = (costDetail.imageBaseUrl+costDetail.profileImageUrl).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
+         guard let encodedUrlstring = (costDetail.imageBaseUrl.trimLeadingAndTrailingSpaces()+costDetail.profileImageUrl.trimLeadingAndTrailingSpaces()).addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) else { return  }
         if let imageUrl = URL(string: encodedUrlstring){
             self.imageViewLabour.setImageWith(imageUrl, placeholderImage: UIImage(named: Constant.ImageNames.placeholderImage))
         }
